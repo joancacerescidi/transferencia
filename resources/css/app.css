@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer components {
+    * {
+        scroll-behavior: smooth;
+    }
+    body {
+        @apply text-base font-montserrat overflow-x-hidden text-text-color;
+        @apply text-base overflow-x-hidden;
+    }
+    p {
+        @apply tracking-wide
+    }
+    img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+    }
+    .u-container {
+        @apply container mx-auto py-16 xl:py-20;
+        width: 90%;
+        max-width: 1440px;
+    }
+    .oculto {
+        @apply opacity-0 pointer-events-none;
+    }
+    .section-hero {
+        background-image: url(/images/hero-bg.png);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+}
