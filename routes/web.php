@@ -20,3 +20,12 @@ Route::get('/', function () {
 Route::get('/detalle', function () {
     return view('detail');
 });
+
+Route::get('/detalle2', function () {
+    return view('detail2');
+});
+
+
+Route::get('/search', function () {
+    return view('search');
+});
