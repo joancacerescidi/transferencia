@@ -2,8 +2,7 @@
 @section('content')
     <section class="u-container">
         <h2 class="text-center text-xl xl:text-4xl font-bold mb-6 xl:mb-14">
-            Ministerio de Relaciones Exteriores <br class="hidden xl:block"> Ministerio - Período : Hasta Setiembre 2022 <br
-                class="hidden xl:block"> 107702654456 - Marco Antonio
+            Ministerio de Relaciones Exteriores <br class="hidden xl:block"> Fraccionamiento  <br class="hidden xl:block"> Período : Hasta Setiembre 2022  
         </h2>
         <a href="{{ url('/detalle') }}"
             class="flex items-center gap-3 mb-8 xl:mb-16 font-semibold text-sm xl:text-lg text-main-blue">

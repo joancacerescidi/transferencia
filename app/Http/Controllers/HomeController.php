@@ -20,6 +20,8 @@ class HomeController extends Controller
       
         // $periodo = " Hasta setiembre 2022" . $mes;
         // return view('home', compact('meses'));
+
+        
         return view('home');
     }
 }
