@@ -9,19 +9,19 @@
             </h1>
             <p class="mb-14 opacity-80 text-sm xl:text-base">Usamos información de fuentes oficiales a través del Open Data.
             </p>
-            <a href="#" class="py-4 px-8 text-lg font-bold bg-main-blue rounded-xl text-sm xl:text-base">Ir al
+            <a href="#" class="py-4 px-8  font-bold bg-main-blue rounded-xl text-sm xl:text-base">Ir al
                 Ranking</a>
         </article>
     </section>
     <section class="u-container">
         <h2 class="text-center text-xl xl:text-4xl font-bold mb-14">
-            Ranking en transparencia de compras <br class="hidden xl:block"> y ejecución de contratos
+            Ranking en transparencia de compras <br class="hidden xl:block"> y ejecución de contratos <br class="hidden xl:block"> Período : Hasta Setiembre 2022
         </h2>
         <form class="mb-14">
             <div class="relative xl:w-1/3 mx-auto mb-14">
                 <input
                     class="block w-full py-5 px-6 rounded-xl border border-gray-200 bg-white shadow-sm focus:outline-none focus:ring focus:ring-main-blue"
-                    type="text" placeholder="Buscar entidad del estado">
+                    type="text" placeholder="Buscar entidad del estado" value="Ministerio">
                   
                 <button type="button" class="absolute top-5 right-5">
                     <a href="{{ url('/search') }}">
@@ -29,7 +29,7 @@
                     </a>
                 </button>
             </div>
-            <div class="grid xl:grid-cols-12 items-center gap-4 xl:gap-8">
+            {{-- <div class="grid xl:grid-cols-12 items-center gap-4 xl:gap-8">
                 <p class="xl:col-span-2 text-lg font-bold text-main-gray">Filtros</p>
                 <div class="xl:col-span-10 grid xl:grid-cols-3 gap-4 xl:gap-8">
                     <select
@@ -62,7 +62,7 @@
 
                     </select>
                 </div>
-            </div>
+            </div> --}}
         </form>
         <article>
             <header class="grid grid-cols-6 xl:grid-cols-12 mb-8 text-main-gray text-sm xl:text-lg">
