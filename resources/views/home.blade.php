@@ -24,13 +24,14 @@
 
         </ul>
 
-        <form class="mb-14">
+        <form class="mb-14" method="POST" action="{{ route('busqueda') }}">
+            @csrf
             <div class="relative xl:w-1/3 mx-auto mb-14">
                 <input
                     class="block w-full py-5 px-6 rounded-xl border border-gray-200 bg-white shadow-sm focus:outline-none focus:ring focus:ring-main-blue"
-                    type="text" placeholder="Buscar entidad del estado" value="Ministerio">
+                    type="text" placeholder="Buscar entidad del estado" name="clave" required>
 
-                <button type="button" class="absolute top-5 right-5">
+                <button type="submit" class="absolute top-5 right-5">
                     <a href="{{ url('/search') }}">
                         <img src="{{ asset('images/icon-buscar.png') }}" alt="Buscar">
                     </a>
@@ -104,12 +105,13 @@
                             <li class="flex items-center justify-between gap-4">
                                 <p class="flex items-center gap-3 font-medium">
                                     {{ $categorias->name }}
-                                    <a href="{{ url('/detalle') }}"><img src="{{ asset('images/icon-compartir.png') }}"
-                                            alt="Compartir"></a>
+
+                                    <a href="{{ url('/detalle1/' . $item->ruc) }}"><img
+                                            src="{{ asset('images/icon-compartir.png') }}" alt="Compartir"></a>
                                 </p>
                                 <p class="flex items-center gap-8 xl:gap-24">
                                     <span class="xl:mr-12 block"> {{ $categorias->riesgo }} mill.</span>
-                                    <span class="xl:-mr-8 block">{{ $categorias->nota }}8.3</span>
+                                    <span class="xl:-mr-8 block">{{ $categorias->nota }}</span>
                                 </p>
                             </li>
                         @endforeach
