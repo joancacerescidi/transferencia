@@ -76,7 +76,7 @@
             <header class="grid grid-cols-6 xl:grid-cols-12 mb-8 text-main-gray text-sm xl:text-lg">
                 <p class="col-span-1 pl-6 xl:pl-10">#</p>
                 <p class="col-span-4 xl:col-span-7 pl-4 xl:pl-10">Nombre</p>
-                <p class="col-span-2 hidden xl:block">En reisgo</p>
+                <p class="col-span-2 hidden xl:block">Monto</p>
                 <p class="text-left xl:text-center col-span-1 xl:col-span-2">Nota</p>
             </header>
             @foreach ($result as $item)
@@ -90,12 +90,12 @@
 
 
                         <p class="col-span-4 xl:col-span-4 order-2 xl:order-3 line-clamp-2">{{ $item->nombre }}</p>
-                       
-                       
+
+
                         <p
                             class="col-span-6 xl:col-span-3 text-main-red order-4 xl:order-3 text-xs xl:text-lg xl:text-right col-start-2 xl:xol-start-auto">
-                            <span class="text-gray-400 xl:hidden pr-8 font-medium">En riesgo:</span>
-                            <span>S/ {{ $item->riesgo }} mill.</span>
+                            <span class="text-gray-400 xl:hidden pr-8 font-medium">Monto:</span>
+                            <span>S/ {{ $item->riesgo }} mill</span>
                         </p>
                         <p
                             class="col-span-6 xl:col-span-3 text-main-red flex items-center xl:justify-end gap-2 order-3 xl:order-4 col-start-2 xl:col-start-auto">
@@ -109,8 +109,12 @@
                                 <p class="flex items-center gap-3 font-medium xl:col-start-3 col-span-6 xl:col-span-4">
                                     {{ $categorias->name }}
 
-                                    @if ($categorias->riesgo !== 0.0)
-                                        <a href="{{ url('/detalle1/' . $item->ruc . '/' . $categorias->sigla) }}"><img
+                                    @if ($categorias->sigla === 'COF' || $categorias->sigla === 'PCP')
+                                        <span class="font-medium text-[red]">"En construccion"
+                                        </span>
+                                    @endif
+                                    @if ($categorias->riesgo !== '0.00')
+                                        <a href="{{ url('/detalle1/' . $item->ruc . '/' . $categorias->sigla .'/'.$item->nombre ) }}"><img
                                                 src="{{ asset('images/icon-compartir.png') }}" alt="Compartir"></a>
                                     @endif
                                 </p>

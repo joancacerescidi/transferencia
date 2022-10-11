@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::post('/search', [HomeController::class, 'busqueda'])->name('busqueda');
-Route::get('/detalle1/{ruc}/{type}', [HomeController::class, 'detalle1'])->name('detalle1');
-Route::get('/detalle2/{rucEntidad}/{rucContratista}/{type}', [HomeController::class, 'detalle2'])->name('detalle2');
+Route::get('/detalle1/{ruc}/{type}/{entidad}', [HomeController::class, 'detalle1'])->name('detalle1');
+Route::get('/detalle2/{rucEntidad}/{rucContratista}/{type}/{contratista}/{entidad}', [HomeController::class, 'detalle2'])->name('detalle2');
 
 

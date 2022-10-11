@@ -2,7 +2,7 @@
 @section('content')
     <section class="u-container">
         <h2 class="text-center text-xl xl:text-4xl font-bold mb-6 xl:mb-14">
-            Ministerio de Relaciones Exteriores <br class="hidden xl:block"> {{ $title }} <br class="hidden xl:block">
+            {{$entidad}} <br class="hidden xl:block"> {{ $title }} <br class="hidden xl:block">
             Período : Hasta Setiembre 2022
         </h2>
         <a href="{{ url('/') }}"
@@ -19,7 +19,8 @@
                 <p class="xl:col-span-2  font-semibold  hidden xl:block">RUC</p>
                 <p class="xl:col-span-2 text-main-gray font-medium hidden xl:block">Nombre </p>
                 <p class="xl:col-span-2 text-main-gray font-medium hidden xl:block">Monto </p>
-                <p class="xl:col-span-2 text-main-gray font-medium hidden xl:block">Órdenes de compra/Contratos. </p>
+                <p class="xl:col-span-2 text-main-gray font-medium hidden xl:block">Cantidad ordenes de compra/contratos
+                </p>
             </header>
             @foreach ($dataDetalle1 as $data)
                 <div
@@ -28,8 +29,9 @@
                     </p>
                     <p class="xl:col-span-2 font-semibold grid grid-cols-2 xl:block items-center gap-8">
                         <span class="text-main-gray font-medium xl:hidden">RUC:</span>
-                        <a href="{{ url('/detalle2/' . $data->ruc_entidad . '/' . $data->ruc_contratista .'/'.$type) }}">
-                        {{ $data->ruc_contratista }}</a>
+                        <a
+                            href="{{ url('/detalle2/' . $data->ruc_entidad . '/' . $data->ruc_contratista . '/' . $type . '/' . $data->nombre_contratista .'/'.$entidad) }}">
+                            {{ $data->ruc_contratista }}</a>
                     </p>
                     <p class="xl:col-span-2 font-medium grid grid-cols-2 xl:block items-center gap-8">
                         <span class="text-main-gray font-medium xl:hidden">Nombre:</span>
@@ -37,10 +39,10 @@
                     </p>
                     <p class="xl:col-span-2 font-medium grid grid-cols-2 xl:block items-center gap-8">
                         <span class="text-main-gray font-medium xl:hidden">Monto:</span>
-                        S/ {{ $data->monto }}
+                        S/ {{ number_format(round(floatval($data->monto), 2),2) }}
                     </p>
                     <p class="xl:col-span-2 font-medium grid grid-cols-2 xl:block items-center gap-8">
-                        <span class="text-main-gray font-medium xl:hidden">Órdenes de compra/Contratos : </span>
+                        <span class="text-main-gray font-medium xl:hidden">Cantidad ordenes de compra/contratos : </span>
                         <span> {{ $data->cantidad }}</span>
                     </p>
                 </div>

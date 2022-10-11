@@ -70,7 +70,7 @@
 
                         <p
                             class="col-span-6 xl:col-span-3 text-main-red order-4 xl:order-3 text-xs xl:text-lg xl:text-right col-start-2 xl:xol-start-auto">
-                            <span class="text-gray-400 xl:hidden pr-8 font-medium">En riesgo:</span>
+                            <span class="text-gray-400 xl:hidden pr-8 font-medium">Monto:</span>
                             <span>S/ {{ $item->riesgo }} mill.</span>
                         </p>
                         <p
@@ -85,9 +85,12 @@
                             <li class="grid items-center grid-cols-12 gap-4">
                                 <p class="flex items-center gap-3 font-medium xl:col-start-3 col-span-6 xl:col-span-4">
                                     {{ $categorias->name }}
-                                    @if ($categorias->riesgo !== 0.0)
-                                        <a
-                                            href="{{ url('/detalle1/' . $item->ruc . '/' . $categorias->sigla ) }}"><img
+                                    @if ($categorias->sigla === 'COF' || $categorias->sigla === 'PCP')
+                                        <span class="font-medium text-[red]">"En construccion"
+                                        </span>
+                                    @endif
+                                    @if ($categorias->riesgo !== '0.00')
+                                        <a href="{{ url('/detalle1/' . $item->ruc . '/' . $categorias->sigla) }}"><img
                                                 src="{{ asset('images/icon-compartir.png') }}" alt="Compartir"></a>
                                     @endif
                                 </p>
@@ -96,8 +99,6 @@
                                 <p class="flex items-center gap-8 xl:gap-24">
 
                                 </p>
-
-
                             </li>
                         @endforeach
                     </ul>
