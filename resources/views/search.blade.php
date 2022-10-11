@@ -71,7 +71,7 @@
                         <p
                             class="col-span-6 xl:col-span-3 text-main-red order-4 xl:order-3 text-xs xl:text-lg xl:text-right col-start-2 xl:xol-start-auto">
                             <span class="text-gray-400 xl:hidden pr-8 font-medium">Monto:</span>
-                            <span>S/ {{ $item->riesgo }} mill.</span>
+                            <span>S/ {{ $item->riesgo }}</span>
                         </p>
                         <p
                             class="col-span-6 xl:col-span-3 text-main-red flex items-center xl:justify-end gap-2 order-3 xl:order-4 col-start-2 xl:col-start-auto">
@@ -89,12 +89,14 @@
                                         <span class="font-medium text-[red]">"En construccion"
                                         </span>
                                     @endif
+
+                          
                                     @if ($categorias->riesgo !== '0.00')
-                                        <a href="{{ url('/detalle1/' . $item->ruc . '/' . $categorias->sigla) }}"><img
+                                        <a href="{{ url('/detalle1/' . $item->ruc . '/' . $categorias->sigla .'/'.$item->nombre) }}"><img
                                                 src="{{ asset('images/icon-compartir.png') }}" alt="Compartir"></a>
                                     @endif
                                 </p>
-                                <p class="col-span-4 xl:col-span-3 text-right">{{ $categorias->riesgo }} mill.</p>
+                                <p class="col-span-4 xl:col-span-3 text-right">S/ {{ $categorias->riesgo }}</p>
                                 <p class="col-span-2 xl:col-span-3 text-right">{{ $categorias->nota }}</p>
                                 <p class="flex items-center gap-8 xl:gap-24">
 
