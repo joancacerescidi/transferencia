@@ -31,4 +31,15 @@
         background-repeat: no-repeat;
         background-size: cover;
     }
+    @media (max-width: 1024px) {
+        .section-hero {
+            background-image: url(/images/hero-bg-sm.png);
+        }
+    }
+    .line-clamp-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
 }

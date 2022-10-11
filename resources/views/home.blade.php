@@ -77,7 +77,7 @@
                 <p class="col-span-1 pl-6 xl:pl-10">#</p>
                 <p class="col-span-4 xl:col-span-7 pl-4 xl:pl-10">Nombre</p>
                 <p class="col-span-2 hidden xl:block">En reisgo</p>
-                <p class="col-span-1 xl:col-span-2">Nota</p>
+                <p class="text-left xl:text-center col-span-1 xl:col-span-2">Nota</p>
             </header>
             @foreach ($result as $item)
                 <details class="bg-white border border-gray-200 shadow-sm rounded-xl mb-6 cursor-pointer hover:shadow-lg">
@@ -87,31 +87,38 @@
                         <img class="col-span-1 hidden xl:block xl:order-2"
                             src="{{ asset('images/icon-ministerio-relaciones-exteriores.png') }}"
                             alt="Ministerio de relaciones exteriores">
-                        <p class="col-span-4 xl:col-span-6 order-2 xl:order-3">{{ $item->nombre }}</p>
-                        <p class="col-span-6 xl:col-span-2 text-main-red order-4 xl:order-3 text-xs xl:text-lg">
+
+
+                        <p class="col-span-4 xl:col-span-4 order-2 xl:order-3 line-clamp-2">{{ $item->nombre }}</p>
+                       
+                       
+                        <p
+                            class="col-span-6 xl:col-span-3 text-main-red order-4 xl:order-3 text-xs xl:text-lg xl:text-right col-start-2 xl:xol-start-auto">
                             <span class="text-gray-400 xl:hidden pr-8 font-medium">En riesgo:</span>
                             <span>S/ {{ $item->riesgo }} mill.</span>
                         </p>
-                        <p class="col-span-1 text-main-red flex items-center gap-2 order-3 xl:order-4">
+                        <p
+                            class="col-span-6 xl:col-span-3 text-main-red flex items-center xl:justify-end gap-2 order-3 xl:order-4 col-start-2 xl:col-start-auto">
                             <img src="{{ asset('images/icon-estrella.png') }}" class="mb-1"> {{ $item->nota }}
                         </p>
-                        <p class="text-right xl:text-left col-span-6 xl:col-span-1 order-5">
-                            <span class="text-gray-400 xl:hidden pr-8 font-medium">Ver más</span>
-                            <img src="{{ asset('images/icon-chevron-down.png') }}" class="inline">
-                        </p>
+
                     </summary>
-                    <ul class="p-6 xl:pl-8 xl:pb-10 xl:w-2/3 mx-auto grid gap-4 xl:gap-8 text-xs xl:text-base">
+                    <ul class="p-6 xl:p-10 xl:pt-5 grid gap-4 xl:gap-8 text-xs xl:text-base">
                         @foreach ($item->category as $categorias)
-                            <li class="flex items-center justify-between gap-4">
-                                <p class="flex items-center gap-3 font-medium">
+                            <li class="grid items-center grid-cols-12 gap-4">
+                                <p class="flex items-center gap-3 font-medium xl:col-start-3 col-span-6 xl:col-span-4">
                                     {{ $categorias->name }}
 
-                                    <a href="{{ url('/detalle1/' . $item->ruc) }}"><img
-                                            src="{{ asset('images/icon-compartir.png') }}" alt="Compartir"></a>
+                                    @if ($categorias->riesgo !== 0.0)
+                                        <a href="{{ url('/detalle1/' . $item->ruc . '/' . $categorias->sigla) }}"><img
+                                                src="{{ asset('images/icon-compartir.png') }}" alt="Compartir"></a>
+                                    @endif
                                 </p>
+
+                                <p class="col-span-4 xl:col-span-3 text-right">{{ $categorias->riesgo }} mill.</p>
+                                <p class="col-span-2 xl:col-span-3 text-right">{{ $categorias->nota }}</p>
                                 <p class="flex items-center gap-8 xl:gap-24">
-                                    <span class="xl:mr-12 block"> {{ $categorias->riesgo }} mill.</span>
-                                    <span class="xl:-mr-8 block">{{ $categorias->nota }}</span>
+
                                 </p>
                             </li>
                         @endforeach
