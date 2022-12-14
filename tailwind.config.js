@@ -9,12 +9,12 @@ module.exports = {
         extend: {
             colors: {
                 // ...colors,
-                "text-color": "#0D101C",
-                "main-gray": "#A49FBE",
-                "main-gray-light": "#A49FBE",
-                "main-blue": "#1B46C2",
-                "main-red": "#EA3B45",
-                "body-bg": "#F8F9FF",
+                'text-color': '#0D101C',
+                'main-gray': '#A49FBE',
+                'main-gray-light': '#A49FBE',
+                'main-blue': '#1B46C2',
+                'main-red': '#EA3B45',
+                'body-bg': '#F8F9FF'
             },
             gridTemplateColumns: {
                 // Simple n column grid

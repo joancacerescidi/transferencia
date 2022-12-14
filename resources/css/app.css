@@ -3,7 +3,7 @@
 @tailwind utilities;
 @layer components {
     * {
-        scroll-behavior: smooth;
+        scroll-behavior:smooth;
     }
     body {
         @apply text-base font-montserrat overflow-x-hidden text-text-color;
@@ -41,5 +41,8 @@
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
         overflow: hidden;
+    }
+    dialog::backdrop {
+        background-color: rgba(0, 0, 0, .5);
     }
 }
