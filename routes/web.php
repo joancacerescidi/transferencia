@@ -33,5 +33,7 @@ Route::get('/detail-deparment-period/{department}/{period}', [DepartmentControll
 Route::get('/glosario/principal', [GlosarioContoller::class, 'index'])->name('glosario.index');
 #feedback
 Route::get('/usuario/feedback', [FeedbackController::class, 'index'])->name('feedback.index');
+#registrar un feddback
+Route::post('/save/feedback', [FeedbackController::class, 'created'])->name('feedback.created');
 #denuncia
 Route::get('/usuario/denuncia', [DenunciaController::class, 'index'])->name('denuncia.index');
