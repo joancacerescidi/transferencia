@@ -608,6 +608,9 @@ dialog::backdrop {
 .order-3 {
   order: 3;
 }
+.order-5 {
+  order: 5;
+}
 .col-span-1 {
   grid-column: span 1 / span 1;
 }
@@ -622,6 +625,9 @@ dialog::backdrop {
 }
 .col-start-2 {
   grid-column-start: 2;
+}
+.m-6 {
+  margin: 1.5rem;
 }
 .m-20 {
   margin: 5rem;
@@ -685,6 +691,9 @@ dialog::backdrop {
 }
 .block {
   display: block;
+}
+.inline {
+  display: inline;
 }
 .flex {
   display: flex;

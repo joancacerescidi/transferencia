@@ -5,6 +5,7 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\GlosarioContoller;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RankingController;
 use App\Http\Controllers\SectionController;
 use Illuminate\Support\Facades\Route;
 
@@ -37,8 +38,13 @@ Route::get('/detail-deparment-period/{department}/{period}', [DepartmentControll
 // Route::get('/detalle2/{rucEntidad}/{rucContratista}/{type}/{contratista}/{entidad}', [HomeController::class, 'detalle2'])->name('detalle2');
 
 
-
-
+#Rankings
+#Entidad
+Route::get('/ranking/entidad/{period}', [RankingController::class, 'rankingEntidad']);
+#proveedores
+Route::get('/ranking/proveedor/{period}', [RankingController::class, 'rankingProveedor']);
+#funcionario
+Route::get('/ranking/funcionario/{period}', [RankingController::class, 'rankingFuncionario']);
 
 
 
