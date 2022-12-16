@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -32,16 +33,17 @@ class FeedbackController extends Controller
         ]);
         DB::beginTransaction();
         try {
+
             DB::table('feedback')->insert([
                 'detalle' => $request->detalle,
                 'telefono' => $request->telefono,
                 'email' => $request->email,
-                'nombre' => $request->nombre,
+                'nombre' =>  $request->nombre,
             ]);
             DB::commit();
         } catch (\Exception $ex) {
             DB::rollBack();
-            throw $ex;
+            // throw $ex;
             return back()->with('errorSave', 'error');
         }
         return back()->with('success', 'éxito');

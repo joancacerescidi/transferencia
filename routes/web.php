@@ -19,14 +19,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Ruta inicial
+#Ruta inicial
 Route::get('/{period?}', [SectionController::class, 'index']);
+#Ranking entidad
+Route::get('/ranking/entidad', [SectionController::class, 'index']);
+
+
+
+
 //Ruta al darle clic en una regiòn del mapa
 Route::get('/detail-deparment-period/{department}/{period}', [DepartmentController::class, 'index']);
+
+
 
 // Route::post('/search', [HomeController::class, 'busqueda'])->name('busqueda');
 // Route::get('/detalle1/{ruc}/{type}/{entidad}', [HomeController::class, 'detalle1'])->name('detalle1');
 // Route::get('/detalle2/{rucEntidad}/{rucContratista}/{type}/{contratista}/{entidad}', [HomeController::class, 'detalle2'])->name('detalle2');
+
+
+
+
+
+
 
 
 #Glosario
@@ -37,3 +51,5 @@ Route::get('/usuario/feedback', [FeedbackController::class, 'index'])->name('fee
 Route::post('/save/feedback', [FeedbackController::class, 'created'])->name('feedback.created');
 #denuncia
 Route::get('/usuario/denuncia', [DenunciaController::class, 'index'])->name('denuncia.index');
+#registrar una denuncia
+Route::post('/save/denuncia', [DenunciaController::class, 'created'])->name('denuncia.created');
