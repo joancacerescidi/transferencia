@@ -40,13 +40,15 @@
                     <article class="grid gap-10">
                         <div class="border bg-body-bg shadow-lg px-6 py-10">
                             <h4 class="xl:text-xl font-bold text-center mb-10">Lorem ipsum dolor sit.</h4>
-                            <form class="grid xl:grid-cols-3 gap-x-6 gap-y-6 xl:gap-y-10 items-center">
+                            <form method="POST" action="{{ route('entidad.busqueda', [$period]) }}"
+                                class="grid xl:grid-cols-3 gap-x-6 gap-y-6 xl:gap-y-10 items-center">
+                                @csrf
                                 <p class="text-center xl:text-left xl:text-lg font-bold">Entidad: </p>
                                 <div class="relative xl:col-span-2">
-                                    <input
+                                    <input name="palabraClave"
                                         class="block w-full py-5 px-6 rounded-xl border border-gray-200 bg-white shadow-sm focus:outline-none focus:ring focus:ring-main-blue"
-                                        type="text" placeholder="Buscar entidad">
-                                    <button type="button" class="absolute top-5 right-5">
+                                        type="text" placeholder="Buscar entidad" required>
+                                    <button type="submit" class="absolute top-5 right-5">
                                         <img src="/images/icon-buscar.png" alt="Buscar">
                                     </button>
                                 </div>
@@ -55,15 +57,18 @@
                                     Entidades</a>
                             </form>
                         </div>
+
                         <div class="border bg-body-bg shadow-lg px-6 py-10">
                             <h4 class="xl:text-xl font-bold text-center mb-10">Lorem ipsum dolor sit.</h4>
-                            <form class="grid xl:grid-cols-3 gap-x-6 gap-y-6 xl:gap-y-10 items-center">
+                            <form method="POST" action="{{ route('proveedor.busqueda', [$period]) }}"
+                                class="grid xl:grid-cols-3 gap-x-6 gap-y-6 xl:gap-y-10 items-center">
+                                @csrf
                                 <p class="text-center xl:text-left xl:text-lg font-bold">Proveedor: </p>
                                 <div class="relative xl:col-span-2">
-                                    <input
+                                    <input name="palabraClave"
                                         class="block w-full py-5 px-6 rounded-xl border border-gray-200 bg-white shadow-sm focus:outline-none focus:ring focus:ring-main-blue"
                                         type="text" placeholder="Buscar proveedor">
-                                    <button type="button" class="absolute top-5 right-5">
+                                    <button type="submit" class="absolute top-5 right-5">
                                         <img src="/images/icon-buscar.png" alt="Buscar">
                                     </button>
                                 </div>
@@ -74,13 +79,17 @@
                         </div>
                         <div class="border bg-body-bg shadow-lg px-6 py-10">
                             <h4 class="xl:text-xl font-bold text-center mb-10">Lorem ipsum dolor sit.</h4>
-                            <form class="grid xl:grid-cols-3 gap-x-6 gap-y-6 xl:gap-y-10 items-center">
+
+
+                            <form method="POST" action="{{ route('funcionario.busqueda', [$period]) }}"
+                                class="grid xl:grid-cols-3 gap-x-6 gap-y-6 xl:gap-y-10 items-center">
+                                @csrf
                                 <p class="text-center xl:text-left xl:text-lg font-bold">Funcionario: </p>
                                 <div class="relative xl:col-span-2">
-                                    <input
+                                    <input name="palabraClave"
                                         class="block w-full py-5 px-6 rounded-xl border border-gray-200 bg-white shadow-sm focus:outline-none focus:ring focus:ring-main-blue"
                                         type="text" placeholder="Buscar funcionario">
-                                    <button type="button" class="absolute top-5 right-5">
+                                    <button type="submit" class="absolute top-5 right-5">
                                         <img src="/images/icon-buscar.png" alt="Buscar">
                                     </button>
                                 </div>
@@ -89,13 +98,13 @@
                                     Funcionario</a>
                             </form>
                         </div>
-                            <div class="border bg-white shadow-lg px-6 py-10">
+                        <div class="border bg-white shadow-lg px-6 py-10">
                             <h3 class="text-lg text-center font-bold mb-4">
                                 Avance en ejecución
                             </h3>
                             <img src="../images/repair.png" class="w-2/3 mx-auto">
                         </div>
-                      
+
 
                     </article>
                     <article class="grid gap-10">
@@ -104,7 +113,7 @@
 
                             <canvas id="myChart"></canvas>
                         </div>
-                          <div class="border bg-white shadow-lg px-6 py-10">
+                        <div class="border bg-white shadow-lg px-6 py-10">
                             <h4 class="xl:text-xl font-bold text-center mb-10">Lorem ipsum dolor sit.</h4>
                             <svg id="mapa-peru" baseprofile="tiny" fill="#7c7c7c" stroke="#ffffff" stroke-linecap="round"
                                 stroke-linejoin="round" stroke-width="2" version="1.2" viewbox="0 0 1000 1472"
@@ -218,8 +227,8 @@
                                 </circle>
                             </svg>
                         </div>
-                       
-                    
+
+
                     </article>
                 </div>
             </div>
@@ -327,20 +336,35 @@
 
                     $tooltip.style.top = `${top}px`
                     $tooltip.style.left = `${left}px`
-                    $tooltip.innerHTML = `${name}<ul class="ml-4">
-                                                    <li type="circle">m_compra : ${m_compra}</li>
-                                                    <li type="circle">m_contrato : ${m_contrato}</li>
-                                                    <li type="circle">c_fra : ${c_fra}</li>
-                                                    <li type="circle">m_prc : ${m_prc}</li>
-                                                    <li type="circle">m_pmr : ${m_pmr}</li>
-                                                    <li type="circle">m_crc : ${m_crc}</li>
-                                                    <li type="circle">m_adi : ${m_adi}</li>
-                                                    <li type="circle">m_cof : ${m_cof}</li>
-                                                    <li type="circle">m_fra : ${m_fra}</li>
-                                                    <li type="circle">c_dprc : ${c_dprc}</li>
-                                                    <li type="circle">c_dpmr : ${c_dpmr}</li>
-                                                    <li type="circle">c_dcrc : ${c_dcrc}</li>
-                                                    <li type="circle">c_adi : ${c_adi}</li>
+                    $tooltip.innerHTML = `  <h4 class="font-bold mb-4">${name}</h4>
+                                               <ul class="pl-8 grid gap-3">
+                                                     <li class="text-sm flex items-center gap-2"> 
+                                                        <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>m_compra : ${m_compra}</p></li>
+                                                    
+                                                     <li class="text-sm flex items-center gap-2"> 
+                                                        <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>m_contrato : ${m_contrato}</p></li>
+                                                     <li class="text-sm flex items-center gap-2"> 
+                                                        <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>c_fra : ${c_fra}</p></li>
+                                                     <li class="text-sm flex items-center gap-2"> 
+                                                        <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>m_prc : ${m_prc}</p></li>
+                                                     <li class="text-sm flex items-center gap-2"> 
+                                                        <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>m_pmr : ${m_pmr}</p></li>
+                                                     <li class="text-sm flex items-center gap-2"> 
+                                                        <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>m_crc : ${m_crc}</p></li>
+                                                     <li class="text-sm flex items-center gap-2"> 
+                                                        <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>m_adi : ${m_adi}</p></li>
+                                                     <li class="text-sm flex items-center gap-2"> 
+                                                        <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>m_cof : ${m_cof}</p></li>
+                                                     <li class="text-sm flex items-center gap-2"> 
+                                                        <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>m_fra : ${m_fra}</p></li>
+                                                     <li class="text-sm flex items-center gap-2"> 
+                                                        <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>c_dprc : ${c_dprc}</p></li>
+                                                     <li class="text-sm flex items-center gap-2"> 
+                                                        <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>c_dpmr : ${c_dpmr}</p></li>
+                                                     <li class="text-sm flex items-center gap-2"> 
+                                                        <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>c_dcrc : ${c_dcrc}</p></li>
+                                                     <li class="text-sm flex items-center gap-2"> 
+                                                        <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>c_adi : ${c_adi}</p></li>
                                                  </ul>`;
 
                     $tooltip.classList.remove('opacity-0')

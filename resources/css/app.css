@@ -3,7 +3,7 @@
 @tailwind utilities;
 @layer components {
     * {
-        scroll-behavior:smooth;
+        scroll-behavior: smooth;
     }
     body {
         @apply text-base font-montserrat overflow-x-hidden text-text-color;
@@ -44,5 +44,13 @@
     }
     dialog::backdrop {
         background-color: rgba(0, 0, 0, .5);
+    }
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    input[type=number] {
+        -moz-appearance: textfield;
     }
 }

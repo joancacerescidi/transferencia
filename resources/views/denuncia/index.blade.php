@@ -13,7 +13,7 @@
                 </p>
             </aside>
             <article>
-                <form method="POST"  enctype="multipart/form-data" action="{{ route('denuncia.created') }}"
+                <form method="POST" enctype="multipart/form-data" action="{{ route('denuncia.created') }}"
                     class="grid gap-6 xl:gap-10 bg-body-bg xl:bg-white py-10 px-6 xl:p-10 rounded-md shadow-lg border">
                     {{ csrf_field() }}
                     <h2 class="text-center text-xl xl:text-3xl font-bold">
@@ -64,16 +64,16 @@
                         <input id="nombres" value="{{ old('nombres') }}" name="nombres" type="text"
                             placeholder="Nombres"
                             class="text-sm block w-full p-4 rounded-md border shadow-md focus:outline-none focus:ring focus:ring-main-blue @error('nombres') ring ring-red-500  @enderror" ">
-                            @error('nombres')
-                            <span class="py-2 text-red-500 text-xs xl:text-sm block">{{ $message }}</span>
-                          @enderror
-                    </div>
-                <div class="grid xl:grid-cols-2 gap-6 xl:gap-10">
+                                    @error('nombres')
+        <span class="py-2 text-red-500 text-xs xl:text-sm block">{{ $message }}</span>
+    @enderror
+                            </div>
+                        <div class="grid xl:grid-cols-2 gap-6 xl:gap-10">
 
-                     <div>
-                       <label for="email" class="font-semibold text-xs xl:text-sm block mb-1">Teléfono</label>
-                       <input id="telefono" value="{{ old('telefono') }}" name="telefono" type="number" placeholder="E-mail"
-                          class="text-sm block w-full p-4 rounded-md border shadow-md focus:outline-none focus:ring focus:ring-main-blue @error('telefono') ring ring-red-500  @enderror"">
+                             <div>
+                               <label for="email" class="font-semibold text-xs xl:text-sm block mb-1">Teléfono</label>
+                               <input id="telefono" value="{{ old('telefono') }}" name="telefono" type="number" placeholder="E-mail"
+                                  class="text-sm block w-full p-4 rounded-md border shadow-md focus:outline-none focus:ring focus:ring-main-blue @error('telefono') ring ring-red-500  @enderror"">
                         @error('telefono')
                             <span class="py-2 text-red-500 text-xs xl:text-sm block">{{ $message }}</span>
                         @enderror
@@ -94,8 +94,11 @@
                         <span for="" class="font-semibold text-xs xl:text-sm block mb-1">Archivo adjunto</span>
                         <label for="archivo"
                             class="text-sm w-full p-4 rounded-md border bg-white shadow-md flex items-center gap-4 cursor-pointer">
-                            <img src="../images/file.png" alt="">
-                            Adjuntar archivo (opcional)
+                            <img src="../images/file.png" id="archivo-icon" alt="">
+                            <span id="archivo-description">
+                                Adjuntar archivo (opcional)
+                            </span>
+
                         </label>
                         <input type="file" name="files[]" class="hidden" id="archivo"
                             accept="image/png,image/jpeg,image/jpg,.pdf" multiple>
@@ -115,4 +118,34 @@
             </article>
         </section>
     </main>
+@endsection
+
+
+@section('scripts')
+    <script>
+        const $file = document.getElementById('archivo')
+        const $fileIcon = document.getElementById('archivo-icon')
+        const $fileDescription = document.getElementById('archivo-description')
+
+        $file.addEventListener('change', (event) => {
+            const fileList = event.target.files;
+
+            if (fileList.length === 0) {
+                $fileDescription.innerHTML = 'Adjuntar archivo'
+                $fileIcon.setAttribute('src', '/images/file.png')
+            }
+
+            if (fileList.length > 0) {
+                $fileDescription.innerHTML = `
+          <b class="pr-2">${fileList.length}</b>
+          ${
+            fileList.length > 1 
+              ? 'Archivos subidos con exito'
+              : 'Archivo subido con exito'
+          }
+        `
+                $fileIcon.setAttribute('src', '/images/icon-check.svg')
+            }
+        })
+    </script>
 @endsection

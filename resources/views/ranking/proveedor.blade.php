@@ -11,11 +11,11 @@
                 </span>
             </a>
             <h2 class="text-center text-xl xl:text-4xl font-bold mb-14">
-                Ranking de entidades
+                Ranking de proveedores
             </h2>
 
             @isset($search)
-                <form method="POST" action="{{ route('entidad.busqueda', [$period]) }}" class="mb-14">
+                <form method="POST" action="{{ route('proveedor.busqueda', [$period]) }}" class="mb-14">
                      @csrf
                     <div class="relative xl:w-1/3 mx-auto mb-14">
                         <input name="palabraClave"
