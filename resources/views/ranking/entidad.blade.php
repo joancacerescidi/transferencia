@@ -16,7 +16,7 @@
 
             @isset($search)
                 <form method="POST" action="{{ route('entidad.busqueda', [$period]) }}" class="mb-14">
-                     @csrf
+                    @csrf
                     <div class="relative xl:w-1/3 mx-auto mb-14">
                         <input name="palabraClave"
                             class="block w-full py-5 px-6 rounded-xl border border-gray-200 bg-white shadow-sm focus:outline-none focus:ring focus:ring-main-blue"
@@ -43,7 +43,7 @@
                         <img src="../images/icon-chevron-down-blue.png" alt="">
                     </p>
                 </header>
-                @foreach ($result as $item)
+                @foreach ($result as $key => $item)
                     <details
                         class="bg-white border border-gray-200 shadow-sm rounded-xl mb-6 cursor-pointer hover:shadow-lg">
                         <summary
@@ -58,19 +58,19 @@
                             </p>
                             <p
                                 class="col-span-6 xl:col-span-3 text-main-red order-4 xl:order-3 text-xs xl:text-lg xl:text-right col-start-2 xl:xol-start-auto">
-                                <span class="text-gray-400 xl:hidden pr-8 font-medium">En riesgo:</span>
+                                <span class="text-gray-400 xl:hidden pr-8 font-medium">Monto:</span>
                                 <span> {{ $item->dataList->montoTotal }}</span>
                             </p>
                             <p
                                 class="col-span-6 xl:col-span-3 text-main-red flex items-center xl:justify-end gap-2 order-3 xl:order-4 col-start-2 xl:col-start-auto">
-                                <span class="text-gray-400 xl:hidden pr-8 font-medium">Nota:</span>
+                                <span class="text-gray-400 xl:hidden pr-8 font-medium">Ranking:</span>
                                 <img src="/images/icon-estrella.png" class="mb-1">
                                 {{ $item->dataList->ranking }}
                             </p>
                             <!-- <p class="text-right xl:text-left col-span-6 xl:col-span-1 order-5">
-                                                              <span class="text-gray-400 xl:hidden pr-8 font-medium">Ver más</span>
-                                                              <img src="/images/icon-chevron-down.png" class="inline">
-                                                            </p> -->
+                                                                                                                  <span class="text-gray-400 xl:hidden pr-8 font-medium">Ver más</span>
+                                                                                                                  <img src="/images/icon-chevron-down.png" class="inline">
+                                                                                                                </p> -->
                         </summary>
 
 
@@ -98,9 +98,10 @@
 
                         <hr class="m-6">
                         <h2 class="text-center text-sm xl:text-base font-bold mb-6">
-                            Lorem ipsum dolor sit amet.
+                            Gráfico Entidad
                         </h2>
-                        <img src="/images/grafico-example.jpg" class="mb-8 mx-auto">
+                        <canvas id="myChartEntidad{{ $key }}"></canvas>
+
                     </details>
                 @endforeach
                 <div class="flex justify-center py-8">
@@ -109,4 +110,42 @@
             </article>
         </section>
     </main>
+@endsection
+@section('scripts')
+    <script>
+        var dataEntidad = {!! json_encode($result->items()) !!};
+        dataEntidad.forEach((value, index) => {
+           var canvaItem = `myChartEntidad${index}`.toString();
+            const ctx = document.getElementById(canvaItem);
+             new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [2018, 2019, 2020, 2021, 2022],
+                datasets: [{
+                    data: [134015070652.4031, 95566556.88000001, 1576353333.51, 80193151.79199998,
+                        82289637.38
+                    ],
+                    label: "Ranking",
+                    borderColor: "#3e95cd",
+                    fill: false
+                }, {
+                    data: [113610651402.67422, 174887419.29000002, 1681222073.2826984, 159283657.3720001,
+                        176669002.86
+                    ],
+                    label: "Monto de Compra",
+                    borderColor: "#8e5ea2",
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+
+            },
+        });
+         
+
+        });
+      
+       
+    </script>
 @endsection

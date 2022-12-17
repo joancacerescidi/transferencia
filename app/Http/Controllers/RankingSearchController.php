@@ -86,6 +86,7 @@ class RankingSearchController extends Controller
         $search = true;
         return view('ranking.entidad', compact('result', 'search', 'period'));
     }
+
     public function rankingProveedor($period)
     {
         $data = DB::table('public.proveedor_anno')
@@ -187,49 +188,50 @@ class RankingSearchController extends Controller
         $result = $this->convertDataFuncionario($data);
         return view('ranking.funcionario', compact('result'));
     }
-    public function searchFuncionario(Request $request,$period)
+    public function searchFuncionario(Request $request, $period)
     {
         $request->validate([
             'palabraClave' => 'required|string',
         ]);
         $data = DB::table('public.funcionario_anno')
-        ->select(
-            'anno',
-            'idfuncionario',
-            'nombre',
-            'cantidad_ordencompra',
-            'cantidad_contrato',
-            'cantidad_consorcio',
-            'monto_ordencompra',
-            'monto_contrato',
-            'monto_consorcio',
-            'cantidade_ordencompra',
-            'montoe_ordencompra',
-            'cantidade_contrato',
-            'montoe_contrato',
-            'cantidade_consorcio',
-            'montoe_consorcio',
-            'cantidada_ordencompra',
-            'montoa_ordencompra',
-            'cantidada_contrato',
-            'montoa_contrato',
-            'cantidada_consorcio',
-            'montoa_consorcio',
-            'cantidadd_ordencompra',
-            'montod_ordencompra',
-            'cantidadd_contrato',
-            'montod_contrato',
-            'cantidadd_consorcio',
-            'montod_consorcio',
-            DB::raw('(cantidad_ordencompra+cantidad_contrato+cantidad_consorcio+cantidade_ordencompra+cantidade_contrato+cantidade_consorcio+cantidada_ordencompra+cantidada_contrato+cantidada_consorcio) as ranking')
-        )
-         ->where('nombre', 'LIKE', '%' . strtoupper($request->palabraClave) . '%')
-        ->orderBy('ranking', 'DESC')->paginate(10);
+            ->select(
+                'anno',
+                'idfuncionario',
+                'nombre',
+                'cantidad_ordencompra',
+                'cantidad_contrato',
+                'cantidad_consorcio',
+                'monto_ordencompra',
+                'monto_contrato',
+                'monto_consorcio',
+                'cantidade_ordencompra',
+                'montoe_ordencompra',
+                'cantidade_contrato',
+                'montoe_contrato',
+                'cantidade_consorcio',
+                'montoe_consorcio',
+                'cantidada_ordencompra',
+                'montoa_ordencompra',
+                'cantidada_contrato',
+                'montoa_contrato',
+                'cantidada_consorcio',
+                'montoa_consorcio',
+                'cantidadd_ordencompra',
+                'montod_ordencompra',
+                'cantidadd_contrato',
+                'montod_contrato',
+                'cantidadd_consorcio',
+                'montod_consorcio',
+                DB::raw('(cantidad_ordencompra+cantidad_contrato+cantidad_consorcio+cantidade_ordencompra+cantidade_contrato+cantidade_consorcio+cantidada_ordencompra+cantidada_contrato+cantidada_consorcio) as ranking')
+            )
+            ->where('nombre', 'LIKE', '%' . strtoupper($request->palabraClave) . '%')
+            ->orderBy('ranking', 'DESC')->paginate(10);
 
         $result = $this->convertDataFuncionario($data);
         $search = true;
-        return view('ranking.funcionario', compact('result','search', 'period'));
+        return view('ranking.funcionario', compact('result', 'search', 'period'));
     }
+
     public function convertDataEntidad($data)
     {
 
@@ -237,7 +239,7 @@ class RankingSearchController extends Controller
             $item->dataList = new stdClass();
             $item->dataList->nombre = $item->nombre_entidad;
             $item->dataList->montoTotal = $item->montoordencompra + $item->montocontrato;
-            $item->dataList->ranking = round($item->ranking / ($item->montoordencompra + $item->montocontrato), 2);
+            $item->dataList->ranking = intval($item->ranking / ($item->montoordencompra + $item->montocontrato));
             $item->dataList->categorys = [];
             //---Fraccionamientos---//
             $fraccionamiento = new stdClass();
@@ -281,6 +283,20 @@ class RankingSearchController extends Controller
             $consorciosFantasma->cantidad = $item->cantidadcof;
             $consorciosFantasma->sigla = "COF";
             array_push($item->dataList->categorys, $consorciosFantasma);
+
+            $dataEntidadGraf = DB::table('totalannoentidad')
+                ->select(
+                    'anno',
+                    DB::raw('(montofra+montoadi+montoprc+montocrc+montopmr ) as ranking'),
+                    DB::raw('(montoordencompra+montocontrato ) as montocompra'),
+                )->where('ruc_entidad', $item->ruc_entidad)->orderBy('anno')->get();
+
+
+            foreach ($dataEntidadGraf as $graf) {
+                $graf->ranking = intval($graf->ranking);
+                $graf->montocompra = intval($graf->montocompra);
+            }
+            $item->grafico = $dataEntidadGraf;
         });
 
         return $data;
