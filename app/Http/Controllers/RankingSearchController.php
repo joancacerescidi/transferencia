@@ -369,7 +369,7 @@ class RankingSearchController extends Controller
             $sanciones->monto = 0;
             $sanciones->cantidad = $item->cantidadsanciones ?? 0;
             $sanciones->sigla = "sanciones";
-            array_push($item->dataList->categorys, $postulaciones);
+            array_push($item->dataList->categorys, $sanciones);
 
             $penalidades = new stdClass();
             $penalidades->name = "Penalidades";

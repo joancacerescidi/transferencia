@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ptoyecto</title>
+    <title> Qullqita Qatipay</title>
 
 
     <!-- SPLIDE JS -->
@@ -20,64 +20,7 @@
 </head>
 
 <body>
-    <!-- Modal Feedback -->
-    <dialog class="fixed inset-0 p-6 xl:p-10 rounded-xl w-full xl:w-1/3" id="modal-feedback">
-        <h2 class="text-center xl:text-xl font-bold mb-8">¿Como podemos mejorar?</h2>
-        <form class="grid gap-6 xl:gap-10" method="POST" action="created-feedback">
-            @csrf
-            <div>
-                <label class="font-semibold text-xs xl:text-sm block mb-1" for="detalle">Danos tu opinión de que
-                    podriamos mejorar.</label>
-                <textarea name="detalle" id="detalle" rows="3" placeholder="Escribe aqui..."
-                    class="text-sm block w-full p-4 rounded-md border shadow-md focus:outline-none focus:ring focus:ring-main-blue"></textarea>
-                @error('detalle')
-                    <span>
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-            </div>
-            <h4 class="font-bold xl:text-lg">Datos de contacto</h4>
-            <div>
-                <label for="nombre" class="font-semibold text-xs xl:text-sm block mb-1">Nombres</label>
-                <input id="nombre" name="nombre" type="text" placeholder="Nombres"
-                    class="text-sm block w-full p-4 rounded-md border shadow-md focus:outline-none focus:ring focus:ring-main-blue">
 
-                @error('nombre')
-                    <span>
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-            </div>
-            <div>
-                <label for="email" class="font-semibold text-xs xl:text-sm block mb-1">Correo electrónico</label>
-                <input id="email" name="email" type="email" placeholder="E-mail"
-                    class="text-sm block w-full p-4 rounded-md border shadow-md focus:outline-none focus:ring focus:ring-main-blue">
-
-                @error('email')
-                    <span>
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-            </div>
-            <div>
-                <label for="telefono" class="font-semibold text-xs xl:text-sm block mb-1">Celular</label>
-                <input id="telefono" name="telefono" type="number" placeholder="Celular"
-                    class="text-sm block w-full p-4 rounded-md border shadow-md focus:outline-none focus:ring focus:ring-main-blue">
-
-                @error('telefono')
-                    <span>
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-            </div>
-
-            <button type="submit"
-                class="block w-full p-5 bg-main-blue text-white font-semibold rounded-md text-sm">Enviar</button>
-        </form>
-        <button type="submit" id="cerrar-modal-feedback" class="absolute top-4 right-4 cursor-pointer">
-            <img src="{{ asset('images/icon-cerrar-black.png') }}" alt="">
-        </button>
-    </dialog>
 
 
     <!-- Menu movil -->
@@ -95,10 +38,10 @@
 
 
     <header class="u-container py-6 flex items-center justify-between">
-        <a href="/">
-            <img src="{{ asset('images/LOGO.png') }}" alt="Logo">
+        <a href="/" class="font-semibold text-lg ">
+            Qullqita Qatipay
         </a>
-        <p class="font-semibold text-lg hidden xl:block">Data actualizada hasta Octubre 200 </p>
+        <p class="font-semibold text-lg hidden xl:block">Data actualizada a Noviembre 2022 </p>
         <nav class="hidden xl:flex items-center gap-12 font-semibold text-main-gray-light">
             <a href="{{ route('feedback.index') }}" class="transition-colors hover:text-text-color">Feedback</a>
             <a href="{{ route('denuncia.index') }}" class="transition-colors hover:text-text-color">Denuncia</a>
@@ -116,7 +59,9 @@
 
     <footer class="">
         <div class="u-container grid xl:grid-cols-3 xl:items-start gap-12 xl:gap-6">
-            <img src="{{ asset('images/LOGO.png') }}" alt="Logo">
+           <a href="/" class="font-semibold text-lg ">
+            Qullqita Qatipay
+        </a>
             <ul class="grid gap-6 xl:text-lg xl:justify-center">
                 <li>
                     <a href="#">Fuentes</a>
@@ -136,7 +81,7 @@
             </div>
         </div>
         <hr>
-        <p class="py-8 text-sm xl:text-lg text-center">2022@ Proyecto - Todos los derechos reservados</p>
+        <p class="py-8 text-sm xl:text-lg text-center">2022@  Qullqita Qatipay - Todos los derechos reservados</p>
     </footer>
 
     <script src="{{ asset('js/header/index.js') }}"></script>

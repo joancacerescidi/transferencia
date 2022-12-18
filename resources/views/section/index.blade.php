@@ -6,8 +6,7 @@
             id="tooltip"></span>
         <section class="u-container">
             <h2 class="text-center text-xl xl:text-4xl font-bold mb-14">
-                Selecciona el periodo
-
+                Seleccionar el periodo
             </h2>
             <article id="carousel-periodos" class="splide">
                 <div class="splide__track">
@@ -39,7 +38,7 @@
                 <div class="grid xl:grid-cols-2 items-start gap-10 mb-14">
                     <article class="grid gap-10">
                         <div class="border bg-body-bg shadow-lg px-6 py-10">
-                            <h4 class="xl:text-xl font-bold text-center mb-10">Lorem ipsum dolor sit.</h4>
+                            <h4 class="xl:text-xl font-bold text-center mb-10">Buscar Entidad</h4>
                             <form method="POST" action="{{ route('entidad.busqueda', [$period]) }}"
                                 class="grid xl:grid-cols-3 gap-x-6 gap-y-6 xl:gap-y-10 items-center">
                                 @csrf
@@ -59,7 +58,7 @@
                         </div>
 
                         <div class="border bg-body-bg shadow-lg px-6 py-10">
-                            <h4 class="xl:text-xl font-bold text-center mb-10">Lorem ipsum dolor sit.</h4>
+                            <h4 class="xl:text-xl font-bold text-center mb-10">Buscar Proveedor</h4>
                             <form method="POST" action="{{ route('proveedor.busqueda', [$period]) }}"
                                 class="grid xl:grid-cols-3 gap-x-6 gap-y-6 xl:gap-y-10 items-center">
                                 @csrf
@@ -78,7 +77,7 @@
                             </form>
                         </div>
                         <div class="border bg-body-bg shadow-lg px-6 py-10">
-                            <h4 class="xl:text-xl font-bold text-center mb-10">Lorem ipsum dolor sit.</h4>
+                            <h4 class="xl:text-xl font-bold text-center mb-10">Buscar funcionario</h4>
 
 
                             <form method="POST" action="{{ route('funcionario.busqueda', [$period]) }}"
@@ -104,17 +103,15 @@
                             </h3>
                             <img src="../images/repair.png" class="w-2/3 mx-auto">
                         </div>
-
-
                     </article>
                     <article class="grid gap-10">
                         <div class="border bg-white shadow-lg px-6 py-10">
-                            <h4 class="xl:text-xl font-bold text-center mb-10">Lorem ipsum dolor sit.</h4>
+                            <h4 class="xl:text-xl font-bold text-center mb-10">Data por nivel de región</h4>
 
                             <canvas id="myChart"></canvas>
                         </div>
                         <div class="border bg-white shadow-lg px-6 py-10">
-                            <h4 class="xl:text-xl font-bold text-center mb-10">Lorem ipsum dolor sit.</h4>
+                            <h4 class="xl:text-xl font-bold text-center mb-10">Data por Región</h4>
                             <svg id="mapa-peru" baseprofile="tiny" fill="#7c7c7c" stroke="#ffffff" stroke-linecap="round"
                                 stroke-linejoin="round" stroke-width="2" version="1.2" viewbox="0 0 1000 1472"
                                 width="100%" xmlns="http://www.w3.org/2000/svg">
@@ -317,20 +314,19 @@
 
                     dataDepartment.forEach((value) => {
                         if (value.departamento === name) {
-                            m_compra = value.montoordencompra;
-                            m_contrato = value.montocontrato;
-                            c_fra = value.cantidadfra;
-                            m_prc = value.montoprc;
-                            m_pmr = value.montopmr;
-                            m_crc = value.montocrc;
-                            m_adi = value.montoadi;
-                            m_cof = value.montocof;
-                            m_fra = value.montofra;
-                            c_dprc = value.cantidadprc;
-                            c_dpmr = value.cantidadpmr;
-                            c_dcrc = value.cantidadcrc;
-                            c_adi = value.cantidadadi;
-
+                            m_compra = parseInt(value.montoordencompra);
+                            m_contrato = parseInt(value.montocontrato);
+                            c_fra = parseInt(value.cantidadfra);
+                            m_prc = parseInt(value.montoprc);
+                            m_pmr = parseInt(value.montopmr);
+                            m_crc = parseInt(value.montocrc);
+                            m_adi = parseInt(value.montoadi);
+                            m_cof = parseInt(value.montocof);
+                            m_fra = parseInt(value.montofra);
+                            c_dprc = parseInt(value.cantidadprc);
+                            c_dpmr = parseInt(value.cantidadpmr);
+                            c_dcrc = parseInt(value.cantidadcrc);
+                            c_adi = parseInt(value.cantidadadi);
                         }
                     });
 
@@ -339,32 +335,31 @@
                     $tooltip.innerHTML = `  <h4 class="font-bold mb-4">${name}</h4>
                                                <ul class="pl-8 grid gap-3">
                                                      <li class="text-sm flex items-center gap-2"> 
-                                                        <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>m_compra : ${m_compra}</p></li>
-                                                    
+                                                        <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>Monto orden de compra : ${m_compra}</p></li>
                                                      <li class="text-sm flex items-center gap-2"> 
-                                                        <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>m_contrato : ${m_contrato}</p></li>
+                                                        <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>Monto contrato : ${m_contrato}</p></li>
                                                      <li class="text-sm flex items-center gap-2"> 
-                                                        <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>c_fra : ${c_fra}</p></li>
+                                                        <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>Cantidad fraccionamiento : ${c_fra}</p></li>
                                                      <li class="text-sm flex items-center gap-2"> 
-                                                        <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>m_prc : ${m_prc}</p></li>
+                                                        <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>Monto proveedor recién creado : ${m_prc}</p></li>
                                                      <li class="text-sm flex items-center gap-2"> 
-                                                        <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>m_pmr : ${m_pmr}</p></li>
+                                                        <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>Monto proveedor con mismo representante : ${m_pmr}</p></li>
                                                      <li class="text-sm flex items-center gap-2"> 
-                                                        <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>m_crc : ${m_crc}</p></li>
+                                                        <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>Monto consorcio con proveedores recién creados : ${m_crc}</p></li>
                                                      <li class="text-sm flex items-center gap-2"> 
-                                                        <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>m_adi : ${m_adi}</p></li>
+                                                        <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>Monto adjudicaciones directas : ${m_adi}</p></li>
                                                      <li class="text-sm flex items-center gap-2"> 
-                                                        <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>m_cof : ${m_cof}</p></li>
+                                                        <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>Monto Consorcios fantasma : ${m_cof}</p></li>
                                                      <li class="text-sm flex items-center gap-2"> 
-                                                        <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>m_fra : ${m_fra}</p></li>
+                                                        <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>Monto fraccionamiento : ${m_fra}</p></li>
                                                      <li class="text-sm flex items-center gap-2"> 
-                                                        <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>c_dprc : ${c_dprc}</p></li>
+                                                        <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>Cantidad proveedor recién creado : ${c_dprc}</p></li>
                                                      <li class="text-sm flex items-center gap-2"> 
-                                                        <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>c_dpmr : ${c_dpmr}</p></li>
+                                                        <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>Cantidad proveedor con mismo representante : ${c_dpmr}</p></li>
                                                      <li class="text-sm flex items-center gap-2"> 
-                                                        <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>c_dcrc : ${c_dcrc}</p></li>
+                                                        <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>Cantidad Consorcio con proveedores recién creados : ${c_dcrc}</p></li>
                                                      <li class="text-sm flex items-center gap-2"> 
-                                                        <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>c_adi : ${c_adi}</p></li>
+                                                        <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>Cantidad adjudicaciones directas : ${c_adi}</p></li>
                                                  </ul>`;
 
                     $tooltip.classList.remove('opacity-0')

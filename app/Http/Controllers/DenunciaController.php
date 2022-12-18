@@ -57,40 +57,42 @@ class DenunciaController extends Controller
                 'nombres' =>  $request->nombres,
             ]);
             $item = 0;
-            foreach ($request->file('files') as $requestFile) {
-                $item++;
-                #Obtenemos el archivo
-                $file = $requestFile;
-                #Obtenemos el verdadero nombre del archivo
-                $fileName = $file->getClientOriginalName();
-                #obtenemos el nombre del archivo sin su extensión
-                $fileName = pathinfo($fileName, PATHINFO_FILENAME);
-                #Reemplazamos los espacios con un '_' ,el nombre del archivo
-                $nameFile = strtolower(str_replace(" ", "_", $fileName));
-                #Obtenemos la extensión del archivo
-                $extension = strtolower($file->getClientOriginalExtension());
-                #Seteamos la zona horaria
-                date_default_timezone_set("America/Lima");
-                #Armamos el nombre final del archivo
-                $nameFinal = date('His') . '-' . $nameFile . '.' . $extension;
-                #movemos el archivo en la carpeta Public/files ,clasificandolo por su extensión
-                $path = 'files/' . $extension;
-                $file->move(public_path($path), $nameFinal);
-                #Armamos la ruta del archivo para guardarlo en la BD
-                $rutaFile =  $path . '/' . $nameFinal;
-                #Guardamos los datos del archivo en la BD
-                DB::table('denuncia_archivo')->insert([
-                    'iddenuncia' => $resultId,
-                    'item' => $item,
-                    'nombrearchivo' =>  $nameFinal,
-                    'path' => $rutaFile,
-                ]);
+            if ($request->file('files')) {
+                foreach ($request->file('files') as $requestFile) {
+                    $item++;
+                    #Obtenemos el archivo
+                    $file = $requestFile;
+                    #Obtenemos el verdadero nombre del archivo
+                    $fileName = $file->getClientOriginalName();
+                    #obtenemos el nombre del archivo sin su extensión
+                    $fileName = pathinfo($fileName, PATHINFO_FILENAME);
+                    #Reemplazamos los espacios con un '_' ,el nombre del archivo
+                    $nameFile = strtolower(str_replace(" ", "_", $fileName));
+                    #Obtenemos la extensión del archivo
+                    $extension = strtolower($file->getClientOriginalExtension());
+                    #Seteamos la zona horaria
+                    date_default_timezone_set("America/Lima");
+                    #Armamos el nombre final del archivo
+                    $nameFinal = date('His') . '-' . $nameFile . '.' . $extension;
+                    #movemos el archivo en la carpeta Public/files ,clasificandolo por su extensión
+                    $path = 'files/' . $extension;
+                    $file->move(public_path($path), $nameFinal);
+                    #Armamos la ruta del archivo para guardarlo en la BD
+                    $rutaFile =  $path . '/' . $nameFinal;
+                    #Guardamos los datos del archivo en la BD
+                    DB::table('denuncia_archivo')->insert([
+                        'iddenuncia' => $resultId,
+                        'item' => $item,
+                        'nombrearchivo' =>  $nameFinal,
+                        'path' => $rutaFile,
+                    ]);
+                }
             }
 
             DB::commit();
         } catch (\Exception $ex) {
             DB::rollBack();
-            // throw $ex;
+            throw $ex;
             return back()->with('errorSave', 'error');
         }
         return back()->with('success', 'éxito');

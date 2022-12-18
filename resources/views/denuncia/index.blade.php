@@ -41,7 +41,7 @@
                         <div>
                             <label for="contrato" class="font-semibold text-xs xl:text-sm block mb-1">Entidad</label>
                             <input value="{{ old('entidad') }}" id="entidad" name="entidad" type="text"
-                                placeholder="Proceso de compra"
+                                placeholder="Entidad"
                                 class="text-sm block w-full p-4 rounded-md border shadow-md focus:outline-none focus:ring focus:ring-main-blue @error('entidad') ring ring-red-500  @enderror"">
                             @error('entidad')
                                 <span class="py-2 text-red-500 text-xs xl:text-sm block">{{ $message }}</span>
@@ -72,7 +72,7 @@
 
                              <div>
                                <label for="email" class="font-semibold text-xs xl:text-sm block mb-1">Teléfono</label>
-                               <input id="telefono" value="{{ old('telefono') }}" name="telefono" type="number" placeholder="E-mail"
+                               <input id="telefono" value="{{ old('telefono') }}" name="telefono" type="number" placeholder="Teléfono"
                                   class="text-sm block w-full p-4 rounded-md border shadow-md focus:outline-none focus:ring focus:ring-main-blue @error('telefono') ring ring-red-500  @enderror"">
                         @error('telefono')
                             <span class="py-2 text-red-500 text-xs xl:text-sm block">{{ $message }}</span>
@@ -82,7 +82,7 @@
                         <label for="email" class="font-semibold text-xs xl:text-sm block mb-1">Correo electrónico
                             electrónico</label>
                         <input value="{{ old('email') }}" id="email" name="email" type="email"
-                            placeholder="E-mail"
+                            placeholder="Correo electrónico"
                             class="text-sm block w-full p-4 rounded-md border shadow-md focus:outline-none focus:ring focus:ring-main-blue @error('email') ring ring-red-500  @enderror"">
                         @error('email')
                             <span class="py-2 text-red-500 text-xs xl:text-sm block">{{ $message }}</span>
@@ -96,7 +96,7 @@
                             class="text-sm w-full p-4 rounded-md border bg-white shadow-md flex items-center gap-4 cursor-pointer">
                             <img src="../images/file.png" id="archivo-icon" alt="">
                             <span id="archivo-description">
-                                Adjuntar archivo (opcional)
+                                Adjuntar archivo (opcional) - máx 10MB
                             </span>
 
                         </label>

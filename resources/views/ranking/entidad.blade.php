@@ -136,7 +136,7 @@
                         <h2 class="text-center text-sm xl:text-base font-bold mb-6">
                             Gráfico Entidad
                         </h2>
-                        <div class="xl:w-10/12 mx-auto mb-8">
+                        <div class="xl:w-6/12 mx-auto mb-8">
                             <canvas id="myChartEntidad{{ $key }}"></canvas>
                         </div>
                     </details>
