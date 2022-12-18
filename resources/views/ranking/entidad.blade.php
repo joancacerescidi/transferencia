@@ -31,7 +31,7 @@
                 <header class="grid grid-cols-6 xl:grid-cols-12 mb-8 font-semibold text-sm xl:text-lg">
                     <p class="col-span-1 pl-6 xl:pl-10">#</p>
                     <p class="col-span-4 xl:col-span-7 pl-4 xl:pl-10 flex items-center gap-2">
-                        Nombre
+                        Entidad
                         <img src="../images/icon-chevron-up.png" alt="">
                     </p>
                     <p class="col-span-2 hidden xl:flex items-center gap-2">
@@ -49,7 +49,7 @@
                         <summary
                             class="p-6 xl:p-10 grid grid-cols-6 xl:grid-cols-12 items-center gap-4 text-sm xl:text-lg font-bold">
                             <p class="col-span-1 order-1 flex items-center gap-6">
-                                <span>1</span>
+                                <span>{{ $result->firstItem() + $key }}</span>
                                 <img class="hidden xl:block" src="/images/icon-ministerio-relaciones-exteriores.png"
                                     alt="Ministerio de relaciones exteriores">
                             </p>
@@ -61,16 +61,52 @@
                                 <span class="text-gray-400 xl:hidden pr-8 font-medium">Monto:</span>
                                 <span> {{ $item->dataList->montoTotal }}</span>
                             </p>
-                            <p
-                                class="col-span-6 xl:col-span-3 text-main-red flex items-center xl:justify-end gap-2 order-3 xl:order-4 col-start-2 xl:col-start-auto">
-                                <span class="text-gray-400 xl:hidden pr-8 font-medium">Ranking:</span>
-                                <img src="/images/icon-estrella.png" class="mb-1">
-                                {{ $item->dataList->ranking }}
-                            </p>
-                            <!-- <p class="text-right xl:text-left col-span-6 xl:col-span-1 order-5">
-                                                                                                                  <span class="text-gray-400 xl:hidden pr-8 font-medium">Ver más</span>
-                                                                                                                  <img src="/images/icon-chevron-down.png" class="inline">
-                                                                                                                </p> -->
+                            @switch($item->dataList->ranking)
+                                @case($item->dataList->ranking < 0.5)
+                                    <p
+                                        class="col-span-6 xl:col-span-3 text-[#ff0000] flex items-center xl:justify-end gap-2 order-3 xl:order-4 col-start-2 xl:col-start-auto">
+                                        <span class="text-gray-400 xl:hidden pr-8 font-medium">Ranking:</span>
+                                        <svg class="mb-1" width="22" height="22" viewBox="0 0 24 24"
+                                            style="fill: rgb(255, 0, 0);">
+                                            <path
+                                                d="M21.947 9.179a1.001 1.001 0 0 0-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 0 0-1.822-.001L8.622 8.05l-5.701.453a1 1 0 0 0-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 0 0 1.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 0 0 1.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z">
+                                            </path>
+                                        </svg>
+                                        {{ $item->dataList->ranking }}
+                                    </p>
+                                @break
+
+                                @case($item->dataList->ranking < 0.5 && $item->dataList->ranking > 0.2)
+                                    <p
+                                        class="col-span-6 xl:col-span-3 text-[#ff6347] flex items-center xl:justify-end gap-2 order-3 xl:order-4 col-start-2 xl:col-start-auto">
+                                        <span class="text-gray-400 xl:hidden pr-8 font-medium">Ranking:</span>
+                                        <svg class="mb-1" width="22" height="22" viewBox="0 0 24 24"
+                                            style="fill: rgb(255, 99, 71);">
+                                            <path
+                                                d="M21.947 9.179a1.001 1.001 0 0 0-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 0 0-1.822-.001L8.622 8.05l-5.701.453a1 1 0 0 0-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 0 0 1.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 0 0 1.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z">
+                                            </path>
+                                        </svg>
+                                        {{ $item->dataList->ranking }}
+                                    </p>
+                                @break
+
+                                @case($item->dataList->ranking > 0.2)
+                                    <p
+                                        class="col-span-6 xl:col-span-3 text-[#3cb371] flex items-center xl:justify-end gap-2 order-3 xl:order-4 col-start-2 xl:col-start-auto">
+                                        <span class="text-gray-400 xl:hidden pr-8 font-medium">Ranking:</span>
+                                        <svg class="mb-1" width="22" height="22" viewBox="0 0 24 24"
+                                            style="fill: rgb(60, 179, 113);">
+                                            <path
+                                                d="M21.947 9.179a1.001 1.001 0 0 0-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 0 0-1.822-.001L8.622 8.05l-5.701.453a1 1 0 0 0-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 0 0 1.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 0 0 1.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z">
+                                            </path>
+                                        </svg>
+                                        {{ $item->dataList->ranking }}
+                                    </p>
+                                @break
+                            @endswitch
+
+
+
                         </summary>
 
 
@@ -100,8 +136,9 @@
                         <h2 class="text-center text-sm xl:text-base font-bold mb-6">
                             Gráfico Entidad
                         </h2>
-                        <canvas id="myChartEntidad{{ $key }}"></canvas>
-
+                        <div class="xl:w-10/12 mx-auto mb-8">
+                            <canvas id="myChartEntidad{{ $key }}"></canvas>
+                        </div>
                     </details>
                 @endforeach
                 <div class="flex justify-center py-8">
@@ -115,37 +152,31 @@
     <script>
         var dataEntidad = {!! json_encode($result->items()) !!};
         dataEntidad.forEach((value, index) => {
-           var canvaItem = `myChartEntidad${index}`.toString();
+
+            var canvaItem = `myChartEntidad${index}`.toString();
             const ctx = document.getElementById(canvaItem);
-             new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: [2018, 2019, 2020, 2021, 2022],
-                datasets: [{
-                    data: [134015070652.4031, 95566556.88000001, 1576353333.51, 80193151.79199998,
-                        82289637.38
-                    ],
-                    label: "Ranking",
-                    borderColor: "#3e95cd",
-                    fill: false
-                }, {
-                    data: [113610651402.67422, 174887419.29000002, 1681222073.2826984, 159283657.3720001,
-                        176669002.86
-                    ],
-                    label: "Monto de Compra",
-                    borderColor: "#8e5ea2",
-                    fill: false
-                }]
-            },
-            options: {
-                responsive: true,
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: value.grafico.label,
+                    datasets: [{
+                        data: value.grafico.dataset1,
+                        label: "Ranking",
+                        borderColor: "#3e95cd",
+                        fill: false
+                    }, {
+                        data: value.grafico.dataset2,
+                        label: "Monto de Compra",
+                        borderColor: "#8e5ea2",
+                        fill: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                },
+            });
 
-            },
-        });
-         
 
         });
-      
-       
     </script>
 @endsection

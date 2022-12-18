@@ -291,12 +291,20 @@ class RankingSearchController extends Controller
                     DB::raw('(montoordencompra+montocontrato ) as montocompra'),
                 )->where('ruc_entidad', $item->ruc_entidad)->orderBy('anno')->get();
 
-
+            $labels = [];
+            $dataset1 = [];
+            $dataset2 = [];
             foreach ($dataEntidadGraf as $graf) {
-                $graf->ranking = intval($graf->ranking);
-                $graf->montocompra = intval($graf->montocompra);
+                array_push($labels, $graf->anno);
+                array_push($dataset1, intval($graf->ranking));
+                array_push($dataset2, intval($graf->montocompra));
             }
-            $item->grafico = $dataEntidadGraf;
+            $grafico = new stdClass();
+            $grafico->label = $labels;
+            $grafico->dataset1 = $dataset1;
+            $grafico->dataset2 = $dataset2;
+
+            $item->grafico = $grafico;
         });
 
         return $data;
@@ -307,45 +315,68 @@ class RankingSearchController extends Controller
         $data->each(function ($item) {
             $item->dataList = new stdClass();
             $item->dataList->nombre = $item->nombre;
-            $item->dataList->montoTotal = 0;
-            $item->dataList->ranking = 0;
+            $item->dataList->montoTotal = $item->montooc + $item->montocontrato + $item->montoconsorcio;
+            $item->dataList->cantidadTotal = $item->cantidadoc + $item->cantidadcontrato + $item->cantidadconsorcio;
             $item->dataList->categorys = [];
 
 
-            $montooc = new stdClass();
-            $montooc->name = "montooc";
-            $montooc->monto =  $item->montooc ?? 0;
-            $montooc->cantidad = $item->cantidadoc ?? 0;
-            $montooc->sigla = "montooc";
-            array_push($item->dataList->categorys, $montooc);
+            $ordenCompra = new stdClass();
+            $ordenCompra->name = "Órdenes de compra";
+            $ordenCompra->monto =  $item->montooc ?? 0;
+            $ordenCompra->cantidad = $item->cantidadoc ?? 0;
+            $ordenCompra->sigla = "orden_compra";
+            array_push($item->dataList->categorys, $ordenCompra);
 
-            $montocontrato = new stdClass();
-            $montocontrato->name = "montocontrato";
-            $montocontrato->monto =  $item->montocontrato ?? 0;
-            $montocontrato->cantidad = $item->cantidadcontrato ?? 0;
-            $montocontrato->sigla = "montocontrato";
-            array_push($item->dataList->categorys, $montocontrato);
+            $contrato = new stdClass();
+            $contrato->name = "Contrato";
+            $contrato->monto =  $item->montocontrato ?? 0;
+            $contrato->cantidad = $item->cantidadcontrato ?? 0;
+            $contrato->sigla = "contrato";
+            array_push($item->dataList->categorys, $contrato);
 
-            $montoconsorcio = new stdClass();
-            $montoconsorcio->name = "montoconsorcio";
-            $montoconsorcio->monto =  $item->montoconsorcio ?? 0;
-            $montoconsorcio->cantidad = $item->cantidadconsorcio ?? 0;
-            $montoconsorcio->sigla = "montocontrato";
-            array_push($item->dataList->categorys, $montoconsorcio);
+            $consorcio = new stdClass();
+            $consorcio->name = "Como consorcio";
+            $consorcio->monto =  $item->montoconsorcio ?? 0;
+            $consorcio->cantidad = $item->cantidadconsorcio ?? 0;
+            $consorcio->sigla = "consorcio";
+            array_push($item->dataList->categorys, $consorcio);
 
-            $montoresuelto = new stdClass();
-            $montoresuelto->name = "montoresuelto";
-            $montoresuelto->monto =  $item->montoresuelto ?? 0;
-            $montoresuelto->cantidad = $item->cantidadresuelto ?? 0;
-            $montoresuelto->sigla = "montocontrato";
-            array_push($item->dataList->categorys, $montoresuelto);
+            $contrato_resuelto = new stdClass();
+            $contrato_resuelto->name = "Contratos resueltos";
+            $contrato_resuelto->monto =  $item->montoresuelto ?? 0;
+            $contrato_resuelto->cantidad = $item->cantidadresuelto ?? 0;
+            $contrato_resuelto->sigla = "contrato_resuelto";
+            array_push($item->dataList->categorys, $contrato_resuelto);
 
-            $montopenalidad = new stdClass();
-            $montopenalidad->name = "montoresuelto";
-            $montopenalidad->monto =  $item->montopenalidad ?? 0;
-            $montopenalidad->cantidad = $item->cantidadpenalidad ?? 0;
-            $montopenalidad->sigla = "montocontrato";
-            array_push($item->dataList->categorys, $montopenalidad);
+            $postulaciones = new stdClass();
+            $postulaciones->name = "Postulaciones";
+            $postulaciones->monto = 0;
+            $postulaciones->cantidad = $item->cantidadpostor ?? 0;
+            $postulaciones->sigla = "postulaciones";
+            array_push($item->dataList->categorys, $postulaciones);
+
+
+            $postulaciones_representante = new stdClass();
+            $postulaciones_representante->name = "Postulaciones con mismo representante";
+            $postulaciones_representante->monto = 0;
+            $postulaciones_representante->cantidad = $item->cantidadpmr ?? 0;
+            $postulaciones_representante->sigla = "postulaciones_representante";
+            array_push($item->dataList->categorys, $postulaciones_representante);
+
+
+            $sanciones = new stdClass();
+            $sanciones->name = "Sanciones";
+            $sanciones->monto = 0;
+            $sanciones->cantidad = $item->cantidadsanciones ?? 0;
+            $sanciones->sigla = "sanciones";
+            array_push($item->dataList->categorys, $postulaciones);
+
+            $penalidades = new stdClass();
+            $penalidades->name = "Penalidades";
+            $penalidades->monto = 0;
+            $penalidades->cantidad =  0;
+            $penalidades->sigla = "penalidades";
+            array_push($item->dataList->categorys, $penalidades);
         });
 
         return $data;
@@ -360,93 +391,122 @@ class RankingSearchController extends Controller
                 $item->montoe_ordencompra + $item->montoe_contrato + $item->montoe_consorcio +
                 $item->montoa_ordencompra + $item->montoa_contrato + $item->montoa_consorcio +
                 $item->montod_ordencompra + $item->montod_contrato + $item->montod_consorcio;
-            $item->dataList->ranking = 0;
+
+            $item->dataList->cantidadTotal = $item->cantidad_ordencompra + $item->cantidad_contrato + $item->cantidad_consorcio +
+                $item->cantidade_ordencompra + $item->cantidade_contrato + $item->cantidade_consorcio +
+                $item->cantidada_ordencompra + $item->cantidada_contrato + $item->cantidada_consorcio +
+                $item->cantidadd_ordencompra + $item->cantidadd_contrato + $item->cantidadd_consorcio;
             $item->dataList->categorys = [];
 
+            $dondeCPD = new stdClass();
+            $dondeCPD->name = "Donde se contrata a un pariente directamente";
+            $dondeCPD->subcategory = [];
 
-            $monto_ordencompra = new stdClass();
-            $monto_ordencompra->name = "monto_ordencompra";
-            $monto_ordencompra->monto =  $item->monto_ordencompra ?? 0;
-            $monto_ordencompra->cantidad = $item->cantidad_ordencompra ?? 0;
-            $monto_ordencompra->sigla = "monto_ordencompra";
-            array_push($item->dataList->categorys, $monto_ordencompra);
+            $dondeCPDcategory = new stdClass();
+            $dondeCPDcategory->name = "Ordenes de compra";
+            $dondeCPDcategory->monto =  $item->monto_ordencompra ?? 0;
+            $dondeCPDcategory->cantidad = $item->cantidad_ordencompra ?? 0;
+            array_push($dondeCPD->subcategory, $dondeCPDcategory);
 
-            $monto_contrato = new stdClass();
-            $monto_contrato->name = "monto_contrato";
-            $monto_contrato->monto =  $item->monto_contrato ?? 0;
-            $monto_contrato->cantidad = $item->cantidad_contrato ?? 0;
-            $monto_contrato->sigla = "monto_contrato";
-            array_push($item->dataList->categorys, $monto_contrato);
+            $contrato = new stdClass();
+            $contrato->name = "Contrato";
+            $contrato->monto =  $item->monto_contrato ?? 0;
+            $contrato->cantidad = $item->cantidad_contrato ?? 0;
+            array_push($dondeCPD->subcategory, $contrato);
 
-            $monto_consorcio = new stdClass();
-            $monto_consorcio->name = "monto_consorcio";
-            $monto_consorcio->monto =  $item->monto_consorcio ?? 0;
-            $monto_consorcio->cantidad = $item->cantidad_consorcio ?? 0;
-            $monto_consorcio->sigla = "monto_consorcio";
-            array_push($item->dataList->categorys, $monto_consorcio);
+            $consorcio = new stdClass();
+            $consorcio->name = "Como consorcio";
+            $consorcio->monto =  $item->monto_consorcio ?? 0;
+            $consorcio->cantidad = $item->cantidad_consorcio ?? 0;
+            array_push($dondeCPD->subcategory, $consorcio);
 
-            $montoe_ordencompra = new stdClass();
-            $montoe_ordencompra->name = "montoe_ordencompra";
-            $montoe_ordencompra->monto =  $item->montoe_ordencompra ?? 0;
-            $montoe_ordencompra->cantidad = $item->cantidade_ordencompra ?? 0;
-            $montoe_ordencompra->sigla = "montoe_ordencompra";
-            array_push($item->dataList->categorys, $montoe_ordencompra);
+            array_push($item->dataList->categorys, $dondeCPD);
 
-            $montoe_contrato = new stdClass();
-            $montoe_contrato->name = "montoe_contrato";
-            $montoe_contrato->monto =  $item->montoe_contrato ?? 0;
-            $montoe_contrato->cantidad = $item->cantidade_contrato ?? 0;
-            $montoe_contrato->sigla = "montoe_contrato";
-            array_push($item->dataList->categorys, $montoe_contrato);
 
-            $montoe_consorcio = new stdClass();
-            $montoe_consorcio->name = "montoe_consorcio";
-            $montoe_consorcio->monto =  $item->montoe_consorcio ?? 0;
-            $montoe_consorcio->cantidad = $item->cantidade_consorcio ?? 0;
-            $montoe_consorcio->sigla = "montoe_consorcio";
-            array_push($item->dataList->categorys, $montoe_consorcio);
 
-            $montoa_ordencompra = new stdClass();
-            $montoa_ordencompra->name = "montoa_ordencompra";
-            $montoa_ordencompra->monto =  $item->montoa_ordencompra ?? 0;
-            $montoa_ordencompra->cantidad = $item->cantidada_ordencompra ?? 0;
-            $montoa_ordencompra->sigla = "montoa_ordencompra";
-            array_push($item->dataList->categorys, $montoa_ordencompra);
 
-            $montoa_contrato = new stdClass();
-            $montoa_contrato->name = "montoa_contrato";
-            $montoa_contrato->monto =  $item->montoa_contrato ?? 0;
-            $montoa_contrato->cantidad = $item->cantidada_contrato ?? 0;
-            $montoa_contrato->sigla = "montoa_contrato";
-            array_push($item->dataList->categorys, $montoa_contrato);
 
-            $montoa_consorcio = new stdClass();
-            $montoa_consorcio->name = "montoa_consorcio";
-            $montoa_consorcio->monto =  $item->montoa_consorcio ?? 0;
-            $montoa_consorcio->cantidad = $item->cantidada_consorcio ?? 0;
-            $montoa_consorcio->sigla = "montoa_consorcio";
-            array_push($item->dataList->categorys, $montoa_consorcio);
+            $DPRE = new stdClass();
+            $DPRE->name = "Donde un pariente es representante de una empresa";
+            $DPRE->subcategory = [];
 
-            $montod_ordencompra = new stdClass();
-            $montod_ordencompra->name = "montod_ordencompra";
-            $montod_ordencompra->monto =  $item->montod_ordencompra ?? 0;
-            $montod_ordencompra->cantidad = $item->cantidadd_ordencompra ?? 0;
-            $montod_ordencompra->sigla = "montod_ordencompra";
-            array_push($item->dataList->categorys, $montod_ordencompra);
+            $DPREOrdeneCompra = new stdClass();
+            $DPREOrdeneCompra->name = "Ordenes de compra";
+            $DPREOrdeneCompra->monto =  $item->montoe_ordencompra ?? 0;
+            $DPREOrdeneCompra->cantidad = $item->cantidade_ordencompra ?? 0;
+            array_push($DPRE->subcategory, $DPREOrdeneCompra);
 
-            $montod_contrato = new stdClass();
-            $montod_contrato->name = "montod_contrato";
-            $montod_contrato->monto =  $item->montod_contrato ?? 0;
-            $montod_contrato->cantidad = $item->cantidadd_contrato ?? 0;
-            $montod_contrato->sigla = "montod_contrato";
-            array_push($item->dataList->categorys, $montod_contrato);
+            $DPREContrato = new stdClass();
+            $DPREContrato->name = "Contrato";
+            $DPREContrato->monto =  $item->montoe_contrato ?? 0;
+            $DPREContrato->cantidad = $item->cantidade_contrato ?? 0;
+            array_push($DPRE->subcategory, $DPREContrato);
 
-            $montod_consorcio = new stdClass();
-            $montod_consorcio->name = "montod_consorcio";
-            $montod_consorcio->monto =  $item->montod_consorcio ?? 0;
-            $montod_consorcio->cantidad = $item->cantidadd_consorcio ?? 0;
-            $montod_consorcio->sigla = "montod_consorcio";
-            array_push($item->dataList->categorys, $montod_consorcio);
+            $DPREConsorcio = new stdClass();
+            $DPREConsorcio->name = "Como consorcio";
+            $DPREConsorcio->monto =  $item->montoe_consorcio ?? 0;
+            $DPREConsorcio->cantidad = $item->cantidade_consorcio ?? 0;
+            array_push($DPRE->subcategory, $DPREConsorcio);
+
+            array_push($item->dataList->categorys, $DPRE);
+
+
+
+
+            $CDAF = new stdClass();
+            $CDAF->name = "Contrataciones directas al funcionario";
+            $CDAF->subcategory = [];
+
+            $CDAFOrdeneCompra = new stdClass();
+            $CDAFOrdeneCompra->name = "Ordenes de compra";
+            $CDAFOrdeneCompra->monto =  $item->montod_ordencompra ?? 0;
+            $CDAFOrdeneCompra->cantidad = $item->cantidadd_ordencompra ?? 0;
+            array_push($CDAF->subcategory, $CDAFOrdeneCompra);
+
+            $CDAFContrato = new stdClass();
+            $CDAFContrato->name = "Contrato";
+            $CDAFContrato->monto =  $item->montod_contrato ?? 0;
+            $CDAFContrato->cantidad = $item->cantidadd_contrato ?? 0;
+            array_push($CDAF->subcategory, $CDAFContrato);
+
+            $CDAFConsorcio = new stdClass();
+            $CDAFConsorcio->name = "Como consorcio";
+            $CDAFConsorcio->monto =  $item->montod_consorcio ?? 0;
+            $CDAFConsorcio->cantidad = $item->cantidadd_consorcio ?? 0;
+            array_push($CDAF->subcategory, $CDAFConsorcio);
+
+            array_push($item->dataList->categorys, $CDAF);
+
+
+
+            $CEDFA = new stdClass();
+            $CEDFA->name = "Contrataciones a las empresas donde el funcionario es accionista";
+            $CEDFA->subcategory = [];
+
+            $CEDFAOrdeneCompra = new stdClass();
+            $CEDFAOrdeneCompra->name = "Ordenes de compra";
+            $CEDFAOrdeneCompra->monto =  $item->montoa_ordencompra ?? 0;
+            $CEDFAOrdeneCompra->cantidad = $item->cantidada_ordencompra ?? 0;
+            array_push($CEDFA->subcategory, $CEDFAOrdeneCompra);
+
+            $CEDFAContrato = new stdClass();
+            $CEDFAContrato->name = "Contrato";
+            $CEDFAContrato->monto =  $item->montoa_contrato ?? 0;
+            $CEDFAContrato->cantidad = $item->cantidada_contrato ?? 0;
+            array_push($CEDFA->subcategory, $CEDFAContrato);
+
+            $CEDFAConsorcio = new stdClass();
+            $CEDFAConsorcio->name = "Como consorcio";
+            $CEDFAConsorcio->monto =  $item->montoa_consorcio ?? 0;
+            $CEDFAConsorcio->cantidad = $item->cantidada_consorcio ?? 0;
+            array_push($CEDFA->subcategory, $CEDFAConsorcio);
+
+            array_push($item->dataList->categorys, $CEDFA);
+
+
+
+
+
         });
 
         return $data;

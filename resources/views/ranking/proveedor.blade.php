@@ -16,7 +16,7 @@
 
             @isset($search)
                 <form method="POST" action="{{ route('proveedor.busqueda', [$period]) }}" class="mb-14">
-                     @csrf
+                    @csrf
                     <div class="relative xl:w-1/3 mx-auto mb-14">
                         <input name="palabraClave"
                             class="block w-full py-5 px-6 rounded-xl border border-gray-200 bg-white shadow-sm focus:outline-none focus:ring focus:ring-main-blue"
@@ -31,7 +31,7 @@
                 <header class="grid grid-cols-6 xl:grid-cols-12 mb-8 font-semibold text-sm xl:text-lg">
                     <p class="col-span-1 pl-6 xl:pl-10">#</p>
                     <p class="col-span-4 xl:col-span-7 pl-4 xl:pl-10 flex items-center gap-2">
-                        Nombre
+                        Proveedor
                         <img src="../images/icon-chevron-up.png" alt="">
                     </p>
                     <p class="col-span-2 hidden xl:flex items-center gap-2">
@@ -39,17 +39,17 @@
                         <img src="../images/icon-chevron-down-blue.png" alt="">
                     </p>
                     <p class="col-span-1 xl:col-span-2 flex items-center gap-2 justify-center">
-                        Ranking
+                        Cantidad
                         <img src="../images/icon-chevron-down-blue.png" alt="">
                     </p>
                 </header>
-                @foreach ($result as $item)
+                @foreach ($result as $key => $item)
                     <details
                         class="bg-white border border-gray-200 shadow-sm rounded-xl mb-6 cursor-pointer hover:shadow-lg">
                         <summary
                             class="p-6 xl:p-10 grid grid-cols-6 xl:grid-cols-12 items-center gap-4 text-sm xl:text-lg font-bold">
                             <p class="col-span-1 order-1 flex items-center gap-6">
-                                <span>1</span>
+                                <span>{{ $result->firstItem() + $key }}</span>
                                 <img class="hidden xl:block" src="/images/icon-ministerio-relaciones-exteriores.png"
                                     alt="Ministerio de relaciones exteriores">
                             </p>
@@ -58,31 +58,23 @@
                             </p>
                             <p
                                 class="col-span-6 xl:col-span-3 text-main-red order-4 xl:order-3 text-xs xl:text-lg xl:text-right col-start-2 xl:xol-start-auto">
-                                <span class="text-gray-400 xl:hidden pr-8 font-medium">En riesgo:</span>
+                                <span class="text-gray-400 xl:hidden pr-8 font-medium">Monto:</span>
                                 <span> {{ $item->dataList->montoTotal }}</span>
                             </p>
                             <p
                                 class="col-span-6 xl:col-span-3 text-main-red flex items-center xl:justify-end gap-2 order-3 xl:order-4 col-start-2 xl:col-start-auto">
-                                <span class="text-gray-400 xl:hidden pr-8 font-medium">Nota:</span>
-                                <img src="/images/icon-estrella.png" class="mb-1">
-                                {{ $item->dataList->ranking }}
+                                <span class="text-gray-400 xl:hidden pr-8 font-medium">Cantidad:</span>
+                             
+                                {{ $item->dataList->cantidadTotal }}
                             </p>
                             <!-- <p class="text-right xl:text-left col-span-6 xl:col-span-1 order-5">
-                                                              <span class="text-gray-400 xl:hidden pr-8 font-medium">Ver más</span>
-                                                              <img src="/images/icon-chevron-down.png" class="inline">
-                                                            </p> -->
+                                                                      <span class="text-gray-400 xl:hidden pr-8 font-medium">Ver más</span>
+                                                                      <img src="/images/icon-chevron-down.png" class="inline">
+                                                                    </p> -->
                         </summary>
 
 
                         <ul class="p-6 xl:p-10 xl:pt-5 grid gap-4 xl:gap-8 text-xs xl:text-base">
-                            <li class="grid items-center grid-cols-12 gap-4">
-                                <p
-                                    class="col-start-8 xl:col-start-9 col-span-3 xl:col-span-1 text-right font-bold text-xs xl:text-sm">
-                                    Monto</p>
-                                <p
-                                    class="col-start-11 xl:col-start-12 col-span-2 xl:col-span-1 text-right font-bold text-xs xl:text-sm">
-                                    Cantidad</p>
-                            </li>
 
                             @foreach ($item->dataList->categorys as $categorias)
                                 <li class="grid items-center grid-cols-12 gap-4">
@@ -96,11 +88,7 @@
                             @endforeach
                         </ul>
 
-                        <hr class="m-6">
-                        <h2 class="text-center text-sm xl:text-base font-bold mb-6">
-                            Lorem ipsum dolor sit amet.
-                        </h2>
-                        <img src="/images/grafico-example.jpg" class="mb-8 mx-auto">
+
                     </details>
                 @endforeach
                 <div class="flex justify-center py-8">
