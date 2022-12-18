@@ -3,83 +3,128 @@
     <main class="bg-body-bg">
         <section class="u-container">
             <a href="#" class="flex items-center gap-3 mb-8 xl:mb-16 font-semibold text-sm xl:text-lg text-main-blue">
-                <img src="{{ asset('images/icon-chevron-left-blue.png') }}" alt="">
-                Volver / Pagina 1 / Pagina 2
+                <img src="/images/icon-chevron-left-blue.png" alt="">
+                <span>
+                    <span>Volver</span> /
+                    <span>Pagina 1</span> /
+                    <span>Pagina 2</span>
+                </span>
             </a>
-            <h2 class="text-center text-xl xl:text-4xl font-bold mb-6 xl:mb-14">
-                {{ $department }}
+            <h2 class="text-center text-xl xl:text-4xl font-bold mb-14">
+                Ranking de entidades
             </h2>
-            <article
-                class="p-5 xl:p-10 bg-white border border-gray-200 shadow-sm rounded-xl mb-6 cursor-pointer hover:shadow-lg">
-                <header
-                    class="hidden xl:grid grid-cols-2 xl:grid-cols-12 gap-8 items-center text-xs xl:text-sm mb-6 xl:mb-14">
-                    <p class="col-span-1 hidden xl:block">
-                        <img src="{{ asset('images/icon-circle.png') }}" class="mx-auto">
+
+            <article>
+                <header class="grid grid-cols-6 xl:grid-cols-12 mb-8 font-semibold text-sm xl:text-lg">
+                    <p class="col-span-1 pl-6 xl:pl-10">#</p>
+                    <p class="col-span-4 xl:col-span-7 pl-4 xl:pl-10 flex items-center gap-2">
+                        Departamento
+                        <img src="../images/icon-chevron-up.png" alt="">
                     </p>
-                    <p class="xl:col-span-2 font-semibold flex items-center gap-2">
-                        Fecha de emisión
-                        <img src="{{ asset('images/icon-chevron-up.png') }}" alt="">
-                    </p>
-                    <p class="xl:col-span-1 font-semibold flex items-center">
-                        # orden
-                        <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="">
-                    </p>
-                    <p class="xl:col-span-5 font-semibold flex items-center gap-2">
-                        Descripción
-                        <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="">
-                    </p>
-                    <p class="xl:col-span-1 font-semibold hidden xl:flex items-center gap-2 xl:text-right">
+                    <p class="col-span-2 hidden xl:flex items-center gap-2">
                         Monto
-                        <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="">
+                        <img src="../images/icon-chevron-down-blue.png" alt="">
                     </p>
-                    <p class="xl:col-span-2 font-semibold hidden xl:flex items-center gap-2">
-                        Comentarios
-                        <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="">
+                    <p class="col-span-1 xl:col-span-2 flex items-center gap-2 justify-center">
+                        Ranking
+                        <img src="../images/icon-chevron-down-blue.png" alt="">
                     </p>
                 </header>
-                <div
-                    class="grid xl:grid-cols-12 items-start gap-8 text-xs xl:text-sm mb-10 border-b pb-4 xl:pb-0 xl:border-0">
-                    <p class="col-span-1 hidden xl:block"></p>
-                    <p class="xl:col-span-2 font-semibold grid grid-cols-2 xl:block items-center gap-8">
-                        <span class="text-main-gray font-medium xl:hidden">Fecha de emisión:</span>
-                        12/12/1999
-                    </p>
-                    <p class="xl:col-span-1 font-medium grid grid-cols-2 xl:block items-center gap-8">
-                        <span class="text-main-gray font-medium xl:hidden"># de orden/contrato:</span>
-                        150
-                    </p>
-                    <p class="xl:col-span-5 font-medium grid grid-cols-2 xl:block items-center gap-8">
-                        <span class="text-main-gray font-medium xl:hidden">Descripción:</span>
-                        SERVICIO DE UN ASESOR MEDICO CIRUJANO, SOLICITADO POR EL DEPARTAMENTO DE CIRUJIA DE ESTE HOSPI
-                        CONTRATO
-                        IAFAS N°018-2021 CORRESPONDIENTE AL MES DE ENERO-2022
-                    </p>
-                    <p class="xl:col-span-1 font-medium grid grid-cols-2 xl:block items-center gap-8 xl:text-right">
-                        <span class="text-main-gray font-medium xl:hidden">Monto: </span>
-                        <span>120</span>
-                    </p>
-                    <p class="xl:col-span-2 font-medium grid grid-cols-2 xl:block items-center gap-8">
-                        <span class="text-main-gray font-medium xl:hidden">Comentarios: </span>
-                        <span>Comentarios</span>
-                    </p>
+                @foreach ($resultDepartmentDetail as $key => $item)
+                    <details
+                        class="bg-white border border-gray-200 shadow-sm rounded-xl mb-6 cursor-pointer hover:shadow-lg">
+                        <summary
+                            class="p-6 xl:p-10 grid grid-cols-6 xl:grid-cols-12 items-center gap-4 text-sm xl:text-lg font-bold">
+                            <p class="col-span-1 order-1 flex items-center gap-6">
+                                <span>{{ $resultDepartmentDetail->firstItem() + $key }}</span>
+                                <img class="hidden xl:block" src="/images/icon-ministerio-relaciones-exteriores.png"
+                                    alt="Ministerio de relaciones exteriores">
+                            </p>
+                            <p class="col-span-6 xl:col-span-5 order-2 xl:order-3 line-clamp-2">
+                                {{ $item->dataList->nombre }}
+                            </p>
+                            <p
+                                class="col-span-6 xl:col-span-3 text-main-red order-4 xl:order-3 text-xs xl:text-lg xl:text-right col-start-2 xl:xol-start-auto">
+                                <span class="text-gray-400 xl:hidden pr-8 font-medium">Monto:</span>
+                                <span> {{ $item->dataList->montoTotal }}</span>
+                            </p>
+                            @switch($item->dataList->ranking)
+                                @case($item->dataList->ranking < 0.5)
+                                    <p
+                                        class="col-span-6 xl:col-span-3 text-[#ff0000] flex items-center xl:justify-end gap-2 order-3 xl:order-4 col-start-2 xl:col-start-auto">
+                                        <span class="text-gray-400 xl:hidden pr-8 font-medium">Ranking:</span>
+                                        <svg class="mb-1" width="22" height="22" viewBox="0 0 24 24"
+                                            style="fill: rgb(255, 0, 0);">
+                                            <path
+                                                d="M21.947 9.179a1.001 1.001 0 0 0-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 0 0-1.822-.001L8.622 8.05l-5.701.453a1 1 0 0 0-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 0 0 1.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 0 0 1.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z">
+                                            </path>
+                                        </svg>
+                                        {{ $item->dataList->ranking }}
+                                    </p>
+                                @break
+
+                                @case($item->dataList->ranking < 0.5 && $item->dataList->ranking > 0.2)
+                                    <p
+                                        class="col-span-6 xl:col-span-3 text-[#ff6347] flex items-center xl:justify-end gap-2 order-3 xl:order-4 col-start-2 xl:col-start-auto">
+                                        <span class="text-gray-400 xl:hidden pr-8 font-medium">Ranking:</span>
+                                        <svg class="mb-1" width="22" height="22" viewBox="0 0 24 24"
+                                            style="fill: rgb(255, 99, 71);">
+                                            <path
+                                                d="M21.947 9.179a1.001 1.001 0 0 0-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 0 0-1.822-.001L8.622 8.05l-5.701.453a1 1 0 0 0-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 0 0 1.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 0 0 1.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z">
+                                            </path>
+                                        </svg>
+                                        {{ $item->dataList->ranking }}
+                                    </p>
+                                @break
+
+                                @case($item->dataList->ranking > 0.2)
+                                    <p
+                                        class="col-span-6 xl:col-span-3 text-[#3cb371] flex items-center xl:justify-end gap-2 order-3 xl:order-4 col-start-2 xl:col-start-auto">
+                                        <span class="text-gray-400 xl:hidden pr-8 font-medium">Ranking:</span>
+                                        <svg class="mb-1" width="22" height="22" viewBox="0 0 24 24"
+                                            style="fill: rgb(60, 179, 113);">
+                                            <path
+                                                d="M21.947 9.179a1.001 1.001 0 0 0-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 0 0-1.822-.001L8.622 8.05l-5.701.453a1 1 0 0 0-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 0 0 1.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 0 0 1.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z">
+                                            </path>
+                                        </svg>
+                                        {{ $item->dataList->ranking }}
+                                    </p>
+                                @break
+                            @endswitch
+
+
+
+                        </summary>
+
+
+                        <ul class="p-6 xl:p-10 xl:pt-5 grid gap-4 xl:gap-8 text-xs xl:text-base">
+                            <li class="grid items-center grid-cols-12 gap-4">
+                                <p
+                                    class="col-start-8 xl:col-start-9 col-span-3 xl:col-span-1 text-right font-bold text-xs xl:text-sm">
+                                    Monto</p>
+                                <p
+                                    class="col-start-11 xl:col-start-12 col-span-2 xl:col-span-1 text-right font-bold text-xs xl:text-sm">
+                                    Cantidad</p>
+                            </li>
+
+                            @foreach ($item->dataList->categorys as $categorias)
+                                <li class="grid items-center grid-cols-12 gap-4">
+                                    <p class="flex items-center gap-3 font-medium xl:col-start-2 col-span-6 xl:col-span-4">
+                                        {{ $categorias->name }}
+                                        <a href="#"><img src="/images/icon-compartir.png" alt="Compartir"></a>
+                                    </p>
+                                    <p class="col-span-4 xl:col-span-4 text-right">{{ $categorias->monto }}</p>
+                                    <p class="col-span-2 xl:col-span-3 text-right">{{ $categorias->cantidad }}</p>
+                                </li>
+                            @endforeach
+                        </ul>
+
+                    </details>
+                @endforeach
+                <div class="flex justify-center py-8">
+                    {{ $resultDepartmentDetail->links() }}
                 </div>
             </article>
-            <div class="flex justify-center py-8">
-                <button class="p-4">
-                    <img src="{{ asset('images/icon-chevron-left-blue.png') }}" alt="">
-                </button>
-                <button
-                    class="p-4 bg-white font-semibold border hover:border-main-blue transition-colors shadow-sm border-main-blue">1</button>
-                <button
-                    class="p-4 bg-white font-semibold border hover:border-main-blue transition-colors shadow-sm">2</button>
-                <button
-                    class="p-4 bg-white font-semibold border hover:border-main-blue transition-colors shadow-sm">3</button>
-                <button
-                    class="p-4 bg-white font-semibold border hover:border-main-blue transition-colors shadow-sm">4</button>
-                <button class="p-4">
-                    <img src="{{ asset('images/icon-chevron-right-blue.png') }}" alt="">
-                </button>
-            </div>
         </section>
     </main>
 @endsection

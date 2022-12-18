@@ -8,6 +8,9 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use stdClass;
 
+
+
+
 class DepartmentController extends Controller
 {
     //
@@ -28,7 +31,7 @@ class DepartmentController extends Controller
         ]);
         if (!$validator->fails()) {
             $resultDepartmentDetail = $this->deparmentDetail($period, $department);
-           
+
             return view('department.index', compact('resultDepartmentDetail', 'department'));
         } else {
             abort(404);
@@ -37,88 +40,89 @@ class DepartmentController extends Controller
     public function deparmentDetail($period, $department)
     {
         $data = DB::table('public.totalannoentidad')
-                   ->select('ruc_entidad', 'nombre_entidad', 'montoordencompra', 'montocontrato',
-                            'cantidadfra', 'montoprc', 'montopmr', 'montocrc', 'montoadi', 'montocof', 
-                            'montofra', 'cantidadprc','cantidadpmr', 'cantidadcrc', 'cantidadadi',
-                            'cantidadcof', 'departamento', 'nivelgobierno', 'poder',
-                            DB::raw('(montofra+montoadi+montoprc+montocrc+montopmr) as ranking'))
-                    ->where('anno', $period)
-                    ->where('departamento', $department)
-                    ->orderBy('ranking', 'DESC')->paginate(15);
+            ->select(
+                'ruc_entidad',
+                'nombre_entidad',
+                'montoordencompra',
+                'montocontrato',
+                'cantidadfra',
+                'montoprc',
+                'montopmr',
+                'montocrc',
+                'montoadi',
+                'montocof',
+                'montofra',
+                'cantidadprc',
+                'cantidadpmr',
+                'cantidadcrc',
+                'cantidadadi',
+                'cantidadcof',
+                'departamento',
+                'nivelgobierno',
+                'poder',
+                DB::raw('(montofra+montoadi+montoprc+montocrc+montopmr) as ranking')
+            )
+            ->where('anno', $period)
+            ->where('departamento', $department)
+            ->orderBy('ranking', 'DESC')->paginate(10);
 
-        $newArray = [];
-        $orderData = 0;
-        foreach ($data as $item) {
-            $presumaRiesgo = $item->montoFRA + $item->montoADI + $item->montoPRC + $item->montoCRC + $item->montoPMR;
-            $newCategory = [];
-            $object1 = new stdClass();
-            $orderData = $orderData + 1;
-            $object1->order = $orderData;
-            $object1->ruc = $item->ruc_entidad;
-            $object1->nombre = $item->nombre_entidad;
-            $object1->riesgo = number_format(round(floatval($presumaRiesgo), 2), 2);
-            $object1->nota = round(floatval($item->IndiceTCO), 2);
+        $data->each(function ($item) {
+            $item->dataList = new stdClass();
+            $item->dataList->nombre = $item->nombre_entidad;
+            $item->dataList->montoTotal = $item->montoordencompra + $item->montocontrato;
+            $item->dataList->ranking = intval($item->ranking / ($item->montoordencompra + $item->montocontrato));
+            $item->dataList->categorys = [];
+
             //---Fraccionamientos---//
             $fraccionamiento = new stdClass();
             $fraccionamiento->name = "Fraccionamiento";
-            $fraccionamiento->riesgo =  number_format(round(floatval($item->montoFRA), 2), 2);
-            $fraccionamiento->nota = round(floatval($item->IndiceFRA), 2);
+            $fraccionamiento->monto =  $item->montofra;
+            $fraccionamiento->cantidad = $item->cantidadfra;
             $fraccionamiento->sigla = "FRA";
-            array_push($newCategory, $fraccionamiento);
+            array_push($item->dataList->categorys, $fraccionamiento);
+
             //---Proveedor recién creado---/
             $proveedorRecienCreado = new stdClass();
             $proveedorRecienCreado->name = "Proveedor recién creado";
-            $proveedorRecienCreado->riesgo = number_format(round(floatval($item->montoPRC), 2), 2);
-            $proveedorRecienCreado->nota = round(floatval($item->IndicePRC), 2);
+            $proveedorRecienCreado->monto = $item->montoprc;
+            $proveedorRecienCreado->cantidad = $item->cantidadprc;
             $proveedorRecienCreado->sigla = "PRC";
-            array_push($newCategory, $proveedorRecienCreado);
+            array_push($item->dataList->categorys, $proveedorRecienCreado);
+
+
             //---Proveedor con mismo representante---/
             $proveedorMismoRepresentante = new stdClass();
             $proveedorMismoRepresentante->name = "Proveedor con mismo representante";
-            $proveedorMismoRepresentante->riesgo = number_format(round(floatval($item->montoPMR), 2), 2);
-            $proveedorMismoRepresentante->nota = round(floatval($item->IndicePMR), 2);
+            $proveedorMismoRepresentante->monto = $item->montopmr;
+            $proveedorMismoRepresentante->cantidad = $item->cantidadpmr;
             $proveedorMismoRepresentante->sigla = "PMR";
-            array_push($newCategory, $proveedorMismoRepresentante);
+            array_push($item->dataList->categorys, $proveedorMismoRepresentante);
+
             //---Consorcio con proveedores recién creados---/
             $consorcioProveedoresRecienCreados = new stdClass();
             $consorcioProveedoresRecienCreados->name = "Consorcio con proveedores recién creados";
-            $consorcioProveedoresRecienCreados->riesgo =  number_format(round(floatval($item->montoCRC), 2), 2);
-            $consorcioProveedoresRecienCreados->nota = round(floatval($item->IndiceCRC), 2);
+            $consorcioProveedoresRecienCreados->monto =  $item->montocrc;
+            $consorcioProveedoresRecienCreados->cantidad = $item->cantidadcrc;
             $consorcioProveedoresRecienCreados->sigla = "CRC";
-            array_push($newCategory, $consorcioProveedoresRecienCreados);
+            array_push($item->dataList->categorys, $consorcioProveedoresRecienCreados);
+
             //---Adjudicaciones directas---/
             $adjudicacionesDirectas = new stdClass();
             $adjudicacionesDirectas->name = "Adjudicaciones directas";
-            $adjudicacionesDirectas->riesgo = number_format(round(floatval($item->montoADI), 2), 2);
-            $adjudicacionesDirectas->nota =  round(floatval($item->IndiceADI), 2);
+            $adjudicacionesDirectas->monto = $item->montoadi;
+            $adjudicacionesDirectas->cantidad = $item->cantidadadi;
             $adjudicacionesDirectas->sigla = "ADI";
-            array_push($newCategory, $adjudicacionesDirectas);
-            //---Personas con prohibición de contratar---/
-            $personasProhibicionContratar = new stdClass();
-            $personasProhibicionContratar->name = "Personas con prohibición de contratar";
-            $personasProhibicionContratar->riesgo =  number_format(round(floatval($item->montoPCP), 2), 2);
-            $personasProhibicionContratar->nota =  round(floatval($item->IndicePCP), 2);
-            $personasProhibicionContratar->sigla = "PCP";
-            array_push($newCategory, $personasProhibicionContratar);
-            //---CPP---/
-            // $cpp = new stdClass();
-            // $cpp->name = "CPP";
-            // $cpp->riesgo = round(floatval($item->montoCPP), 2);
-            // $cpp->nota = round(floatval($item->IndiceCPP), 2);
-            // $cpp->sigla = "CPP";
-            // array_push($newCategory, $cpp);
+            array_push($item->dataList->categorys, $adjudicacionesDirectas);
+
             //---Consorcios fantasma---/
             $consorciosFantasma = new stdClass();
             $consorciosFantasma->name = "Consorcios fantasma";
-            $consorciosFantasma->riesgo = number_format(round(floatval($item->montoCOF), 2), 2);
-            $consorciosFantasma->nota = round(floatval($item->IndiceCOF), 2);
+            $consorciosFantasma->monto = $item->montocof;
+            $consorciosFantasma->cantidad = $item->cantidadcof;
             $consorciosFantasma->sigla = "COF";
-            array_push($newCategory, $consorciosFantasma);
-
-
-            $object1->category = $newCategory;
-            array_push($newArray, $object1);
-        }                  
-        return $newArray;
+            array_push($item->dataList->categorys, $consorciosFantasma);
+        });
+     
+        return $data;
     }
 }
