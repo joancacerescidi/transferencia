@@ -11,7 +11,7 @@
                 </span>
             </a>
             <h2 class="text-center text-xl xl:text-4xl font-bold mb-14">
-                Ranking de entidades
+               {{$department}}
             </h2>
 
             <article>
