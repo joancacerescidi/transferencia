@@ -12,6 +12,9 @@
             </a>
             <h2 class="text-center text-xl xl:text-4xl font-bold mb-14">
                 Ranking de funcionarios
+                   @isset($busquedaPalabra)
+                    <br class="hidden xl:block"> Resultado de "{{ $busquedaPalabra }}"
+                @endisset
             </h2>
 
             @isset($search)
@@ -19,6 +22,7 @@
                     @csrf
                     <div class="relative xl:w-1/3 mx-auto mb-14">
                         <input name="palabraClave"
+                           value="<?= $busquedaPalabra ?>"
                             class="block w-full py-5 px-6 rounded-xl border border-gray-200 bg-white shadow-sm focus:outline-none focus:ring focus:ring-main-blue"
                             type="text" placeholder="Buscar entidad del estado">
                         <button type="submit" class="absolute top-5 right-5">

@@ -106,8 +106,7 @@
                     </article>
                     <article class="grid gap-10">
                         <div class="border bg-white shadow-lg px-6 py-10">
-                            <h4 class="xl:text-xl font-bold text-center mb-10">Data por nivel de región</h4>
-
+                            <h4 class="xl:text-xl font-bold text-center mb-10">Data por nivel de Gobierno</h4>
                             <canvas id="myChart"></canvas>
                         </div>
                         <div class="border bg-white shadow-lg px-6 py-10">
@@ -235,18 +234,20 @@
 @section('scripts')
     <script>
         //Gráfico de barras
+        var dataGraf = {!! json_encode($resultGraf) !!};
         const ctx = document.getElementById('myChart');
         new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Nacional', 'Regional', 'Local', 'Autónomo'],
+                labels: dataGraf.label,
                 datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
+                    label: 'Nivel de gobierno',
+                    data: dataGraf.dataSet1,
                     borderWidth: 1
                 }]
             },
             options: {
+                responsive: true,
                 scales: {
                     y: {
                         beginAtZero: true

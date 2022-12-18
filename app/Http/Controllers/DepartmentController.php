@@ -69,23 +69,23 @@ class DepartmentController extends Controller
         $data->each(function ($item) {
             $item->dataList = new stdClass();
             $item->dataList->nombre = $item->nombre_entidad;
-            $item->dataList->montoTotal = $item->montoordencompra + $item->montocontrato;
-            $item->dataList->ranking = intval($item->ranking / ($item->montoordencompra + $item->montocontrato));
+            $item->dataList->montoTotal = number_format(intval($item->montoordencompra + $item->montocontrato));
+            $item->dataList->ranking = number_format(intval($item->ranking / ($item->montoordencompra + $item->montocontrato)));
             $item->dataList->categorys = [];
 
             //---Fraccionamientos---//
             $fraccionamiento = new stdClass();
             $fraccionamiento->name = "Fraccionamiento";
-            $fraccionamiento->monto =  $item->montofra;
-            $fraccionamiento->cantidad = $item->cantidadfra;
+            $fraccionamiento->monto =  number_format(intval($item->montofra));
+            $fraccionamiento->cantidad = number_format(intval($item->cantidadfra));
             $fraccionamiento->sigla = "FRA";
             array_push($item->dataList->categorys, $fraccionamiento);
 
             //---Proveedor recién creado---/
             $proveedorRecienCreado = new stdClass();
             $proveedorRecienCreado->name = "Proveedor recién creado";
-            $proveedorRecienCreado->monto = $item->montoprc;
-            $proveedorRecienCreado->cantidad = $item->cantidadprc;
+            $proveedorRecienCreado->monto = number_format(intval($item->montoprc));
+            $proveedorRecienCreado->cantidad = number_format(intval($item->cantidadprc));
             $proveedorRecienCreado->sigla = "PRC";
             array_push($item->dataList->categorys, $proveedorRecienCreado);
 
@@ -93,32 +93,32 @@ class DepartmentController extends Controller
             //---Proveedor con mismo representante---/
             $proveedorMismoRepresentante = new stdClass();
             $proveedorMismoRepresentante->name = "Proveedor con mismo representante";
-            $proveedorMismoRepresentante->monto = $item->montopmr;
-            $proveedorMismoRepresentante->cantidad = $item->cantidadpmr;
+            $proveedorMismoRepresentante->monto = number_format(intval($item->montopmr));
+            $proveedorMismoRepresentante->cantidad = number_format(intval($item->cantidadpmr));
             $proveedorMismoRepresentante->sigla = "PMR";
             array_push($item->dataList->categorys, $proveedorMismoRepresentante);
 
             //---Consorcio con proveedores recién creados---/
             $consorcioProveedoresRecienCreados = new stdClass();
             $consorcioProveedoresRecienCreados->name = "Consorcio con proveedores recién creados";
-            $consorcioProveedoresRecienCreados->monto =  $item->montocrc;
-            $consorcioProveedoresRecienCreados->cantidad = $item->cantidadcrc;
+            $consorcioProveedoresRecienCreados->monto =  number_format(intval($item->montocrc));
+            $consorcioProveedoresRecienCreados->cantidad = number_format(intval($item->cantidadcrc));
             $consorcioProveedoresRecienCreados->sigla = "CRC";
             array_push($item->dataList->categorys, $consorcioProveedoresRecienCreados);
 
             //---Adjudicaciones directas---/
             $adjudicacionesDirectas = new stdClass();
             $adjudicacionesDirectas->name = "Adjudicaciones directas";
-            $adjudicacionesDirectas->monto = $item->montoadi;
-            $adjudicacionesDirectas->cantidad = $item->cantidadadi;
+            $adjudicacionesDirectas->monto = number_format(intval($item->montoadi));
+            $adjudicacionesDirectas->cantidad = number_format(intval($item->cantidadadi));
             $adjudicacionesDirectas->sigla = "ADI";
             array_push($item->dataList->categorys, $adjudicacionesDirectas);
 
             //---Consorcios fantasma---/
             $consorciosFantasma = new stdClass();
             $consorciosFantasma->name = "Consorcios fantasma";
-            $consorciosFantasma->monto = $item->montocof;
-            $consorciosFantasma->cantidad = $item->cantidadcof;
+            $consorciosFantasma->monto = number_format(intval($item->montocof));
+            $consorciosFantasma->cantidad = number_format(intval($item->cantidadcof));
             $consorciosFantasma->sigla = "COF";
             array_push($item->dataList->categorys, $consorciosFantasma);
         });

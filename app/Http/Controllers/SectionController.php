@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
+use stdClass;
 
 class SectionController extends Controller
 {
@@ -20,8 +21,8 @@ class SectionController extends Controller
         ]);
         if (!$validator->fails()) {
             $resultDeparment = $this->dataDepartment($period);
-
-            return view('section.index', compact('periods', 'period', 'resultDeparment'));
+            $resultGraf = $this->governmentLevel($period);
+            return view('section.index', compact('periods', 'period', 'resultDeparment', 'resultGraf'));
         } else {
             abort(404);
         }
@@ -43,8 +44,22 @@ class SectionController extends Controller
         return $data;
     }
     //Sección del gráfico de barras
-    public function governmentLevel()
+    public function governmentLevel($period)
     {
-        return "hola";
+        $data = DB::select("SELECT nivelgobierno, sum(montoprc+montopmr+montocrc+montoadi+montocof+montofra) 
+	                        FROM public.totalannoentidad
+	                        WHERE anno=?
+                            GROUP BY nivelgobierno", [$period]);
+
+        $newObjt = new stdClass();
+        $newObjt->label = [];
+        $newObjt->dataSet1 = [];
+
+        foreach ($data as $graf) {
+            array_push($newObjt->label, $graf->nivelgobierno);
+            array_push($newObjt->dataSet1, intval($graf->sum));
+        }
+
+        return $newObjt;
     }
 }

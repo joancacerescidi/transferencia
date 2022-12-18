@@ -84,7 +84,8 @@ class RankingSearchController extends Controller
 
         $result = $this->convertDataEntidad($data);
         $search = true;
-        return view('ranking.entidad', compact('result', 'search', 'period'));
+        $busquedaPalabra = $request->palabraClave;
+        return view('ranking.entidad', compact('result', 'search', 'period', 'busquedaPalabra'));
     }
 
     public function rankingProveedor($period)
@@ -148,7 +149,8 @@ class RankingSearchController extends Controller
 
         $result = $this->convertDataProveedor($data);
         $search = true;
-        return view('ranking.proveedor', compact('result', 'search', 'period'));
+        $busquedaPalabra = $request->palabraClave;
+        return view('ranking.proveedor', compact('result', 'search', 'period', 'busquedaPalabra'));
     }
     public function rankingFuncionario($period)
     {
@@ -229,7 +231,8 @@ class RankingSearchController extends Controller
 
         $result = $this->convertDataFuncionario($data);
         $search = true;
-        return view('ranking.funcionario', compact('result', 'search', 'period'));
+        $busquedaPalabra = $request->palabraClave;
+        return view('ranking.funcionario', compact('result', 'search', 'period', 'busquedaPalabra'));
     }
 
     public function convertDataEntidad($data)
@@ -238,49 +241,49 @@ class RankingSearchController extends Controller
         $data->each(function ($item) {
             $item->dataList = new stdClass();
             $item->dataList->nombre = $item->nombre_entidad;
-            $item->dataList->montoTotal = $item->montoordencompra + $item->montocontrato;
-            $item->dataList->ranking = intval($item->ranking / ($item->montoordencompra + $item->montocontrato));
+            $item->dataList->montoTotal = number_format(intval($item->montoordencompra + $item->montocontrato));
+            $item->dataList->ranking = number_format(intval($item->ranking / ($item->montoordencompra + $item->montocontrato)));
             $item->dataList->categorys = [];
             //---Fraccionamientos---//
             $fraccionamiento = new stdClass();
             $fraccionamiento->name = "Fraccionamiento";
-            $fraccionamiento->monto =  $item->montofra;
-            $fraccionamiento->cantidad = $item->cantidadfra;
+            $fraccionamiento->monto =  number_format(intval($item->montofra));
+            $fraccionamiento->cantidad = number_format(intval($item->cantidadfra));
             $fraccionamiento->sigla = "FRA";
             array_push($item->dataList->categorys, $fraccionamiento);
             //---Proveedor recién creado---/
             $proveedorRecienCreado = new stdClass();
             $proveedorRecienCreado->name = "Proveedor recién creado";
-            $proveedorRecienCreado->monto = $item->montoprc;
-            $proveedorRecienCreado->cantidad = $item->cantidadprc;
+            $proveedorRecienCreado->monto = number_format(intval($item->montoprc));
+            $proveedorRecienCreado->cantidad = number_format(intval($item->cantidadprc));
             $proveedorRecienCreado->sigla = "PRC";
             array_push($item->dataList->categorys, $proveedorRecienCreado);
             //---Proveedor con mismo representante---/
             $proveedorMismoRepresentante = new stdClass();
             $proveedorMismoRepresentante->name = "Proveedor con mismo representante";
-            $proveedorMismoRepresentante->monto = $item->montopmr;
-            $proveedorMismoRepresentante->cantidad = $item->cantidadpmr;
+            $proveedorMismoRepresentante->monto = number_format(intval($item->montopmr));
+            $proveedorMismoRepresentante->cantidad = number_format(intval($item->cantidadpmr));
             $proveedorMismoRepresentante->sigla = "PMR";
             array_push($item->dataList->categorys, $proveedorMismoRepresentante);
             //---Consorcio con proveedores recién creados---/
             $consorcioProveedoresRecienCreados = new stdClass();
             $consorcioProveedoresRecienCreados->name = "Consorcio con proveedores recién creados";
-            $consorcioProveedoresRecienCreados->monto =  $item->montocrc;
-            $consorcioProveedoresRecienCreados->cantidad = $item->cantidadcrc;
+            $consorcioProveedoresRecienCreados->monto =  number_format(intval($item->montocrc));
+            $consorcioProveedoresRecienCreados->cantidad = number_format(intval($item->cantidadcrc));
             $consorcioProveedoresRecienCreados->sigla = "CRC";
             array_push($item->dataList->categorys, $consorcioProveedoresRecienCreados);
             //---Adjudicaciones directas---/
             $adjudicacionesDirectas = new stdClass();
             $adjudicacionesDirectas->name = "Adjudicaciones directas";
-            $adjudicacionesDirectas->monto = $item->montoadi;
-            $adjudicacionesDirectas->cantidad = $item->cantidadadi;
+            $adjudicacionesDirectas->monto = number_format(intval($item->montoadi));
+            $adjudicacionesDirectas->cantidad = number_format(intval($item->cantidadadi));
             $adjudicacionesDirectas->sigla = "ADI";
             array_push($item->dataList->categorys, $adjudicacionesDirectas);
             //---Consorcios fantasma---/
             $consorciosFantasma = new stdClass();
             $consorciosFantasma->name = "Consorcios fantasma";
-            $consorciosFantasma->monto = $item->montocof;
-            $consorciosFantasma->cantidad = $item->cantidadcof;
+            $consorciosFantasma->monto = number_format(intval($item->montocof));
+            $consorciosFantasma->cantidad = number_format(intval($item->cantidadcof));
             $consorciosFantasma->sigla = "COF";
             array_push($item->dataList->categorys, $consorciosFantasma);
 
@@ -315,66 +318,66 @@ class RankingSearchController extends Controller
         $data->each(function ($item) {
             $item->dataList = new stdClass();
             $item->dataList->nombre = $item->nombre;
-            $item->dataList->montoTotal = $item->montooc + $item->montocontrato + $item->montoconsorcio;
-            $item->dataList->cantidadTotal = $item->cantidadoc + $item->cantidadcontrato + $item->cantidadconsorcio;
+            $item->dataList->montoTotal = number_format(intval($item->montooc + $item->montocontrato + $item->montoconsorcio));
+            $item->dataList->cantidadTotal = number_format(intval($item->cantidadoc + $item->cantidadcontrato + $item->cantidadconsorcio));
             $item->dataList->categorys = [];
 
 
             $ordenCompra = new stdClass();
             $ordenCompra->name = "Órdenes de compra";
-            $ordenCompra->monto =  $item->montooc ?? 0;
-            $ordenCompra->cantidad = $item->cantidadoc ?? 0;
+            $ordenCompra->monto =  number_format(intval($item->montooc ?? 0));
+            $ordenCompra->cantidad = number_format(intval($item->cantidadoc ?? 0));
             $ordenCompra->sigla = "orden_compra";
             array_push($item->dataList->categorys, $ordenCompra);
 
             $contrato = new stdClass();
             $contrato->name = "Contrato";
-            $contrato->monto =  $item->montocontrato ?? 0;
-            $contrato->cantidad = $item->cantidadcontrato ?? 0;
+            $contrato->monto =  number_format(intval($item->montocontrato ?? 0));
+            $contrato->cantidad = number_format(intval($item->cantidadcontrato ?? 0));
             $contrato->sigla = "contrato";
             array_push($item->dataList->categorys, $contrato);
 
             $consorcio = new stdClass();
             $consorcio->name = "Como consorcio";
-            $consorcio->monto =  $item->montoconsorcio ?? 0;
-            $consorcio->cantidad = $item->cantidadconsorcio ?? 0;
+            $consorcio->monto =  number_format(intval($item->montoconsorcio ?? 0));
+            $consorcio->cantidad = number_format(intval($item->cantidadconsorcio ?? 0));
             $consorcio->sigla = "consorcio";
             array_push($item->dataList->categorys, $consorcio);
 
             $contrato_resuelto = new stdClass();
             $contrato_resuelto->name = "Contratos resueltos";
-            $contrato_resuelto->monto =  $item->montoresuelto ?? 0;
-            $contrato_resuelto->cantidad = $item->cantidadresuelto ?? 0;
+            $contrato_resuelto->monto =  number_format(intval($item->montoresuelto ?? 0));
+            $contrato_resuelto->cantidad = number_format(intval($item->cantidadresuelto ?? 0));
             $contrato_resuelto->sigla = "contrato_resuelto";
             array_push($item->dataList->categorys, $contrato_resuelto);
 
             $postulaciones = new stdClass();
             $postulaciones->name = "Postulaciones";
-            $postulaciones->monto = 0;
-            $postulaciones->cantidad = $item->cantidadpostor ?? 0;
+            $postulaciones->monto = number_format(intval(0));
+            $postulaciones->cantidad = number_format(intval($item->cantidadpostor ?? 0));
             $postulaciones->sigla = "postulaciones";
             array_push($item->dataList->categorys, $postulaciones);
 
 
             $postulaciones_representante = new stdClass();
             $postulaciones_representante->name = "Postulaciones con mismo representante";
-            $postulaciones_representante->monto = 0;
-            $postulaciones_representante->cantidad = $item->cantidadpmr ?? 0;
+            $postulaciones_representante->monto = number_format(intval(0));
+            $postulaciones_representante->cantidad = number_format(intval($item->cantidadpmr ?? 0));
             $postulaciones_representante->sigla = "postulaciones_representante";
             array_push($item->dataList->categorys, $postulaciones_representante);
 
 
             $sanciones = new stdClass();
             $sanciones->name = "Sanciones";
-            $sanciones->monto = 0;
-            $sanciones->cantidad = $item->cantidadsanciones ?? 0;
+            $sanciones->monto = number_format(intval(0));
+            $sanciones->cantidad = number_format(intval($item->cantidadsanciones ?? 0));
             $sanciones->sigla = "sanciones";
             array_push($item->dataList->categorys, $sanciones);
 
             $penalidades = new stdClass();
             $penalidades->name = "Penalidades";
-            $penalidades->monto = 0;
-            $penalidades->cantidad =  0;
+            $penalidades->monto = number_format(intval(0));
+            $penalidades->cantidad = number_format(intval( 0));
             $penalidades->sigla = "penalidades";
             array_push($item->dataList->categorys, $penalidades);
         });
@@ -387,15 +390,15 @@ class RankingSearchController extends Controller
         $data->each(function ($item) {
             $item->dataList = new stdClass();
             $item->dataList->nombre = $item->nombre;
-            $item->dataList->montoTotal = $item->monto_ordencompra + $item->monto_contrato + $item->monto_consorcio +
+            $item->dataList->montoTotal = number_format(intval($item->monto_ordencompra + $item->monto_contrato + $item->monto_consorcio +
                 $item->montoe_ordencompra + $item->montoe_contrato + $item->montoe_consorcio +
                 $item->montoa_ordencompra + $item->montoa_contrato + $item->montoa_consorcio +
-                $item->montod_ordencompra + $item->montod_contrato + $item->montod_consorcio;
+                $item->montod_ordencompra + $item->montod_contrato + $item->montod_consorcio));
 
-            $item->dataList->cantidadTotal = $item->cantidad_ordencompra + $item->cantidad_contrato + $item->cantidad_consorcio +
+            $item->dataList->cantidadTotal = number_format(intval($item->cantidad_ordencompra + $item->cantidad_contrato + $item->cantidad_consorcio +
                 $item->cantidade_ordencompra + $item->cantidade_contrato + $item->cantidade_consorcio +
                 $item->cantidada_ordencompra + $item->cantidada_contrato + $item->cantidada_consorcio +
-                $item->cantidadd_ordencompra + $item->cantidadd_contrato + $item->cantidadd_consorcio;
+                $item->cantidadd_ordencompra + $item->cantidadd_contrato + $item->cantidadd_consorcio));
             $item->dataList->categorys = [];
 
             $dondeCPD = new stdClass();
@@ -404,20 +407,20 @@ class RankingSearchController extends Controller
 
             $dondeCPDcategory = new stdClass();
             $dondeCPDcategory->name = "Ordenes de compra";
-            $dondeCPDcategory->monto =  $item->monto_ordencompra ?? 0;
-            $dondeCPDcategory->cantidad = $item->cantidad_ordencompra ?? 0;
+            $dondeCPDcategory->monto =  number_format(intval($item->monto_ordencompra ?? 0));
+            $dondeCPDcategory->cantidad = number_format(intval($item->cantidad_ordencompra ?? 0));
             array_push($dondeCPD->subcategory, $dondeCPDcategory);
 
             $contrato = new stdClass();
             $contrato->name = "Contrato";
-            $contrato->monto =  $item->monto_contrato ?? 0;
-            $contrato->cantidad = $item->cantidad_contrato ?? 0;
+            $contrato->monto =  number_format(intval($item->monto_contrato ?? 0));
+            $contrato->cantidad = number_format(intval($item->cantidad_contrato ?? 0));
             array_push($dondeCPD->subcategory, $contrato);
 
             $consorcio = new stdClass();
             $consorcio->name = "Como consorcio";
-            $consorcio->monto =  $item->monto_consorcio ?? 0;
-            $consorcio->cantidad = $item->cantidad_consorcio ?? 0;
+            $consorcio->monto =  number_format(intval($item->monto_consorcio ?? 0));
+            $consorcio->cantidad = number_format(intval($item->cantidad_consorcio ?? 0));
             array_push($dondeCPD->subcategory, $consorcio);
 
             array_push($item->dataList->categorys, $dondeCPD);
@@ -432,20 +435,20 @@ class RankingSearchController extends Controller
 
             $DPREOrdeneCompra = new stdClass();
             $DPREOrdeneCompra->name = "Ordenes de compra";
-            $DPREOrdeneCompra->monto =  $item->montoe_ordencompra ?? 0;
-            $DPREOrdeneCompra->cantidad = $item->cantidade_ordencompra ?? 0;
+            $DPREOrdeneCompra->monto =  number_format(intval($item->montoe_ordencompra ?? 0));
+            $DPREOrdeneCompra->cantidad = number_format(intval($item->cantidade_ordencompra ?? 0));
             array_push($DPRE->subcategory, $DPREOrdeneCompra);
 
             $DPREContrato = new stdClass();
             $DPREContrato->name = "Contrato";
-            $DPREContrato->monto =  $item->montoe_contrato ?? 0;
-            $DPREContrato->cantidad = $item->cantidade_contrato ?? 0;
+            $DPREContrato->monto =  number_format(intval($item->montoe_contrato ?? 0));
+            $DPREContrato->cantidad = number_format(intval($item->cantidade_contrato ?? 0));
             array_push($DPRE->subcategory, $DPREContrato);
 
             $DPREConsorcio = new stdClass();
             $DPREConsorcio->name = "Como consorcio";
-            $DPREConsorcio->monto =  $item->montoe_consorcio ?? 0;
-            $DPREConsorcio->cantidad = $item->cantidade_consorcio ?? 0;
+            $DPREConsorcio->monto =  number_format(intval($item->montoe_consorcio ?? 0));
+            $DPREConsorcio->cantidad = number_format(intval($item->cantidade_consorcio ?? 0));
             array_push($DPRE->subcategory, $DPREConsorcio);
 
             array_push($item->dataList->categorys, $DPRE);
@@ -459,20 +462,20 @@ class RankingSearchController extends Controller
 
             $CDAFOrdeneCompra = new stdClass();
             $CDAFOrdeneCompra->name = "Ordenes de compra";
-            $CDAFOrdeneCompra->monto =  $item->montod_ordencompra ?? 0;
-            $CDAFOrdeneCompra->cantidad = $item->cantidadd_ordencompra ?? 0;
+            $CDAFOrdeneCompra->monto =  number_format(intval($item->montod_ordencompra ?? 0));
+            $CDAFOrdeneCompra->cantidad = number_format(intval($item->cantidadd_ordencompra ?? 0));
             array_push($CDAF->subcategory, $CDAFOrdeneCompra);
 
             $CDAFContrato = new stdClass();
             $CDAFContrato->name = "Contrato";
-            $CDAFContrato->monto =  $item->montod_contrato ?? 0;
-            $CDAFContrato->cantidad = $item->cantidadd_contrato ?? 0;
+            $CDAFContrato->monto =  number_format(intval($item->montod_contrato ?? 0));
+            $CDAFContrato->cantidad = number_format(intval($item->cantidadd_contrato ?? 0));
             array_push($CDAF->subcategory, $CDAFContrato);
 
             $CDAFConsorcio = new stdClass();
             $CDAFConsorcio->name = "Como consorcio";
-            $CDAFConsorcio->monto =  $item->montod_consorcio ?? 0;
-            $CDAFConsorcio->cantidad = $item->cantidadd_consorcio ?? 0;
+            $CDAFConsorcio->monto =  number_format(intval($item->montod_consorcio ?? 0));
+            $CDAFConsorcio->cantidad = number_format(intval($item->cantidadd_consorcio ?? 0));
             array_push($CDAF->subcategory, $CDAFConsorcio);
 
             array_push($item->dataList->categorys, $CDAF);
@@ -485,26 +488,23 @@ class RankingSearchController extends Controller
 
             $CEDFAOrdeneCompra = new stdClass();
             $CEDFAOrdeneCompra->name = "Ordenes de compra";
-            $CEDFAOrdeneCompra->monto =  $item->montoa_ordencompra ?? 0;
-            $CEDFAOrdeneCompra->cantidad = $item->cantidada_ordencompra ?? 0;
+            $CEDFAOrdeneCompra->monto =  number_format(intval($item->montoa_ordencompra ?? 0));
+            $CEDFAOrdeneCompra->cantidad = number_format(intval($item->cantidada_ordencompra ?? 0));
             array_push($CEDFA->subcategory, $CEDFAOrdeneCompra);
 
             $CEDFAContrato = new stdClass();
             $CEDFAContrato->name = "Contrato";
-            $CEDFAContrato->monto =  $item->montoa_contrato ?? 0;
-            $CEDFAContrato->cantidad = $item->cantidada_contrato ?? 0;
+            $CEDFAContrato->monto =  number_format(intval($item->montoa_contrato ?? 0));
+            $CEDFAContrato->cantidad = number_format(intval($item->cantidada_contrato ?? 0));
             array_push($CEDFA->subcategory, $CEDFAContrato);
 
             $CEDFAConsorcio = new stdClass();
             $CEDFAConsorcio->name = "Como consorcio";
-            $CEDFAConsorcio->monto =  $item->montoa_consorcio ?? 0;
-            $CEDFAConsorcio->cantidad = $item->cantidada_consorcio ?? 0;
+            $CEDFAConsorcio->monto =  number_format(intval($item->montoa_consorcio ?? 0));
+            $CEDFAConsorcio->cantidad = number_format(intval($item->cantidada_consorcio ?? 0));
             array_push($CEDFA->subcategory, $CEDFAConsorcio);
 
             array_push($item->dataList->categorys, $CEDFA);
-
-
-
 
 
         });
