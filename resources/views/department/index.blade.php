@@ -4,10 +4,8 @@
         <section class="u-container">
             <a href="#" class="flex items-center gap-3 mb-8 xl:mb-16 font-semibold text-sm xl:text-lg text-main-blue">
                 <img src="/images/icon-chevron-left-blue.png" alt="">
-                <span>
-                    <span>Volver</span> /
-                    <span>Pagina 1</span> /
-                    <span>Pagina 2</span>
+              <span>
+                    <span onclick="window.location='{{ url('/') }}'">Inicio</span>
                 </span>
             </a>
             <h2 class="text-center text-xl xl:text-4xl font-bold mb-14">

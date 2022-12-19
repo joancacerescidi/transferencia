@@ -4,15 +4,13 @@
         <section class="u-container">
             <a href="#" class="flex items-center gap-3 mb-8 xl:mb-16 font-semibold text-sm xl:text-lg text-main-blue">
                 <img src="/images/icon-chevron-left-blue.png" alt="">
-                <span>
-                    <span>Volver</span> /
-                    <span>Pagina 1</span> /
-                    <span>Pagina 2</span>
+               <span>
+                    <span onclick="window.location='{{ url('/') }}'">Inicio</span>
                 </span>
             </a>
             <h2 class="text-center text-xl xl:text-4xl font-bold mb-14">
                 Ranking de funcionarios
-                   @isset($busquedaPalabra)
+                @isset($busquedaPalabra)
                     <br class="hidden xl:block"> Resultado de "{{ $busquedaPalabra }}"
                 @endisset
             </h2>
@@ -21,8 +19,7 @@
                 <form method="POST" action="{{ route('funcionario.busqueda', [$period]) }}" class="mb-14">
                     @csrf
                     <div class="relative xl:w-1/3 mx-auto mb-14">
-                        <input name="palabraClave"
-                           value="<?= $busquedaPalabra ?>"
+                        <input name="palabraClave" value="<?= $busquedaPalabra ?>"
                             class="block w-full py-5 px-6 rounded-xl border border-gray-200 bg-white shadow-sm focus:outline-none focus:ring focus:ring-main-blue"
                             type="text" placeholder="Buscar entidad del estado">
                         <button type="submit" class="absolute top-5 right-5">
@@ -71,9 +68,9 @@
                                 {{ $item->dataList->cantidadTotal }}
                             </p>
                             <!-- <p class="text-right xl:text-left col-span-6 xl:col-span-1 order-5">
-                                                                                      <span class="text-gray-400 xl:hidden pr-8 font-medium">Ver más</span>
-                                                                                      <img src="/images/icon-chevron-down.png" class="inline">
-                                                                                    </p> -->
+                                                                                          <span class="text-gray-400 xl:hidden pr-8 font-medium">Ver más</span>
+                                                                                          <img src="/images/icon-chevron-down.png" class="inline">
+                                                                                        </p> -->
                         </summary>
 
 

@@ -5,9 +5,7 @@
             <a href="#" class="flex items-center gap-3 mb-8 xl:mb-16 font-semibold text-sm xl:text-lg text-main-blue">
                 <img src="/images/icon-chevron-left-blue.png" alt="">
                 <span>
-                    <span>Volver</span> /
-                    <span>Pagina 1</span> /
-                    <span>Pagina 2</span>
+                    <span onclick="window.location='{{ url('/') }}'">Inicio</span>
                 </span>
             </a>
             <h2 class="text-center text-xl xl:text-4xl font-bold mb-14">
@@ -21,8 +19,7 @@
                 <form method="POST" action="{{ route('entidad.busqueda', [$period]) }}" class="mb-14">
                     @csrf
                     <div class="relative xl:w-1/3 mx-auto mb-14">
-                        <input name="palabraClave"
-                        value="<?= $busquedaPalabra ?>"
+                        <input name="palabraClave" value="<?= $busquedaPalabra ?>"
                             class="block w-full py-5 px-6 rounded-xl border border-gray-200 bg-white shadow-sm focus:outline-none focus:ring focus:ring-main-blue"
                             type="text" placeholder="Buscar entidad del estado">
                         <button type="submit" class="absolute top-5 right-5">
