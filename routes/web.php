@@ -3,6 +3,7 @@
 use App\Http\Controllers\DenunciaController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\FuncionarioController;
 use App\Http\Controllers\GlosarioContoller;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RankingController;
@@ -39,7 +40,7 @@ Route::get('/detail-deparment-period/{department}/{period}', [DepartmentControll
 // Route::get('/detalle2/{rucEntidad}/{rucContratista}/{type}/{contratista}/{entidad}', [HomeController::class, 'detalle2'])->name('detalle2');
 
 
-#Rankings
+#Rankings - Home
 #Entidad
 Route::get('/ranking/entidad/{period}', [RankingSearchController::class, 'rankingEntidad']);
 Route::post('/ranking/entidad/search/{period}', [RankingSearchController::class, 'searchEntidad'])->name('entidad.busqueda');
@@ -50,8 +51,17 @@ Route::post('/ranking/proveedor/search/{period}', [RankingSearchController::clas
 Route::get('/ranking/funcionario/{period}', [RankingSearchController::class, 'rankingFuncionario']);
 Route::post('/ranking/funcionario/search/{period}', [RankingSearchController::class, 'searchFuncionario'])->name('funcionario.busqueda');
 
+#Detalles
+#Detalle - 1 - funcionario
+Route::get('/detail/funcionario/{idFuncionario}/{nivel}/{type}/{name}/{ruc?}', [FuncionarioController::class, 'FirstDetail']);
 
 
+
+
+
+
+
+#Otras vistas
 #Glosario
 Route::get('/glosario/principal', [GlosarioContoller::class, 'index'])->name('glosario.index');
 #feedback

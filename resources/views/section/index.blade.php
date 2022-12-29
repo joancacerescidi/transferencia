@@ -37,24 +37,32 @@
                 </h2>
                 <div class="grid xl:grid-cols-2 items-start gap-10 mb-14">
                     <article class="grid gap-10">
+
                         <div class="border bg-body-bg shadow-lg px-6 py-10">
                             <h4 class="xl:text-xl font-bold text-center mb-10">Buscar Entidad</h4>
                             <form method="POST" action="{{ route('entidad.busqueda', [$period]) }}"
                                 class="grid xl:grid-cols-3 gap-x-6 gap-y-6 xl:gap-y-10 items-center">
                                 @csrf
                                 <p class="text-center xl:text-left xl:text-lg font-bold">Entidad: </p>
-                                <div class="relative xl:col-span-2">
+                                <div class="flex xl:col-span-2">
                                     <input name="palabraClave"
-                                        class="block w-full py-5 px-6 rounded-xl border border-gray-200 bg-white shadow-sm focus:outline-none focus:ring focus:ring-main-blue"
+                                        class="block w-8/12  py-5 px-6 rounded-tl-xl rounded-bl-xl border border-gray-200 bg-white shadow-sm focus:outline-none focus:ring focus:ring-main-blue text-xs xl:text-base"
                                         type="text" placeholder="Buscar entidad" required>
-                                    <button type="submit" class="absolute top-5 right-5">
+                                    <button type="submit"
+                                        class="block w-4/12  text-xs xl:text-sm px-4 flex items-center gap-2 bg-main-blue text-white font-medium rounded-tr-xl rounded-br-xl">
                                         <img src="/images/icon-buscar.png" alt="Buscar">
+                                        <span class="text-xs xl:text-base">Buscar</span>
                                     </button>
                                 </div>
+                                <hr class="xl:col-span-3">
                                 <a href="{{ url('/ranking/entidad/' . $period) }}"
-                                    class="p-5 bg-main-blue text-white text-center font-semibold xl:col-span-3 mx-10 rounded-md">Ranking
-                                    Entidades</a>
+                                    class="flex justify-center items-center gap-2 p-5 bg-main-blue text-white font-semibold xl:col-span-3 xl:mx-10 rounded-md text-xs xl:text-base">
+                                    <img src="../images/ver-rankings.png" alt="">
+                                    Ranking Entidades</a>
                             </form>
+
+
+
                         </div>
 
                         <div class="border bg-body-bg shadow-lg px-6 py-10">
@@ -63,38 +71,44 @@
                                 class="grid xl:grid-cols-3 gap-x-6 gap-y-6 xl:gap-y-10 items-center">
                                 @csrf
                                 <p class="text-center xl:text-left xl:text-lg font-bold">Proveedor: </p>
-                                <div class="relative xl:col-span-2">
+                                <div class="flex xl:col-span-2">
                                     <input name="palabraClave"
-                                        class="block w-full py-5 px-6 rounded-xl border border-gray-200 bg-white shadow-sm focus:outline-none focus:ring focus:ring-main-blue"
+                                        class="block w-8/12  py-5 px-6 rounded-tl-xl rounded-bl-xl border border-gray-200 bg-white shadow-sm focus:outline-none focus:ring focus:ring-main-blue text-xs xl:text-base"
                                         type="text" placeholder="Buscar proveedor">
-                                    <button type="submit" class="absolute top-5 right-5">
+                                    <button type="submit"
+                                        class="block w-4/12  text-xs xl:text-sm px-4 flex items-center gap-2 bg-main-blue text-white font-medium rounded-tr-xl rounded-br-xl">
                                         <img src="/images/icon-buscar.png" alt="Buscar">
+                                        <span class="text-xs xl:text-base">Buscar</span>
                                     </button>
                                 </div>
+                                <hr class="xl:col-span-3">
                                 <a href="{{ url('/ranking/proveedor/' . $period) }}"
-                                    class="p-5 bg-main-blue text-white text-center font-semibold xl:col-span-3 xl:mx-10 rounded-md">Ranking
-                                    Proveedores</a>
+                                    class="flex justify-center items-center gap-2 p-5 bg-main-blue text-white font-semibold xl:col-span-3 xl:mx-10 rounded-md text-xs xl:text-base">
+                                    <img src="../images/ver-rankings.png" alt="">
+                                    Ranking Proveedores</a>
                             </form>
                         </div>
                         <div class="border bg-body-bg shadow-lg px-6 py-10">
                             <h4 class="xl:text-xl font-bold text-center mb-10">Buscar funcionario</h4>
-
-
                             <form method="POST" action="{{ route('funcionario.busqueda', [$period]) }}"
                                 class="grid xl:grid-cols-3 gap-x-6 gap-y-6 xl:gap-y-10 items-center">
                                 @csrf
                                 <p class="text-center xl:text-left xl:text-lg font-bold">Funcionario: </p>
-                                <div class="relative xl:col-span-2">
+                                <div class="flex xl:col-span-2">
                                     <input name="palabraClave"
-                                        class="block w-full py-5 px-6 rounded-xl border border-gray-200 bg-white shadow-sm focus:outline-none focus:ring focus:ring-main-blue"
+                                        class="block w-8/12  py-5 px-6 rounded-tl-xl rounded-bl-xl border border-gray-200 bg-white shadow-sm focus:outline-none focus:ring focus:ring-main-blue text-xs xl:text-base"
                                         type="text" placeholder="Buscar funcionario">
-                                    <button type="submit" class="absolute top-5 right-5">
+                                    <button type="submit"
+                                        class="block w-4/12  text-xs xl:text-sm px-4 flex items-center gap-2 bg-main-blue text-white font-medium rounded-tr-xl rounded-br-xl">
                                         <img src="/images/icon-buscar.png" alt="Buscar">
+                                        <span class="text-xs xl:text-base">Buscar</span>
                                     </button>
                                 </div>
+                                <hr class="xl:col-span-3">
                                 <a href="{{ url('/ranking/funcionario/' . $period) }}"
-                                    class="p-5 bg-main-blue text-white text-center font-semibold xl:col-span-3 xl:mx-10 rounded-md">Ranking
-                                    Funcionario</a>
+                                    class="flex justify-center items-center gap-2 p-5 bg-main-blue text-white font-semibold xl:col-span-3 xl:mx-10 rounded-md text-xs xl:text-base">
+                                    <img src="../images/ver-rankings.png" alt="">
+                                    Ranking Funcionario</a>
                             </form>
                         </div>
                         <div class="border bg-white shadow-lg px-6 py-10">
@@ -299,6 +313,8 @@
                     let left = e.layerX
                     let name = region.getAttribute('name');
 
+
+
                     var m_compra = "indefinido";
                     var m_contrato = "indefinido";
                     var c_fra = "indefinido";
@@ -331,35 +347,37 @@
                         }
                     });
 
-                    $tooltip.style.top = `${top}px`
-                    $tooltip.style.left = `${left}px`
-                    $tooltip.innerHTML = `  <h4 class="font-bold mb-4">${name}</h4>
-                                               <ul class="pl-8 grid gap-3">
-                                                     <li class="text-sm flex items-center gap-2"> 
+                    if (document.body.clientWidth > 640) {
+                        $tooltip.style.top = `${top}px`
+                        $tooltip.style.left = `${left}px`
+                    }
+                    $tooltip.innerHTML = `  <h4 class="font-bold mb-4 text-sm xl:text-base">${name}</h4>
+                                               <ul class="xl:pl-8 grid gap-3">
+                                                     <li class="text-xs xl:text-sm flex items-center gap-2"> 
                                                         <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>Monto orden de compra : ${m_compra}</p></li>
-                                                     <li class="text-sm flex items-center gap-2"> 
+                                                     <li class="text-xs xl:text-sm flex items-center gap-2"> 
                                                         <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>Monto contrato : ${m_contrato}</p></li>
-                                                     <li class="text-sm flex items-center gap-2"> 
+                                                     <li class="text-xs xl:text-sm flex items-center gap-2"> 
                                                         <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>Cantidad fraccionamiento : ${c_fra}</p></li>
-                                                     <li class="text-sm flex items-center gap-2"> 
+                                                     <li class="text-xs xl:text-sm flex items-center gap-2"> 
                                                         <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>Monto proveedor recién creado : ${m_prc}</p></li>
-                                                     <li class="text-sm flex items-center gap-2"> 
+                                                     <li class="text-xs xl:text-sm flex items-center gap-2"> 
                                                         <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>Monto proveedor con mismo representante : ${m_pmr}</p></li>
-                                                     <li class="text-sm flex items-center gap-2"> 
+                                                     <li class="text-xs xl:text-sm flex items-center gap-2"> 
                                                         <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>Monto consorcio con proveedores recién creados : ${m_crc}</p></li>
-                                                     <li class="text-sm flex items-center gap-2"> 
+                                                     <li class="text-xs xl:text-sm flex items-center gap-2"> 
                                                         <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>Monto adjudicaciones directas : ${m_adi}</p></li>
-                                                     <li class="text-sm flex items-center gap-2"> 
+                                                     <li class="text-xs xl:text-sm flex items-center gap-2"> 
                                                         <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>Monto Consorcios fantasma : ${m_cof}</p></li>
-                                                     <li class="text-sm flex items-center gap-2"> 
+                                                     <li class="text-xs xl:text-sm flex items-center gap-2"> 
                                                         <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>Monto fraccionamiento : ${m_fra}</p></li>
-                                                     <li class="text-sm flex items-center gap-2"> 
+                                                     <li class="text-xs xl:text-sm flex items-center gap-2"> 
                                                         <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>Cantidad proveedor recién creado : ${c_dprc}</p></li>
-                                                     <li class="text-sm flex items-center gap-2"> 
+                                                     <li class="text-xs xl:text-sm flex items-center gap-2"> 
                                                         <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>Cantidad proveedor con mismo representante : ${c_dpmr}</p></li>
-                                                     <li class="text-sm flex items-center gap-2"> 
+                                                     <li class="text-xs xl:text-sm flex items-center gap-2"> 
                                                         <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>Cantidad Consorcio con proveedores recién creados : ${c_dcrc}</p></li>
-                                                     <li class="text-sm flex items-center gap-2"> 
+                                                     <li class="text-xs xl:text-sm flex items-center gap-2"> 
                                                         <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>Cantidad adjudicaciones directas : ${c_adi}</p></li>
                                                  </ul>`;
 

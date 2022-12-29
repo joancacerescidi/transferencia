@@ -35,33 +35,32 @@
         </button>
     </section> --}}
 
+    <div class="bg-gray-800 text-white">
 
-
-    <header class="u-container py-6 flex items-center justify-between">
-        <a href="/" class="font-semibold text-lg ">
-            Qullqita Qatipay
-        </a>
-        <p class="font-semibold text-lg hidden xl:block">Data actualizada a Noviembre 2022 </p>
-        <nav class="hidden xl:flex items-center gap-12 font-semibold text-main-gray-light">
-            <a href="{{ route('feedback.index') }}" class="transition-colors hover:text-text-color">Feedback</a>
-            <a href="{{ route('denuncia.index') }}" class="transition-colors hover:text-text-color">Denuncia</a>
-            <a href="{{ route('glosario.index') }}"
-                class="transition-colors hover:text-text-color cursor-pointer">Glosario</a>
-        </nav>
-        <button type="button" class="xl:hidden" id="btn-abrir-menu">
-            <img src="{{ asset('images/icon-menu.png') }}" alt="Menu">
-        </button>
-    </header>
-
+        <header class="u-container py-6 flex items-center justify-between">
+            <a href="/" class="font-semibold text-lg ">
+                Qullqita Qatipay
+            </a>
+            <p class="font-semibold text-lg hidden xl:block">Data actualizada a Noviembre 2022 </p>
+            <nav class="hidden xl:flex items-center gap-12 font-semibold text-main-gray-light">
+                <a href="{{ route('feedback.index') }}" class="text-white">Feedback</a>
+                <a href="{{ route('denuncia.index') }}" class="text-white">Denuncia</a>
+                <a href="{{ route('glosario.index') }}" class=" text-white cursor-pointer">Glosario</a>
+            </nav>
+            <button type="button" class="xl:hidden" id="btn-abrir-menu">
+                <img src="{{ asset('images/icon-menu.png') }}" alt="Menu">
+            </button>
+        </header>
+    </div>
     @yield('content')
 
 
 
-    <footer class="">
+    <footer class="bg-gray-900 text-white">
         <div class="u-container grid xl:grid-cols-3 xl:items-start gap-12 xl:gap-6">
-           <a href="/" class="font-semibold text-lg ">
-            Qullqita Qatipay
-        </a>
+            <a href="/" class="font-semibold text-lg ">
+                Qullqita Qatipay
+            </a>
             <ul class="grid gap-6 xl:text-lg xl:justify-center">
                 <li>
                     <a href="#">Fuentes</a>
@@ -74,14 +73,14 @@
                 </li>
             </ul>
             <div class="flex gap-8 xl:justify-end">
-                <img src="{{ asset('images/icon-fb.png') }}" alt="">
-                <img src="{{ asset('images/icon-tw.png') }}" alt="">
-                <img src="{{ asset('images/icon-linkedin.png') }}" alt="">
-                <img src="{{ asset('images/icon-insta.png') }}" alt="">
+                <img src="{{ asset('images/icon-fb.svg') }}" alt="">
+                <img src="{{ asset('images/icon-tw.svg') }}" alt="">
+                <img src="{{ asset('images/icon-linkedin.svg') }}" alt="">
+                <img src="{{ asset('images/icon-insta.svg') }}" alt="">
             </div>
         </div>
-        <hr>
-        <p class="py-8 text-sm xl:text-lg text-center">2022@  Qullqita Qatipay - Todos los derechos reservados</p>
+        <hr class="xl:mx-10">
+        <p class="py-8 text-sm xl:text-lg text-center">2022@ Qullqita Qatipay - Todos los derechos reservados</p>
     </footer>
 
     <script src="{{ asset('js/header/index.js') }}"></script>

@@ -187,6 +187,7 @@ class RankingSearchController extends Controller
             )
             ->where('anno', $period)
             ->orderBy('ranking', 'DESC')->paginate(10);
+
         $result = $this->convertDataFuncionario($data);
         return view('ranking.funcionario', compact('result'));
     }
@@ -377,7 +378,7 @@ class RankingSearchController extends Controller
             $penalidades = new stdClass();
             $penalidades->name = "Penalidades";
             $penalidades->monto = number_format(intval(0));
-            $penalidades->cantidad = number_format(intval( 0));
+            $penalidades->cantidad = number_format(intval(0));
             $penalidades->sigla = "penalidades";
             array_push($item->dataList->categorys, $penalidades);
         });
@@ -388,7 +389,9 @@ class RankingSearchController extends Controller
     {
 
         $data->each(function ($item) {
+           
             $item->dataList = new stdClass();
+            $item->dataList->idFuncionario = $item->idfuncionario;
             $item->dataList->nombre = $item->nombre;
             $item->dataList->montoTotal = number_format(intval($item->monto_ordencompra + $item->monto_contrato + $item->monto_consorcio +
                 $item->montoe_ordencompra + $item->montoe_contrato + $item->montoe_consorcio +
@@ -401,29 +404,33 @@ class RankingSearchController extends Controller
                 $item->cantidadd_ordencompra + $item->cantidadd_contrato + $item->cantidadd_consorcio));
             $item->dataList->categorys = [];
 
-            $dondeCPD = new stdClass();
-            $dondeCPD->name = "Donde se contrata a un pariente directamente";
-            $dondeCPD->subcategory = [];
+            $DCPD = new stdClass();
+            $DCPD->name = "Donde se contrata a un pariente directamente";
+            $DCPD->abbreviation = "DCPD";
+            $DCPD->subcategory = [];
 
-            $dondeCPDcategory = new stdClass();
-            $dondeCPDcategory->name = "Ordenes de compra";
-            $dondeCPDcategory->monto =  number_format(intval($item->monto_ordencompra ?? 0));
-            $dondeCPDcategory->cantidad = number_format(intval($item->cantidad_ordencompra ?? 0));
-            array_push($dondeCPD->subcategory, $dondeCPDcategory);
+            $DCPDOrdeneCompra = new stdClass();
+            $DCPDOrdeneCompra->name = "Ordenes de compra";
+            $DCPDOrdeneCompra->abbreviation = "orden-compra";
+            $DCPDOrdeneCompra->monto =  number_format(intval($item->monto_ordencompra ?? 0));
+            $DCPDOrdeneCompra->cantidad = number_format(intval($item->cantidad_ordencompra ?? 0));
+            array_push($DCPD->subcategory, $DCPDOrdeneCompra);
 
-            $contrato = new stdClass();
-            $contrato->name = "Contrato";
-            $contrato->monto =  number_format(intval($item->monto_contrato ?? 0));
-            $contrato->cantidad = number_format(intval($item->cantidad_contrato ?? 0));
-            array_push($dondeCPD->subcategory, $contrato);
+            $DCPDcontrato = new stdClass();
+            $DCPDcontrato->name = "Contrato";
+            $DCPDcontrato->abbreviation = "contrato";
+            $DCPDcontrato->monto =  number_format(intval($item->monto_contrato ?? 0));
+            $DCPDcontrato->cantidad = number_format(intval($item->cantidad_contrato ?? 0));
+            array_push($DCPD->subcategory, $DCPDcontrato);
 
-            $consorcio = new stdClass();
-            $consorcio->name = "Como consorcio";
-            $consorcio->monto =  number_format(intval($item->monto_consorcio ?? 0));
-            $consorcio->cantidad = number_format(intval($item->cantidad_consorcio ?? 0));
-            array_push($dondeCPD->subcategory, $consorcio);
+            $DCPDconsorcio = new stdClass();
+            $DCPDconsorcio->name = "Como consorcio";
+            $DCPDconsorcio->abbreviation = "consorcio";
+            $DCPDconsorcio->monto =  number_format(intval($item->monto_consorcio ?? 0));
+            $DCPDconsorcio->cantidad = number_format(intval($item->cantidad_consorcio ?? 0));
+            array_push($DCPD->subcategory, $DCPDconsorcio);
 
-            array_push($item->dataList->categorys, $dondeCPD);
+            array_push($item->dataList->categorys, $DCPD);
 
 
 
@@ -431,22 +438,26 @@ class RankingSearchController extends Controller
 
             $DPRE = new stdClass();
             $DPRE->name = "Donde un pariente es representante de una empresa";
+            $DPRE->abbreviation = "DPRE";
             $DPRE->subcategory = [];
 
             $DPREOrdeneCompra = new stdClass();
             $DPREOrdeneCompra->name = "Ordenes de compra";
+            $DPREOrdeneCompra->abbreviation = "orden-compra";
             $DPREOrdeneCompra->monto =  number_format(intval($item->montoe_ordencompra ?? 0));
             $DPREOrdeneCompra->cantidad = number_format(intval($item->cantidade_ordencompra ?? 0));
             array_push($DPRE->subcategory, $DPREOrdeneCompra);
 
             $DPREContrato = new stdClass();
             $DPREContrato->name = "Contrato";
+            $DPREContrato->abbreviation = "contrato";
             $DPREContrato->monto =  number_format(intval($item->montoe_contrato ?? 0));
             $DPREContrato->cantidad = number_format(intval($item->cantidade_contrato ?? 0));
             array_push($DPRE->subcategory, $DPREContrato);
 
             $DPREConsorcio = new stdClass();
             $DPREConsorcio->name = "Como consorcio";
+            $DPREConsorcio->abbreviation = "consorcio";
             $DPREConsorcio->monto =  number_format(intval($item->montoe_consorcio ?? 0));
             $DPREConsorcio->cantidad = number_format(intval($item->cantidade_consorcio ?? 0));
             array_push($DPRE->subcategory, $DPREConsorcio);
@@ -458,22 +469,26 @@ class RankingSearchController extends Controller
 
             $CDAF = new stdClass();
             $CDAF->name = "Contrataciones directas al funcionario";
+            $CDAF->abbreviation = "CDAF";
             $CDAF->subcategory = [];
 
             $CDAFOrdeneCompra = new stdClass();
             $CDAFOrdeneCompra->name = "Ordenes de compra";
+            $CDAFOrdeneCompra->abbreviation = "orden-compra";
             $CDAFOrdeneCompra->monto =  number_format(intval($item->montod_ordencompra ?? 0));
             $CDAFOrdeneCompra->cantidad = number_format(intval($item->cantidadd_ordencompra ?? 0));
             array_push($CDAF->subcategory, $CDAFOrdeneCompra);
 
             $CDAFContrato = new stdClass();
             $CDAFContrato->name = "Contrato";
+            $CDAFContrato->abbreviation = "contrato";
             $CDAFContrato->monto =  number_format(intval($item->montod_contrato ?? 0));
             $CDAFContrato->cantidad = number_format(intval($item->cantidadd_contrato ?? 0));
             array_push($CDAF->subcategory, $CDAFContrato);
 
             $CDAFConsorcio = new stdClass();
             $CDAFConsorcio->name = "Como consorcio";
+            $CDAFConsorcio->abbreviation = "consorcio";
             $CDAFConsorcio->monto =  number_format(intval($item->montod_consorcio ?? 0));
             $CDAFConsorcio->cantidad = number_format(intval($item->cantidadd_consorcio ?? 0));
             array_push($CDAF->subcategory, $CDAFConsorcio);
@@ -484,29 +499,31 @@ class RankingSearchController extends Controller
 
             $CEDFA = new stdClass();
             $CEDFA->name = "Contrataciones a las empresas donde el funcionario es accionista";
+            $CEDFA->abbreviation = "CEDFA";
             $CEDFA->subcategory = [];
 
             $CEDFAOrdeneCompra = new stdClass();
             $CEDFAOrdeneCompra->name = "Ordenes de compra";
+            $CEDFAOrdeneCompra->abbreviation = "orden-compra";
             $CEDFAOrdeneCompra->monto =  number_format(intval($item->montoa_ordencompra ?? 0));
             $CEDFAOrdeneCompra->cantidad = number_format(intval($item->cantidada_ordencompra ?? 0));
             array_push($CEDFA->subcategory, $CEDFAOrdeneCompra);
 
             $CEDFAContrato = new stdClass();
             $CEDFAContrato->name = "Contrato";
+            $CEDFAContrato->abbreviation = "contrato";
             $CEDFAContrato->monto =  number_format(intval($item->montoa_contrato ?? 0));
             $CEDFAContrato->cantidad = number_format(intval($item->cantidada_contrato ?? 0));
             array_push($CEDFA->subcategory, $CEDFAContrato);
 
             $CEDFAConsorcio = new stdClass();
             $CEDFAConsorcio->name = "Como consorcio";
+            $CEDFAConsorcio->abbreviation = "consorcio";
             $CEDFAConsorcio->monto =  number_format(intval($item->montoa_consorcio ?? 0));
             $CEDFAConsorcio->cantidad = number_format(intval($item->cantidada_consorcio ?? 0));
             array_push($CEDFA->subcategory, $CEDFAConsorcio);
 
             array_push($item->dataList->categorys, $CEDFA);
-
-
         });
 
         return $data;
