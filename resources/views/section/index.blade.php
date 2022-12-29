@@ -347,10 +347,7 @@
                         }
                     });
 
-                    if (document.body.clientWidth > 640) {
-                        $tooltip.style.top = `${top}px`
-                        $tooltip.style.left = `${left}px`
-                    }
+
                     $tooltip.innerHTML = `  <h4 class="font-bold mb-4 text-sm xl:text-base">${name}</h4>
                                                <ul class="xl:pl-8 grid gap-3">
                                                      <li class="text-xs xl:text-sm flex items-center gap-2"> 
@@ -381,6 +378,15 @@
                                                         <span class="block w-2 h-2 rounded-full bg-main-blue"></span><p>Cantidad adjudicaciones directas : ${c_adi}</p></li>
                                                  </ul>`;
 
+                    if (document.body.clientWidth > 640) {
+                        let tooltipWidth = $tooltip.clientWidth
+
+                        $tooltip.style.top = `${top}px`
+                        $tooltip.style.left = `${left - tooltipWidth}px`
+                    } else {
+                        $tooltip.style.top = '0'
+                        $tooltip.style.left = `0`
+                    }
                     $tooltip.classList.remove('opacity-0')
                 })
 
