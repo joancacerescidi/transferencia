@@ -43,16 +43,18 @@
                             <form method="POST" action="{{ route('entidad.busqueda', [$period]) }}"
                                 class="grid xl:grid-cols-3 gap-x-6 gap-y-6 xl:gap-y-10 items-center">
                                 @csrf
-                                <p class="text-center xl:text-left xl:text-lg font-bold">Entidad: </p>
-                                <div class="flex xl:col-span-2">
-                                    <input name="palabraClave"
-                                        class="block w-8/12  py-5 px-6 rounded-tl-xl rounded-bl-xl border border-gray-200 bg-white shadow-sm focus:outline-none focus:ring focus:ring-main-blue text-xs xl:text-base"
-                                        type="text" placeholder="Buscar entidad" required>
-                                    <button type="submit"
-                                        class="block w-4/12  text-xs xl:text-sm px-4 flex items-center gap-2 bg-main-blue text-white font-medium rounded-tr-xl rounded-br-xl">
-                                        <img src="/images/icon-buscar.png" alt="Buscar">
-                                        <span class="text-xs xl:text-base">Buscar</span>
-                                    </button>
+                                <div class="flex flex-col xl:flex-row xl:items-center gap-6 xl:col-span-3">
+                                    <p class="text-center xl:text-left xl:text-lg font-bold">Entidad: </p>
+                                    <div class="flex w-full">
+                                        <input name="palabraClave"
+                                            class="block w-8/12  py-5 px-6 rounded-tl-xl rounded-bl-xl border border-gray-200 bg-white shadow-sm focus:outline-none focus:ring focus:ring-main-blue text-xs xl:text-base"
+                                            type="text" placeholder="Buscar entidad" required>
+                                        <button type="submit"
+                                            class="block w-4/12  text-xs xl:text-sm px-4 flex items-center justify-center gap-2 bg-main-blue text-white font-medium rounded-tr-xl rounded-br-xl">
+                                            <img src="/images/icon-buscar.png" alt="Buscar">
+                                            <span class="text-xs xl:text-base">Buscar</span>
+                                        </button>
+                                    </div>
                                 </div>
                                 <hr class="xl:col-span-3">
                                 <a href="{{ url('/ranking/entidad/' . $period) }}"
@@ -70,16 +72,18 @@
                             <form method="POST" action="{{ route('proveedor.busqueda', [$period]) }}"
                                 class="grid xl:grid-cols-3 gap-x-6 gap-y-6 xl:gap-y-10 items-center">
                                 @csrf
-                                <p class="text-center xl:text-left xl:text-lg font-bold">Proveedor: </p>
-                                <div class="flex xl:col-span-2">
-                                    <input name="palabraClave"
-                                        class="block w-8/12  py-5 px-6 rounded-tl-xl rounded-bl-xl border border-gray-200 bg-white shadow-sm focus:outline-none focus:ring focus:ring-main-blue text-xs xl:text-base"
-                                        type="text" placeholder="Buscar proveedor">
-                                    <button type="submit"
-                                        class="block w-4/12  text-xs xl:text-sm px-4 flex items-center gap-2 bg-main-blue text-white font-medium rounded-tr-xl rounded-br-xl">
-                                        <img src="/images/icon-buscar.png" alt="Buscar">
-                                        <span class="text-xs xl:text-base">Buscar</span>
-                                    </button>
+                                <div class="flex flex-col xl:flex-row xl:items-center gap-6 xl:col-span-3">
+                                    <p class="text-center xl:text-left xl:text-lg font-bold">Proveedor: </p>
+                                    <div class="flex w-full">
+                                        <input name="palabraClave"
+                                            class="block w-8/12  py-5 px-6 rounded-tl-xl rounded-bl-xl border border-gray-200 bg-white shadow-sm focus:outline-none focus:ring focus:ring-main-blue text-xs xl:text-base"
+                                            type="text" placeholder="Buscar proveedor">
+                                        <button type="submit"
+                                            class="block w-4/12  text-xs xl:text-sm px-4 flex items-center justify-center gap-2 bg-main-blue text-white font-medium rounded-tr-xl rounded-br-xl">
+                                            <img src="/images/icon-buscar.png" alt="Buscar">
+                                            <span class="text-xs xl:text-base">Buscar</span>
+                                        </button>
+                                    </div>
                                 </div>
                                 <hr class="xl:col-span-3">
                                 <a href="{{ url('/ranking/proveedor/' . $period) }}"
@@ -93,16 +97,18 @@
                             <form method="POST" action="{{ route('funcionario.busqueda', [$period]) }}"
                                 class="grid xl:grid-cols-3 gap-x-6 gap-y-6 xl:gap-y-10 items-center">
                                 @csrf
-                                <p class="text-center xl:text-left xl:text-lg font-bold">Funcionario: </p>
-                                <div class="flex xl:col-span-2">
-                                    <input name="palabraClave"
-                                        class="block w-8/12  py-5 px-6 rounded-tl-xl rounded-bl-xl border border-gray-200 bg-white shadow-sm focus:outline-none focus:ring focus:ring-main-blue text-xs xl:text-base"
-                                        type="text" placeholder="Buscar funcionario">
-                                    <button type="submit"
-                                        class="block w-4/12  text-xs xl:text-sm px-4 flex items-center gap-2 bg-main-blue text-white font-medium rounded-tr-xl rounded-br-xl">
-                                        <img src="/images/icon-buscar.png" alt="Buscar">
-                                        <span class="text-xs xl:text-base">Buscar</span>
-                                    </button>
+                                <div class="flex flex-col xl:flex-row xl:items-center gap-6 xl:col-span-3">
+                                    <p class="text-center xl:text-left xl:text-lg font-bold">Funcionario: </p>
+                                    <div class="flex w-full">
+                                        <input name="palabraClave"
+                                            class="block w-8/12  py-5 px-6 rounded-tl-xl rounded-bl-xl border border-gray-200 bg-white shadow-sm focus:outline-none focus:ring focus:ring-main-blue text-xs xl:text-base"
+                                            type="text" placeholder="Buscar funcionario">
+                                        <button type="submit"
+                                            class="block w-4/12  text-xs xl:text-sm px-4 flex items-center justify-center gap-2 bg-main-blue text-white font-medium rounded-tr-xl rounded-br-xl">
+                                            <img src="/images/icon-buscar.png" alt="Buscar">
+                                            <span class="text-xs xl:text-base">Buscar</span>
+                                        </button>
+                                    </div>
                                 </div>
                                 <hr class="xl:col-span-3">
                                 <a href="{{ url('/ranking/funcionario/' . $period) }}"

@@ -1,6 +1,7 @@
     <article
-        class="p-5 xl:p-10 bg-white border border-gray-200 shadow-sm rounded-xl mb-6 cursor-pointer hover:shadow-lg">
-        <header class="hidden xl:grid grid-cols-2 xl:grid-cols-12 gap-4 items-center text-xs xl:text-sm mb-6 xl:mb-14">
+        class="bg-white border border-gray-200 shadow-sm rounded-xl mb-6 cursor-pointer hover:shadow-lg overflow-x-auto">
+        <header
+            class="bg-gray-800 text-white p-5 hidden xl:grid grid-cols-2 xl:grid-cols-12 gap-4 items-center text-xs xl:text-sm mb-6 xl:mb-14 xl:overflow-x-auto u-table-row">
             <p class="xl:col-span-1 font-semibold flex items-center gap-2">
                 Cargo
                 {{-- <img src="{{ asset('images/icon-chevron-up.png') }}" class="w-max"> --}}
@@ -46,7 +47,8 @@
                 {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
             </p>
         </header>
-        <div class="grid xl:grid-cols-12 items-start gap-4 text-xs xl:text-sm mb-10 border-b pb-4 xl:pb-0 xl:border-0">
+     <div
+            class="px-5 py-5 xl:py-0 grid xl:grid-cols-12 items-start gap-4 text-xs xl:text-sm mb-10 border-b pb-4 xl:pb-0 xl:border-0 xl:overflow-x-auto u-table-row">
             @foreach ($collection as $key => $item)
                 <p class="xl:col-span-1 font-semibold grid grid-cols-2 xl:block items-center gap-8">
                     <span class="text-main-gray font-medium xl:hidden">Cargo:</span>
