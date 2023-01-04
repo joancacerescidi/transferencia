@@ -125,7 +125,15 @@
                                 <li class="grid items-center grid-cols-12 gap-4">
                                     <p class="flex items-center gap-3 font-medium xl:col-start-2 col-span-6 xl:col-span-4">
                                         {{ $categorias->name }}
-                                        <a href="#"><img src="/images/icon-compartir.png" alt="Compartir"></a>
+                                        @if ($categorias->sigla == 'FRA')
+                                            <a
+                                                href="{{ url('/detail/first/fraccionamiento/' . $item->dataList->rucEntidad . '/' . $period) }}"><img
+                                                    src="/images/icon-compartir.png" alt="Compartir"></a>
+                                        @elseif($categorias->sigla == 'CRC')
+                                            <a
+                                                href="{{ url('/detail/first/crc/' . $item->dataList->rucEntidad . '/' . $period) }}"><img
+                                                    src="/images/icon-compartir.png" alt="Compartir"></a>
+                                        @endif
                                     </p>
                                     <p class="col-span-4 xl:col-span-4 text-right">{{ $categorias->monto }}</p>
                                     <p class="col-span-2 xl:col-span-3 text-right">{{ $categorias->cantidad }}</p>

@@ -4,12 +4,12 @@
         <section class="u-container">
             <a href="#" class="flex items-center gap-3 mb-8 xl:mb-16 font-semibold text-sm xl:text-lg text-main-blue">
                 <img src="/images/icon-chevron-left-blue.png" alt="">
-              <span>
+                <span>
                     <span onclick="window.location='{{ url('/') }}'">Inicio</span>
                 </span>
             </a>
             <h2 class="text-center text-xl xl:text-4xl font-bold mb-14">
-               {{$department}}
+                {{ $department }}
             </h2>
 
             <article>
@@ -109,7 +109,17 @@
                                 <li class="grid items-center grid-cols-12 gap-4">
                                     <p class="flex items-center gap-3 font-medium xl:col-start-2 col-span-6 xl:col-span-4">
                                         {{ $categorias->name }}
-                                        <a href="#"><img src="/images/icon-compartir.png" alt="Compartir"></a>
+
+                                        @if ($categorias->sigla == 'FRA')
+                                            <a
+                                                href="{{ url('/detail/first/fraccionamiento/' . $item->dataList->rucEntidad . '/' . $period) }}"><img
+                                                    src="/images/icon-compartir.png" alt="Compartir"></a>
+                                        @elseif($categorias->sigla == 'CRC')
+                                            <a
+                                                href="{{ url('/detail/first/crc/' . $item->dataList->rucEntidad . '/' . $period) }}"><img
+                                                    src="/images/icon-compartir.png" alt="Compartir"></a>
+                                        @endif
+
                                     </p>
                                     <p class="col-span-4 xl:col-span-4 text-right">{{ $categorias->monto }}</p>
                                     <p class="col-span-2 xl:col-span-3 text-right">{{ $categorias->cantidad }}</p>

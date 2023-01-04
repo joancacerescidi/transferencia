@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 class FuncionarioController extends Controller
 {
     //
-    public function FirstDetail($idFuncionario, $nivel, $type, $name, $ruc = 0)
+    public function firstDetail($idFuncionario, $nivel, $type, $name, $ruc = 0)
     {
         $nivels = ['DCPD', 'DPRE', 'CDAF', 'CEDFA'];
         $types = ['orden-compra', 'contrato', 'consorcio'];
@@ -345,6 +345,7 @@ class FuncionarioController extends Controller
                         ->crossJoin('funcionario_cargo AS fc')
                         ->crossJoin('funcionario_acciones AS fa')
                         ->crossJoin('osce_contrato AS oc')
+                        ->crossJoin('osce_consorcio AS oo')
                         ->select(
                             'fc.cargo',
                             'fc.nombreentidad',
@@ -360,7 +361,7 @@ class FuncionarioController extends Controller
                             'oc.monto_contratado_item'
                         )
                         ->where('fa.ruc', '=', DB::raw('oo.ruc_miembro'))
-                        ->where('oc.ruc_contratista', '=', DB::raw('oo.ruc_postor'))
+                        ->where('oc.ruc_contratista', '=', DB::raw('oo.ruc_consorcio'))
                         ->where('fc.idfuncionario', '=', intval($idFuncionario))
                         ->where('fa.idfuncionario', '=', intval($idFuncionario))
                         ->where('fa.acciones', '>', 30)

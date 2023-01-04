@@ -6,6 +6,9 @@ use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\FuncionarioController;
 use App\Http\Controllers\GlosarioContoller;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Indices\CrcController;
+use App\Http\Controllers\Indices\FraccionamientoController;
+use App\Http\Controllers\MapaEntidadGraficoController;
 use App\Http\Controllers\RankingController;
 use App\Http\Controllers\RankingSearchController;
 use App\Http\Controllers\SectionController;
@@ -53,10 +56,14 @@ Route::post('/ranking/funcionario/search/{period}', [RankingSearchController::cl
 
 #Detalles
 #Detalle - 1 - funcionario
-Route::get('/detail/funcionario/{idFuncionario}/{nivel}/{type}/{name}/{ruc?}', [FuncionarioController::class, 'FirstDetail']);
-
-
-
+Route::get('/detail/funcionario/{idFuncionario}/{nivel}/{type}/{name}/{ruc?}', [FuncionarioController::class, 'firstDetail']);
+#Detalle - 1 - entidad - grafico - entidad
+#Fraccionamiento
+Route::get('/detail/first/fraccionamiento/{rucEntidad}/{period}', [FraccionamientoController::class, 'first']);
+Route::get('/detail/second/fraccionamiento/{rucContratista}/{rucEntidad}/{period}/{filter}', [FraccionamientoController::class, 'second']);
+#CRC
+Route::get('/detail/first/crc/{rucEntidad}/{period}', [CrcController::class, 'first']);
+Route::get('/detail/second/crc/{rucContratista}/{rucEntidad}/{period}', [CrcController::class, 'second']);
 
 
 

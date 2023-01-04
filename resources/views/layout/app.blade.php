@@ -24,16 +24,16 @@
 
 
     <!-- Menu movil -->
-    {{-- <section id="menu"
+    <section id="menu"
         class="oculto fixed inset-0 bg-text-color text-white text-sm z-10 flex flex-col items-center justify-center gap-8 text-center transition-opacity">
-        <a href="#" class="font-semibold">Inicio</a>
-        <a href="#">Ranking</a>
-        <a href="#">¿Quiénes somos?</a>
-        <a href="#">Contacto</a>
+        <a href="/" class="font-semibold">Inicio</a>
+        <a  href="{{ route('feedback.index') }}">Danos tu opinión</a>
+        <a href="{{ route('denuncia.index') }}">Comparte información</a>
+        <a href="{{ route('glosario.index') }}">Glosario</a>
         <button class="absolute top-8 right-4" type="button" id="btn-cerrar-menu">
             <img src="{{ asset('images/icon-cerrar.png') }}" class="w-8">
         </button>
-    </section> --}}
+    </section>
 
     <div class="bg-gray-800 text-white">
 
@@ -43,8 +43,8 @@
             </a>
             <p class="font-semibold text-lg hidden xl:block">Data actualizada a Noviembre 2022 </p>
             <nav class="hidden xl:flex items-center gap-12 font-semibold text-main-gray-light">
-                <a href="{{ route('feedback.index') }}" class="text-white">Feedback</a>
-                <a href="{{ route('denuncia.index') }}" class="text-white">Denuncia</a>
+                <a href="{{ route('feedback.index') }}" class="text-white">Danos tu opinión</a>
+                <a href="{{ route('denuncia.index') }}" class="text-white">Comparte información</a>
                 <a href="{{ route('glosario.index') }}" class=" text-white cursor-pointer">Glosario</a>
             </nav>
             <button type="button" class="xl:hidden" id="btn-abrir-menu">

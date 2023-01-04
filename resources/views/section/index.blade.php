@@ -290,7 +290,16 @@
 
                 perPage: 6,
                 breakpoints: {
+                    954: {
+                        perPage: 5,
+                    },
+                    780: {
+                        perPage: 4,
+                    },
                     640: {
+                        perPage: 3,
+                    },
+                    450: {
                         perPage: 2,
                     },
                 },

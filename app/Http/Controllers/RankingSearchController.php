@@ -43,7 +43,7 @@ class RankingSearchController extends Controller
             ->orderBy('ranking', 'DESC')->paginate(10);
         $result = $this->convertDataEntidad($data);
 
-        return view('ranking.entidad', compact('result'));
+        return view('ranking.entidad', compact('result', 'period'));
     }
     public function searchEntidad(Request $request, $period)
     {
@@ -241,6 +241,7 @@ class RankingSearchController extends Controller
 
         $data->each(function ($item) {
             $item->dataList = new stdClass();
+            $item->dataList->rucEntidad = $item->ruc_entidad;
             $item->dataList->nombre = $item->nombre_entidad;
             $item->dataList->montoTotal = number_format(intval($item->montoordencompra + $item->montocontrato));
             $item->dataList->ranking = number_format(intval($item->ranking / ($item->montoordencompra + $item->montocontrato)));
@@ -387,9 +388,8 @@ class RankingSearchController extends Controller
     }
     public function convertDataFuncionario($data)
     {
-
         $data->each(function ($item) {
-           
+
             $item->dataList = new stdClass();
             $item->dataList->idFuncionario = $item->idfuncionario;
             $item->dataList->nombre = $item->nombre;

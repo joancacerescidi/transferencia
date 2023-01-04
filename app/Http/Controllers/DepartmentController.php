@@ -32,7 +32,7 @@ class DepartmentController extends Controller
         if (!$validator->fails()) {
             $resultDepartmentDetail = $this->deparmentDetail($period, $department);
 
-            return view('department.index', compact('resultDepartmentDetail', 'department'));
+            return view('department.index', compact('resultDepartmentDetail', 'department', 'period'));
         } else {
             abort(404);
         }
@@ -65,9 +65,9 @@ class DepartmentController extends Controller
             ->where('anno', $period)
             ->where('departamento', $department)
             ->orderBy('ranking', 'DESC')->paginate(10);
-
         $data->each(function ($item) {
             $item->dataList = new stdClass();
+            $item->dataList->rucEntidad = $item->ruc_entidad;
             $item->dataList->nombre = $item->nombre_entidad;
             $item->dataList->montoTotal = number_format(intval($item->montoordencompra + $item->montocontrato));
             $item->dataList->ranking = number_format(intval($item->ranking / ($item->montoordencompra + $item->montocontrato)));
@@ -122,7 +122,7 @@ class DepartmentController extends Controller
             $consorciosFantasma->sigla = "COF";
             array_push($item->dataList->categorys, $consorciosFantasma);
         });
-     
+
         return $data;
     }
 }
