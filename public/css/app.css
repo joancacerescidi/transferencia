@@ -1432,6 +1432,10 @@ input[type=number] {
     grid-template-columns: repeat(11, minmax(0, 1fr));
   }
 
+  .xl\:grid-cols-6 {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
   .xl\:grid-cols-13 {
     grid-template-columns: repeat(13, minmax(0, 1fr));
   }

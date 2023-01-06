@@ -69,9 +69,9 @@
                                 {{ $item->dataList->cantidadTotal }}
                             </p>
                             <!-- <p class="text-right xl:text-left col-span-6 xl:col-span-1 order-5">
-                                                                          <span class="text-gray-400 xl:hidden pr-8 font-medium">Ver más</span>
-                                                                          <img src="/images/icon-chevron-down.png" class="inline">
-                                                                        </p> -->
+                                                                                                  <span class="text-gray-400 xl:hidden pr-8 font-medium">Ver más</span>
+                                                                                                  <img src="/images/icon-chevron-down.png" class="inline">
+                                                                                                </p> -->
                         </summary>
 
 
@@ -81,7 +81,28 @@
                                 <li class="grid items-center grid-cols-12 gap-4">
                                     <p class="flex items-center gap-3 font-medium xl:col-start-2 col-span-6 xl:col-span-4">
                                         {{ $categorias->name }}
-                                        <a href="#"><img src="/images/icon-compartir.png" alt="Compartir"></a>
+                                        @if ($categorias->sigla == 'orden_compra')
+                                            <a
+                                                href="{{ url('/detail/orden-compra/first/proveedor/' . $item->dataList->contratista . '/' . $period) }}"><img
+                                                    src="/images/icon-compartir.png" alt="Compartir"></a>
+                                        @elseif($categorias->sigla == 'contrato')
+                                            <a
+                                                href="{{ url('/detail/contrato/first/proveedor/' . $item->dataList->contratista . '/' . $period) }}"><img
+                                                    src="/images/icon-compartir.png" alt="Compartir"></a>
+                                        @elseif($categorias->sigla == 'consorcio')
+                                            <a
+                                                href="{{ url('/detail/consorcio/first/proveedor/' . $item->dataList->contratista . '/' . $period . '/orden-compra') }}"><img
+                                                    src="/images/icon-compartir.png" alt="Compartir"></a>
+                                        @elseif($categorias->sigla == 'sanciones')
+                                            <a
+                                                href="{{ url('/detail/sanciones/first/proveedor/' . $item->dataList->contratista . '/' . $period) }}"><img
+                                                    src="/images/icon-compartir.png" alt="Compartir"></a>
+                                        @elseif($categorias->sigla == 'contrato_resuelto')
+                                            <a
+                                                href="{{ url('/detail/contrato-resuelto/first/proveedor/' . $item->dataList->contratista . '/' . $period) }}"><img
+                                                    src="/images/icon-compartir.png" alt="Compartir"></a>
+                                        @endif
+                                       
                                     </p>
                                     <p class="col-span-4 xl:col-span-4 text-right">{{ $categorias->monto }}</p>
                                     <p class="col-span-2 xl:col-span-3 text-right">{{ $categorias->cantidad }}</p>

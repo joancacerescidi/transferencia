@@ -115,7 +115,7 @@ class RankingSearchController extends Controller
 
         $result = $this->convertDataProveedor($data);
 
-        return view('ranking.proveedor', compact('result'));
+        return view('ranking.proveedor', compact('result', 'period'));
     }
     public function searchProveedor(Request $request, $period)
     {
@@ -316,9 +316,9 @@ class RankingSearchController extends Controller
     }
     public function convertDataProveedor($data)
     {
-
         $data->each(function ($item) {
             $item->dataList = new stdClass();
+            $item->dataList->contratista = $item->ruc_proveedor;
             $item->dataList->nombre = $item->nombre;
             $item->dataList->montoTotal = number_format(intval($item->montooc + $item->montocontrato + $item->montoconsorcio));
             $item->dataList->cantidadTotal = number_format(intval($item->cantidadoc + $item->cantidadcontrato + $item->cantidadconsorcio));
