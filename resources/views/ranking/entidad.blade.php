@@ -133,6 +133,14 @@
                                             <a
                                                 href="{{ url('/detail/first/crc/' . $item->dataList->rucEntidad . '/' . $period) }}"><img
                                                     src="/images/icon-compartir.png" alt="Compartir"></a>
+                                        @elseif($categorias->sigla == 'PRC')
+                                            <a
+                                                href="{{ url('/detail/first/prc/' . $item->dataList->rucEntidad . '/' . $period) }}"><img
+                                                    src="/images/icon-compartir.png" alt="Compartir"></a>
+                                        @elseif($categorias->sigla == 'ADI')
+                                            <a
+                                                href="{{ url('/detail/first/adi/' . $item->dataList->rucEntidad . '/' . $period) }}"><img
+                                                    src="/images/icon-compartir.png" alt="Compartir"></a>
                                         @endif
                                     </p>
                                     <p class="col-span-4 xl:col-span-4 text-right">{{ $categorias->monto }}</p>

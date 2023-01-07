@@ -69,9 +69,9 @@
                                 {{ $item->dataList->cantidadTotal }}
                             </p>
                             <!-- <p class="text-right xl:text-left col-span-6 xl:col-span-1 order-5">
-                                                                                                  <span class="text-gray-400 xl:hidden pr-8 font-medium">Ver más</span>
-                                                                                                  <img src="/images/icon-chevron-down.png" class="inline">
-                                                                                                </p> -->
+                                                                                                          <span class="text-gray-400 xl:hidden pr-8 font-medium">Ver más</span>
+                                                                                                          <img src="/images/icon-chevron-down.png" class="inline">
+                                                                                                        </p> -->
                         </summary>
 
 
@@ -101,8 +101,13 @@
                                             <a
                                                 href="{{ url('/detail/contrato-resuelto/first/proveedor/' . $item->dataList->contratista . '/' . $period) }}"><img
                                                     src="/images/icon-compartir.png" alt="Compartir"></a>
+                                        @elseif($categorias->sigla == 'postulaciones')
+                                            <a
+                                                href="{{ url('/detail/postulaciones/first/proveedor/' . $item->dataList->contratista . '/' . $period) }}"><img
+                                                    src="/images/icon-compartir.png" alt="Compartir"></a>
                                         @endif
-                                       
+
+
                                     </p>
                                     <p class="col-span-4 xl:col-span-4 text-right">{{ $categorias->monto }}</p>
                                     <p class="col-span-2 xl:col-span-3 text-right">{{ $categorias->cantidad }}</p>

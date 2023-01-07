@@ -6,8 +6,11 @@ use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\FuncionarioController;
 use App\Http\Controllers\GlosarioContoller;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Incides\PrcController;
+use App\Http\Controllers\Indices\AdiController;
 use App\Http\Controllers\Indices\CrcController;
 use App\Http\Controllers\Indices\FraccionamientoController;
+use App\Http\Controllers\Indices\PrcController as IndicesPrcController;
 use App\Http\Controllers\MapaEntidadGraficoController;
 use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\RankingController;
@@ -55,9 +58,14 @@ Route::post('/ranking/proveedor/search/{period}', [RankingSearchController::clas
 Route::get('/ranking/funcionario/{period}', [RankingSearchController::class, 'rankingFuncionario']);
 Route::post('/ranking/funcionario/search/{period}', [RankingSearchController::class, 'searchFuncionario'])->name('funcionario.busqueda');
 
+
 #Detalles
 #Detalle - 1 - funcionario
 Route::get('/detail/funcionario/{idFuncionario}/{nivel}/{type}/{name}/{ruc?}', [FuncionarioController::class, 'firstDetail']);
+
+
+
+
 #Detalle - 1-2 - entidad - grafico - entidad
 #Fraccionamiento
 Route::get('/detail/first/fraccionamiento/{rucEntidad}/{period}', [FraccionamientoController::class, 'first']);
@@ -65,6 +73,13 @@ Route::get('/detail/second/fraccionamiento/{rucContratista}/{rucEntidad}/{period
 #CRC
 Route::get('/detail/first/crc/{rucEntidad}/{period}', [CrcController::class, 'first']);
 Route::get('/detail/second/crc/{rucContratista}/{rucEntidad}/{period}', [CrcController::class, 'second']);
+#ADI
+Route::get('/detail/first/adi/{rucEntidad}/{period}', [AdiController::class, 'first']);
+Route::get('/detail/second/adi/{rucContratista}/{rucEntidad}/{period}}', [AdiController::class, 'second']);
+#/PRC 
+Route::get('/detail/first/prc/{rucEntidad}/{period}', [IndicesPrcController::class, 'first']);
+Route::get('/detail/second/prc/{rucContratista}/{rucEntidad}/{period}/{filter}', [IndicesPrcController::class, 'second']);
+
 #Detalle - 1- 2 proveedor
 #orden de compra
 Route::get('/detail/orden-compra/first/proveedor/{rucContratista}/{period}', [ProveedorController::class, 'ordenCompraFirst']);
@@ -80,7 +95,14 @@ Route::get('/detail/sanciones/first/proveedor/{rucContratista}/{period}', [Prove
 #contrato resuelto
 Route::get('/detail/contrato-resuelto/first/proveedor/{rucContratista}/{period}', [ProveedorController::class, 'contratoResueltoFirst']);
 Route::get('/detail/contrato-resuelto/second/proveedor/{rucEntidad}/{rucContratista}/{period}', [ProveedorController::class, 'contratoResueltoSecond']);
+#postulaciones
+Route::get('/detail/postulaciones/first/proveedor/{rucContratista}/{period}', [ProveedorController::class, 'postulacionesFirst']);
+Route::get('/detail/postulaciones/second/proveedor/{rucEntidad}/{rucContratista}/{period}', [ProveedorController::class, 'postulacionesSecond']);
 
+
+
+
+ 
 #Otras vistas
 #Glosario
 Route::get('/glosario/principal', [GlosarioContoller::class, 'index'])->name('glosario.index');

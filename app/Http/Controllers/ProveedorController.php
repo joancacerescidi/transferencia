@@ -272,4 +272,66 @@ class ProveedorController extends Controller
             ->paginate(10);
         return $data;
     }
+    public  function postulacionesFirst($rucContratista, $period)
+    {
+        $periods = [2018, 2019, 2020, 2021, 2022, 2023];
+        $validator = Validator::make(['period' => $period, 'rucContratista' => $rucContratista], [
+            'period' => ['required', 'integer', Rule::in($periods)],
+            'rucContratista' => ['required', 'integer']
+        ]);
+        if (!$validator->fails()) {
+            $result = $this->postulacionesFirstDetail($rucContratista, $period);
+
+
+            return view('detail.proveedor.postulacion.firstDetail', compact('result', 'rucContratista', 'period'));
+        } else {
+            abort(404);
+        }
+    }
+    public  function postulacionesFirstDetail($rucContratista, $period)
+    {
+        $data = DB::table(DB::raw('osce_postor op'))
+            ->select('oc.entidad_ruc', 'oc.entidad', DB::raw('count(1) as cantidad'))
+            ->crossJoin(DB::raw('osce_convocatoria oc'))
+            ->whereRaw('date_part(\'year\',op.fecha_convocatoria) = ? ', [$period])
+            ->where('op.ruc_postor', '=', $rucContratista)
+            ->whereRaw('op.codigo_convocatoria = oc.codigo_convocatoria')
+            ->whereRaw('op.n_item = oc.n_item')
+            ->groupBy(['oc.entidad_ruc', 'oc.entidad'])
+            ->orderByRaw('cantidad DESC')
+            ->paginate(10);
+
+        return $data;
+    }
+    public function postulacionesSecond($rucEntidad, $rucContratista, $period)
+    {
+
+        $periods = [2018, 2019, 2020, 2021, 2022, 2023];
+
+        $validator = Validator::make(['period' => $period, 'rucContratista' => $rucContratista, 'rucEntidad' => $rucEntidad], [
+            'period' => ['required', 'integer', Rule::in($periods)],
+            'rucContratista' => ['required', 'integer'],
+            'rucEntidad' => ['required', 'integer']
+        ]);
+        if (!$validator->fails()) {
+            $result = $this->postulacionesSecondDetail($rucEntidad, $rucContratista, $period);
+            return view('detail.proveedor.postulacion.secondDetail', compact('result'));
+        } else {
+            abort(404);
+        }
+    }
+    public function postulacionesSecondDetail($rucEntidad, $rucContratista, $period)
+    {
+        $data = DB::table(DB::raw('osce_postor op'))
+            ->select('oc.proceso', 'oc.objeto_contractual', 'oc.descripcion_item', 'oc.moneda', 'oc.monto_referencial_item', 'oc.fecha_convocatoria', 'oc.fecha_presentacion_propuesta')
+            ->crossJoin(DB::raw('osce_convocatoria oc'))
+            ->whereRaw('date_part(\'year\',op.fecha_convocatoria) = ? ', [$period])
+            ->where('op.ruc_postor', '=', $rucContratista)
+            ->whereRaw('op.codigo_convocatoria = oc.codigo_convocatoria')
+            ->whereRaw('op.n_item = oc.n_item')
+            ->where('oc.entidad_ruc', '=', $rucEntidad)
+            ->orderBy('oc.fecha_convocatoria', 'ASC')
+            ->paginate(10);
+        return $data;
+    }
 }
