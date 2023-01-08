@@ -31,10 +31,10 @@
 
         <section class="bg-white">
             <div class="u-container">
-                <h2 class="text-center text-xl xl:text-4xl font-bold mb-14 leading-8">
+                {{-- <h2 class="text-center text-xl xl:text-4xl font-bold mb-14 leading-8">
                     Primera seccion <br>
                     Lorem ipsum dolor sit amet.
-                </h2>
+                </h2> --}}
                 <div class="grid xl:grid-cols-2 items-start gap-10 mb-14">
                     <article class="grid gap-10">
 

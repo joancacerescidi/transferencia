@@ -42,7 +42,6 @@ class RankingSearchController extends Controller
             ->where('anno', $period)
             ->orderBy('ranking', 'DESC')->paginate(10);
         $result = $this->convertDataEntidad($data);
-
         return view('ranking.entidad', compact('result', 'period'));
     }
     public function searchEntidad(Request $request, $period)
