@@ -10,8 +10,10 @@ use App\Http\Controllers\Incides\PrcController;
 use App\Http\Controllers\Indices\AdiController;
 use App\Http\Controllers\Indices\CrcController;
 use App\Http\Controllers\Indices\FraccionamientoController;
+use App\Http\Controllers\Indices\PmrController as IndicesPmrController;
 use App\Http\Controllers\Indices\PrcController as IndicesPrcController;
 use App\Http\Controllers\MapaEntidadGraficoController;
+use App\Http\Controllers\PmrController;
 use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\RankingController;
 use App\Http\Controllers\RankingSearchController;
@@ -75,10 +77,17 @@ Route::get('/detail/first/crc/{rucEntidad}/{period}', [CrcController::class, 'fi
 Route::get('/detail/second/crc/{rucContratista}/{rucEntidad}/{period}', [CrcController::class, 'second']);
 #ADI
 Route::get('/detail/first/adi/{rucEntidad}/{period}', [AdiController::class, 'first']);
-Route::get('/detail/second/adi/{rucContratista}/{rucEntidad}/{period}}', [AdiController::class, 'second']);
+Route::get('/detail/second/adi/{rucContratista}/{rucEntidad}/{period}', [AdiController::class, 'second']);
 #/PRC 
 Route::get('/detail/first/prc/{rucEntidad}/{period}', [IndicesPrcController::class, 'first']);
 Route::get('/detail/second/prc/{rucContratista}/{rucEntidad}/{period}/{filter}', [IndicesPrcController::class, 'second']);
+#/PMR
+Route::get('/detail/first/pmr/{rucEntidad}/{period}', [IndicesPmrController::class, 'first']);
+Route::get('/detail/second/pmr/{rucContratista}/{rucEntidad}/{period}', [IndicesPmrController::class, 'second']);
+
+
+
+
 
 #Detalle - 1- 2 proveedor
 #orden de compra

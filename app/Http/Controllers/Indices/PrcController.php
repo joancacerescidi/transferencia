@@ -21,8 +21,6 @@ class PrcController extends Controller
         ]);
         if (!$validator->fails()) {
             $result = $this->firstDetail($rucEntidad, $period);
-            // $fechaRegistro = $this->fechaRegistroProveedor();
-            // dd($fechaRegistro);
             return view('detail.indices.prc.firstDetail', compact('result', 'rucEntidad', 'period'));
         } else {
             abort(404);
@@ -49,17 +47,7 @@ class PrcController extends Controller
             ->paginate(10);
         return $data;
     }
-    public function fechaRegistroProveedor()
-    {
-      
 
-        $fechaRegistroProveedor = DB::table('osce_proveedor')
-            ->select(DB::raw("min(fecha_inicio_vigencia)"))
-            ->where('osce_proveedor.ruc_proveedor', '=', DB::raw('oo.ruc_contratista'))
-            ->get();
-
-        return $fechaRegistroProveedor;
-    }
     public function second($rucContratista, $rucEntidad, $period, $filter)
     {
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
@@ -71,9 +59,10 @@ class PrcController extends Controller
             'filter' => ['required', 'string', Rule::in($filters)],
         ]);
         if (!$validator->fails()) {
+            $resultDate = $this->fechaRegistroProveedor($rucEntidad);
             $result = $this->secondDetail($rucEntidad, $rucContratista, $period, $filter);
 
-            return view('detail.indices.prc.secondDetail', compact('result', 'rucEntidad', 'rucContratista', 'period', 'filter'));
+            return view('detail.indices.prc.secondDetail', compact('result', 'rucEntidad', 'rucContratista', 'period', 'filter', 'resultDate'));
         } else {
             abort(404);
         }
@@ -100,5 +89,13 @@ class PrcController extends Controller
                 ->paginate(10);
         }
         return $data;
+    }
+
+    public function fechaRegistroProveedor($rucEntidad)
+    {
+        $dataFechaRegistroProveedor = DB::table('osce_proveedor')
+            ->select(DB::raw('min(fecha_inicio_vigencia)'))
+            ->where('osce_proveedor.ruc_proveedor', '=', $rucEntidad)->get();
+        return $dataFechaRegistroProveedor;
     }
 }

@@ -263,18 +263,31 @@
                 datasets: [{
                     label: 'Nivel de gobierno',
                     data: dataGraf.dataSet1,
-                    borderWidth: 1
+                    borderWidth: 1,
                 }]
             },
             options: {
                 responsive: true,
+                onHover: (event, chartElement) => {
+                    event.native.target.style.cursor = chartElement[0] ? 'pointer' : 'default';
+                },
                 scales: {
                     y: {
                         beginAtZero: true
                     }
+                },
+                events: ['mousemove', 'click'],
+                onClick: (event, elements, chart) => {
+                    if (elements[0]) {
+                        const i = elements[0].index;
+                        alert(chart.data.labels[i] + ': ' + chart.data.datasets[0].data[i]);
+                    }
                 }
-            }
+
+            },
+
         });
+
         // Carrusel de periodos
         (function() {
             var hero = new Splide('#carousel-periodos', {

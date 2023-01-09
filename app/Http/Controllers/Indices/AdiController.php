@@ -61,5 +61,14 @@ class AdiController extends Controller
     }
     public function secondDetail($rucEntidad, $rucContratista, $period)
     {
+
+        $data =  DB::table('osce_ordencompra')
+            ->select('fecha_emision', 'descripcion_orden', 'orden', 'objetocontractual', 'moneda', 'monto_total_original', 'tipocontratacion')
+            ->where('anno', '=', $period)
+            ->where('ruc_entidad', '=', $rucEntidad)
+            ->where('ruc_contratista', '=', $rucContratista)
+            ->orderBy('fecha_emision', 'asc')
+            ->paginate(10);
+        return $data;
     }
 }
