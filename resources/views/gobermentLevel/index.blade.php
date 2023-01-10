@@ -9,9 +9,8 @@
                 </span>
             </a>
             <h2 class="text-center text-xl xl:text-4xl font-bold mb-14">
-                {{ $department }}
+                Data por Región
             </h2>
-
             <article>
                 <header class="grid grid-cols-6 xl:grid-cols-12 mb-8 font-semibold text-sm xl:text-lg">
                     <p class="col-span-1 pl-6 xl:pl-10">#</p>
@@ -28,13 +27,13 @@
                         <img src="../images/icon-chevron-down-blue.png" alt="">
                     </p>
                 </header>
-                @foreach ($resultDepartmentDetail as $key => $item)
+                @foreach ($result as $key => $item)
                     <details
                         class="bg-white border border-gray-200 shadow-sm rounded-xl mb-6 cursor-pointer hover:shadow-lg">
                         <summary
                             class="p-6 xl:p-10 grid grid-cols-6 xl:grid-cols-12 items-center gap-4 text-sm xl:text-lg font-bold">
                             <p class="col-span-1 order-1 flex items-center gap-6">
-                                <span>{{ $resultDepartmentDetail->firstItem() + $key }}</span>
+                                <span>{{ $result->firstItem() + $key }}</span>
                                 <img class="hidden xl:block" src="/images/icon-ministerio-relaciones-exteriores.png"
                                     alt="Ministerio de relaciones exteriores">
                             </p>
@@ -62,7 +61,7 @@
 
                                 @case($item->dataList->ranking < 0.5 && $item->dataList->ranking > 0.2)
                                     <p
-                                        class="col-span-6 xl:col-span-3 text-[#ff6347] flex items-center xl:justify-end gap-2 order-3 xl:order-4 col-start-2 xl:col-start-auto">
+                                        class="col-span-6 xl:col-span-3 text-yellow-300 flex items-center xl:justify-end gap-2 order-3 xl:order-4 col-start-2 xl:col-start-auto">
                                         <span class="text-gray-400 xl:hidden pr-8 font-medium">Ranking:</span>
                                         <span class="flex items-center justify-center gap-1 mr-2">
                                             <span class="h-3 w-3 rounded-full block bg-gray-300"></span>
@@ -112,19 +111,19 @@
                                                 href="{{ url('/detail/first/fraccionamiento/' . $item->dataList->rucEntidad . '/' . $period) }}"><img
                                                     src="/images/icon-compartir.png" alt="Compartir"></a>
                                         @elseif($categorias->sigla == 'CRC')
-                                            <a
+                                            <a class="btn-preload"
                                                 href="{{ url('/detail/first/crc/' . $item->dataList->rucEntidad . '/' . $period) }}"><img
                                                     src="/images/icon-compartir.png" alt="Compartir"></a>
                                         @elseif($categorias->sigla == 'PRC')
-                                            <a
+                                            <a class="btn-preload"
                                                 href="{{ url('/detail/first/prc/' . $item->dataList->rucEntidad . '/' . $period) }}"><img
                                                     src="/images/icon-compartir.png" alt="Compartir"></a>
                                         @elseif($categorias->sigla == 'ADI')
-                                            <a
+                                            <a class="btn-preload"
                                                 href="{{ url('/detail/first/adi/' . $item->dataList->rucEntidad . '/' . $period) }}"><img
                                                     src="/images/icon-compartir.png" alt="Compartir"></a>
                                         @elseif($categorias->sigla == 'PMR')
-                                            <a
+                                            <a class="btn-preload"
                                                 href="{{ url('/detail/first/pmr/' . $item->dataList->rucEntidad . '/' . $period) }}"><img
                                                     src="/images/icon-compartir.png" alt="Compartir"></a>
                                         @endif
@@ -139,7 +138,7 @@
                     </details>
                 @endforeach
                 <div class="flex justify-center py-8">
-                    {{ $resultDepartmentDetail->links() }}
+                    {{ $result->links() }}
                 </div>
             </article>
         </section>

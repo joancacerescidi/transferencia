@@ -16,7 +16,8 @@
             </h2>
 
             @isset($search)
-                <form method="POST" action="{{ route('funcionario.busqueda', [$period]) }}" class="mb-14">
+                <form onsubmit='return preloadActiveFuncionario()' method="POST"
+                    action="{{ route('funcionario.busqueda', [$period]) }}" class="mb-14">
                     @csrf
                     <div class="relative xl:w-1/3 mx-auto mb-14">
                         <input name="palabraClave" value="<?= $busquedaPalabra ?>"
@@ -68,9 +69,9 @@
                                 {{ $item->dataList->cantidadTotal }}
                             </p>
                             <!-- <p class="text-right xl:text-left col-span-6 xl:col-span-1 order-5">
-                                                                                                              <span class="text-gray-400 xl:hidden pr-8 font-medium">Ver más</span>
-                                                                                                              <img src="/images/icon-chevron-down.png" class="inline">
-                                                                                                            </p> -->
+                                                                                                                  <span class="text-gray-400 xl:hidden pr-8 font-medium">Ver más</span>
+                                                                                                                  <img src="/images/icon-chevron-down.png" class="inline">
+                                                                                                                </p> -->
                         </summary>
 
 
@@ -90,7 +91,7 @@
                                             {{ $subCategorias->name }}
 
                                             @if ($categorias->abbreviation !== 'CDAF')
-                                                <a
+                                                <a class="btn-preload"
                                                     href="{{ url('/detail/funcionario/' . $item->dataList->idFuncionario . '/' . $categorias->abbreviation . '/' . $subCategorias->abbreviation . '/' . $item->dataList->nombre) }}"><img
                                                         src="/images/icon-compartir.png" alt="Compartir"></a>
                                             @endif
@@ -112,4 +113,12 @@
             </article>
         </section>
     </main>
+@endsection
+@section('scripts')
+    <script>
+        function preloadActiveFuncionario() {
+            let preloader = document.getElementById('preloader');
+            preloader.classList.remove('opacity-0', 'pointer-events-none');
+        }
+    </script>
 @endsection

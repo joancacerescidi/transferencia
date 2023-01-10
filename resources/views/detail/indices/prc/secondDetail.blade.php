@@ -18,12 +18,12 @@
             <div class="flex flex-wrap font-semibold text-xs xl:text-base gap-4 mb-4">
                 <button
                     onclick="window.location='{{ url('/detail/second/prc/' . $rucContratista . '/' . $rucEntidad . '/' . $period . '/orden-compra') }}'"
-                    class="p-4 bg-white transition-colors shadow-sm rounded-md ring @if ($filter == 'orden-compra') ring-blue-500
+                    class="btn-preload p-4 bg-white transition-colors shadow-sm rounded-md ring @if ($filter == 'orden-compra') ring-blue-500
                     @else
                         ring-gray-100 @endif   ring-offset-2">Compra</button>
                 <button
                     onclick="window.location='{{ url('/detail/second/prc/' . $rucContratista . '/' . $rucEntidad . '/' . $period . '/contrato') }}'"
-                    class="p-4 bg-white transition-colors shadow-sm rounded-md ring @if ($filter == 'contrato') ring-blue-500
+                    class="btn-preload p-4 bg-white transition-colors shadow-sm rounded-md ring @if ($filter == 'contrato') ring-blue-500
                     @else
                         ring-gray-100 @endif ring-offset-2">Contrato</button>
             </div>

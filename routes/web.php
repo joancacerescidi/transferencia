@@ -5,6 +5,7 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\FuncionarioController;
 use App\Http\Controllers\GlosarioContoller;
+use App\Http\Controllers\GovernmentLevelController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Incides\PrcController;
 use App\Http\Controllers\Indices\AdiController;
@@ -31,6 +32,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Data para el Section
 #Ruta inicial
 Route::get('/{period?}', [SectionController::class, 'index']);
 #Ranking entidad
@@ -41,15 +43,11 @@ Route::get('/ranking/entidad', [SectionController::class, 'index']);
 
 //Ruta al darle clic en una regiòn del mapa
 Route::get('/detail-deparment-period/{department}/{period}', [DepartmentController::class, 'index']);
+//Ruta al darle clic al grafico de data por nivel de gobierno
+Route::get('/detail-government-level/{nivel}/{period}', [GovernmentLevelController::class, 'index']);
 
 
-
-// Route::post('/search', [HomeController::class, 'busqueda'])->name('busqueda');
-// Route::get('/detalle1/{ruc}/{type}/{entidad}', [HomeController::class, 'detalle1'])->name('detalle1');
-// Route::get('/detalle2/{rucEntidad}/{rucContratista}/{type}/{contratista}/{entidad}', [HomeController::class, 'detalle2'])->name('detalle2');
-
-
-#Rankings - Home
+#Rankings
 #Entidad
 Route::get('/ranking/entidad/{period}', [RankingSearchController::class, 'rankingEntidad']);
 Route::post('/ranking/entidad/search/{period}', [RankingSearchController::class, 'searchEntidad'])->name('entidad.busqueda');
@@ -64,10 +62,6 @@ Route::post('/ranking/funcionario/search/{period}', [RankingSearchController::cl
 #Detalles
 #Detalle - 1 - funcionario
 Route::get('/detail/funcionario/{idFuncionario}/{nivel}/{type}/{name}/{ruc?}', [FuncionarioController::class, 'firstDetail']);
-
-
-
-
 #Detalle - 1-2 - entidad - grafico - entidad
 #Fraccionamiento
 Route::get('/detail/first/fraccionamiento/{rucEntidad}/{period}', [FraccionamientoController::class, 'first']);
@@ -107,11 +101,13 @@ Route::get('/detail/contrato-resuelto/second/proveedor/{rucEntidad}/{rucContrati
 #postulaciones
 Route::get('/detail/postulaciones/first/proveedor/{rucContratista}/{period}', [ProveedorController::class, 'postulacionesFirst']);
 Route::get('/detail/postulaciones/second/proveedor/{rucEntidad}/{rucContratista}/{period}', [ProveedorController::class, 'postulacionesSecond']);
+#Postulaciones con mismo representante
+Route::get('/detail/postulaciones-con-mismo-representante/first/proveedor/{rucContratista}/{period}', [ProveedorController::class, 'postulacionesMismoRepresentanteFirst']);
+Route::get('/detail/postulaciones-con-mismo-representante/second/proveedor/{rucEntidad}/{rucContratista}/{period}', [ProveedorController::class, 'postulacionesMismoRepresentanteSecond']);
 
 
 
 
- 
 #Otras vistas
 #Glosario
 Route::get('/glosario/principal', [GlosarioContoller::class, 'index'])->name('glosario.index');

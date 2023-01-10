@@ -334,4 +334,98 @@ class ProveedorController extends Controller
             ->paginate(10);
         return $data;
     }
+    public function postulacionesMismoRepresentanteFirst($rucContratista, $period)
+    {
+        $periods = [2018, 2019, 2020, 2021, 2022, 2023];
+        $validator = Validator::make(['period' => $period, 'rucContratista' => $rucContratista], [
+            'period' => ['required', 'integer', Rule::in($periods)],
+            'rucContratista' => ['required', 'integer']
+        ]);
+        if (!$validator->fails()) {
+            $result = $this->postulacionesMismoRepresentanteFirstDetail($rucContratista, $period);
+            return view('detail.proveedor.postulacionMismoRepresenante.firstDetail', compact('result', 'rucContratista', 'period'));
+        } else {
+            abort(404);
+        }
+    }
+    public function postulacionesMismoRepresentanteFirstDetail($rucContratista, $period)
+    {
+
+        $data =
+            DB::table(DB::raw('osce_postor op'))
+            ->select('oc.entidad_ruc', 'oc.entidad', DB::raw('count(1) as cantidad'))
+            ->crossJoin(DB::raw('osce_postor op1'))
+            ->crossJoin(DB::raw('osce_conformacion_juridica ocj'))
+            ->crossJoin(DB::raw('osce_conformacion_juridica ocj1'))
+            ->crossJoin(DB::raw('osce_convocatoria oc'))
+            ->whereRaw('date_part(\'year\',op.fecha_convocatoria) = ? ', [$period])
+            ->where('op.ruc_postor', '=', $rucContratista)
+            ->whereRaw('op1.codigo_convocatoria = op.codigo_convocatoria')
+            ->whereRaw('op1.n_item = op.n_item')
+            ->whereRaw('ocj.ruc = op.ruc_postor')
+            ->whereRaw('ocj1.ruc = op1.ruc_postor')
+            ->whereRaw('ocj1.tipo_documento = ocj.tipo_documento')
+            ->whereRaw('ocj1.numero_documento = ocj.numero_documento')
+            ->whereRaw('oc.codigo_convocatoria = op.codigo_convocatoria')
+            ->whereRaw('oc.n_item = op.n_item')
+            ->groupBy(['oc.entidad_ruc', 'oc.entidad'])
+            ->orderByRaw('cantidad DESC')
+            ->paginate(10);
+
+        return $data;
+    }
+    public function postulacionesMismoRepresentanteSecond($rucEntidad, $rucContratista, $period)
+    {
+        $periods = [2018, 2019, 2020, 2021, 2022, 2023];
+
+        $validator = Validator::make(['period' => $period, 'rucContratista' => $rucContratista, 'rucEntidad' => $rucEntidad], [
+            'period' => ['required', 'integer', Rule::in($periods)],
+            'rucContratista' => ['required', 'integer'],
+            'rucEntidad' => ['required', 'integer']
+        ]);
+        if (!$validator->fails()) {
+            $result = $this->postulacionesMismoRepresentanteSecondDetail($rucEntidad, $rucContratista, $period);
+            dd($result);
+            return view('detail.proveedor.postulacion.secondDetail', compact('result'));
+        } else {
+            abort(404);
+        }
+    }
+    public function postulacionesMismoRepresentanteSecondDetail($rucEntidad, $rucContratista, $period)
+    {
+        $data = DB::table(DB::raw('osce_postor op'))
+            ->select('oc.proceso', 'oc.objeto_contractual', 'oc.descripcion_item', 'oc.moneda', 'oc.monto_referencial_item', 'oc.fecha_convocatoria', 'oc.fecha_presentacion_propuesta', DB::raw('(
+            select
+                string_agg(
+                    \'Postor: RUC:\' || op.ruc_postor || \' Nombre: \' || op.postor || \' Representante: documento: \' || ocj.numero_documento || \'  Nombre: \' || ocj.nombre || \' Relacion: \' || ocj.tipo_conf_juridica,
+                    \'*\'
+                )
+            from
+                osce_postor op2,
+                osce_conformacion_juridica ocj2
+            where
+                op2.codigo_convocatoria = oc.codigoconvocatoria
+                and op2.n_item = oc.num_item
+                and op2.ruc_postor <> oc.ruc_contratista
+                and ocj2.ruc = op2.ruc_postor
+        ) as rep1'))
+            ->crossJoin(DB::raw('osce_postor op1'))
+            ->crossJoin(DB::raw('osce_conformacion_juridica ocj'))
+            ->crossJoin(DB::raw('osce_conformacion_juridica ocj1'))
+            ->crossJoin(DB::raw('osce_convocatoria oc'))
+            ->whereRaw('date_part(\'year\',op.fecha_convocatoria)', '=', $period)
+            ->whereRaw('op.ruc_postor', '=', $rucContratista)
+            ->whereRaw('op1.codigo_convocatoria = op.codigo_convocatoria')
+            ->whereRaw('op1.n_item = op.n_item')
+            ->whereRaw('ocj.ruc = op.ruc_postor')
+            ->whereRaw('ocj1.ruc = op1.ruc_postor')
+            ->whereRaw('ocj1.tipo_documento = ocj.tipo_documento')
+            ->whereRaw('ocj1.numero_documento = ocj.numero_documento')
+            ->whereRaw('oc.codigo_convocatoria = op.codigo_convocatoria')
+            ->whereRaw('oc.n_item = op.n_item')
+            ->whereRaw('oc.ruc_entidad', '=', $rucEntidad)
+            ->orderBy('oc.fecha_convocatoria', 'ASC')
+            ->paginate(10);
+        return $data;
+    }
 }

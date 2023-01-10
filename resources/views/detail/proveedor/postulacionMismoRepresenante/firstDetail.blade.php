@@ -10,51 +10,43 @@
                 </span>
             </a>
 
-
-
             <h2 class="text-center text-xl xl:text-4xl font-bold mb-6 xl:mb-14">
-                CRC
+               Proveedor postulación con mismo represenante primer detalle
             </h2>
+
             <article
                 class="bg-white border border-gray-200 shadow-sm rounded-xl mb-6 cursor-pointer hover:shadow-lg overflow-x-auto">
                 <header
-                    class="bg-gray-800 text-white p-5 hidden xl:grid grid-cols-2 xl:grid-cols-4 gap-8 items-center text-xs xl:text-sm mb-6 xl:mb-14">
+                    class="bg-gray-800 text-white p-5 hidden xl:grid grid-cols-2 xl:grid-cols-3 gap-8 items-center text-xs xl:text-sm mb-6 xl:mb-14">
                     <p class="xl:col-span-1 font-semibold flex items-center gap-2">
-                        Ruc Contratista
+                        Entidad Ruc
                         {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
                     </p>
                     <p class="xl:col-span-1 font-semibold flex items-center">
-                        Nombre Contratista
+                        Entidad
                         {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
                     </p>
                     <p class="xl:col-span-1 font-semibold flex items-center gap-2">
                         Cantidad
                         {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
                     </p>
-                    <p class="xl:col-span-1 font-semibold hidden xl:flex items-center gap-2">
-                        Monto
-                        {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
-                    </p>
+
                 </header>
                 <div
-                    class="px-5 py-5 xl:py-0 grid xl:grid-cols-4 items-start gap-8 text-xs xl:text-sm mb-10 border-b pb-4 xl:pb-0 xl:border-0">
+                    class="px-5 py-5 xl:py-0 grid xl:grid-cols-3 items-start gap-8 text-xs xl:text-sm mb-10 border-b pb-4 xl:pb-0 xl:border-0">
                     @foreach ($result as $item)
                         <p class="xl:col-span-1 font-semibold grid grid-cols-2 xl:block items-center gap-8">
-                            <span class="text-main-gray font-medium xl:hidden">Ruc Contratista:</span>
+                            <span class="text-main-gray font-medium xl:hidden">Entidad Ruc:</span>
                             <a class="btn-preload"
-                                href="{{ url('/detail/second/crc/' . $item->ruc_contratista . '/' . $rucEntidad . '/' . $period) }}">{{ $item->ruc_contratista }}</a>
+                                href="{{ url('/detail/postulaciones-con-mismo-representante/second/proveedor/' . $item->entidad_ruc . '/' . $rucContratista . '/' . $period) }}">{{ $item->entidad_ruc }}</a>
                         </p>
                         <p class="xl:col-span-1 font-medium grid grid-cols-2 xl:block items-center gap-8">
-                            <span class="text-main-gray font-medium xl:hidden">Nombre Contratista:</span>
-                            {{ $item->nombre_contratista }}
+                            <span class="text-main-gray font-medium xl:hidden">Entidad:</span>
+                            {{ $item->entidad }}
                         </p>
                         <p class="xl:col-span-1 font-medium grid grid-cols-2 xl:block items-center gap-8">
                             <span class="text-main-gray font-medium xl:hidden">Cantidad:</span>
                             {{ $item->cantidad }}
-                        </p>
-                        <p class="xl:col-span-1 font-medium grid grid-cols-2 xl:block items-center gap-8">
-                            <span class="text-main-gray font-medium xl:hidden">Monto: </span>
-                            <span> {{ $item->monto }}</span>
                         </p>
                     @endforeach
 
@@ -63,6 +55,7 @@
                     <p class=" text-center text-sm xl:text-base font-semibold">Sin Datos</p>
                 @endif
             </article>
+
             <div class="flex justify-center py-8">
                 {{ $result->links() }}
             </div>

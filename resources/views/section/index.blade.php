@@ -40,7 +40,8 @@
 
                         <div class="border bg-body-bg shadow-lg px-6 py-10">
                             <h4 class="xl:text-xl font-bold text-center mb-10">Buscar Entidad</h4>
-                            <form method="POST" action="{{ route('entidad.busqueda', [$period]) }}"
+                            <form onsubmit='return preloadActive()' method="POST"
+                                action="{{ route('entidad.busqueda', [$period]) }}"
                                 class="grid xl:grid-cols-3 gap-x-6 gap-y-6 xl:gap-y-10 items-center">
                                 @csrf
                                 <div class="flex flex-col xl:flex-row xl:items-center gap-6 xl:col-span-3">
@@ -50,7 +51,7 @@
                                             class="block w-8/12  py-5 px-6 rounded-tl-xl rounded-bl-xl border border-gray-200 bg-white shadow-sm focus:outline-none focus:ring focus:ring-main-blue text-xs xl:text-base"
                                             type="text" placeholder="Buscar entidad" required>
                                         <button type="submit"
-                                            class="block w-4/12  text-xs xl:text-sm px-4 flex items-center justify-center gap-2 bg-main-blue text-white font-medium rounded-tr-xl rounded-br-xl">
+                                            class=" block w-4/12  text-xs xl:text-sm px-4 flex items-center justify-center gap-2 bg-main-blue text-white font-medium rounded-tr-xl rounded-br-xl">
                                             <img src="/images/icon-buscar.png" alt="Buscar">
                                             <span class="text-xs xl:text-base">Buscar</span>
                                         </button>
@@ -58,7 +59,7 @@
                                 </div>
                                 <hr class="xl:col-span-3">
                                 <a href="{{ url('/ranking/entidad/' . $period) }}"
-                                    class="flex justify-center items-center gap-2 p-5 bg-main-blue text-white font-semibold xl:col-span-3 xl:mx-10 rounded-md text-xs xl:text-base">
+                                    class="btn-preload flex justify-center items-center gap-2 p-5 bg-main-blue text-white font-semibold xl:col-span-3 xl:mx-10 rounded-md text-xs xl:text-base">
                                     <img src="../images/ver-rankings.png" alt="">
                                     Ranking Entidades</a>
                             </form>
@@ -69,7 +70,8 @@
 
                         <div class="border bg-body-bg shadow-lg px-6 py-10">
                             <h4 class="xl:text-xl font-bold text-center mb-10">Buscar Proveedor</h4>
-                            <form method="POST" action="{{ route('proveedor.busqueda', [$period]) }}"
+                            <form onsubmit='return preloadActive()' method="POST"
+                                action="{{ route('proveedor.busqueda', [$period]) }}"
                                 class="grid xl:grid-cols-3 gap-x-6 gap-y-6 xl:gap-y-10 items-center">
                                 @csrf
                                 <div class="flex flex-col xl:flex-row xl:items-center gap-6 xl:col-span-3">
@@ -87,14 +89,15 @@
                                 </div>
                                 <hr class="xl:col-span-3">
                                 <a href="{{ url('/ranking/proveedor/' . $period) }}"
-                                    class="flex justify-center items-center gap-2 p-5 bg-main-blue text-white font-semibold xl:col-span-3 xl:mx-10 rounded-md text-xs xl:text-base">
+                                    class="btn-preload flex justify-center items-center gap-2 p-5 bg-main-blue text-white font-semibold xl:col-span-3 xl:mx-10 rounded-md text-xs xl:text-base">
                                     <img src="../images/ver-rankings.png" alt="">
                                     Ranking Proveedores</a>
                             </form>
                         </div>
                         <div class="border bg-body-bg shadow-lg px-6 py-10">
                             <h4 class="xl:text-xl font-bold text-center mb-10">Buscar funcionario</h4>
-                            <form method="POST" action="{{ route('funcionario.busqueda', [$period]) }}"
+                            <form onsubmit='return preloadActive()' method="POST"
+                                action="{{ route('funcionario.busqueda', [$period]) }}"
                                 class="grid xl:grid-cols-3 gap-x-6 gap-y-6 xl:gap-y-10 items-center">
                                 @csrf
                                 <div class="flex flex-col xl:flex-row xl:items-center gap-6 xl:col-span-3">
@@ -112,7 +115,7 @@
                                 </div>
                                 <hr class="xl:col-span-3">
                                 <a href="{{ url('/ranking/funcionario/' . $period) }}"
-                                    class="flex justify-center items-center gap-2 p-5 bg-main-blue text-white font-semibold xl:col-span-3 xl:mx-10 rounded-md text-xs xl:text-base">
+                                    class="btn-preload flex justify-center items-center gap-2 p-5 bg-main-blue text-white font-semibold xl:col-span-3 xl:mx-10 rounded-md text-xs xl:text-base">
                                     <img src="../images/ver-rankings.png" alt="">
                                     Ranking Funcionario</a>
                             </form>
@@ -253,6 +256,10 @@
 @endsection
 @section('scripts')
     <script>
+        function preloadActive() {
+            let preloader = document.getElementById('preloader');
+            preloader.classList.remove('opacity-0', 'pointer-events-none');
+        }
         //Gráfico de barras
         var dataGraf = {!! json_encode($resultGraf) !!};
         const ctx = document.getElementById('myChart');
@@ -279,8 +286,13 @@
                 events: ['mousemove', 'click'],
                 onClick: (event, elements, chart) => {
                     if (elements[0]) {
+                        let preloader = document.getElementById('preloader');
+                        preloader.classList.remove('opacity-0', 'pointer-events-none');
                         const i = elements[0].index;
-                        alert(chart.data.labels[i] + ': ' + chart.data.datasets[0].data[i]);
+                        const url = "<?php echo URL::to('detail-government-level'); ?>";
+                        const period = "<?php echo $period; ?>";
+                        const finalUrl = url + '/' + chart.data.labels[i] + '/' + period;
+                        window.location.href = finalUrl;
                     }
                 }
 
@@ -424,6 +436,8 @@
                 })
 
                 region.addEventListener('click', (e) => {
+                    let preloader = document.getElementById('preloader');
+                    preloader.classList.remove('opacity-0', 'pointer-events-none');
                     const url = "<?php echo URL::to('detail-deparment-period'); ?>";
                     const nameRegion = region.getAttribute('name');
                     const period = "<?php echo $period; ?>";

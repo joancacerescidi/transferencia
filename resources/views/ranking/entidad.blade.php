@@ -16,7 +16,8 @@
             </h2>
 
             @isset($search)
-                <form method="POST" action="{{ route('entidad.busqueda', [$period]) }}" class="mb-14">
+                <form onsubmit='return preloadActiveEntidad()' method="POST" action="{{ route('entidad.busqueda', [$period]) }}"
+                    class="mb-14">
                     @csrf
                     <div class="relative xl:w-1/3 mx-auto mb-14">
                         <input name="palabraClave" value="<?= $busquedaPalabra ?>"
@@ -67,26 +68,24 @@
                                     <p
                                         class="col-span-6 xl:col-span-3 text-[#ff0000] flex items-center xl:justify-end gap-2 order-3 xl:order-4 col-start-2 xl:col-start-auto">
                                         <span class="text-gray-400 xl:hidden pr-8 font-medium">Ranking:</span>
-                                        <svg class="mb-1" width="22" height="22" viewBox="0 0 24 24"
-                                            style="fill: rgb(255, 0, 0);">
-                                            <path
-                                                d="M21.947 9.179a1.001 1.001 0 0 0-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 0 0-1.822-.001L8.622 8.05l-5.701.453a1 1 0 0 0-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 0 0 1.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 0 0 1.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z">
-                                            </path>
-                                        </svg>
+                                        <span class="flex items-center justify-center gap-1 mr-2">
+                                            <span class="h-3 w-3 rounded-full block bg-gray-300"></span>
+                                            <span class="h-3 w-3 rounded-full block bg-gray-300"></span>
+                                            <span class="h-3 w-3 rounded-full block bg-red-500"></span>
+                                        </span>
                                         {{ $item->dataList->ranking }}
                                     </p>
                                 @break
 
                                 @case($item->dataList->ranking < 0.5 && $item->dataList->ranking > 0.2)
                                     <p
-                                        class="col-span-6 xl:col-span-3 text-[#ff6347] flex items-center xl:justify-end gap-2 order-3 xl:order-4 col-start-2 xl:col-start-auto">
+                                        class="col-span-6 xl:col-span-3 text-yellow-300 flex items-center xl:justify-end gap-2 order-3 xl:order-4 col-start-2 xl:col-start-auto">
                                         <span class="text-gray-400 xl:hidden pr-8 font-medium">Ranking:</span>
-                                        <svg class="mb-1" width="22" height="22" viewBox="0 0 24 24"
-                                            style="fill: rgb(255, 99, 71);">
-                                            <path
-                                                d="M21.947 9.179a1.001 1.001 0 0 0-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 0 0-1.822-.001L8.622 8.05l-5.701.453a1 1 0 0 0-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 0 0 1.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 0 0 1.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z">
-                                            </path>
-                                        </svg>
+                                        <span class="flex items-center justify-center gap-1 mr-2">
+                                            <span class="h-3 w-3 rounded-full block bg-gray-300"></span>
+                                            <span class="h-3 w-3 rounded-full block bg-yellow-300"></span>
+                                            <span class="h-3 w-3 rounded-full block bg-gray-300"></span>
+                                        </span>
                                         {{ $item->dataList->ranking }}
                                     </p>
                                 @break
@@ -95,12 +94,11 @@
                                     <p
                                         class="col-span-6 xl:col-span-3 text-[#3cb371] flex items-center xl:justify-end gap-2 order-3 xl:order-4 col-start-2 xl:col-start-auto">
                                         <span class="text-gray-400 xl:hidden pr-8 font-medium">Ranking:</span>
-                                        <svg class="mb-1" width="22" height="22" viewBox="0 0 24 24"
-                                            style="fill: rgb(60, 179, 113);">
-                                            <path
-                                                d="M21.947 9.179a1.001 1.001 0 0 0-.868-.676l-5.701-.453-2.467-5.461a.998.998 0 0 0-1.822-.001L8.622 8.05l-5.701.453a1 1 0 0 0-.619 1.713l4.213 4.107-1.49 6.452a1 1 0 0 0 1.53 1.057L12 18.202l5.445 3.63a1.001 1.001 0 0 0 1.517-1.106l-1.829-6.4 4.536-4.082c.297-.268.406-.686.278-1.065z">
-                                            </path>
-                                        </svg>
+                                        <span class="flex items-center justify-center gap-1 mr-2">
+                                            <span class="h-3 w-3 rounded-full block bg-green-500"></span>
+                                            <span class="h-3 w-3 rounded-full block bg-gray-300"></span>
+                                            <span class="h-3 w-3 rounded-full block bg-gray-300"></span>
+                                        </span>
                                         {{ $item->dataList->ranking }}
                                     </p>
                                 @break
@@ -126,23 +124,23 @@
                                     <p class="flex items-center gap-3 font-medium xl:col-start-2 col-span-6 xl:col-span-4">
                                         {{ $categorias->name }}
                                         @if ($categorias->sigla == 'FRA')
-                                            <a
+                                            <a class="btn-preload"
                                                 href="{{ url('/detail/first/fraccionamiento/' . $item->dataList->rucEntidad . '/' . $period) }}"><img
                                                     src="/images/icon-compartir.png" alt="Compartir"></a>
                                         @elseif($categorias->sigla == 'CRC')
-                                            <a
+                                            <a class="btn-preload"
                                                 href="{{ url('/detail/first/crc/' . $item->dataList->rucEntidad . '/' . $period) }}"><img
                                                     src="/images/icon-compartir.png" alt="Compartir"></a>
                                         @elseif($categorias->sigla == 'PRC')
-                                            <a
+                                            <a class="btn-preload"
                                                 href="{{ url('/detail/first/prc/' . $item->dataList->rucEntidad . '/' . $period) }}"><img
                                                     src="/images/icon-compartir.png" alt="Compartir"></a>
                                         @elseif($categorias->sigla == 'ADI')
-                                            <a
+                                            <a class="btn-preload"
                                                 href="{{ url('/detail/first/adi/' . $item->dataList->rucEntidad . '/' . $period) }}"><img
                                                     src="/images/icon-compartir.png" alt="Compartir"></a>
-                                          @elseif($categorias->sigla == 'PMR')
-                                            <a
+                                        @elseif($categorias->sigla == 'PMR')
+                                            <a class="btn-preload"
                                                 href="{{ url('/detail/first/pmr/' . $item->dataList->rucEntidad . '/' . $period) }}"><img
                                                     src="/images/icon-compartir.png" alt="Compartir"></a>
                                         @endif
@@ -171,6 +169,10 @@
 @endsection
 @section('scripts')
     <script>
+        function preloadActiveEntidad() {
+            let preloader = document.getElementById('preloader');
+            preloader.classList.remove('opacity-0', 'pointer-events-none');
+        }
         var dataEntidad = {!! json_encode($result->items()) !!};
         dataEntidad.forEach((value, index) => {
 

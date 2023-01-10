@@ -41,7 +41,7 @@
                     @foreach ($result as $item)
                         <p class="xl:col-span-1 font-semibold grid grid-cols-2 xl:block items-center gap-8">
                             <span class="text-main-gray font-medium xl:hidden">Ruc Entidad:</span>
-                            <a
+                            <a class="btn-preload"
                                 href="{{ url('/detail/orden-compra/second/proveedor/'.$item->ruc_entidad.'/'.$rucContratista.'/'.$period) }}">{{ $item->ruc_entidad }}</a>
                         </p>
                         <p class="xl:col-span-1 font-medium grid grid-cols-2 xl:block items-center gap-8">
