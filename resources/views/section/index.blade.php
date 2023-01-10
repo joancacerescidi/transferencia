@@ -14,7 +14,7 @@
                         @foreach ($periods as $data)
                             <li class="splide__slide">
                                 <button onclick="window.location='{{ url('/' . $data) }}'"
-                                    class="{{ $period == $data ? 'shadow-blue ring ring-offset-2 ring-blue-500 block ' : 'block  border shadow-lg ' }} bg-white font-semibold text-lg  rounded-md  py-5 px-10  my-4">
+                                    class="{{ $period == $data ? 'shadow-blue ring ring-offset-2 ring-blue-500 block ' : 'block  border shadow-lg ' }} bg-white font-semibold text-lg  rounded-md  py-5 px-10  my-4 btn-preload">
                                     {{ $data }}
                                 </button>
                             </li>

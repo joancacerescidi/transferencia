@@ -42,7 +42,10 @@
                         <p class="xl:col-span-1 font-semibold grid grid-cols-2 xl:block items-center gap-8">
                             <span class="text-main-gray font-medium xl:hidden">Ruc:</span>
                             <a class="btn-preload"
-                                href="{{ url('/detail/second/fraccionamiento/' . $item->ruc . '/' . $rucEntidad . '/' . $period.'/orden-compra') }}">{{ $item->ruc }}</a>
+                                href="{{ url('/detail/second/fraccionamiento/' . $item->ruc . '/' . $rucEntidad . '/' . $period . '/orden-compra') }}">{{ $item->ruc }}
+                                <img src="/images/icon-compartir.png" alt="Compartir">
+                            </a>
+
                         </p>
                         <p class="xl:col-span-1 font-medium grid grid-cols-2 xl:block items-center gap-8">
                             <span class="text-main-gray font-medium xl:hidden">Nombre:</span>

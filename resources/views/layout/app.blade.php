@@ -127,6 +127,10 @@
                 })
             });
         }
+
+        window.onbeforeunload = function(e) {
+            preloader.classList.add('opacity-0', 'pointer-events-none');
+        };
     </script>
 </body>
 
