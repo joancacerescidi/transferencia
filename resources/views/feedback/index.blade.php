@@ -6,10 +6,10 @@
             <aside>
                 <img src="../images/feedback-aside.png" alt="">
                 <h2 class="text-center text-xl xl:text-3xl font-bold mb-4">
-                    Lorem, ipsum dolor.
+                    Danos tu opinión.
                 </h2>
                 <p class="xl:text-xl text-center">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Harum, quis.
+                    Tu opinión es muy importante por eso nos gustaría que rellenaras el siguiente formulario.
                 </p>
             </aside>
             <article>

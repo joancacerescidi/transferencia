@@ -169,10 +169,6 @@
 @endsection
 @section('scripts')
     <script>
-        function preloadActiveEntidad() {
-            let preloader = document.getElementById('preloader');
-            preloader.classList.remove('opacity-0', 'pointer-events-none');
-        }
         var dataEntidad = {!! json_encode($result->items()) !!};
         dataEntidad.forEach((value, index) => {
 

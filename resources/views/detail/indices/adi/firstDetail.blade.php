@@ -4,10 +4,12 @@
         <section class="py-20 px-6 xl:px-10">
             <a href="#" class="flex items-center gap-3 mb-8 xl:mb-16 font-semibold text-sm xl:text-lg text-main-blue">
                 <img src="{{ asset('images/icon-chevron-left-blue.png') }}" alt="">
+
                 <span>
-                    <span onclick="window.location='{{ url('/') }}'">Inicio </span>
-                    {{-- <span onclick="window.location='{{ url('/') }}'">/ Inicio</span> --}}
+                    <span onclick="window.location='{{ url('/') }}'">Inicio</span>
+                    <span onclick="window.location='{{ url('/ranking/entidad/' . $period) }}'">/ Entidades</span>
                 </span>
+
             </a>
 
 

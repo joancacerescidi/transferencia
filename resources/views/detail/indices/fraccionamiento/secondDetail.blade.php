@@ -5,13 +5,14 @@
             <a href="#" class="flex items-center gap-3 mb-8 xl:mb-16 font-semibold text-sm xl:text-lg text-main-blue">
                 <img src="{{ asset('images/icon-chevron-left-blue.png') }}" alt="">
                 <span>
-                    <span onclick="window.location='{{ url('/') }}'">Inicio </span>
-                    {{-- <span onclick="window.location='{{ url('/') }}'">/ Inicio</span> --}}
+                    <span onclick="window.location='{{ url('/') }}'">Inicio</span>
+                    <span onclick="window.location='{{ url('/ranking/entidad/' . $period) }}'">/ Entidades</span>
+                    <span
+                        onclick="window.location='{{ url('/detail/first/fraccionamiento/' . $rucEntidad . '/' . $period) }}'">/
+                        1° Detalle</span>
+
                 </span>
             </a>
-
-
-
             <h2 class="text-center text-xl xl:text-4xl font-bold mb-6 xl:mb-14">
                 Fraccionamiento
             </h2>

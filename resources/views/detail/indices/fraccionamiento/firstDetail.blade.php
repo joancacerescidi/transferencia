@@ -5,8 +5,8 @@
             <a href="#" class="flex items-center gap-3 mb-8 xl:mb-16 font-semibold text-sm xl:text-lg text-main-blue">
                 <img src="{{ asset('images/icon-chevron-left-blue.png') }}" alt="">
                 <span>
-                    <span onclick="window.location='{{ url('/') }}'">Inicio </span>
-                    {{-- <span onclick="window.location='{{ url('/') }}'">/ Inicio</span> --}}
+                    <span onclick="window.location='{{ url('/') }}'">Inicio</span>
+                    <span onclick="window.location='{{ url('/ranking/entidad/' . $period) }}'">/ Entidades</span>
                 </span>
             </a>
 
@@ -43,9 +43,7 @@
                             <span class="text-main-gray font-medium xl:hidden">Ruc:</span>
                             <a class="btn-preload"
                                 href="{{ url('/detail/second/fraccionamiento/' . $item->ruc . '/' . $rucEntidad . '/' . $period . '/orden-compra') }}">{{ $item->ruc }}
-                                <img src="/images/icon-compartir.png" alt="Compartir">
                             </a>
-
                         </p>
                         <p class="xl:col-span-1 font-medium grid grid-cols-2 xl:block items-center gap-8">
                             <span class="text-main-gray font-medium xl:hidden">Nombre:</span>

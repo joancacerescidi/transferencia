@@ -6,10 +6,11 @@
             <aside>
                 <img src="../images/denuncia-aside.png" alt="">
                 <h2 class="text-center text-xl xl:text-3xl font-bold mb-4">
-                    Lorem, ipsum dolor.
+                    Comparte información
                 </h2>
                 <p class="xl:text-xl text-center">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Harum, quis.
+                    Si tienes conocimiento de información que podría servir, puedes rellenar
+                    el siguiente formulario y ayudar a la justicia.
                 </p>
             </aside>
             <article>
@@ -64,16 +65,16 @@
                         <input id="nombres" value="{{ old('nombres') }}" name="nombres" type="text"
                             placeholder="Nombres"
                             class="text-sm block w-full p-4 rounded-md border shadow-md focus:outline-none focus:ring focus:ring-main-blue @error('nombres') ring ring-red-500  @enderror" ">
-                                    @error('nombres')
+                                                    @error('nombres')
         <span class="py-2 text-red-500 text-xs xl:text-sm block">{{ $message }}</span>
     @enderror
-                            </div>
-                        <div class="grid xl:grid-cols-2 gap-6 xl:gap-10">
+                                            </div>
+                                        <div class="grid xl:grid-cols-2 gap-6 xl:gap-10">
 
-                             <div>
-                               <label for="email" class="font-semibold text-xs xl:text-sm block mb-1">Teléfono</label>
-                               <input id="telefono" value="{{ old('telefono') }}" name="telefono" type="number" placeholder="Teléfono"
-                                  class="text-sm block w-full p-4 rounded-md border shadow-md focus:outline-none focus:ring focus:ring-main-blue @error('telefono') ring ring-red-500  @enderror"">
+                                             <div>
+                                               <label for="email" class="font-semibold text-xs xl:text-sm block mb-1">Teléfono</label>
+                                               <input id="telefono" value="{{ old('telefono') }}" name="telefono" type="number" placeholder="Teléfono"
+                                                  class="text-sm block w-full p-4 rounded-md border shadow-md focus:outline-none focus:ring focus:ring-main-blue @error('telefono') ring ring-red-500  @enderror"">
                         @error('telefono')
                             <span class="py-2 text-red-500 text-xs xl:text-sm block">{{ $message }}</span>
                         @enderror

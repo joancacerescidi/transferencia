@@ -49,7 +49,7 @@ class PmrController extends Controller
         if (!$validator->fails()) {
 
             $result = $this->secondDetail($rucEntidad, $rucContratista, $period);
-            $conformacion = $this->conformacionJuridica();
+            $conformacion = $this->conformacionJuridica($rucContratista);
             return view('detail.indices.pmr.secondDetail', compact('result', 'conformacion'));
         } else {
             abort(404);
@@ -81,12 +81,12 @@ class PmrController extends Controller
 
         return $data;
     }
-    public function conformacionJuridica()
+    public function conformacionJuridica($rucContratista)
     {
         $data =
             DB::table(DB::raw('osce_conformacion_juridica ocj1'))
             ->select('ocj1.numero_documento', 'ocj1.nombre', 'ocj1.tipo_conf_juridica')
-            ->where('ocj1.ruc', '=', '20450417514')
+            ->where('ocj1.ruc', '=', $rucContratista)
             ->get();
         return $data;
     }

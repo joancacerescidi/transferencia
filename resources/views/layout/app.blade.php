@@ -109,29 +109,10 @@
         <p class="py-8 text-sm xl:text-lg text-center">2022@ Qullqita Qatipay - Todos los derechos reservados</p>
     </footer>
     <script src="{{ asset('js/header/index.js') }}"></script>
+    <script src="{{ asset('js/preload/index.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     @yield('scripts')
-    <script>
-        let preloader = document.getElementById('preloader');
-        let btnPreloader = [...document.querySelectorAll('.btn-preload')];
-        if (preloader) {
-            window.addEventListener('load', () => {
-                preloader.classList.add('opacity-0', 'pointer-events-none');
-            });
-        }
 
-        if (btnPreloader.length > 0) {
-            btnPreloader.map(btn => {
-                btn.addEventListener('click', () => {
-                    preloader.classList.remove('opacity-0', 'pointer-events-none');
-                })
-            });
-        }
-
-        window.onbeforeunload = function(e) {
-            preloader.classList.add('opacity-0', 'pointer-events-none');
-        };
-    </script>
 </body>
 
 </html>

@@ -385,47 +385,37 @@ class ProveedorController extends Controller
         ]);
         if (!$validator->fails()) {
             $result = $this->postulacionesMismoRepresentanteSecondDetail($rucEntidad, $rucContratista, $period);
-            dd($result);
-            return view('detail.proveedor.postulacion.secondDetail', compact('result'));
+            $conformacion = $this->conformacionJuridica($rucContratista);
+            return view('detail.proveedor.postulacionMismoRepresenante.secondDetail', compact('result', 'conformacion'));
         } else {
             abort(404);
         }
     }
     public function postulacionesMismoRepresentanteSecondDetail($rucEntidad, $rucContratista, $period)
     {
-        $data = DB::table(DB::raw('osce_postor op'))
-            ->select('oc.proceso', 'oc.objeto_contractual', 'oc.descripcion_item', 'oc.moneda', 'oc.monto_referencial_item', 'oc.fecha_convocatoria', 'oc.fecha_presentacion_propuesta', DB::raw('(
-            select
-                string_agg(
-                    \'Postor: RUC:\' || op.ruc_postor || \' Nombre: \' || op.postor || \' Representante: documento: \' || ocj.numero_documento || \'  Nombre: \' || ocj.nombre || \' Relacion: \' || ocj.tipo_conf_juridica,
-                    \'*\'
-                )
-            from
-                osce_postor op2,
-                osce_conformacion_juridica ocj2
-            where
-                op2.codigo_convocatoria = oc.codigoconvocatoria
-                and op2.n_item = oc.num_item
-                and op2.ruc_postor <> oc.ruc_contratista
-                and ocj2.ruc = op2.ruc_postor
-        ) as rep1'))
-            ->crossJoin(DB::raw('osce_postor op1'))
-            ->crossJoin(DB::raw('osce_conformacion_juridica ocj'))
-            ->crossJoin(DB::raw('osce_conformacion_juridica ocj1'))
-            ->crossJoin(DB::raw('osce_convocatoria oc'))
-            ->whereRaw('date_part(\'year\',op.fecha_convocatoria)', '=', $period)
-            ->whereRaw('op.ruc_postor', '=', $rucContratista)
-            ->whereRaw('op1.codigo_convocatoria = op.codigo_convocatoria')
-            ->whereRaw('op1.n_item = op.n_item')
-            ->whereRaw('ocj.ruc = op.ruc_postor')
-            ->whereRaw('ocj1.ruc = op1.ruc_postor')
-            ->whereRaw('ocj1.tipo_documento = ocj.tipo_documento')
-            ->whereRaw('ocj1.numero_documento = ocj.numero_documento')
-            ->whereRaw('oc.codigo_convocatoria = op.codigo_convocatoria')
-            ->whereRaw('oc.n_item = op.n_item')
-            ->whereRaw('oc.ruc_entidad', '=', $rucEntidad)
-            ->orderBy('oc.fecha_convocatoria', 'ASC')
+
+        $data = DB::table(DB::raw('osce_contrato oc'))
+            ->distinct()
+            ->select(DB::raw('(num_contrato,  oc.num_item) as numero_contrato'), 'fecha_suscripcion_contrato', 'descripcion_proceso', 'urlcontrato', 'moneda', 'monto_contratado_item', DB::raw('(select string_agg(\'Postor: RUC:\' || op.ruc_postor || \' Nombre: \' || op.postor || \' Representante: documento: \' || ocj.numero_documento || \'  Nombre: \' || ocj.nombre || \' Relacion: \' || ocj.tipo_conf_juridica, \'*\') 
+from osce_postor op, osce_conformacion_juridica ocj
+	 where op.codigo_convocatoria=oc.codigoconvocatoria
+	       and op.n_item=oc.num_item
+	 	   and op.ruc_postor<>oc.ruc_contratista
+	       and ocj.ruc=op.ruc_postor) as rep1'))
+            ->where([['oc.anno', $period], ['oc.ruc_entidad', $rucEntidad], ['oc.ruc_contratista', $rucContratista]])
+            ->orderBy('fecha_suscripcion_contrato', 'ASC')
             ->paginate(10);
+
+        return $data;
+    }
+    public function conformacionJuridica($rucContratista)
+    {
+
+        $data = DB::table('osce_conformacion_juridica')
+            ->select('osce_conformacion_juridica.numero_documento', 'osce_conformacion_juridica.nombre', 'osce_conformacion_juridica.tipo_conf_juridica')
+            ->where('osce_conformacion_juridica.ruc', '=', $rucContratista)
+            ->get();
+
         return $data;
     }
 }
