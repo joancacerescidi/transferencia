@@ -10,7 +10,7 @@ use Illuminate\Validation\Rule;
 class ProveedorController extends Controller
 {
     //
-    public function ordenCompraFirst($rucContratista, $period)
+    public function ordenCompraFirst($rucContratista, $period,  $nombre = 'Sin nombre')
     {
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
         $validator = Validator::make(['period' => $period, 'rucContratista' => $rucContratista], [
@@ -19,7 +19,7 @@ class ProveedorController extends Controller
         ]);
         if (!$validator->fails()) {
             $result = $this->ordenCompraFirstDetail($rucContratista, $period);
-            return view('detail.proveedor.orden-compra.firstDetail', compact('result', 'rucContratista', 'period'));
+            return view('detail.proveedor.orden-compra.firstDetail', compact('result', 'rucContratista', 'period', 'nombre'));
         } else {
             abort(404);
         }
@@ -37,7 +37,7 @@ class ProveedorController extends Controller
 
         return  $data;
     }
-    public function ordenCompraSecond($rucEntidad, $rucContratista, $period)
+    public function ordenCompraSecond($rucEntidad, $rucContratista, $period, $ruc, $rucNombre, $nombre = 'Sin nombre')
     {
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
 
@@ -48,7 +48,7 @@ class ProveedorController extends Controller
         ]);
         if (!$validator->fails()) {
             $result = $this->ordenCompraSecondDetail($rucEntidad, $rucContratista, $period);
-            return view('detail.proveedor.orden-compra.secondDetail', compact('result'));
+            return view('detail.proveedor.orden-compra.secondDetail', compact('result', 'period', 'ruc', 'rucNombre', 'nombre'));
         } else {
             abort(404);
         }
@@ -64,7 +64,7 @@ class ProveedorController extends Controller
 
         return  $data;
     }
-    public function contratoFirst($rucContratista, $period)
+    public function contratoFirst($rucContratista, $period, $nombre = 'Sin nombre')
     {
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
         $validator = Validator::make(['period' => $period, 'rucContratista' => $rucContratista], [
@@ -73,7 +73,7 @@ class ProveedorController extends Controller
         ]);
         if (!$validator->fails()) {
             $result = $this->contratoFirstDetail($rucContratista, $period);
-            return view('detail.proveedor.contrato.firstDetail', compact('result', 'rucContratista', 'period'));
+            return view('detail.proveedor.contrato.firstDetail', compact('result', 'rucContratista', 'period', 'nombre'));
         } else {
             abort(404);
         }
@@ -88,7 +88,7 @@ class ProveedorController extends Controller
             ->paginate(10);
         return $data;
     }
-    public function contratoSecond($rucEntidad, $rucContratista, $period)
+    public function contratoSecond($rucEntidad, $rucContratista, $period, $ruc, $rucNombre, $nombre = 'Sin nombre')
     {
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
 
@@ -99,7 +99,7 @@ class ProveedorController extends Controller
         ]);
         if (!$validator->fails()) {
             $result = $this->contratoSecondDetail($rucEntidad, $rucContratista, $period);
-            return view('detail.proveedor.contrato.secondDetail', compact('result'));
+            return view('detail.proveedor.contrato.secondDetail', compact('result', 'period', 'ruc', 'rucNombre', 'nombre'));
         } else {
             abort(404);
         }
@@ -114,7 +114,7 @@ class ProveedorController extends Controller
         return $data;
     }
 
-    public function consorcioFirst($rucContratista, $period, $filter)
+    public function consorcioFirst($rucContratista, $period, $filter, $nombre = 'Sin nombre',$busquedaPalabra = null)
     {
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
         $filters = ['orden-compra', 'contrato'];
@@ -125,7 +125,8 @@ class ProveedorController extends Controller
         ]);
         if (!$validator->fails()) {
             $result = $this->consorcioFirstDetail($rucContratista, $period, $filter);
-            return view('detail.proveedor.consorcio.firstDetail', compact('result', 'rucContratista', 'period', 'filter'));
+
+            return view('detail.proveedor.consorcio.firstDetail', compact('result', 'rucContratista', 'period', 'filter', 'nombre', 'busquedaPalabra'));
         } else {
             abort(404);
         }
@@ -155,7 +156,7 @@ class ProveedorController extends Controller
         }
         return $data;
     }
-    public function consorcioSecond($rucEntidad, $rucContratista, $period, $filter)
+    public function consorcioSecond($rucEntidad, $rucContratista, $period, $filter, $ruc, $rucNombre, $nombre = 'Sin nombre', $busquedaPalabra = null)
     {
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
         $filters = ['orden-compra', 'contrato'];
@@ -167,7 +168,7 @@ class ProveedorController extends Controller
         ]);
         if (!$validator->fails()) {
             $result = $this->consorcioSecondDetail($rucEntidad, $rucContratista, $period, $filter);
-            return view('detail.proveedor.consorcio.secondDetail', compact('result', 'rucEntidad', 'rucContratista', 'period', 'filter'));
+            return view('detail.proveedor.consorcio.secondDetail', compact('result', 'rucEntidad', 'rucContratista', 'period', 'filter', 'ruc', 'rucNombre', 'nombre', 'busquedaPalabra'));
         } else {
             abort(404);
         }
@@ -197,7 +198,7 @@ class ProveedorController extends Controller
         }
         return $data;
     }
-    public function sancionesFirst($rucContratista, $period)
+    public function sancionesFirst($rucContratista, $period, $nombre = 'Sin nombre')
     {
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
         $validator = Validator::make(['period' => $period, 'rucContratista' => $rucContratista], [
@@ -207,7 +208,7 @@ class ProveedorController extends Controller
         if (!$validator->fails()) {
             $result = $this->sancionesFirstDetail($rucContratista, $period);
 
-            return view('detail.proveedor.sanciones.firstDetail', compact('result', 'rucContratista', 'period'));
+            return view('detail.proveedor.sanciones.firstDetail', compact('result', 'rucContratista', 'period', 'nombre'));
         } else {
             abort(404);
         }
@@ -222,7 +223,7 @@ class ProveedorController extends Controller
             ->paginate(10);
         return $data;
     }
-    public function contratoResueltoFirst($rucContratista, $period)
+    public function contratoResueltoFirst($rucContratista, $period, $nombre = 'Sin nombre')
     {
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
         $validator = Validator::make(['period' => $period, 'rucContratista' => $rucContratista], [
@@ -231,7 +232,7 @@ class ProveedorController extends Controller
         ]);
         if (!$validator->fails()) {
             $result = $this->contratoResueltoFirstDetail($rucContratista, $period);
-            return view('detail.proveedor.contratoResuelto.firstDetail', compact('result', 'rucContratista', 'period'));
+            return view('detail.proveedor.contratoResuelto.firstDetail', compact('result', 'rucContratista', 'period', 'nombre'));
         } else {
             abort(404);
         }
@@ -246,7 +247,7 @@ class ProveedorController extends Controller
             ->paginate(10);
         return $data;
     }
-    public function contratoResueltoSecond($rucEntidad, $rucContratista, $period)
+    public function contratoResueltoSecond($rucEntidad, $rucContratista, $period, $ruc, $rucNombre, $nombre = 'Sin nombre')
     {
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
 
@@ -257,7 +258,7 @@ class ProveedorController extends Controller
         ]);
         if (!$validator->fails()) {
             $result = $this->contratoResueltoSecondDetail($rucEntidad, $rucContratista, $period);
-            return view('detail.proveedor.contratoResuelto.secondDetail', compact('result'));
+            return view('detail.proveedor.contratoResuelto.secondDetail', compact('result', 'period', 'ruc', 'rucNombre', 'nombre'));
         } else {
             abort(404);
         }
@@ -272,7 +273,7 @@ class ProveedorController extends Controller
             ->paginate(10);
         return $data;
     }
-    public  function postulacionesFirst($rucContratista, $period)
+    public  function postulacionesFirst($rucContratista, $period, $nombre = 'Sin nombre')
     {
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
         $validator = Validator::make(['period' => $period, 'rucContratista' => $rucContratista], [
@@ -283,7 +284,7 @@ class ProveedorController extends Controller
             $result = $this->postulacionesFirstDetail($rucContratista, $period);
 
 
-            return view('detail.proveedor.postulacion.firstDetail', compact('result', 'rucContratista', 'period'));
+            return view('detail.proveedor.postulacion.firstDetail', compact('result', 'rucContratista', 'period', 'nombre'));
         } else {
             abort(404);
         }
@@ -303,7 +304,7 @@ class ProveedorController extends Controller
 
         return $data;
     }
-    public function postulacionesSecond($rucEntidad, $rucContratista, $period)
+    public function postulacionesSecond($rucEntidad, $rucContratista, $period, $ruc, $rucNombre, $nombre = 'Sin nombre')
     {
 
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
@@ -315,7 +316,7 @@ class ProveedorController extends Controller
         ]);
         if (!$validator->fails()) {
             $result = $this->postulacionesSecondDetail($rucEntidad, $rucContratista, $period);
-            return view('detail.proveedor.postulacion.secondDetail', compact('result'));
+            return view('detail.proveedor.postulacion.secondDetail', compact('result', 'ruc', 'rucNombre', 'nombre', 'ruc', 'rucNombre', 'nombre'));
         } else {
             abort(404);
         }
@@ -334,7 +335,7 @@ class ProveedorController extends Controller
             ->paginate(10);
         return $data;
     }
-    public function postulacionesMismoRepresentanteFirst($rucContratista, $period)
+    public function postulacionesMismoRepresentanteFirst($rucContratista, $period, $nombre = 'Sin nombre')
     {
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
         $validator = Validator::make(['period' => $period, 'rucContratista' => $rucContratista], [
@@ -374,7 +375,7 @@ class ProveedorController extends Controller
 
         return $data;
     }
-    public function postulacionesMismoRepresentanteSecond($rucEntidad, $rucContratista, $period)
+    public function postulacionesMismoRepresentanteSecond($rucEntidad, $rucContratista, $period, $ruc, $rucNombre, $nombre = 'Sin nombre')
     {
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
 
@@ -386,7 +387,7 @@ class ProveedorController extends Controller
         if (!$validator->fails()) {
             $result = $this->postulacionesMismoRepresentanteSecondDetail($rucEntidad, $rucContratista, $period);
             $conformacion = $this->conformacionJuridica($rucContratista);
-            return view('detail.proveedor.postulacionMismoRepresenante.secondDetail', compact('result', 'conformacion'));
+            return view('detail.proveedor.postulacionMismoRepresenante.secondDetail', compact('result', 'conformacion', 'period', 'ruc', 'rucNombre', 'nombre'));
         } else {
             abort(404);
         }

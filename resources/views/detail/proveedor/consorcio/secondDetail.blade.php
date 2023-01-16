@@ -4,24 +4,24 @@
         <section class="py-20 px-6 xl:px-10">
             <a href="#" class="flex items-center gap-3 mb-8 xl:mb-16 font-semibold text-sm xl:text-lg text-main-blue">
                 <img src="{{ asset('images/icon-chevron-left-blue.png') }}" alt="">
-                <span>
-                    <span onclick="window.location='{{ url('/') }}'">Inicio </span>
-                    {{-- <span onclick="window.location='{{ url('/') }}'">/ Inicio</span> --}}
-                </span>
+
+                <span class="btn-preload" onclick="window.location='{{ url('/') }}'">Inicio </span>
+
             </a>
 
 
             <h2 class="text-center text-xl xl:text-4xl font-bold mb-6 xl:mb-14">
-                Proveedor consorcio segundo detalle
+                CONSORCIO <br>
+                {{ $nameEntidad }}<br> {{ $ruc }}<br> {{ $nameRuc }}
             </h2>
             <div class="flex flex-wrap font-semibold text-xs xl:text-base gap-4 mb-4">
                 <button
-                    onclick="window.location='{{ url('/detail/consorcio/second/proveedor/'.$rucEntidad.'/' . $rucContratista . '/' . $period . '/orden-compra') }}'"
+                    onclick="window.location='{{ url('/detail/consorcio/second/proveedor/' . $rucEntidad . '/' . $rucContratista . '/' . $period . '/orden-compra') }}'"
                     class="p-4 bg-white transition-colors shadow-sm rounded-md ring @if ($filter == 'orden-compra') ring-blue-500
                     @else
                         ring-gray-100 @endif   ring-offset-2">Compra</button>
                 <button
-                    onclick="window.location='{{ url('/detail/consorcio/second/proveedor/'.$rucEntidad.'/' .  $rucContratista . '/' . $period . '/contrato') }}'"
+                    onclick="window.location='{{ url('/detail/consorcio/second/proveedor/' . $rucEntidad . '/' . $rucContratista . '/' . $period . '/contrato') }}'"
                     class="p-4 bg-white transition-colors shadow-sm rounded-md ring @if ($filter == 'contrato') ring-blue-500
                     @else
                         ring-gray-100 @endif ring-offset-2">Contrato</button>

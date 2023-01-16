@@ -13,7 +13,7 @@
 
 
             <h2 class="text-center text-xl xl:text-4xl font-bold mb-6 xl:mb-14">
-                Proveedor postulacion primer detalle
+                POSTULACIÓN <br> {{ $nombre }}
             </h2>
 
 
@@ -41,7 +41,7 @@
                         <p class="xl:col-span-1 font-semibold grid grid-cols-2 xl:block items-center gap-8">
                             <span class="text-main-gray font-medium xl:hidden">Entidad Ruc:</span>
                             <a class="btn-preload"
-                                href="{{ url('/detail/postulaciones/second/proveedor/' . $item->entidad_ruc . '/' . $rucContratista . '/' . $period) }}">{{ $item->entidad_ruc }}</a>
+                                href="{{ url('/detail/postulaciones/second/proveedor/' . $item->entidad_ruc . '/' . $rucContratista . '/' . $period . '/' . $item->entidad_ruc . '/' . $item->entidad . '/' . $nombre) }}">{{ $item->entidad_ruc }}</a>
                         </p>
                         <p class="xl:col-span-1 font-medium grid grid-cols-2 xl:block items-center gap-8">
                             <span class="text-main-gray font-medium xl:hidden">Entidad:</span>

@@ -15,11 +15,11 @@
 
                 @if ($busquedaPalabra !== null)
                     <span class="btn-preload"
-                        onclick="window.location='{{ url('/detail/first/crc/' . $rucEntidad . '/' . $period . '/' . $busquedaPalabra) }}'">/
+                        onclick="window.location='{{ url('/detail/first/crc/' . $rucEntidad . '/' . $period . '/' . $nameEntidad . '/' . $busquedaPalabra) }}'">/
                         Proveedor</span>
                 @else
                     <span class="btn-preload"
-                        onclick="window.location='{{ url('/detail/first/crc/' . $rucEntidad . '/' . $period) }}'">/
+                        onclick="window.location='{{ url('/detail/first/crc/' . $rucEntidad . '/' . $period . '/' . $nameEntidad) }}'">/
                         Proveedor</span>
                 @endif
                 @if ($busquedaPalabra !== null)
@@ -31,7 +31,8 @@
                 @endif
             </a>
             <h2 class="text-center text-xl xl:text-4xl font-bold mb-6 xl:mb-14">
-                CRC
+                CONSORCIO CON PROVEEDORES RECIÉN CREADOS <br> {{ $nameEntidad }}<br> {{ $ruc }}<br>
+                {{ $nameRuc }}
             </h2>
             <article
                 class="bg-white border border-gray-200 shadow-sm rounded-xl mb-6 cursor-pointer hover:shadow-lg overflow-x-auto">

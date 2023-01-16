@@ -5,7 +5,7 @@
             <a href="#" class="flex items-center gap-3 mb-8 xl:mb-16 font-semibold text-sm xl:text-lg text-main-blue">
                 <img src="/images/icon-chevron-left-blue.png" alt="">
                 <span>
-                    <span onclick="window.location='{{ url('/') }}'">Inicio</span>
+                    <span class="btn-preload" onclick="window.location='{{ url('/') }}'">Inicio</span>
                 </span>
             </a>
             <h2 class="text-center text-xl xl:text-4xl font-bold mb-14">
@@ -69,9 +69,9 @@
                                 {{ $item->dataList->cantidadTotal }}
                             </p>
                             <!-- <p class="text-right xl:text-left col-span-6 xl:col-span-1 order-5">
-                                                                                                                  <span class="text-gray-400 xl:hidden pr-8 font-medium">Ver más</span>
-                                                                                                                  <img src="/images/icon-chevron-down.png" class="inline">
-                                                                                                                </p> -->
+                                                                                                                                                                          <span class="text-gray-400 xl:hidden pr-8 font-medium">Ver más</span>
+                                                                                                                                                                          <img src="/images/icon-chevron-down.png" class="inline">
+                                                                                                                                                                        </p> -->
                         </summary>
 
 
@@ -91,10 +91,17 @@
                                             {{ $subCategorias->name }}
 
                                             @if ($categorias->abbreviation !== 'CDAF')
-                                                <a class="btn-preload"
-                                                    href="{{ url('/detail/funcionario/' . $item->dataList->idFuncionario . '/' . $categorias->abbreviation . '/' . $subCategorias->abbreviation . '/' . $item->dataList->nombre) }}"><img
-                                                        src="/images/icon-compartir.png" alt="Compartir"></a>
+                                                @if (isset($busquedaPalabra))
+                                                    <a class="btn-preload"
+                                                        href="{{ url('/detail/funcionario/' . $item->dataList->idFuncionario . '/' . $categorias->abbreviation . '/' . $subCategorias->abbreviation . '/' . $item->dataList->nombre . '/' . $period . '/0' . '/' . $busquedaPalabra) }}"><img
+                                                            src="/images/icon-compartir.png" alt="Compartir"></a>
+                                                @else
+                                                    <a class="btn-preload"
+                                                        href="{{ url('/detail/funcionario/' . $item->dataList->idFuncionario . '/' . $categorias->abbreviation . '/' . $subCategorias->abbreviation . '/' . $item->dataList->nombre . '/' . $period) }}"><img
+                                                            src="/images/icon-compartir.png" alt="Compartir"></a>
+                                                @endif
                                             @endif
+
 
                                         </p>
                                         <p class="col-span-4 xl:col-span-4 text-right">{{ $subCategorias->monto }}</p>

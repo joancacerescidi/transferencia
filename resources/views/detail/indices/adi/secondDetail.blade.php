@@ -15,11 +15,11 @@
 
                 @if ($busquedaPalabra !== null)
                     <span class="btn-preload"
-                        onclick="window.location='{{ url('/detail/first/adi/' . $rucEntidad . '/' . $period . '/' . $busquedaPalabra) }}'">/
+                        onclick="window.location='{{ url('/detail/first/adi/' . $rucEntidad . '/' . $period . '/' . $nameEntidad . '/' . $busquedaPalabra) }}'">/
                         Proveedor</span>
                 @else
                     <span class="btn-preload"
-                        onclick="window.location='{{ url('/detail/first/adi/' . $rucEntidad . '/' . $period) }}'">/
+                        onclick="window.location='{{ url('/detail/first/adi/' . $rucEntidad . '/' . $period . '/' . $nameEntidad) }}'">/
                         Proveedor</span>
                 @endif
                 @if ($busquedaPalabra !== null)
@@ -32,7 +32,8 @@
             </a>
 
             <h2 class="text-center text-xl xl:text-4xl font-bold mb-6 xl:mb-14">
-                ADI segundo detalle
+                ADJUDICACIONES DIRECTAS <br>
+                {{ $nameEntidad }}<br> {{ $ruc }}<br> {{ $nameRuc }}
             </h2>
 
             </div>

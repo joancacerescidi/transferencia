@@ -27,7 +27,8 @@
 
 
             <h2 class="text-center text-xl xl:text-4xl font-bold mb-6 xl:mb-14">
-                ADI primer detalle
+                ADJUDICACIONES DIRECTAS<br>
+                {{ $nameEntidad }}
             </h2>
             <article
                 class="bg-white border border-gray-200 shadow-sm rounded-xl mb-6 cursor-pointer hover:shadow-lg overflow-x-auto">
@@ -57,11 +58,11 @@
                             <span class="text-main-gray font-medium xl:hidden">Ruc Contratista:</span>
                             @if ($busquedaPalabra !== null)
                                 <a class="btn-preload"
-                                    href="{{ url('/detail/second/adi/' . $item->ruc_contratista . '/' . $rucEntidad . '/' . $period . '/' . $busquedaPalabra) }}">{{ $item->ruc_contratista }}
+                                    href="{{ url('/detail/second/adi/' . $item->ruc_contratista . '/' . $rucEntidad . '/' . $period . '/' . $nameEntidad . '/' . $item->ruc_contratista . '/' . $item->nombre_razon_contratista . '/' . $busquedaPalabra) }}">{{ $item->ruc_contratista }}
                                 </a>
                             @else
                                 <a class="btn-preload"
-                                    href="{{ url('/detail/second/adi/' . $item->ruc_contratista . '/' . $rucEntidad . '/' . $period) }}">{{ $item->ruc_contratista }}
+                                    href="{{ url('/detail/second/adi/' . $item->ruc_contratista . '/' . $rucEntidad . '/' . $period . '/' . $nameEntidad . '/' . $item->ruc_contratista . '/' . $item->nombre_razon_contratista) }}">{{ $item->ruc_contratista }}
                                 </a>
                             @endif
                         </p>
@@ -75,7 +76,7 @@
                         </p>
                         <p class="xl:col-span-1 font-medium grid grid-cols-2 xl:block items-center gap-8">
                             <span class="text-main-gray font-medium xl:hidden">Monto: </span>
-                            <span> {{ $item->monto }}</span>
+                            <span> {{ round($item->monto, 2) }}</span>
                         </p>
                     @endforeach
 

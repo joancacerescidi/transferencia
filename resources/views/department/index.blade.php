@@ -5,7 +5,7 @@
             <a href="#" class="flex items-center gap-3 mb-8 xl:mb-16 font-semibold text-sm xl:text-lg text-main-blue">
                 <img src="/images/icon-chevron-left-blue.png" alt="">
                 <span>
-                    <span onclick="window.location='{{ url('/') }}'">Inicio</span>
+                    <span class="btn-preload" onclick="window.location='{{ url('/') }}'">Inicio</span>
                 </span>
             </a>
             <h2 class="text-center text-xl xl:text-4xl font-bold mb-14">
@@ -62,7 +62,7 @@
 
                                 @case($item->dataList->ranking < 0.5 && $item->dataList->ranking > 0.2)
                                     <p
-                                        class="col-span-6 xl:col-span-3 text-[#ff6347] flex items-center xl:justify-end gap-2 order-3 xl:order-4 col-start-2 xl:col-start-auto">
+                                        class="col-span-6 xl:col-span-3 text-yellow-300 flex items-center xl:justify-end gap-2 order-3 xl:order-4 col-start-2 xl:col-start-auto">
                                         <span class="text-gray-400 xl:hidden pr-8 font-medium">Ranking:</span>
                                         <span class="flex items-center justify-center gap-1 mr-2">
                                             <span class="h-3 w-3 rounded-full block bg-gray-300"></span>
@@ -109,23 +109,23 @@
 
                                         @if ($categorias->sigla == 'FRA')
                                             <a class="btn-preload"
-                                                href="{{ url('/detail/first/fraccionamiento/' . $item->dataList->rucEntidad . '/' . $period) }}"><img
+                                                href="{{ url('/detail/first/fraccionamiento/' . $item->dataList->rucEntidad . '/' . $period . '/' . $item->dataList->nombre) }}"><img
                                                     src="/images/icon-compartir.png" alt="Compartir"></a>
                                         @elseif($categorias->sigla == 'CRC')
                                             <a
-                                                href="{{ url('/detail/first/crc/' . $item->dataList->rucEntidad . '/' . $period) }}"><img
+                                                href="{{ url('/detail/first/crc/' . $item->dataList->rucEntidad . '/' . $period . '/' . $item->dataList->nombre) }}"><img
                                                     src="/images/icon-compartir.png" alt="Compartir"></a>
                                         @elseif($categorias->sigla == 'PRC')
                                             <a
-                                                href="{{ url('/detail/first/prc/' . $item->dataList->rucEntidad . '/' . $period) }}"><img
+                                                href="{{ url('/detail/first/prc/' . $item->dataList->rucEntidad . '/' . $period . '/' . $item->dataList->nombre) }}"><img
                                                     src="/images/icon-compartir.png" alt="Compartir"></a>
                                         @elseif($categorias->sigla == 'ADI')
                                             <a
-                                                href="{{ url('/detail/first/adi/' . $item->dataList->rucEntidad . '/' . $period) }}"><img
+                                                href="{{ url('/detail/first/adi/' . $item->dataList->rucEntidad . '/' . $period . '/' . $item->dataList->nombre) }}"><img
                                                     src="/images/icon-compartir.png" alt="Compartir"></a>
                                         @elseif($categorias->sigla == 'PMR')
                                             <a
-                                                href="{{ url('/detail/first/pmr/' . $item->dataList->rucEntidad . '/' . $period) }}"><img
+                                                href="{{ url('/detail/first/pmr/' . $item->dataList->rucEntidad . '/' . $period . '/' . $item->dataList->nombre) }}"><img
                                                     src="/images/icon-compartir.png" alt="Compartir"></a>
                                         @endif
 

@@ -15,11 +15,11 @@
 
                 @if ($busquedaPalabra !== null)
                     <span class="btn-preload"
-                        onclick="window.location='{{ url('/detail/first/pmr/' . $rucEntidad . '/' . $period . '/' . $busquedaPalabra) }}'">/
+                        onclick="window.location='{{ url('/detail/first/pmr/' . $rucEntidad . '/' . $period . '/' . $nameEntidad . '/' . $busquedaPalabra) }}'">/
                         Proveedor</span>
                 @else
                     <span class="btn-preload"
-                        onclick="window.location='{{ url('/detail/first/pmr/' . $rucEntidad . '/' . $period) }}'">/
+                        onclick="window.location='{{ url('/detail/first/pmr/' . $rucEntidad . '/' . $period . '/' . $nameEntidad) }}'">/
                         Proveedor</span>
                 @endif
                 @if ($busquedaPalabra !== null)
@@ -32,25 +32,41 @@
             </a>
 
             <h2 class="text-center text-xl xl:text-4xl font-bold mb-6 xl:mb-14">
-                PMR segundo detalle
+                PROVEEDOR CON MISMO REPRESENTANTE <br>
+                {{ $nameEntidad }}<br> {{ $ruc }}<br> {{ $nameRuc }}
             </h2>
-            <div>
-                @foreach ($conformacion as $item)
-                    <ul>
-                        <li>
-                            {{ $item->numero_documento }}
-                        </li>
-                        <li>
-                            {{ $item->nombre }}
-                        </li>
-                        <li>
-                            {{ $item->tipo_conf_juridica }}
-                        </li>
-                    </ul>
+            <section class="u-container">
+                <details
+                    class="w-8/12 mx-auto bg-white border border-gray-200 shadow-sm rounded-xl mb-6 cursor-pointer hover:shadow-lg">
+                    <summary class="p-6 xl:p-10 flex items-center justify-center gap-4 text-sm xl:text-lg font-bold">
+                        <p class="line-clamp-2">
+                           CONFORMACIÓN
+                        </p>
+                    </summary>
 
-                    <br>
-                @endforeach
-            </div>
+                    <ul class="p-6 xl:p-10 xl:pt-5 grid gap-4 xl:gap-8 text-xs xl:text-base">
+                        <li class="grid items-center grid-cols-3 gap-4">
+                            <p class="flex items-center font-bold">
+                                Documento
+                            </p>
+                            <p class="text-right font-bold"> Nombre</p>
+                            <p class="text-right font-bold"> Relación</p>
+                        </li>
+                        @foreach ($conformacion as $item)
+                            <li class="grid items-center grid-cols-3 gap-4">
+                                <p class="flex items-center gap-3 font-medium">
+                                    {{ $item->numero_documento }}
+
+                                </p>
+                                <p class="text-right"> {{ $item->nombre }}</p>
+                                <p class="text-right"> {{ $item->tipo_conf_juridica }}</p>
+                            </li>
+                        @endforeach
+
+                    </ul>
+                </details>
+            </section>
+
 
 
             <article
@@ -82,7 +98,7 @@
                         {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
                     </p>
                     <p class="xl:col-span-3 font-semibold hidden xl:flex items-center gap-2">
-                        Rep1
+                        Representantes de los postores en la misma convocatoria
                         {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
                     </p>
                 </header>
@@ -116,7 +132,7 @@
                             <span> {{ $item->monto_contratado_item }}</span>
                         </p>
                         <p class="xl:col-span-3 font-medium grid grid-cols-2 xl:block items-center gap-8">
-                            <span class="text-main-gray font-medium xl:hidden">Rep1: </span>
+                            <span class="text-main-gray font-medium xl:hidden">Representantes de los postores en la misma convocatoria: </span>
                             <span> {{ $item->rep1 }}</span>
                         </p>
                     @endforeach

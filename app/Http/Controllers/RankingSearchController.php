@@ -61,20 +61,55 @@ class RankingSearchController extends Controller
         $request->validate([
             'palabraClave' => 'required|string',
         ]);
-        $data = DB::table('public.totalannoentidad')
-            ->select('anno', 'ruc_entidad', 'nombre_entidad', 'montoordencompra', 'montocontrato', 'cantidadfra', 'montoprc', 'montopmr', 'montocrc', 'montoadi', 'montocof', 'montofra', 'cantidadprc', 'cantidadpmr', 'cantidadcrc', 'cantidadadi', 'cantidadcof', 'indicetco', 'montotco', 'departamento', 'provincia', 'distrito', 'nivelgobierno', 'poder', DB::raw('montofra+montoadi+montoprc+montocrc+montopmr as ranking'))
-            ->where(function ($query) use ($request) {
-                $query->where('ruc_entidad', '=', strtoupper($request->palabraClave));
-                $query->orWhere('nombre_entidad', 'LIKE', '%' . strtoupper($request->palabraClave) . '%');
-            })
-            ->where('anno', '=', $period)
-            ->orderBy('ranking', 'DESC')
-            ->paginate(10);
+        $orderby = ['monto', 'ranking'];
+        $validator = Validator::make(['order' => $order], [
+            'order' => ['required', 'string', Rule::in($orderby)],
+        ]);
+        if (!$validator->fails()) {
+            $data = DB::table('public.totalannoentidad')
+                ->select(
+                    'anno',
+                    'ruc_entidad',
+                    'nombre_entidad',
+                    'montoordencompra',
+                    'montocontrato',
+                    'cantidadfra',
+                    'montoprc',
+                    'montopmr',
+                    'montocrc',
+                    'montoadi',
+                    'montocof',
+                    'montofra',
+                    'cantidadprc',
+                    'cantidadpmr',
+                    'cantidadcrc',
+                    'cantidadadi',
+                    'cantidadcof',
+                    'indicetco',
+                    'montotco',
+                    'departamento',
+                    'provincia',
+                    'distrito',
+                    'nivelgobierno',
+                    'poder',
+                    DB::raw('montofra+montoadi+montoprc+montocrc+montopmr as ranking'),
+                    DB::raw('(montoordencompra+montocontrato) as monto')
+                )
+                ->where(function ($query) use ($request) {
+                    $query->where('ruc_entidad', '=', strtoupper($request->palabraClave));
+                    $query->orWhere('nombre_entidad', 'LIKE', '%' . strtoupper($request->palabraClave) . '%');
+                })
+                ->where('anno', '=', $period)
+                ->orderBy($order, 'DESC')
+                ->paginate(10);
 
-        $result = $this->convertDataEntidad($data);
-        $search = true;
-        $busquedaPalabra = $request->palabraClave;
-        return view('ranking.entidad', compact('result', 'search', 'period', 'busquedaPalabra', 'order'));
+            $result = $this->convertDataEntidad($data);
+            $search = true;
+            $busquedaPalabra = $request->palabraClave;
+            return view('ranking.entidad', compact('result', 'search', 'period', 'busquedaPalabra', 'order'));
+        } else {
+            abort(404);
+        }
     }
 
     public function rankingProveedor($period)
@@ -178,7 +213,7 @@ class RankingSearchController extends Controller
             ->orderBy('ranking', 'DESC')->paginate(10);
 
         $result = $this->convertDataFuncionario($data);
-        return view('ranking.funcionario', compact('result'));
+        return view('ranking.funcionario', compact('result', 'period'));
     }
     public function searchFuncionario(Request $request, $period)
     {

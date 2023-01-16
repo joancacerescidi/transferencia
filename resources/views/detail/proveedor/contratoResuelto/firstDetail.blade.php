@@ -13,7 +13,7 @@
 
 
             <h2 class="text-center text-xl xl:text-4xl font-bold mb-6 xl:mb-14">
-                Proveedor primer detalle contrato resuelto
+                CONTRATO RESUELTO <br> {{ $nombre }}
             </h2>
             <article
                 class="bg-white border border-gray-200 shadow-sm rounded-xl mb-6 cursor-pointer hover:shadow-lg overflow-x-auto">
@@ -42,7 +42,7 @@
                         <p class="xl:col-span-1 font-semibold grid grid-cols-2 xl:block items-center gap-8">
                             <span class="text-main-gray font-medium xl:hidden">Ruc Entidad:</span>
                             <a class="btn-preload"
-                                href="{{ url('/detail/contrato-resuelto/second/proveedor/'.$item->ruc_entidad.'/'.$rucContratista.'/'.$period) }}">{{ $item->ruc_entidad }}</a>
+                                href="{{ url('/detail/contrato-resuelto/second/proveedor/' . $item->ruc_entidad . '/' . $rucContratista . '/' . $period . '/' . $item->ruc_entidad . '/' . $item->nombre_entidad . '/' . $nombre) }}">{{ $item->ruc_entidad }}</a>
                         </p>
                         <p class="xl:col-span-1 font-medium grid grid-cols-2 xl:block items-center gap-8">
                             <span class="text-main-gray font-medium xl:hidden">Nombre Entidad:</span>

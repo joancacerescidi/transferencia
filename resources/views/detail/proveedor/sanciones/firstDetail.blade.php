@@ -13,7 +13,7 @@
 
 
             <h2 class="text-center text-xl xl:text-4xl font-bold mb-6 xl:mb-14">
-                proveedor sanciones primer detalle
+                SANCIONES <br> {{ $nombre }}
             </h2>
             <article
                 class="bg-white border border-gray-200 shadow-sm rounded-xl mb-6 cursor-pointer hover:shadow-lg overflow-x-auto">
@@ -45,15 +45,15 @@
                     @foreach ($result as $item)
                         <p class="xl:col-span-1 font-semibold grid grid-cols-2 xl:block items-center gap-8">
                             <span class="text-main-gray font-medium xl:hidden">Desde:</span>
-                           {{ $item->desde }}
+                            {{ $item->desde }}
                         </p>
                         <p class="xl:col-span-1 font-medium grid grid-cols-2 xl:block items-center gap-8">
                             <span class="text-main-gray font-medium xl:hidden">Hasta:</span>
-                           {{ $item->hasta }}
+                            {{ $item->hasta }}
                         </p>
                         <p class="xl:col-span-1 font-medium grid grid-cols-2 xl:block items-center gap-8">
                             <span class="text-main-gray font-medium xl:hidden">Resolución:</span>
-                          {{ $item->resolucion }}
+                            {{ $item->resolucion }}
                         </p>
                         <p class="xl:col-span-2 font-medium grid grid-cols-2 xl:block items-center gap-8">
                             <span class="text-main-gray font-medium xl:hidden">Motivo: </span>

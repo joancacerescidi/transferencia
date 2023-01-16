@@ -10,8 +10,11 @@ use Illuminate\Support\Facades\DB;
 class FuncionarioController extends Controller
 {
     //
-    public function firstDetail($idFuncionario, $nivel, $type, $name, $ruc = 0)
+
+
+    public function firstDetail($idFuncionario, $nivel, $type, $name, $period, $ruc = 0, $busquedaPalabra = null)
     {
+
         $nivels = ['DCPD', 'DPRE', 'CDAF', 'CEDFA'];
         $types = ['orden-compra', 'contrato', 'consorcio'];
         $validator = Validator::make(['nivel' => $nivel, 'type' => $type, 'idFuncionario' => $idFuncionario, 'name' => $name], [
@@ -380,7 +383,7 @@ class FuncionarioController extends Controller
                 }
             }
             // dd($data);
-            return view('detail.funcionario.firstDetail', compact('data', 'nivel', 'type', 'name', 'labelNivel', 'labelType'));
+            return view('detail.funcionario.firstDetail', compact('data', 'period', 'nivel', 'type', 'name', 'labelNivel', 'labelType', 'busquedaPalabra'));
         } else {
             abort(404);
         }

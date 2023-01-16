@@ -59,7 +59,6 @@ class SectionController extends Controller
             array_push($newObjt->label, $graf->nivelgobierno);
             array_push($newObjt->dataSet1, intval($graf->sum));
         }
-
         return $newObjt;
     }
 }

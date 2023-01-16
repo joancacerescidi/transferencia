@@ -50,8 +50,8 @@ Route::get('/detail-government-level/{nivel}/{period}', [GovernmentLevelControll
 
 #Rankings
 #Entidad
-Route::get('/ranking/entidad/{period}/{order}', [RankingSearchController::class, 'rankingEntidad']);
 Route::post('/ranking/entidad/search/{period}/{order}', [RankingSearchController::class, 'searchEntidad'])->name('entidad.busqueda');
+Route::get('/ranking/entidad/{period}/{order}', [RankingSearchController::class, 'rankingEntidad']);
 #proveedores
 Route::get('/ranking/proveedor/{period}', [RankingSearchController::class, 'rankingProveedor']);
 Route::post('/ranking/proveedor/search/{period}', [RankingSearchController::class, 'searchProveedor'])->name('proveedor.busqueda');
@@ -62,23 +62,23 @@ Route::post('/ranking/funcionario/search/{period}', [RankingSearchController::cl
 
 #Detalles
 #Detalle - 1 - funcionario
-Route::get('/detail/funcionario/{idFuncionario}/{nivel}/{type}/{name}/{ruc?}', [FuncionarioController::class, 'firstDetail']);
+Route::get('/detail/funcionario/{idFuncionario}/{nivel}/{type}/{name}/{period}/{ruc?}/{busquedaPalabra?}', [FuncionarioController::class, 'firstDetail']);
 #Detalle - 1-2 - entidad - grafico - entidad
 #Fraccionamiento
-Route::get('/detail/first/fraccionamiento/{rucEntidad}/{period}/{busquedaPalabra?}', [FraccionamientoController::class, 'first']);
-Route::get('/detail/second/fraccionamiento/{rucContratista}/{rucEntidad}/{period}/{filter}/{busquedaPalabra?}', [FraccionamientoController::class, 'second']);
+Route::get('/detail/first/fraccionamiento/{rucEntidad}/{period}/{nameEntidad}/{busquedaPalabra?}', [FraccionamientoController::class, 'first']);
+Route::get('/detail/second/fraccionamiento/{rucContratista}/{rucEntidad}/{period}/{filter}/{nameEntidad}/{ruc}/{nameRuc}/{busquedaPalabra?}', [FraccionamientoController::class, 'second']);
 #CRC
-Route::get('/detail/first/crc/{rucEntidad}/{period}/{busquedaPalabra?}', [CrcController::class, 'first']);
-Route::get('/detail/second/crc/{rucContratista}/{rucEntidad}/{period}/{busquedaPalabra?}', [CrcController::class, 'second']);
+Route::get('/detail/first/crc/{rucEntidad}/{period}/{nameEntidad}/{busquedaPalabra?}', [CrcController::class, 'first']);
+Route::get('/detail/second/crc/{rucContratista}/{rucEntidad}/{period}/{nameEntidad}/{ruc}/{nameRuc?}/{busquedaPalabra?}', [CrcController::class, 'second']);
 #ADI
-Route::get('/detail/first/adi/{rucEntidad}/{period}/{busquedaPalabra?}', [AdiController::class, 'first']);
-Route::get('/detail/second/adi/{rucContratista}/{rucEntidad}/{period}/{busquedaPalabra?}', [AdiController::class, 'second']);
+Route::get('/detail/first/adi/{rucEntidad}/{period}/{nameEntidad}/{busquedaPalabra?}', [AdiController::class, 'first']);
+Route::get('/detail/second/adi/{rucContratista}/{rucEntidad}/{period}/{nameEntidad}/{ruc}/{nameRuc}//{busquedaPalabra?}', [AdiController::class, 'second']);
 #/PRC 
-Route::get('/detail/first/prc/{rucEntidad}/{period}/{busquedaPalabra?}', [IndicesPrcController::class, 'first']);
-Route::get('/detail/second/prc/{rucContratista}/{rucEntidad}/{period}/{filter}/{busquedaPalabra?}', [IndicesPrcController::class, 'second']);
+Route::get('/detail/first/prc/{rucEntidad}/{period}/{nameEntidad}/{busquedaPalabra?}', [IndicesPrcController::class, 'first']);
+Route::get('/detail/second/prc/{rucContratista}/{rucEntidad}/{period}/{filter}/{nameEntidad}/{ruc}/{nameRuc}/{busquedaPalabra?}', [IndicesPrcController::class, 'second']);
 #/PMR
-Route::get('/detail/first/pmr/{rucEntidad}/{period}/{busquedaPalabra?}', [IndicesPmrController::class, 'first']);
-Route::get('/detail/second/pmr/{rucContratista}/{rucEntidad}/{period}/{busquedaPalabra?}', [IndicesPmrController::class, 'second']);
+Route::get('/detail/first/pmr/{rucEntidad}/{period}/{nameEntidad}/{busquedaPalabra?}', [IndicesPmrController::class, 'first']);
+Route::get('/detail/second/pmr/{rucContratista}/{rucEntidad}/{period}/{nameEntidad}/{ruc}/{nameRuc}/{busquedaPalabra?}', [IndicesPmrController::class, 'second']);
 
 
 
@@ -86,25 +86,25 @@ Route::get('/detail/second/pmr/{rucContratista}/{rucEntidad}/{period}/{busquedaP
 
 #Detalle - 1- 2 proveedor
 #orden de compra
-Route::get('/detail/orden-compra/first/proveedor/{rucContratista}/{period}', [ProveedorController::class, 'ordenCompraFirst']);
-Route::get('/detail/orden-compra/second/proveedor/{rucEntidad}/{rucContratista}/{period}', [ProveedorController::class, 'ordenCompraSecond']);
+Route::get('/detail/orden-compra/first/proveedor/{rucContratista}/{period}/{nombre?}', [ProveedorController::class, 'ordenCompraFirst']);
+Route::get('/detail/orden-compra/second/proveedor/{rucEntidad}/{rucContratista}/{period}/{ruc}/{rucNombre}/{nombre?}', [ProveedorController::class, 'ordenCompraSecond']);
 #contrato
-Route::get('/detail/contrato/first/proveedor/{rucContratista}/{period}', [ProveedorController::class, 'contratoFirst']);
-Route::get('/detail/contrato/second/proveedor/{rucEntidad}/{rucContratista}/{period}', [ProveedorController::class, 'contratoSecond']);
+Route::get('/detail/contrato/first/proveedor/{rucContratista}/{period}/{nombre?}', [ProveedorController::class, 'contratoFirst']);
+Route::get('/detail/contrato/second/proveedor/{rucEntidad}/{rucContratista}/{period}/{ruc}/{rucNombre}/{nombre?}', [ProveedorController::class, 'contratoSecond']);
 #consorcio
-Route::get('/detail/consorcio/first/proveedor/{rucContratista}/{period}/{filter}', [ProveedorController::class, 'consorcioFirst']);
-Route::get('/detail/consorcio/second/proveedor/{rucEntidad}/{rucContratista}/{period}/{filter}', [ProveedorController::class, 'consorcioSecond']);
+Route::get('/detail/consorcio/first/proveedor/{rucContratista}/{period}/{filter}/{nombre?}/{busquedaPalabra?}', [ProveedorController::class, 'consorcioFirst']);
+Route::get('/detail/consorcio/second/proveedor/{rucEntidad}/{rucContratista}/{period}/{filter}/{ruc}/{rucNombre}/{nombre?}/{busquedaPalabra?}', [ProveedorController::class, 'consorcioSecond']);
 #sanciones
-Route::get('/detail/sanciones/first/proveedor/{rucContratista}/{period}', [ProveedorController::class, 'sancionesFirst']);
+Route::get('/detail/sanciones/first/proveedor/{rucContratista}/{period}/{nombre?}', [ProveedorController::class, 'sancionesFirst']);
 #contrato resuelto
-Route::get('/detail/contrato-resuelto/first/proveedor/{rucContratista}/{period}', [ProveedorController::class, 'contratoResueltoFirst']);
-Route::get('/detail/contrato-resuelto/second/proveedor/{rucEntidad}/{rucContratista}/{period}', [ProveedorController::class, 'contratoResueltoSecond']);
+Route::get('/detail/contrato-resuelto/first/proveedor/{rucContratista}/{period}/{nombre?}', [ProveedorController::class, 'contratoResueltoFirst']);
+Route::get('/detail/contrato-resuelto/second/proveedor/{rucEntidad}/{rucContratista}/{period}/{ruc}/{rucNombre}/{nombre?}', [ProveedorController::class, 'contratoResueltoSecond']);
 #postulaciones
-Route::get('/detail/postulaciones/first/proveedor/{rucContratista}/{period}', [ProveedorController::class, 'postulacionesFirst']);
-Route::get('/detail/postulaciones/second/proveedor/{rucEntidad}/{rucContratista}/{period}', [ProveedorController::class, 'postulacionesSecond']);
+Route::get('/detail/postulaciones/first/proveedor/{rucContratista}/{period}/{nombre?}', [ProveedorController::class, 'postulacionesFirst']);
+Route::get('/detail/postulaciones/second/proveedor/{rucEntidad}/{rucContratista}/{period}/{ruc}/{rucNombre}/{nombre?}', [ProveedorController::class, 'postulacionesSecond']);
 #Postulaciones con mismo representante
-Route::get('/detail/postulaciones-con-mismo-representante/first/proveedor/{rucContratista}/{period}', [ProveedorController::class, 'postulacionesMismoRepresentanteFirst']);
-Route::get('/detail/postulaciones-con-mismo-representante/second/proveedor/{rucEntidad}/{rucContratista}/{period}', [ProveedorController::class, 'postulacionesMismoRepresentanteSecond']);
+Route::get('/detail/postulaciones-con-mismo-representante/first/proveedor/{rucContratista}/{period}/{nombre?}', [ProveedorController::class, 'postulacionesMismoRepresentanteFirst']);
+Route::get('/detail/postulaciones-con-mismo-representante/second/proveedor/{rucEntidad}/{rucContratista}/{period}/{ruc}/{rucNombre}/{nombre?}', [ProveedorController::class, 'postulacionesMismoRepresentanteSecond']);
 
 
 

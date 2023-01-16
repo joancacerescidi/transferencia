@@ -22,7 +22,7 @@ class GovernmentLevelController extends Controller
         if (!$validator->fails()) {
 
             $result = $this->dataGovernment($nivel, $period);
-            return view('gobermentLevel.index', compact('nivel', 'period', 'result'));
+            return view('gobermentLevel.index', compact('nivel', 'period', 'result', 'nivel'));
         } else {
             abort(404);
         }

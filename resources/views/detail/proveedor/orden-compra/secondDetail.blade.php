@@ -13,7 +13,7 @@
 
 
             <h2 class="text-center text-xl xl:text-4xl font-bold mb-6 xl:mb-14">
-                Proveedor segundo detalle
+                ÓRDENES DE COMPRA  <br> {{$nombre}}<br> {{$ruc}} <br>{{$rucNombre}}
             </h2>
 
             <article

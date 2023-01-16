@@ -5,11 +5,18 @@
             <a href="#" class="flex items-center gap-3 mb-8 xl:mb-16 font-semibold text-sm xl:text-lg text-main-blue">
                 <img src="/images/icon-chevron-left-blue.png" alt="">
                 <span>
-                    <span onclick="window.location='{{ url('/') }}'">Inicio</span>
+                    <span class="btn-preload" onclick="window.location='{{ url('/') }}'">Inicio</span>
                 </span>
             </a>
             <h2 class="text-center text-xl xl:text-4xl font-bold mb-14">
-                Data por Región
+
+                @if ($nivel == 'L')
+                    LOCAL
+                @elseif($nivel == 'R')
+                    REGIONAL
+                @else
+                    AUTÓNOMO
+                @endif
             </h2>
             <article>
                 <header class="grid grid-cols-6 xl:grid-cols-12 mb-8 font-semibold text-sm xl:text-lg">
@@ -108,23 +115,23 @@
 
                                         @if ($categorias->sigla == 'FRA')
                                             <a class="btn-preload"
-                                                href="{{ url('/detail/first/fraccionamiento/' . $item->dataList->rucEntidad . '/' . $period) }}"><img
+                                                href="{{ url('/detail/first/fraccionamiento/' . $item->dataList->rucEntidad . '/' . $period . '/' . $item->dataList->nombre) }}"><img
                                                     src="/images/icon-compartir.png" alt="Compartir"></a>
                                         @elseif($categorias->sigla == 'CRC')
                                             <a class="btn-preload"
-                                                href="{{ url('/detail/first/crc/' . $item->dataList->rucEntidad . '/' . $period) }}"><img
+                                                href="{{ url('/detail/first/crc/' . $item->dataList->rucEntidad . '/' . $period . '/' . $item->dataList->nombre) }}"><img
                                                     src="/images/icon-compartir.png" alt="Compartir"></a>
                                         @elseif($categorias->sigla == 'PRC')
                                             <a class="btn-preload"
-                                                href="{{ url('/detail/first/prc/' . $item->dataList->rucEntidad . '/' . $period) }}"><img
+                                                href="{{ url('/detail/first/prc/' . $item->dataList->rucEntidad . '/' . $period . '/' . $item->dataList->nombre) }}"><img
                                                     src="/images/icon-compartir.png" alt="Compartir"></a>
                                         @elseif($categorias->sigla == 'ADI')
                                             <a class="btn-preload"
-                                                href="{{ url('/detail/first/adi/' . $item->dataList->rucEntidad . '/' . $period) }}"><img
+                                                href="{{ url('/detail/first/adi/' . $item->dataList->rucEntidad . '/' . $period . '/' . $item->dataList->nombre) }}"><img
                                                     src="/images/icon-compartir.png" alt="Compartir"></a>
                                         @elseif($categorias->sigla == 'PMR')
                                             <a class="btn-preload"
-                                                href="{{ url('/detail/first/pmr/' . $item->dataList->rucEntidad . '/' . $period) }}"><img
+                                                href="{{ url('/detail/first/pmr/' . $item->dataList->rucEntidad . '/' . $period . '/' . $item->dataList->nombre) }}"><img
                                                     src="/images/icon-compartir.png" alt="Compartir"></a>
                                         @endif
 

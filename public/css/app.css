@@ -807,6 +807,9 @@ input[type=number] {
 .grid-cols-2 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
+.grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
 .flex-col {
   flex-direction: column;
 }
@@ -1120,17 +1123,13 @@ input[type=number] {
   --tw-text-opacity: 1;
   color: rgb(255 0 0 / var(--tw-text-opacity));
 }
-.text-\[\#ff6347\] {
+.text-yellow-300 {
   --tw-text-opacity: 1;
-  color: rgb(255 99 71 / var(--tw-text-opacity));
+  color: rgb(253 224 71 / var(--tw-text-opacity));
 }
 .text-\[\#3cb371\] {
   --tw-text-opacity: 1;
   color: rgb(60 179 113 / var(--tw-text-opacity));
-}
-.text-yellow-300 {
-  --tw-text-opacity: 1;
-  color: rgb(253 224 71 / var(--tw-text-opacity));
 }
 .text-main-gray-light {
   --tw-text-opacity: 1;

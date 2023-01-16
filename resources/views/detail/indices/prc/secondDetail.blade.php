@@ -15,11 +15,11 @@
 
                 @if ($busquedaPalabra !== null)
                     <span class="btn-preload"
-                        onclick="window.location='{{ url('/detail/first/prc/' . $rucEntidad . '/' . $period . '/' . $busquedaPalabra) }}'">/
+                        onclick="window.location='{{ url('/detail/first/prc/' . $rucEntidad . '/' . $period . '/' . $nameEntidad . '/' . $busquedaPalabra) }}'">/
                         Proveedor</span>
                 @else
                     <span class="btn-preload"
-                        onclick="window.location='{{ url('/detail/first/prc/' . $rucEntidad . '/' . $period) }}'">/
+                        onclick="window.location='{{ url('/detail/first/prc/' . $rucEntidad . '/' . $period . '/' . $nameEntidad) }}'">/
                         Proveedor</span>
                 @endif
                 @if ($busquedaPalabra !== null)
@@ -34,19 +34,36 @@
 
 
             <h2 class="text-center text-xl xl:text-4xl font-bold mb-6 xl:mb-14">
-                PRC segundo detalle - "{{ $resultDate[0]->min }}"
+
+
+                PROVEEDOR RECIÉN CREADO <br>
+                {{ $nameEntidad }}<br> {{ $ruc }}<br> {{ $nameRuc }} <br>"{{ $resultDate[0]->min }}"
             </h2>
             <div class="flex flex-wrap font-semibold text-xs xl:text-base gap-4 mb-4">
-                <button
-                    onclick="window.location='{{ url('/detail/second/prc/' . $rucContratista . '/' . $rucEntidad . '/' . $period . '/orden-compra') }}'"
-                    class="btn-preload p-4 bg-white transition-colors shadow-sm rounded-md ring @if ($filter == 'orden-compra') ring-blue-500
+                @if ($busquedaPalabra !== null)
+                    <button
+                        onclick="window.location='{{ url('/detail/second/prc/' . $rucContratista . '/' . $rucEntidad . '/' . $period . '/orden-compra' . '/' . $nameEntidad . '/' . $ruc . '/' . $nameRuc . '/' . $busquedaPalabra) }}'"
+                        class="btn-preload p-4 bg-white transition-colors shadow-sm rounded-md ring @if ($filter == 'orden-compra') ring-blue-500
                     @else
                         ring-gray-100 @endif   ring-offset-2">Compra</button>
-                <button
-                    onclick="window.location='{{ url('/detail/second/prc/' . $rucContratista . '/' . $rucEntidad . '/' . $period . '/contrato') }}'"
-                    class="btn-preload p-4 bg-white transition-colors shadow-sm rounded-md ring @if ($filter == 'contrato') ring-blue-500
+                    <button
+                        onclick="window.location='{{ url('/detail/second/prc/' . $rucContratista . '/' . $rucEntidad . '/' . $period . '/contrato' . '/' . $nameEntidad . '/' . $ruc . '/' . $nameRuc . '/' . $busquedaPalabra) }}'"
+                        class="btn-preload p-4 bg-white transition-colors shadow-sm rounded-md ring @if ($filter == 'contrato') ring-blue-500
                     @else
                         ring-gray-100 @endif ring-offset-2">Contrato</button>
+                @else
+                    <button
+                        onclick="window.location='{{ url('/detail/second/prc/' . $rucContratista . '/' . $rucEntidad . '/' . $period . '/orden-compra' . '/' . $nameEntidad . '/' . $ruc . '/' . $nameRuc) }}'"
+                        class="btn-preload p-4 bg-white transition-colors shadow-sm rounded-md ring @if ($filter == 'orden-compra') ring-blue-500
+                    @else
+                        ring-gray-100 @endif   ring-offset-2">Compra</button>
+                    <button
+                        onclick="window.location='{{ url('/detail/second/prc/' . $rucContratista . '/' . $rucEntidad . '/' . $period . '/contrato' . '/' . $nameEntidad . '/' . $ruc . '/' . $nameRuc) }}'"
+                        class="btn-preload p-4 bg-white transition-colors shadow-sm rounded-md ring @if ($filter == 'contrato') ring-blue-500
+                    @else
+                        ring-gray-100 @endif ring-offset-2">Contrato</button>
+                @endif
+
             </div>
             @if ($filter == 'orden-compra')
                 <article
@@ -66,7 +83,7 @@
                             {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
                         </p>
                         <p class="xl:col-span-1 font-semibold hidden xl:flex items-center gap-2">
-                            Monto
+                            Tipo
                             {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
                         </p>
                         <p class="xl:col-span-1 font-semibold hidden xl:flex items-center gap-2">
@@ -95,7 +112,7 @@
                             </p>
 
                             <p class="xl:col-span-1 font-medium grid grid-cols-2 xl:block items-center gap-8">
-                                <span class="text-main-gray font-medium xl:hidden">Monto: </span>
+                                <span class="text-main-gray font-medium xl:hidden">Tipo: </span>
                                 <span> {{ $item->objetocontractual }}</span>
                             </p>
                             <p class="xl:col-span-1 font-medium grid grid-cols-2 xl:block items-center gap-8">
@@ -104,7 +121,7 @@
                             </p>
                             <p class="xl:col-span-1 font-medium grid grid-cols-2 xl:block items-center gap-8">
                                 <span class="text-main-gray font-medium xl:hidden">Monto Total: </span>
-                                <span> {{ $item->monto_total_original }}</span>
+                                <span> {{ round($item->monto_total_original, 2)  }}</span>
                             </p>
                         @endforeach
                     </div>

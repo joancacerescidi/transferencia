@@ -4,10 +4,22 @@
         <section class="py-20 px-6 xl:px-10">
             <a href="#" class="flex items-center gap-3 mb-8 xl:mb-16 font-semibold text-sm xl:text-lg text-main-blue">
                 <img src="{{ asset('images/icon-chevron-left-blue.png') }}" alt="">
-                 <span>
-                    <span onclick="window.location='{{ url('/') }}'">Inicio </span>
-                     {{-- <span onclick="window.location='{{ url('/') }}'">/ Inicio</span> --}}
-                </span>
+
+                <span class="btn-preload" onclick="window.location='{{ url('/') }}'">Inicio</span>
+                @if ($busquedaPalabra !== null)
+                    <span class="btn-preload" onclick="javascript:document.busquedaEntidad.submit()">/ Funcionario</span>
+                @else
+                    <span class="btn-preload" onclick="window.location='{{ url('/ranking/funcionario/' . $period) }}'">/
+
+                        Funcionario</span>
+                @endif
+                @if ($busquedaPalabra !== null)
+                    <form onsubmit='return preloadActive()' action="{{ route('funcionario.busqueda', [$period]) }}"
+                        method="POST" name="busquedaEntidad" id="busquedaEntidad">
+                        @csrf
+                        <input type="hidden" name="palabraClave" value="{{ $busquedaPalabra }}">
+                    </form>
+                @endif
             </a>
             <h2 class="text-center text-xl xl:text-4xl font-bold mb-6 xl:mb-0">
                 {{ $name }}
