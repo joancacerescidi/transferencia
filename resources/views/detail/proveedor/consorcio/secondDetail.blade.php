@@ -12,7 +12,7 @@
 
             <h2 class="text-center text-xl xl:text-4xl font-bold mb-6 xl:mb-14">
                 CONSORCIO <br>
-                {{ $nameEntidad }}<br> {{ $ruc }}<br> {{ $nameRuc }}
+                {{ $nombre }}<br> {{ $ruc }}<br> {{ $rucNombre }}
             </h2>
             <div class="flex flex-wrap font-semibold text-xs xl:text-base gap-4 mb-4">
                 <button

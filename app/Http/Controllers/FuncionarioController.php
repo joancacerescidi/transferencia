@@ -382,7 +382,7 @@ class FuncionarioController extends Controller
                         ->paginate(10);
                 }
             }
-            // dd($data);
+    
             return view('detail.funcionario.firstDetail', compact('data', 'period', 'nivel', 'type', 'name', 'labelNivel', 'labelType', 'busquedaPalabra'));
         } else {
             abort(404);
