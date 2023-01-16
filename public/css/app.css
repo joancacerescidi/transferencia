@@ -752,6 +752,10 @@ input[type=number] {
 .w-3 {
   width: 0.75rem;
 }
+.w-max {
+  width: -moz-max-content;
+  width: max-content;
+}
 .w-8\/12 {
   width: 66.666667%;
 }
@@ -763,10 +767,6 @@ input[type=number] {
 }
 .w-2 {
   width: 0.5rem;
-}
-.w-max {
-  width: -moz-max-content;
-  width: max-content;
 }
 .max-w-6xl {
   max-width: 72rem;

@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 class AdiController extends Controller
 {
     //
-    public function first($rucEntidad, $period)
+    public function first($rucEntidad, $period, $busquedaPalabra = null)
     {
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
         $validator = Validator::make(['period' => $period, 'rucEntidad' => $rucEntidad], [
@@ -21,7 +21,7 @@ class AdiController extends Controller
         ]);
         if (!$validator->fails()) {
             $result = $this->firstDetail($rucEntidad, $period);
-            return view('detail.indices.adi.firstDetail', compact('result', 'rucEntidad', 'period'));
+            return view('detail.indices.adi.firstDetail', compact('result', 'rucEntidad', 'period', 'busquedaPalabra'));
         } else {
             abort(404);
         }
@@ -44,7 +44,7 @@ class AdiController extends Controller
 
         return $data;
     }
-    public function second($rucContratista, $rucEntidad, $period)
+    public function second($rucContratista, $rucEntidad, $period, $busquedaPalabra = null)
     {
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
         $validator = Validator::make(['period' => $period, 'rucContratista' => $rucContratista, 'rucEntidad' => $rucEntidad], [
@@ -54,7 +54,7 @@ class AdiController extends Controller
         ]);
         if (!$validator->fails()) {
             $result = $this->secondDetail($rucEntidad, $rucContratista, $period);
-            return view('detail.indices.adi.secondDetail', compact('result', 'rucEntidad', 'rucContratista', 'period'));
+            return view('detail.indices.adi.secondDetail', compact('result', 'rucEntidad', 'rucContratista', 'period', 'busquedaPalabra'));
         } else {
             abort(404);
         }

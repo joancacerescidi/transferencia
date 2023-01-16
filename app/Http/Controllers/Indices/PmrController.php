@@ -11,7 +11,7 @@ use Illuminate\Validation\Rule;
 class PmrController extends Controller
 {
     //
-    public function first($rucEntidad, $period)
+    public function first($rucEntidad, $period, $busquedaPalabra = null)
     {
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
         $validator = Validator::make(['period' => $period, 'rucEntidad' => $rucEntidad], [
@@ -20,7 +20,7 @@ class PmrController extends Controller
         ]);
         if (!$validator->fails()) {
             $result = $this->firstDetail($rucEntidad, $period);
-            return view('detail.indices.pmr.firstDetail', compact('result', 'rucEntidad', 'period'));
+            return view('detail.indices.pmr.firstDetail', compact('result', 'rucEntidad', 'period', 'busquedaPalabra'));
         } else {
             abort(404);
         }
@@ -38,7 +38,7 @@ class PmrController extends Controller
 
         return $data;
     }
-    public function second($rucContratista, $rucEntidad, $period)
+    public function second($rucContratista, $rucEntidad, $period, $busquedaPalabra = null)
     {
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
         $validator = Validator::make(['period' => $period, 'rucContratista' => $rucContratista, 'rucEntidad' => $rucEntidad], [
@@ -47,10 +47,9 @@ class PmrController extends Controller
             'rucEntidad' => ['required', 'integer']
         ]);
         if (!$validator->fails()) {
-
             $result = $this->secondDetail($rucEntidad, $rucContratista, $period);
             $conformacion = $this->conformacionJuridica($rucContratista);
-            return view('detail.indices.pmr.secondDetail', compact('result', 'conformacion'));
+            return view('detail.indices.pmr.secondDetail', compact('result', 'period','rucEntidad','conformacion', 'busquedaPalabra'));
         } else {
             abort(404);
         }

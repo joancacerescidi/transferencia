@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 
 class CrcController extends Controller
 {
-    public function first($rucEntidad, $period)
+    public function first($rucEntidad, $period, $busquedaPalabra = null)
     {
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
         $validator = Validator::make(['period' => $period, 'rucEntidad' => $rucEntidad], [
@@ -21,7 +21,7 @@ class CrcController extends Controller
         ]);
         if (!$validator->fails()) {
             $result = $this->firstDetail($rucEntidad, $period);
-            return view('detail.indices.crc.firstDetail', compact('result', 'rucEntidad', 'period'));
+            return view('detail.indices.crc.firstDetail', compact('result', 'rucEntidad', 'period', 'busquedaPalabra'));
         } else {
             abort(404);
         }
@@ -44,7 +44,7 @@ class CrcController extends Controller
         return $data;
     }
 
-    public function second($rucContratista, $rucEntidad, $period)
+    public function second($rucContratista, $rucEntidad, $period, $busquedaPalabra = null)
     {
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
 
@@ -56,7 +56,7 @@ class CrcController extends Controller
         ]);
         if (!$validator->fails()) {
             $result = $this->secondDetail($rucContratista, $rucEntidad, $period);
-            return view('detail.indices.crc.secondDetail', compact('result'));
+            return view('detail.indices.crc.secondDetail', compact('result', 'rucEntidad', 'period', 'busquedaPalabra'));
         } else {
             abort(404);
         }
@@ -67,7 +67,7 @@ class CrcController extends Controller
         $data = DB::table(DB::raw('osce_contrato a'))
             ->select('fecha_suscripcion_contrato', 'descripcion_proceso', 'num_contrato', 'urlcontrato', 'moneda', 'monto_contratado_item', 'ruc_miembro', DB::raw('(select distinct proveedor from osce_proveedor op2 where op2.ruc_proveedor=b.ruc_miembro)  as nombre'), DB::raw('(select min(fecha_inicio_vigencia) from osce_proveedor op2 where op2.ruc_proveedor=b.ruc_miembro)  as fechainicio'))
             ->crossJoin(DB::raw('osce_consorcio b'))
-            ->where('a.anno', '=',$period)
+            ->where('a.anno', '=', $period)
             ->where('a.ruc_entidad', '=', $rucEntidad)
             ->where('a.ruc_contratista', '=', $rucContratista)
             ->whereRaw('(a.fecha_suscripcion_contrato  - interval \'30 day\') <= (select min(op.fecha_inicio_vigencia) 

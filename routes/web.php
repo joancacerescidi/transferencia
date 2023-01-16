@@ -3,6 +3,7 @@
 use App\Http\Controllers\DenunciaController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\FuenteController;
 use App\Http\Controllers\FuncionarioController;
 use App\Http\Controllers\GlosarioContoller;
 use App\Http\Controllers\GovernmentLevelController;
@@ -49,8 +50,8 @@ Route::get('/detail-government-level/{nivel}/{period}', [GovernmentLevelControll
 
 #Rankings
 #Entidad
-Route::get('/ranking/entidad/{period}', [RankingSearchController::class, 'rankingEntidad']);
-Route::post('/ranking/entidad/search/{period}', [RankingSearchController::class, 'searchEntidad'])->name('entidad.busqueda');
+Route::get('/ranking/entidad/{period}/{order}', [RankingSearchController::class, 'rankingEntidad']);
+Route::post('/ranking/entidad/search/{period}/{order}', [RankingSearchController::class, 'searchEntidad'])->name('entidad.busqueda');
 #proveedores
 Route::get('/ranking/proveedor/{period}', [RankingSearchController::class, 'rankingProveedor']);
 Route::post('/ranking/proveedor/search/{period}', [RankingSearchController::class, 'searchProveedor'])->name('proveedor.busqueda');
@@ -64,20 +65,20 @@ Route::post('/ranking/funcionario/search/{period}', [RankingSearchController::cl
 Route::get('/detail/funcionario/{idFuncionario}/{nivel}/{type}/{name}/{ruc?}', [FuncionarioController::class, 'firstDetail']);
 #Detalle - 1-2 - entidad - grafico - entidad
 #Fraccionamiento
-Route::get('/detail/first/fraccionamiento/{rucEntidad}/{period}', [FraccionamientoController::class, 'first']);
-Route::get('/detail/second/fraccionamiento/{rucContratista}/{rucEntidad}/{period}/{filter}', [FraccionamientoController::class, 'second']);
+Route::get('/detail/first/fraccionamiento/{rucEntidad}/{period}/{busquedaPalabra?}', [FraccionamientoController::class, 'first']);
+Route::get('/detail/second/fraccionamiento/{rucContratista}/{rucEntidad}/{period}/{filter}/{busquedaPalabra?}', [FraccionamientoController::class, 'second']);
 #CRC
-Route::get('/detail/first/crc/{rucEntidad}/{period}', [CrcController::class, 'first']);
-Route::get('/detail/second/crc/{rucContratista}/{rucEntidad}/{period}', [CrcController::class, 'second']);
+Route::get('/detail/first/crc/{rucEntidad}/{period}/{busquedaPalabra?}', [CrcController::class, 'first']);
+Route::get('/detail/second/crc/{rucContratista}/{rucEntidad}/{period}/{busquedaPalabra?}', [CrcController::class, 'second']);
 #ADI
-Route::get('/detail/first/adi/{rucEntidad}/{period}', [AdiController::class, 'first']);
-Route::get('/detail/second/adi/{rucContratista}/{rucEntidad}/{period}', [AdiController::class, 'second']);
+Route::get('/detail/first/adi/{rucEntidad}/{period}/{busquedaPalabra?}', [AdiController::class, 'first']);
+Route::get('/detail/second/adi/{rucContratista}/{rucEntidad}/{period}/{busquedaPalabra?}', [AdiController::class, 'second']);
 #/PRC 
-Route::get('/detail/first/prc/{rucEntidad}/{period}', [IndicesPrcController::class, 'first']);
-Route::get('/detail/second/prc/{rucContratista}/{rucEntidad}/{period}/{filter}', [IndicesPrcController::class, 'second']);
+Route::get('/detail/first/prc/{rucEntidad}/{period}/{busquedaPalabra?}', [IndicesPrcController::class, 'first']);
+Route::get('/detail/second/prc/{rucContratista}/{rucEntidad}/{period}/{filter}/{busquedaPalabra?}', [IndicesPrcController::class, 'second']);
 #/PMR
-Route::get('/detail/first/pmr/{rucEntidad}/{period}', [IndicesPmrController::class, 'first']);
-Route::get('/detail/second/pmr/{rucContratista}/{rucEntidad}/{period}', [IndicesPmrController::class, 'second']);
+Route::get('/detail/first/pmr/{rucEntidad}/{period}/{busquedaPalabra?}', [IndicesPmrController::class, 'first']);
+Route::get('/detail/second/pmr/{rucContratista}/{rucEntidad}/{period}/{busquedaPalabra?}', [IndicesPmrController::class, 'second']);
 
 
 
@@ -119,3 +120,5 @@ Route::post('/save/feedback', [FeedbackController::class, 'created'])->name('fee
 Route::get('/usuario/denuncia', [DenunciaController::class, 'index'])->name('denuncia.index');
 #registrar una denuncia
 Route::post('/save/denuncia', [DenunciaController::class, 'created'])->name('denuncia.created');
+#fuentes
+Route::get('/usuario/fuentes', [FuenteController::class, 'index'])->name('fuente.index');

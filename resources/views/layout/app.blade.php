@@ -87,23 +87,21 @@
             <a href="/" class="btn-preload font-semibold text-lg ">
                 Qullqita Qatipay
             </a>
+
             <ul class="grid gap-6 xl:text-lg xl:justify-center">
                 <li>
-                    <a href="#">Fuentes</a>
+                    <a class="btn-preload" href="{{ route('fuente.index') }}">Fuentes</a>
                 </li>
                 <li>
-                    <a href="#">Política anticorrupción</a>
+                    <a class="btn-preload" href="{{ route('feedback.index') }}">Danos tu opinión</a>
                 </li>
                 <li>
-                    <a href="#">Contáctanos</a>
+                    <a class="btn-preload" href="{{ route('denuncia.index') }}">Comparte información</a>
+                </li>
+                <li>
+                    <a class="btn-preload" href="{{ route('glosario.index') }}">Glosario</a>
                 </li>
             </ul>
-            <div class="flex gap-8 xl:justify-end">
-                <img src="{{ asset('images/icon-fb.svg') }}" alt="">
-                <img src="{{ asset('images/icon-tw.svg') }}" alt="">
-                <img src="{{ asset('images/icon-linkedin.svg') }}" alt="">
-                <img src="{{ asset('images/icon-insta.svg') }}" alt="">
-            </div>
         </div>
         <hr class="xl:mx-10">
         <p class="py-8 text-sm xl:text-lg text-center">2022@ Qullqita Qatipay - Todos los derechos reservados</p>

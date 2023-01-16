@@ -12,7 +12,7 @@ class PrcController extends Controller
 {
     //
 
-    public function first($rucEntidad, $period)
+    public function first($rucEntidad, $period, $busquedaPalabra = null)
     {
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
         $validator = Validator::make(['period' => $period, 'rucEntidad' => $rucEntidad], [
@@ -21,7 +21,7 @@ class PrcController extends Controller
         ]);
         if (!$validator->fails()) {
             $result = $this->firstDetail($rucEntidad, $period);
-            return view('detail.indices.prc.firstDetail', compact('result', 'rucEntidad', 'period'));
+            return view('detail.indices.prc.firstDetail', compact('result', 'rucEntidad', 'period', 'busquedaPalabra'));
         } else {
             abort(404);
         }
@@ -48,7 +48,7 @@ class PrcController extends Controller
         return $data;
     }
 
-    public function second($rucContratista, $rucEntidad, $period, $filter)
+    public function second($rucContratista, $rucEntidad, $period, $filter, $busquedaPalabra = null)
     {
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
         $filters = ['orden-compra', 'contrato'];
@@ -62,7 +62,7 @@ class PrcController extends Controller
             $resultDate = $this->fechaRegistroProveedor($rucEntidad);
             $result = $this->secondDetail($rucEntidad, $rucContratista, $period, $filter);
 
-            return view('detail.indices.prc.secondDetail', compact('result', 'rucEntidad', 'rucContratista', 'period', 'filter', 'resultDate'));
+            return view('detail.indices.prc.secondDetail', compact('result', 'rucEntidad', 'rucContratista', 'period', 'filter', 'resultDate', 'busquedaPalabra'));
         } else {
             abort(404);
         }

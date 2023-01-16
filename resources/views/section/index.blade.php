@@ -41,7 +41,7 @@
                         <div class="border bg-body-bg shadow-lg px-6 py-10">
                             <h4 class="xl:text-xl font-bold text-center mb-10">Buscar Entidad</h4>
                             <form onsubmit='return preloadActive()' method="POST"
-                                action="{{ route('entidad.busqueda', [$period]) }}"
+                                action="{{ route('entidad.busqueda', [$period, 'monto']) }}"
                                 class="grid xl:grid-cols-3 gap-x-6 gap-y-6 xl:gap-y-10 items-center">
                                 @csrf
                                 <div class="flex flex-col xl:flex-row xl:items-center gap-6 xl:col-span-3">
@@ -58,7 +58,7 @@
                                     </div>
                                 </div>
                                 <hr class="xl:col-span-3">
-                                <a href="{{ url('/ranking/entidad/' . $period) }}"
+                                <a href="{{ url('/ranking/entidad/' . $period . '/monto') }}"
                                     class="btn-preload flex justify-center items-center gap-2 p-5 bg-main-blue text-white font-semibold xl:col-span-3 xl:mx-10 rounded-md text-xs xl:text-base">
                                     <img src="../images/ver-rankings.png" alt="">
                                     Ranking Entidades</a>

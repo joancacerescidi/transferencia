@@ -13,17 +13,16 @@ use Illuminate\Http\Request;
 class FraccionamientoController extends Controller
 {
     //
-    public function first($rucEntidad, $period)
+    public function first($rucEntidad, $period, $busquedaPalabra = null)
     {
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
         $validator = Validator::make(['period' => $period, 'rucEntidad' => $rucEntidad], [
             'period' => ['required', 'integer', Rule::in($periods)],
-            'rucEntidad' => ['required', 'integer']
+            'rucEntidad' => ['required', 'integer'],
         ]);
         if (!$validator->fails()) {
             $result = $this->firstDetail($rucEntidad, $period);
-
-            return view('detail.indices.fraccionamiento.firstDetail', compact('result', 'rucEntidad', 'period'));
+            return view('detail.indices.fraccionamiento.firstDetail', compact('result', 'rucEntidad', 'period', 'busquedaPalabra'));
         } else {
             abort(404);
         }
@@ -53,11 +52,11 @@ class FraccionamientoController extends Controller
 
         return $data;
     }
-    public function second($rucContratista, $rucEntidad, $period, $filter)
+    public function second($rucContratista, $rucEntidad, $period, $filter, $busquedaPalabra = null)
     {
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
         $filters = ['orden-compra', 'contrato'];
-        $validator = Validator::make(['period' => $period, 'rucEntidad' => $rucEntidad, 'rucContratista' => $rucContratista, 'filter'=> $filter], [
+        $validator = Validator::make(['period' => $period, 'rucEntidad' => $rucEntidad, 'rucContratista' => $rucContratista, 'filter' => $filter], [
             'period' => ['required', 'integer', Rule::in($periods)],
             'rucEntidad' => ['required', 'integer'],
             'rucContratista' => ['required', 'integer'],
@@ -66,7 +65,7 @@ class FraccionamientoController extends Controller
         if (!$validator->fails()) {
             $result = $this->secondDetail($rucContratista, $rucEntidad, $period, $filter);
             // dd($result);
-            return view('detail.indices.fraccionamiento.secondDetail', compact('result', 'filter', 'period', 'rucContratista', 'rucEntidad'));
+            return view('detail.indices.fraccionamiento.secondDetail', compact('result', 'filter', 'period', 'rucContratista', 'rucEntidad', 'busquedaPalabra'));
         } else {
             abort(404);
         }
@@ -90,7 +89,7 @@ class FraccionamientoController extends Controller
                 ->orderBy('fecha_suscripcion_contrato', 'asc')
                 ->paginate(10);
         }
-       
+
         return $data;
     }
 }

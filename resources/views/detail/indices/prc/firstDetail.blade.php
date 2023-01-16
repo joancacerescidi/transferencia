@@ -5,8 +5,22 @@
             <a href="#" class="flex items-center gap-3 mb-8 xl:mb-16 font-semibold text-sm xl:text-lg text-main-blue">
                 <img src="{{ asset('images/icon-chevron-left-blue.png') }}" alt="">
                 <span>
-                    <span onclick="window.location='{{ url('/') }}'">Inicio </span>
-                    {{-- <span onclick="window.location='{{ url('/') }}'">/ Inicio</span> --}}
+                    <span class="btn-preload" onclick="window.location='{{ url('/') }}'">Inicio</span>
+
+                    @if ($busquedaPalabra !== null)
+                        <span class="btn-preload" onclick="javascript:document.busquedaEntidad.submit()">/ Entidades</span>
+                    @else
+                        <span class="btn-preload"
+                            onclick="window.location='{{ url('/ranking/entidad/' . $period . '/monto') }}'">/
+                            Entidades</span>
+                    @endif
+                    @if ($busquedaPalabra !== null)
+                        <form onsubmit='return preloadActive()' action="{{ route('entidad.busqueda', [$period, 'monto']) }}"
+                            method="POST" name="busquedaEntidad" id="busquedaEntidad">
+                            @csrf
+                            <input type="hidden" name="palabraClave" value="{{ $busquedaPalabra }}">
+                        </form>
+                    @endif
                 </span>
             </a>
 
@@ -41,8 +55,15 @@
                     @foreach ($result as $item)
                         <p class="xl:col-span-1 font-semibold grid grid-cols-2 xl:block items-center gap-8">
                             <span class="text-main-gray font-medium xl:hidden">Ruc:</span>
-                            <a class="btn-preload"
-                                href="{{ url('/detail/second/prc/' . $item->ruc . '/' . $rucEntidad . '/' . $period . '/orden-compra') }}">{{ $item->ruc }}</a>
+                            @if ($busquedaPalabra !== null)
+                                <a class="btn-preload"
+                                    href="{{ url('/detail/second/prc/' . $item->ruc . '/' . $rucEntidad . '/' . $period . '/orden-compra' . '/' . $busquedaPalabra) }}">{{ $item->ruc }}
+                                </a>
+                            @else
+                                <a class="btn-preload"
+                                    href="{{ url('/detail/second/prc/' . $item->ruc . '/' . $rucEntidad . '/' . $period . '/orden-compra') }}">{{ $item->ruc }}
+                                </a>
+                            @endif
                         </p>
                         <p class="xl:col-span-1 font-medium grid grid-cols-2 xl:block items-center gap-8">
                             <span class="text-main-gray font-medium xl:hidden">Nombre:</span>
