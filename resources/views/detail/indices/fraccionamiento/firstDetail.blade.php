@@ -27,6 +27,7 @@
             <h2 class="text-center text-xl xl:text-4xl font-bold mb-6 xl:mb-14">
                 FRACCIONAMIENTO <br>
                 {{ $nameEntidad }}
+              22  {{ $nombreRuta }}22
             </h2>
             <article
                 class="bg-white border border-gray-200 shadow-sm rounded-xl mb-6 cursor-pointer hover:shadow-lg overflow-x-auto">

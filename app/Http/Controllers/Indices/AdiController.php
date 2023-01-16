@@ -34,14 +34,14 @@ class AdiController extends Controller
             ->where('oo.anno', '=', $period)
             ->where('oo.ruc_entidad', '=', $rucEntidad)
             ->where(function ($query) {
-                $query->where('oo.tipocontratacion', '=', 'Otras contrataciones sin proceso de selecci�n previo')
-                    ->orWhere('oo.tipocontratacion', '=', 'Deviene de Exoneraciones / Contrataci�n Directa');
+                $query->where('oo.tipocontratacion', '=', 'Otras contrataciones sin proceso de selección previo')
+                    ->orWhere('oo.tipocontratacion', '=', 'Deviene de Exoneraciones / Contratación Directa');
             })
             ->where('oo.estadocontratacion', '<>', 'Anulada')
             ->groupBy(['oo.ruc_contratista', 'oo.nombre_razon_contratista'])
             ->orderByRaw('cantidad DESC')
             ->paginate(10);
-
+            
         return $data;
     }
     public function second($rucContratista, $rucEntidad, $period, $nameEntidad, $ruc, $nameRuc, $busquedaPalabra = null)

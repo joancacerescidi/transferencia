@@ -10,7 +10,6 @@ use stdClass;
 
 
 
-
 class DepartmentController extends Controller
 {
     //
@@ -29,6 +28,7 @@ class DepartmentController extends Controller
             'period' => ['required', 'integer', Rule::in($periods)],
             'department' => ['required', 'string', Rule::in($departments)]
         ]);
+
         if (!$validator->fails()) {
             $resultDepartmentDetail = $this->deparmentDetail($period, $department);
 
