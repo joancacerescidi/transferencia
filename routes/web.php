@@ -72,7 +72,7 @@ Route::get('/detail/first/crc/{rucEntidad}/{period}/{nameEntidad}/{busquedaPalab
 Route::get('/detail/second/crc/{rucContratista}/{rucEntidad}/{period}/{nameEntidad}/{ruc}/{nameRuc?}/{busquedaPalabra?}', [CrcController::class, 'second']);
 #ADI
 Route::get('/detail/first/adi/{rucEntidad}/{period}/{nameEntidad}/{busquedaPalabra?}', [AdiController::class, 'first']);
-Route::get('/detail/second/adi/{rucContratista}/{rucEntidad}/{period}/{nameEntidad}/{ruc}/{nameRuc}//{busquedaPalabra?}', [AdiController::class, 'second']);
+Route::get('/detail/second/adi/{rucContratista}/{rucEntidad}/{period}/{nameEntidad}/{ruc}/{nameRuc}/{busquedaPalabra?}', [AdiController::class, 'second']);
 #/PRC 
 Route::get('/detail/first/prc/{rucEntidad}/{period}/{nameEntidad}/{busquedaPalabra?}', [IndicesPrcController::class, 'first']);
 Route::get('/detail/second/prc/{rucContratista}/{rucEntidad}/{period}/{filter}/{nameEntidad}/{ruc}/{nameRuc}/{busquedaPalabra?}', [IndicesPrcController::class, 'second']);
