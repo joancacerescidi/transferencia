@@ -17,7 +17,7 @@
             </h2>
             <section class="u-container">
                 <details
-                    class="w-8/12 mx-auto bg-white border border-gray-200 shadow-sm rounded-xl mb-6 cursor-pointer hover:shadow-lg">
+                    class="w-8/12 mx-auto bg-white border border-gray-200 shadow-sm rounded-xl mb-6 cursor-pointer hover:shadow-lg" open>
                     <summary class="p-6 xl:p-10 flex items-center justify-center gap-4 text-sm xl:text-lg font-bold">
                         <p class="line-clamp-2">
                             CONFORMACIÓN
