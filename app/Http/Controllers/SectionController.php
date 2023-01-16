@@ -56,6 +56,13 @@ class SectionController extends Controller
         $newObjt->dataSet1 = [];
 
         foreach ($data as $graf) {
+            if ($graf->nivelgobierno == 'R') {
+                $graf->nivelgobierno = "REGIONAL";
+            } else if ($graf->nivelgobierno == 'L') {
+                $graf->nivelgobierno = "LOCAL";
+            } else if ($graf->nivelgobierno == 'A') {
+                $graf->nivelgobierno = "AUTÓNOMO";
+            }
             array_push($newObjt->label, $graf->nivelgobierno);
             array_push($newObjt->dataSet1, intval($graf->sum));
         }
