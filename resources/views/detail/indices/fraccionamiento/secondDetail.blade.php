@@ -84,11 +84,11 @@
                             Fecha Emisión
                             {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
                         </p>
-                        <p class="xl:col-span-5 font-semibold flex items-center">
+                        <p class="xl:col-span-3 font-semibold flex items-center">
                             Descripción Orden
                             {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
                         </p>
-                        <p class="xl:col-span-1 font-semibold flex items-center gap-2">
+                        <p class="xl:col-span-3 font-semibold flex items-center gap-2">
                             Objeto Contractual
                             {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
                         </p>
@@ -112,11 +112,11 @@
                                 <span class="text-main-gray font-medium xl:hidden">Fecha Emisión:</span>
                                 {{ $item->fecha_emision }}
                             </p>
-                            <p class="xl:col-span-5 font-medium grid grid-cols-2 xl:block items-center gap-8">
+                            <p class="xl:col-span-3 font-medium grid grid-cols-2 xl:block items-center gap-8">
                                 <span class="text-main-gray font-medium xl:hidden">Descripción Orden:</span>
                                 {{ $item->descripcion_orden }}
                             </p>
-                            <p class="xl:col-span-1 font-medium grid grid-cols-2 xl:block items-center gap-8">
+                            <p class="xl:col-span-3 font-medium grid grid-cols-2 xl:block items-center gap-8">
                                 <span class="text-main-gray font-medium xl:hidden">Objeto Contractual:</span>
                                 {{ $item->orden }}
                             </p>
@@ -131,7 +131,7 @@
                             </p>
                             <p class="xl:col-span-1 font-medium grid grid-cols-2 xl:block items-center gap-8">
                                 <span class="text-main-gray font-medium xl:hidden">Monto Total: </span>
-                                <span> {{ round($item->monto_total_original, 2) }}</span>
+                                <span> {{ number_format(round($item->monto_total_original, 2)) }}</span>
                             </p>
                         @endforeach
                     </div>
@@ -196,7 +196,7 @@
                             </p>
                             <p class="xl:col-span-1 font-medium grid grid-cols-2 xl:block items-center gap-8">
                                 <span class="text-main-gray font-medium xl:hidden">Monto Contratado: </span>
-                                <span> {{ $item->monto_contratado_item }}</span>
+                                <span> {{ number_format(round($item->monto_contratado_item, 2)) }}</span>
                             </p>
                         @endforeach
                     </div>

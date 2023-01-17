@@ -113,7 +113,7 @@
                         </p>
                         <p class="xl:col-span-1 font-medium grid grid-cols-2 xl:block items-center gap-8">
                             <span class="text-main-gray font-medium xl:hidden">Monto Contratado: </span>
-                            <span> {{ $item->monto_contratado_item }}</span>
+                            <span> {{ number_format($item->monto_contratado_item) }}</span>
                         </p>
                         <p class="xl:col-span-1 font-medium grid grid-cols-2 xl:block items-center gap-8">
                             <span class="text-main-gray font-medium xl:hidden">Ruc Miembro: </span>

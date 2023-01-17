@@ -94,7 +94,7 @@
                         </p>
                         <p class="xl:col-span-1 font-medium grid grid-cols-2 xl:block items-center gap-8">
                             <span class="text-main-gray font-medium xl:hidden">Monto Total: </span>
-                            <span> {{ $item->monto_total_original }}</span>
+                            <span> {{ number_format(round($item->monto_total_original, 2))    }}</span>
                         </p>
                     @endforeach
                 </div>

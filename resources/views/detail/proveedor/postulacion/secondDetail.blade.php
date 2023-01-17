@@ -93,7 +93,7 @@
                         </p>
                         <p class="xl:col-span-1 font-medium grid grid-cols-2 xl:block items-center gap-8">
                             <span class="text-main-gray font-medium xl:hidden">Monto Referencial Item: </span>
-                            <span> {{ $item->monto_referencial_item }}</span>
+                            <span> {{ number_format(round($item->monto_referencial_item, 2))  }}</span>
                         </p>
                         <p class="xl:col-span-1 font-medium grid grid-cols-2 xl:block items-center gap-8">
                             <span class="text-main-gray font-medium xl:hidden"> Fecha Convocatoria: </span>

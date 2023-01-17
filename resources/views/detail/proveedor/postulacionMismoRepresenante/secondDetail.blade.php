@@ -127,7 +127,7 @@
                         </p>
                         <p class="xl:col-span-1 font-medium grid grid-cols-2 xl:block items-center gap-8">
                             <span class="text-main-gray font-medium xl:hidden"> Monto Contratado Item: </span>
-                            <span> {{ $item->monto_contratado_item }}</span>
+                            <span> {{ number_format(round($item->monto_contratado_item, 2)) }}</span>
                         </p>
                         <p class="xl:col-span-4 font-medium grid grid-cols-2 xl:block items-center gap-8">
                             <span class="text-main-gray font-medium xl:hidden">Representantes de los postores en la misma
