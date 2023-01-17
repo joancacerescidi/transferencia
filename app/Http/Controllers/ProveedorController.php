@@ -250,7 +250,7 @@ class ProveedorController extends Controller
             ->paginate(10);
         return $data;
     }
-    public function contratoResueltoSecond($rucEntidad, $rucContratista, $period, $ruc, $rucNombre, $nombre = 'Sin nombre')
+    public function contratoResueltoSecond($rucEntidad, $rucContratista, $period, $ruc, $rucNombre, $nombre = 'Sin nombre', $busquedaPalabra = null)
     {
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
 
@@ -261,7 +261,7 @@ class ProveedorController extends Controller
         ]);
         if (!$validator->fails()) {
             $result = $this->contratoResueltoSecondDetail($rucEntidad, $rucContratista, $period);
-            return view('detail.proveedor.contratoResuelto.secondDetail', compact('result', 'period', 'ruc', 'rucNombre', 'nombre'));
+            return view('detail.proveedor.contratoResuelto.secondDetail', compact('result', 'rucEntidad', 'rucContratista', 'period', 'ruc', 'rucNombre', 'nombre', 'busquedaPalabra'));
         } else {
             abort(404);
         }
@@ -305,7 +305,7 @@ class ProveedorController extends Controller
 
         return $data;
     }
-    public function postulacionesSecond($rucEntidad, $rucContratista, $period, $ruc, $rucNombre, $nombre = 'Sin nombre')
+    public function postulacionesSecond($rucEntidad, $rucContratista, $period, $ruc, $rucNombre, $nombre = 'Sin nombre', $busquedaPalabra = null)
     {
 
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
@@ -317,7 +317,7 @@ class ProveedorController extends Controller
         ]);
         if (!$validator->fails()) {
             $result = $this->postulacionesSecondDetail($rucEntidad, $rucContratista, $period);
-            return view('detail.proveedor.postulacion.secondDetail', compact('result', 'ruc', 'rucNombre', 'nombre', 'ruc', 'rucNombre', 'nombre'));
+            return view('detail.proveedor.postulacion.secondDetail', compact('result', 'ruc', 'rucEntidad', 'rucContratista', 'rucNombre', 'nombre', 'ruc', 'rucNombre', 'nombre', 'busquedaPalabra'));
         } else {
             abort(404);
         }
@@ -376,7 +376,7 @@ class ProveedorController extends Controller
 
         return $data;
     }
-    public function postulacionesMismoRepresentanteSecond($rucEntidad, $rucContratista, $period, $ruc, $rucNombre, $nombre = 'Sin nombre')
+    public function postulacionesMismoRepresentanteSecond($rucEntidad, $rucContratista, $period, $ruc, $rucNombre, $nombre = 'Sin nombre', $busquedaPalabra = null)
     {
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
 
@@ -388,7 +388,7 @@ class ProveedorController extends Controller
         if (!$validator->fails()) {
             $result = $this->postulacionesMismoRepresentanteSecondDetail($rucEntidad, $rucContratista, $period);
             $conformacion = $this->conformacionJuridica($rucContratista);
-            return view('detail.proveedor.postulacionMismoRepresenante.secondDetail', compact('result', 'conformacion', 'period', 'ruc', 'rucNombre', 'nombre'));
+            return view('detail.proveedor.postulacionMismoRepresenante.secondDetail', compact('result', 'rucEntidad', 'rucContratista', 'conformacion', 'period', 'ruc', 'rucNombre', 'nombre', 'busquedaPalabra'));
         } else {
             abort(404);
         }

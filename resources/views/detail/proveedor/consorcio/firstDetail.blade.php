@@ -128,8 +128,14 @@
                         @foreach ($result as $item)
                             <p class="xl:col-span-1 font-semibold grid grid-cols-2 xl:block items-center gap-8">
                                 <span class="text-main-gray font-medium xl:hidden">Ruc Entidad:</span>
-                                <a class="btn-preload"
-                                    href="{{ url('/detail/consorcio/second/proveedor/' . $item->ruc_entidad . '/' . $rucContratista . '/' . $period . '/orden-compra' . '/' . $item->ruc_entidad . '/' . $item->nombre_entidad . '/' . $nombre) }}">{{ $item->ruc_entidad }}</a>
+
+                                @if ($busquedaPalabra !== null)
+                                    <a class="btn-preload"
+                                        href="{{ url('/detail/consorcio/second/proveedor/' . $item->ruc_entidad . '/' . $rucContratista . '/' . $period . '/orden-compra' . '/' . $item->ruc_entidad . '/' . $item->nombre_entidad . '/' . $nombre . '/' . $busquedaPalabra) }}">{{ $item->ruc_entidad }}</a>
+                                @else
+                                    <a class="btn-preload"
+                                        href="{{ url('/detail/consorcio/second/proveedor/' . $item->ruc_entidad . '/' . $rucContratista . '/' . $period . '/orden-compra' . '/' . $item->ruc_entidad . '/' . $item->nombre_entidad . '/' . $nombre) }}">{{ $item->ruc_entidad }}</a>
+                                @endif
                             </p>
                             <p class="xl:col-span-1 font-medium grid grid-cols-2 xl:block items-center gap-8">
                                 <span class="text-main-gray font-medium xl:hidden">Nombre Entidad:</span>

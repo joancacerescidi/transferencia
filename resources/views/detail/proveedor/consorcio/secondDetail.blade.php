@@ -6,7 +6,29 @@
                 <img src="{{ asset('images/icon-chevron-left-blue.png') }}" alt="">
 
                 <span class="btn-preload" onclick="window.location='{{ url('/') }}'">Inicio </span>
+                @if ($busquedaPalabra !== null)
+                    <span class="btn-preload" onclick="javascript:document.busquedaProveedor.submit()">/ Proveedor</span>
+                @else
+                    <span class="btn-preload" onclick="window.location='{{ url('/ranking/proveedor/' . $period) }}'">/
+                        Proveedor</span>
+                @endif
+                @if ($busquedaPalabra !== null)
+                    <span class="btn-preload"
+                        onclick="window.location='{{ url('/detail/consorcio/first/proveedor/' . $rucContratista . '/' . $period . '/contrato' . '/' . $nombre . '/' . $busquedaPalabra) }}'">/
+                        1° Detalle</span>
+                @else
+                    <span class="btn-preload"
+                        onclick="window.location='{{ url('/detail/consorcio/first/proveedor/' . $rucContratista . '/' . $period . '/contrato' . '/' . $nombre) }}'">/
+                        1° Detalle</span>
+                @endif
 
+                @if ($busquedaPalabra !== null)
+                    <form onsubmit='return preloadActive()' action="{{ route('proveedor.busqueda', [$period]) }}"
+                        method="POST" name="busquedaProveedor" id="busquedaProveedor">
+                        @csrf
+                        <input type="hidden" name="palabraClave" value="{{ $busquedaPalabra }}">
+                    </form>
+                @endif
             </a>
 
 
@@ -14,17 +36,36 @@
                 CONSORCIO <br>
                 {{ $nombre }}<br> {{ $ruc }}<br> {{ $rucNombre }}
             </h2>
+
             <div class="flex flex-wrap font-semibold text-xs xl:text-base gap-4 mb-4">
-                <button
-                    onclick="window.location='{{ url('/detail/consorcio/second/proveedor/' . $rucEntidad . '/' . $rucContratista . '/' . $period . '/orden-compra') }}'"
-                    class="p-4 bg-white transition-colors shadow-sm rounded-md ring @if ($filter == 'orden-compra') ring-blue-500
+
+                @if ($busquedaPalabra !== null)
+                    <button
+                        onclick="window.location='{{ url('/detail/consorcio/second/proveedor/' . $rucEntidad . '/' . $rucContratista . '/' . $period . '/orden-compra' . '/' . $rucEntidad . '/' . $rucNombre . '/' . $nombre . '/' . $busquedaPalabra) }}'"
+                        class="p-4 bg-white transition-colors shadow-sm rounded-md ring @if ($filter == 'orden-compra') ring-blue-500
                     @else
                         ring-gray-100 @endif   ring-offset-2">Compra</button>
-                <button
-                    onclick="window.location='{{ url('/detail/consorcio/second/proveedor/' . $rucEntidad . '/' . $rucContratista . '/' . $period . '/contrato') }}'"
-                    class="p-4 bg-white transition-colors shadow-sm rounded-md ring @if ($filter == 'contrato') ring-blue-500
+                    <button
+                        onclick="window.location='{{ url('/detail/consorcio/second/proveedor/' . $rucEntidad . '/' . $rucContratista . '/' . $period . '/contrato' . '/' . $rucEntidad . '/' . $rucNombre . '/' . $nombre . '/' . $busquedaPalabra) }}'"
+                        class="p-4 bg-white transition-colors shadow-sm rounded-md ring @if ($filter == 'contrato') ring-blue-500
                     @else
                         ring-gray-100 @endif ring-offset-2">Contrato</button>
+                @else
+                    <button
+                        onclick="window.location='{{ url('/detail/consorcio/second/proveedor/' . $rucEntidad . '/' . $rucContratista . '/' . $period . '/orden-compra' . '/' . $rucEntidad . '/' . $rucNombre . '/' . $nombre) }}'"
+                        class="p-4 bg-white transition-colors shadow-sm rounded-md ring @if ($filter == 'orden-compra') ring-blue-500
+                    @else
+                        ring-gray-100 @endif   ring-offset-2">Compra</button>
+                    <button
+                        onclick="window.location='{{ url('/detail/consorcio/second/proveedor/' . $rucEntidad . '/' . $rucContratista . '/' . $period . '/contrato' . '/' . $rucEntidad . '/' . $rucNombre . '/' . $nombre) }}'"
+                        class="p-4 bg-white transition-colors shadow-sm rounded-md ring @if ($filter == 'contrato') ring-blue-500
+                    @else
+                        ring-gray-100 @endif ring-offset-2">Contrato</button>
+                @endif
+
+
+
+
             </div>
             @if ($filter == 'orden-compra')
                 <article

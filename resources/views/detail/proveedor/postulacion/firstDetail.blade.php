@@ -51,8 +51,13 @@
                     @foreach ($result as $item)
                         <p class="xl:col-span-1 font-semibold grid grid-cols-2 xl:block items-center gap-8">
                             <span class="text-main-gray font-medium xl:hidden">Entidad Ruc:</span>
-                            <a class="btn-preload"
-                                href="{{ url('/detail/postulaciones/second/proveedor/' . $item->entidad_ruc . '/' . $rucContratista . '/' . $period . '/' . $item->entidad_ruc . '/' . $item->entidad . '/' . $nombre) }}">{{ $item->entidad_ruc }}</a>
+                            @if ($busquedaPalabra !== null)
+                                <a class="btn-preload"
+                                    href="{{ url('/detail/postulaciones/second/proveedor/' . $item->entidad_ruc . '/' . $rucContratista . '/' . $period . '/' . $item->entidad_ruc . '/' . $item->entidad . '/' . $nombre . '/' . $busquedaPalabra) }}">{{ $item->entidad_ruc }}</a>
+                            @else
+                                <a class="btn-preload"
+                                    href="{{ url('/detail/postulaciones/second/proveedor/' . $item->entidad_ruc . '/' . $rucContratista . '/' . $period . '/' . $item->entidad_ruc . '/' . $item->entidad . '/' . $nombre) }}">{{ $item->entidad_ruc }}</a>
+                            @endif
                         </p>
                         <p class="xl:col-span-1 font-medium grid grid-cols-2 xl:block items-center gap-8">
                             <span class="text-main-gray font-medium xl:hidden">Entidad:</span>

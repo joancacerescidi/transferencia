@@ -4,10 +4,30 @@
         <section class="py-20 px-6 xl:px-10">
             <a href="#" class="flex items-center gap-3 mb-8 xl:mb-16 font-semibold text-sm xl:text-lg text-main-blue">
                 <img src="{{ asset('images/icon-chevron-left-blue.png') }}" alt="">
-                <span>
-                    <span onclick="window.location='{{ url('/') }}'">Inicio </span>
-                    {{-- <span onclick="window.location='{{ url('/') }}'">/ Inicio</span> --}}
-                </span>
+                <span onclick="window.location='{{ url('/') }}'">Inicio </span>
+                @if ($busquedaPalabra !== null)
+                    <span class="btn-preload" onclick="javascript:document.busquedaProveedor.submit()">/ Proveedor</span>
+                @else
+                    <span class="btn-preload" onclick="window.location='{{ url('/ranking/proveedor/' . $period) }}'">/
+                        Proveedor</span>
+                @endif
+
+                @if ($busquedaPalabra !== null)
+                    <span class="btn-preload"
+                        onclick="window.location='{{ url('/detail/postulaciones-con-mismo-representante/first/proveedor/' . $rucContratista . '/' . $period . '/' . $nombre . '/' . $busquedaPalabra) }}'">/
+                        1° Detalle</span>
+                @else
+                    <span class="btn-preload"
+                        onclick="window.location='{{ url('/detail/postulaciones-con-mismo-representante/first/proveedor/' . $rucContratista . '/' . $period . '/' . $nombre) }}'">/
+                        1° Detalle</span>
+                @endif
+                @if ($busquedaPalabra !== null)
+                    <form onsubmit='return preloadActive()' action="{{ route('proveedor.busqueda', [$period]) }}"
+                        method="POST" name="busquedaProveedor" id="busquedaProveedor">
+                        @csrf
+                        <input type="hidden" name="palabraClave" value="{{ $busquedaPalabra }}">
+                    </form>
+                @endif
             </a>
 
 
@@ -17,7 +37,8 @@
             </h2>
             <section class="u-container">
                 <details
-                    class="w-8/12 mx-auto bg-white border border-gray-200 shadow-sm rounded-xl mb-6 cursor-pointer hover:shadow-lg" open>
+                    class="w-8/12 mx-auto bg-white border border-gray-200 shadow-sm rounded-xl mb-6 cursor-pointer hover:shadow-lg"
+                    open>
                     <summary class="p-6 xl:p-10 flex items-center justify-center gap-4 text-sm xl:text-lg font-bold">
                         <p class="line-clamp-2">
                             CONFORMACIÓN
