@@ -109,23 +109,23 @@
 
                                         @if ($categorias->sigla == 'FRA')
                                             <a class="btn-preload"
-                                                href="{{ url('/detail/first/fraccionamiento/' . $item->dataList->rucEntidad . '/' . $period . '/' . $item->dataList->nombre) }}"><img
+                                                href="{{ url('/detail/first/fraccionamiento/' . $item->dataList->rucEntidad . '/' . $period . '/' . $item->dataList->nombre . '/' . $ruta . '/' . $department) }}"><img
                                                     src="/images/icon-compartir.png" alt="Compartir"></a>
                                         @elseif($categorias->sigla == 'CRC')
                                             <a
-                                                href="{{ url('/detail/first/crc/' . $item->dataList->rucEntidad . '/' . $period . '/' . $item->dataList->nombre) }}"><img
+                                                href="{{ url('/detail/first/crc/' . $item->dataList->rucEntidad . '/' . $period . '/' . $item->dataList->nombre . '/' . $ruta . '/' . $department) }}"><img
                                                     src="/images/icon-compartir.png" alt="Compartir"></a>
                                         @elseif($categorias->sigla == 'PRC')
                                             <a
-                                                href="{{ url('/detail/first/prc/' . $item->dataList->rucEntidad . '/' . $period . '/' . $item->dataList->nombre) }}"><img
+                                                href="{{ url('/detail/first/prc/' . $item->dataList->rucEntidad . '/' . $period . '/' . $item->dataList->nombre . '/' . $ruta . '/' . $department) }}"><img
                                                     src="/images/icon-compartir.png" alt="Compartir"></a>
                                         @elseif($categorias->sigla == 'ADI')
                                             <a
-                                                href="{{ url('/detail/first/adi/' . $item->dataList->rucEntidad . '/' . $period . '/' . $item->dataList->nombre) }}"><img
+                                                href="{{ url('/detail/first/adi/' . $item->dataList->rucEntidad . '/' . $period . '/' . $item->dataList->nombre . '/' . $ruta . '/' . $department) }}"><img
                                                     src="/images/icon-compartir.png" alt="Compartir"></a>
                                         @elseif($categorias->sigla == 'PMR')
                                             <a
-                                                href="{{ url('/detail/first/pmr/' . $item->dataList->rucEntidad . '/' . $period . '/' . $item->dataList->nombre) }}"><img
+                                                href="{{ url('/detail/first/pmr/' . $item->dataList->rucEntidad . '/' . $period . '/' . $item->dataList->nombre . '/' . $ruta . '/' . $department) }}"><img
                                                     src="/images/icon-compartir.png" alt="Compartir"></a>
                                         @endif
 

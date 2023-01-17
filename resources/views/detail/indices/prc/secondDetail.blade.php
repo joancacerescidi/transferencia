@@ -9,17 +9,28 @@
                 @if ($busquedaPalabra !== null)
                     <span class="btn-preload" onclick="javascript:document.busquedaEntidad.submit()">/ Entidades</span>
                 @else
-                    <span class="btn-preload"
-                        onclick="window.location='{{ url('/ranking/entidad/' . $period . '/monto') }}'">/ Entidades</span>
+                    @if ($ruta === 'entidad.goverment')
+                        <span class="btn-preload"
+                            onclick="window.location='{{ url('/detail-government-level' . '/' . $primaryVariable . '/' . $period) }}'">/
+                            Entidades</span>
+                    @elseif($ruta === 'entidad.deparment')
+                        <span class="btn-preload"
+                            onclick="window.location='{{ url('/detail-deparment-period' . '/' . $primaryVariable . '/' . $period) }}'">/
+                            Entidades</span>
+                    @elseif($ruta === 'entidad.busqueda')
+                        <span class="btn-preload"
+                            onclick="window.location='{{ url('/ranking/entidad/' . $period . '/monto') }}'">/
+                            Entidades</span>
+                    @endif
                 @endif
 
                 @if ($busquedaPalabra !== null)
                     <span class="btn-preload"
-                        onclick="window.location='{{ url('/detail/first/prc/' . $rucEntidad . '/' . $period . '/' . $nameEntidad . '/' . $busquedaPalabra) }}'">/
+                        onclick="window.location='{{ url('/detail/first/prc/' . $rucEntidad . '/' . $period . '/' . $nameEntidad . '/' . $ruta . '/' . $primaryVariable . '/' . $busquedaPalabra) }}'">/
                         Proveedor</span>
                 @else
                     <span class="btn-preload"
-                        onclick="window.location='{{ url('/detail/first/prc/' . $rucEntidad . '/' . $period . '/' . $nameEntidad) }}'">/
+                        onclick="window.location='{{ url('/detail/first/prc/' . $rucEntidad . '/' . $period . '/' . $nameEntidad . '/' . $ruta . '/' . $primaryVariable) }}'">/
                         Proveedor</span>
                 @endif
                 @if ($busquedaPalabra !== null)
@@ -39,26 +50,27 @@
                 PROVEEDOR RECIÉN CREADO <br>
                 {{ $nameEntidad }}<br> {{ $ruc }}<br> {{ $nameRuc }} <br>"{{ $resultDate[0]->min }}"
             </h2>
+
             <div class="flex flex-wrap font-semibold text-xs xl:text-base gap-4 mb-4">
                 @if ($busquedaPalabra !== null)
                     <button
-                        onclick="window.location='{{ url('/detail/second/prc/' . $rucContratista . '/' . $rucEntidad . '/' . $period . '/orden-compra' . '/' . $nameEntidad . '/' . $ruc . '/' . $nameRuc . '/' . $busquedaPalabra) }}'"
+                        onclick="window.location='{{ url('/detail/second/prc/' . $rucContratista . '/' . $rucEntidad . '/' . $period . '/orden-compra' . '/' . $nameEntidad . '/' . $ruc . '/' . $nameRuc . '/' . $ruta . '/' . $primaryVariable . '/' . $busquedaPalabra) }}'"
                         class="btn-preload p-4 bg-white transition-colors shadow-sm rounded-md ring @if ($filter == 'orden-compra') ring-blue-500
                     @else
                         ring-gray-100 @endif   ring-offset-2">Compra</button>
                     <button
-                        onclick="window.location='{{ url('/detail/second/prc/' . $rucContratista . '/' . $rucEntidad . '/' . $period . '/contrato' . '/' . $nameEntidad . '/' . $ruc . '/' . $nameRuc . '/' . $busquedaPalabra) }}'"
+                        onclick="window.location='{{ url('/detail/second/prc/' . $rucContratista . '/' . $rucEntidad . '/' . $period . '/contrato' . '/' . $nameEntidad . '/' . $ruc . '/' . $nameRuc . '/' . $ruta . '/' . $primaryVariable . '/' . $busquedaPalabra) }}'"
                         class="btn-preload p-4 bg-white transition-colors shadow-sm rounded-md ring @if ($filter == 'contrato') ring-blue-500
                     @else
                         ring-gray-100 @endif ring-offset-2">Contrato</button>
                 @else
                     <button
-                        onclick="window.location='{{ url('/detail/second/prc/' . $rucContratista . '/' . $rucEntidad . '/' . $period . '/orden-compra' . '/' . $nameEntidad . '/' . $ruc . '/' . $nameRuc) }}'"
+                        onclick="window.location='{{ url('/detail/second/prc/' . $rucContratista . '/' . $rucEntidad . '/' . $period . '/orden-compra' . '/' . $nameEntidad . '/' . $ruc . '/' . $nameRuc . '/' . $ruta . '/' . $primaryVariable) }}'"
                         class="btn-preload p-4 bg-white transition-colors shadow-sm rounded-md ring @if ($filter == 'orden-compra') ring-blue-500
                     @else
                         ring-gray-100 @endif   ring-offset-2">Compra</button>
                     <button
-                        onclick="window.location='{{ url('/detail/second/prc/' . $rucContratista . '/' . $rucEntidad . '/' . $period . '/contrato' . '/' . $nameEntidad . '/' . $ruc . '/' . $nameRuc) }}'"
+                        onclick="window.location='{{ url('/detail/second/prc/' . $rucContratista . '/' . $rucEntidad . '/' . $period . '/contrato' . '/' . $nameEntidad . '/' . $ruc . '/' . $nameRuc . '/' . $ruta . '/' . $primaryVariable) }}'"
                         class="btn-preload p-4 bg-white transition-colors shadow-sm rounded-md ring @if ($filter == 'contrato') ring-blue-500
                     @else
                         ring-gray-100 @endif ring-offset-2">Contrato</button>
@@ -121,7 +133,7 @@
                             </p>
                             <p class="xl:col-span-1 font-medium grid grid-cols-2 xl:block items-center gap-8">
                                 <span class="text-main-gray font-medium xl:hidden">Monto Total: </span>
-                                <span> {{ round($item->monto_total_original, 2)  }}</span>
+                                <span> {{ round($item->monto_total_original, 2) }}</span>
                             </p>
                         @endforeach
                     </div>

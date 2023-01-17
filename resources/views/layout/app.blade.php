@@ -74,7 +74,7 @@
                 <a href="{{ route('glosario.index') }}" class=" btn-preload text-white cursor-pointer">Glosario</a>
             </nav>
             <button type="button" class="xl:hidden" id="btn-abrir-menu">
-                <img src="{{ asset('images/ icon-menu.png') }}" alt="Menu">
+                <img src="{{ asset('images/icon-menu.svg') }}" alt="Menu">
             </button>
         </header>
     </div>

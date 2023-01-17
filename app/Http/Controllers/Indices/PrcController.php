@@ -12,7 +12,7 @@ class PrcController extends Controller
 {
     //
 
-    public function first($rucEntidad, $period, $nameEntidad, $busquedaPalabra = null)
+    public function first($rucEntidad, $period, $nameEntidad, $ruta, $primaryVariable, $busquedaPalabra = null)
     {
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
         $validator = Validator::make(['period' => $period, 'rucEntidad' => $rucEntidad], [
@@ -21,7 +21,7 @@ class PrcController extends Controller
         ]);
         if (!$validator->fails()) {
             $result = $this->firstDetail($rucEntidad, $period);
-            return view('detail.indices.prc.firstDetail', compact('result', 'rucEntidad', 'period', 'busquedaPalabra', 'nameEntidad'));
+            return view('detail.indices.prc.firstDetail', compact('result', 'rucEntidad', 'period', 'busquedaPalabra', 'nameEntidad', 'ruta', 'primaryVariable'));
         } else {
             abort(404);
         }
@@ -48,7 +48,7 @@ class PrcController extends Controller
         return $data;
     }
 
-    public function second($rucContratista, $rucEntidad, $period, $filter, $nameEntidad, $ruc, $nameRuc, $busquedaPalabra = null)
+    public function second($rucContratista, $rucEntidad, $period, $filter, $nameEntidad, $ruc, $nameRuc, $ruta,  $primaryVariable, $busquedaPalabra = null)
     {
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
         $filters = ['orden-compra', 'contrato'];
@@ -62,7 +62,7 @@ class PrcController extends Controller
             $resultDate = $this->fechaRegistroProveedor($rucEntidad);
             $result = $this->secondDetail($rucEntidad, $rucContratista, $period, $filter);
 
-            return view('detail.indices.prc.secondDetail', compact('result', 'rucEntidad', 'rucContratista', 'period', 'filter', 'resultDate', 'busquedaPalabra', 'nameEntidad', 'ruc', 'nameRuc'));
+            return view('detail.indices.prc.secondDetail', compact('result', 'rucEntidad', 'rucContratista', 'period', 'filter', 'resultDate', 'busquedaPalabra', 'nameEntidad', 'ruc', 'nameRuc', 'ruta', 'primaryVariable'));
         } else {
             abort(404);
         }

@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 
 class CrcController extends Controller
 {
-    public function first($rucEntidad, $period, $nameEntidad, $busquedaPalabra = null)
+    public function first($rucEntidad, $period, $nameEntidad, $ruta, $primaryVariable, $busquedaPalabra = null)
     {
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
         $validator = Validator::make(['period' => $period, 'rucEntidad' => $rucEntidad], [
@@ -21,7 +21,7 @@ class CrcController extends Controller
         ]);
         if (!$validator->fails()) {
             $result = $this->firstDetail($rucEntidad, $period);
-            return view('detail.indices.crc.firstDetail', compact('result', 'rucEntidad', 'period', 'busquedaPalabra', 'nameEntidad'));
+            return view('detail.indices.crc.firstDetail', compact('result', 'rucEntidad', 'period', 'busquedaPalabra', 'nameEntidad', 'primaryVariable', 'ruta'));
         } else {
             abort(404);
         }
@@ -44,7 +44,7 @@ class CrcController extends Controller
         return $data;
     }
 
-    public function second($rucContratista, $rucEntidad, $period, $nameEntidad, $ruc, $nameRuc = 'Sin nombre', $busquedaPalabra = null)
+    public function second($rucContratista, $rucEntidad, $period, $nameEntidad, $ruc, $ruta, $primaryVariable, $nameRuc = 'Sin nombre', $busquedaPalabra = null)
     {
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
 
@@ -56,7 +56,7 @@ class CrcController extends Controller
         ]);
         if (!$validator->fails()) {
             $result = $this->secondDetail($rucContratista, $rucEntidad, $period);
-            return view('detail.indices.crc.secondDetail', compact('result', 'rucEntidad', 'period', 'busquedaPalabra', 'nameEntidad', 'ruc', 'nameRuc'));
+            return view('detail.indices.crc.secondDetail', compact('result', 'rucEntidad', 'period', 'busquedaPalabra', 'nameEntidad', 'ruc', 'nameRuc', 'primaryVariable', 'ruta'));
         } else {
             abort(404);
         }

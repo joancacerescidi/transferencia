@@ -31,8 +31,8 @@ class DepartmentController extends Controller
 
         if (!$validator->fails()) {
             $resultDepartmentDetail = $this->deparmentDetail($period, $department);
-
-            return view('department.index', compact('resultDepartmentDetail', 'department', 'period'));
+            $ruta = 'entidad.deparment';
+            return view('department.index', compact('resultDepartmentDetail', 'department', 'period', 'ruta'));
         } else {
             abort(404);
         }

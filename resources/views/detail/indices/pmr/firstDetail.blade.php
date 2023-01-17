@@ -5,14 +5,24 @@
             <a href="#" class="flex items-center gap-3 mb-8 xl:mb-16 font-semibold text-sm xl:text-lg text-main-blue">
                 <img src="{{ asset('images/icon-chevron-left-blue.png') }}" alt="">
                 <span class="btn-preload" onclick="window.location='{{ url('/') }}'">Inicio</span>
-                @if ($busquedaPalabra !== null)
+                @if ($busquedaPalabra !== null && $busquedaPalabra !== 'default')
                     <span class="btn-preload" onclick="javascript:document.busquedaEntidad.submit()">/ Entidades</span>
                 @else
-                    <span class="btn-preload"
-                        onclick="window.location='{{ url('/ranking/entidad/' . $period . '/monto') }}'">/
-                        Entidades</span>
+                    @if ($ruta === 'entidad.goverment')
+                        <span class="btn-preload"
+                            onclick="window.location='{{ url('/detail-government-level' . '/' . $primaryVariable . '/' . $period) }}'">/
+                            Entidades</span>
+                    @elseif($ruta === 'entidad.deparment')
+                        <span class="btn-preload"
+                            onclick="window.location='{{ url('/detail-deparment-period' . '/' . $primaryVariable . '/' . $period) }}'">/
+                            Entidades</span>
+                    @elseif($ruta === 'entidad.busqueda')
+                        <span class="btn-preload"
+                            onclick="window.location='{{ url('/ranking/entidad/' . $period . '/monto') }}'">/
+                            Entidades</span>
+                    @endif
                 @endif
-                @if ($busquedaPalabra !== null)
+                @if ($busquedaPalabra !== null && $busquedaPalabra !== 'default')
                     <form onsubmit='return preloadActive()' action="{{ route('entidad.busqueda', [$period, 'monto']) }}"
                         method="POST" name="busquedaEntidad" id="busquedaEntidad">
                         @csrf
@@ -57,11 +67,11 @@
 
                             @if ($busquedaPalabra !== null)
                                 <a class="btn-preload"
-                                    href="{{ url('/detail/second/pmr/' . $item->ruc_contratista . '/' . $rucEntidad . '/' . $period . '/' . $nameEntidad . '/' . $item->ruc_contratista . '/' . $item->nombre_contratista . '/' . $busquedaPalabra) }}">{{ $item->ruc_contratista }}
+                                    href="{{ url('/detail/second/pmr/' . $item->ruc_contratista . '/' . $rucEntidad . '/' . $period . '/' . $nameEntidad . '/' . $item->ruc_contratista . '/' . $item->nombre_contratista . '/' . $ruta . '/' . $primaryVariable . '/' . $busquedaPalabra) }}">{{ $item->ruc_contratista }}
                                 </a>
                             @else
                                 <a class="btn-preload"
-                                    href="{{ url('/detail/second/pmr/' . $item->ruc_contratista . '/' . $rucEntidad . '/' . $period . '/' . $nameEntidad . '/' . $item->ruc_contratista . '/' . $item->nombre_contratista) }}">{{ $item->ruc_contratista }}
+                                    href="{{ url('/detail/second/pmr/' . $item->ruc_contratista . '/' . $rucEntidad . '/' . $period . '/' . $nameEntidad . '/' . $item->ruc_contratista . '/' . $item->nombre_contratista . '/' . $ruta . '/' . $primaryVariable) }}">{{ $item->ruc_contratista }}
                                 </a>
                             @endif
                         </p>

@@ -291,7 +291,15 @@
                         const i = elements[0].index;
                         const url = "<?php echo URL::to('detail-government-level'); ?>";
                         const period = "<?php echo $period; ?>";
-                        const finalUrl = url + '/' + chart.data.labels[i] + '/' + period;
+                        var regionSigla = '';
+                        if (chart.data.labels[i]==='REGIONAL') {
+                            regionSigla = 'R';
+                        } else if (chart.data.labels[i]==='LOCAL') {
+                            regionSigla = 'L';
+                        } else if (chart.data.labels[i]==='AUTÓNOMO') {
+                            regionSigla = 'A';
+                        }
+                        const finalUrl = url + '/' + regionSigla + '/' + period;
                         window.location.href = finalUrl;
                     }
                 }
@@ -371,19 +379,19 @@
 
                     dataDepartment.forEach((value) => {
                         if (value.departamento === name) {
-                            m_compra = parseInt(value.montoordencompra);
-                            m_contrato = parseInt(value.montocontrato);
-                            c_fra = parseInt(value.cantidadfra);
-                            m_prc = parseInt(value.montoprc);
-                            m_pmr = parseInt(value.montopmr);
-                            m_crc = parseInt(value.montocrc);
-                            m_adi = parseInt(value.montoadi);
-                            m_cof = parseInt(value.montocof);
-                            m_fra = parseInt(value.montofra);
-                            c_dprc = parseInt(value.cantidadprc);
-                            c_dpmr = parseInt(value.cantidadpmr);
-                            c_dcrc = parseInt(value.cantidadcrc);
-                            c_adi = parseInt(value.cantidadadi);
+                            m_compra = parseInt(value.montoordencompra).toLocaleString('en-US');
+                            m_contrato = parseInt(value.montocontrato).toLocaleString('en-US');
+                            c_fra = parseInt(value.cantidadfra).toLocaleString('en-US');
+                            m_prc = parseInt(value.montoprc).toLocaleString('en-US');
+                            m_pmr = parseInt(value.montopmr).toLocaleString('en-US');
+                            m_crc = parseInt(value.montocrc).toLocaleString('en-US');
+                            m_adi = parseInt(value.montoadi).toLocaleString('en-US');
+                            m_cof = parseInt(value.montocof).toLocaleString('en-US');
+                            m_fra = parseInt(value.montofra).toLocaleString('en-US');
+                            c_dprc = parseInt(value.cantidadprc).toLocaleString('en-US');
+                            c_dpmr = parseInt(value.cantidadpmr).toLocaleString('en-US');
+                            c_dcrc = parseInt(value.cantidadcrc).toLocaleString('en-US');
+                            c_adi = parseInt(value.cantidadadi).toLocaleString('en-US');
                         }
                     });
 

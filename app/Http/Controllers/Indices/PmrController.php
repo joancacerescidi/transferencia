@@ -11,7 +11,7 @@ use Illuminate\Validation\Rule;
 class PmrController extends Controller
 {
     //
-    public function first($rucEntidad, $period,  $nameEntidad, $busquedaPalabra = null)
+    public function first($rucEntidad, $period,  $nameEntidad, $ruta, $primaryVariable, $busquedaPalabra = null)
     {
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
         $validator = Validator::make(['period' => $period, 'rucEntidad' => $rucEntidad], [
@@ -20,7 +20,7 @@ class PmrController extends Controller
         ]);
         if (!$validator->fails()) {
             $result = $this->firstDetail($rucEntidad, $period);
-            return view('detail.indices.pmr.firstDetail', compact('result', 'rucEntidad', 'period', 'busquedaPalabra', 'nameEntidad'));
+            return view('detail.indices.pmr.firstDetail', compact('result', 'rucEntidad', 'period', 'busquedaPalabra', 'nameEntidad', 'ruta', 'primaryVariable'));
         } else {
             abort(404);
         }
@@ -38,7 +38,7 @@ class PmrController extends Controller
 
         return $data;
     }
-    public function second($rucContratista, $rucEntidad, $period,  $nameEntidad, $ruc, $nameRuc, $busquedaPalabra = null)
+    public function second($rucContratista, $rucEntidad, $period,  $nameEntidad, $ruc, $nameRuc, $ruta, $primaryVariable, $busquedaPalabra = null)
     {
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
         $validator = Validator::make(['period' => $period, 'rucContratista' => $rucContratista, 'rucEntidad' => $rucEntidad], [
@@ -49,7 +49,7 @@ class PmrController extends Controller
         if (!$validator->fails()) {
             $result = $this->secondDetail($rucEntidad, $rucContratista, $period);
             $conformacion = $this->conformacionJuridica($rucContratista);
-            return view('detail.indices.pmr.secondDetail', compact('result', 'period', 'rucEntidad', 'conformacion', 'busquedaPalabra', 'nameEntidad', 'ruc', 'nameRuc'));
+            return view('detail.indices.pmr.secondDetail', compact('result', 'period', 'rucEntidad', 'conformacion', 'busquedaPalabra', 'nameEntidad', 'ruc', 'nameRuc', 'ruta', 'primaryVariable'));
         } else {
             abort(404);
         }

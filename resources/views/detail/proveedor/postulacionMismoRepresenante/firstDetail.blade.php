@@ -4,14 +4,25 @@
         <section class="py-20 px-6 xl:px-10">
             <a href="#" class="flex items-center gap-3 mb-8 xl:mb-16 font-semibold text-sm xl:text-lg text-main-blue">
                 <img src="{{ asset('images/icon-chevron-left-blue.png') }}" alt="">
-                <span>
-                    <span onclick="window.location='{{ url('/') }}'">Inicio </span>
-                    {{-- <span onclick="window.location='{{ url('/') }}'">/ Inicio</span> --}}
-                </span>
+
+                <span onclick="window.location='{{ url('/') }}'">Inicio </span>
+                @if ($busquedaPalabra !== null)
+                    <span class="btn-preload" onclick="javascript:document.busquedaProveedor.submit()">/ Proveedor</span>
+                @else
+                    <span class="btn-preload" onclick="window.location='{{ url('/ranking/proveedor/' . $period) }}'">/
+                        Proveedor</span>
+                @endif
+                @if ($busquedaPalabra !== null)
+                    <form onsubmit='return preloadActive()' action="{{ route('proveedor.busqueda', [$period]) }}"
+                        method="POST" name="busquedaProveedor" id="busquedaProveedor">
+                        @csrf
+                        <input type="hidden" name="palabraClave" value="{{ $busquedaPalabra }}">
+                    </form>
+                @endif
             </a>
 
             <h2 class="text-center text-xl xl:text-4xl font-bold mb-6 xl:mb-14">
-              POSTULACIÓN MISMO REPRESENTANTE  <br> {{ $nombre }}
+                POSTULACIÓN MISMO REPRESENTANTE <br> {{ $nombre }}
             </h2>
 
             <article
@@ -38,7 +49,7 @@
                         <p class="xl:col-span-1 font-semibold grid grid-cols-2 xl:block items-center gap-8">
                             <span class="text-main-gray font-medium xl:hidden">Entidad Ruc:</span>
                             <a class="btn-preload"
-                                href="{{ url('/detail/postulaciones-con-mismo-representante/second/proveedor/' . $item->entidad_ruc . '/' . $rucContratista . '/' . $period. '/' . $item->entidad_ruc . '/' . $item->entidad . '/' . $nombre) }}">{{ $item->entidad_ruc }}</a>
+                                href="{{ url('/detail/postulaciones-con-mismo-representante/second/proveedor/' . $item->entidad_ruc . '/' . $rucContratista . '/' . $period . '/' . $item->entidad_ruc . '/' . $item->entidad . '/' . $nombre) }}">{{ $item->entidad_ruc }}</a>
                         </p>
                         <p class="xl:col-span-1 font-medium grid grid-cols-2 xl:block items-center gap-8">
                             <span class="text-main-gray font-medium xl:hidden">Entidad:</span>

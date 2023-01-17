@@ -7,7 +7,7 @@
 
                 <span class="btn-preload" onclick="window.location='{{ url('/') }}'">Inicio</span>
                 @if ($busquedaPalabra !== null)
-                    <span class="btn-preload" onclick="javascript:document.busquedaEntidad.submit()">/ Funcionario</span>
+                    <span class="btn-preload" onclick="javascript:document.busquedaFuncionario.submit()">/ Funcionario</span>
                 @else
                     <span class="btn-preload" onclick="window.location='{{ url('/ranking/funcionario/' . $period) }}'">/
 
@@ -15,7 +15,7 @@
                 @endif
                 @if ($busquedaPalabra !== null)
                     <form onsubmit='return preloadActive()' action="{{ route('funcionario.busqueda', [$period]) }}"
-                        method="POST" name="busquedaEntidad" id="busquedaEntidad">
+                        method="POST" name="busquedaFuncionario" id="busquedaFuncionario">
                         @csrf
                         <input type="hidden" name="palabraClave" value="{{ $busquedaPalabra }}">
                     </form>

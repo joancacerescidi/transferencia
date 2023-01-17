@@ -7,14 +7,25 @@
 
                 <span class="btn-preload" onclick="window.location='{{ url('/') }}'">Inicio</span>
 
-                @if ($busquedaPalabra !== null)
+                @if ($busquedaPalabra !== null && $busquedaPalabra !== 'default')
                     <span class="btn-preload" onclick="javascript:document.busquedaEntidad.submit()">/ Entidades</span>
                 @else
-                    <span class="btn-preload"
-                        onclick="window.location='{{ url('/ranking/entidad/' . $period . '/monto') }}'">/
-                        Entidades</span>
+                    @if ($ruta === 'entidad.goverment')
+                        <span class="btn-preload"
+                            onclick="window.location='{{ url('/detail-government-level' . '/' . $primaryVariable . '/' . $period) }}'">/
+                            Entidades</span>
+                    @elseif($ruta === 'entidad.deparment')
+                        <span class="btn-preload"
+                            onclick="window.location='{{ url('/detail-deparment-period' . '/' . $primaryVariable . '/' . $period) }}'">/
+                            Entidades</span>
+                    @elseif($ruta === 'entidad.busqueda')
+                        <span class="btn-preload"
+                            onclick="window.location='{{ url('/ranking/entidad/' . $period . '/monto') }}'">/
+                            Entidades</span>
+                    @endif
+
                 @endif
-                @if ($busquedaPalabra !== null)
+                @if ($busquedaPalabra !== null && $busquedaPalabra !== 'default')
                     <form onsubmit='return preloadActive()' action="{{ route('entidad.busqueda', [$period, 'monto']) }}"
                         method="POST" name="busquedaEntidad" id="busquedaEntidad">
                         @csrf
@@ -27,7 +38,6 @@
             <h2 class="text-center text-xl xl:text-4xl font-bold mb-6 xl:mb-14">
                 FRACCIONAMIENTO <br>
                 {{ $nameEntidad }}
-              22  {{ $nombreRuta }}22
             </h2>
             <article
                 class="bg-white border border-gray-200 shadow-sm rounded-xl mb-6 cursor-pointer hover:shadow-lg overflow-x-auto">
@@ -57,11 +67,11 @@
                             <span class="text-main-gray font-medium xl:hidden">Ruc:</span>
                             @if ($busquedaPalabra !== null)
                                 <a class="btn-preload"
-                                    href="{{ url('/detail/second/fraccionamiento/' . $item->ruc . '/' . $rucEntidad . '/' . $period . '/orden-compra' . '/' . $nameEntidad . '/' . $item->ruc . '/' . $item->nombre . '/' . $busquedaPalabra) }}">{{ $item->ruc }}
+                                    href="{{ url('/detail/second/fraccionamiento/' . $item->ruc . '/' . $rucEntidad . '/' . $period . '/orden-compra' . '/' . $nameEntidad . '/' . $item->ruc . '/' . $item->nombre . '/' . $ruta . '/' . $primaryVariable . '/' . $busquedaPalabra) }}">{{ $item->ruc }}
                                 </a>
                             @else
                                 <a class="btn-preload"
-                                    href="{{ url('/detail/second/fraccionamiento/' . $item->ruc . '/' . $rucEntidad . '/' . $period . '/orden-compra' . '/' . $nameEntidad . '/' . $item->ruc . '/' . $item->nombre) }}">{{ $item->ruc }}
+                                    href="{{ url('/detail/second/fraccionamiento/' . $item->ruc . '/' . $rucEntidad . '/' . $period . '/orden-compra' . '/' . $nameEntidad . '/' . $item->ruc . '/' . $item->nombre . '/' . $ruta . '/' . $primaryVariable) }}">{{ $item->ruc }}
                                 </a>
                             @endif
 

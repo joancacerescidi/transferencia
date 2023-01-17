@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use stdClass;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Route;
 
 class RankingSearchController extends Controller
 {
@@ -51,7 +52,8 @@ class RankingSearchController extends Controller
                 ->where('anno', $period)
                 ->orderBy($order, 'DESC')->paginate(10);
             $result = $this->convertDataEntidad($data);
-            return view('ranking.entidad', compact('result', 'period', 'order'));
+            $ruta = 'entidad.busqueda';
+            return view('ranking.entidad', compact('result', 'period', 'order', 'ruta'));
         } else {
             abort(404);
         }
@@ -106,7 +108,8 @@ class RankingSearchController extends Controller
             $result = $this->convertDataEntidad($data);
             $search = true;
             $busquedaPalabra = $request->palabraClave;
-            return view('ranking.entidad', compact('result', 'search', 'period', 'busquedaPalabra', 'order'));
+            $ruta = 'entidad.busqueda';
+            return view('ranking.entidad', compact('result', 'search', 'period', 'busquedaPalabra', 'order', 'ruta'));
         } else {
             abort(404);
         }
@@ -138,7 +141,6 @@ class RankingSearchController extends Controller
             ->orderBy('ranking', 'DESC')->paginate(10);
 
         $result = $this->convertDataProveedor($data);
-
         return view('ranking.proveedor', compact('result', 'period'));
     }
     public function searchProveedor(Request $request, $period)

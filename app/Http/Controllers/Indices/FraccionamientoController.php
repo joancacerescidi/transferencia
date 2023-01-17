@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 class FraccionamientoController extends Controller
 {
     //
-    public function first($rucEntidad, $period, $nameEntidad, $busquedaPalabra = null)
+    public function first($rucEntidad, $period, $nameEntidad, $ruta, $primaryVariable, $busquedaPalabra = null)
     {
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
         $validator = Validator::make(['period' => $period, 'rucEntidad' => $rucEntidad], [
@@ -23,7 +23,7 @@ class FraccionamientoController extends Controller
         if (!$validator->fails()) {
             $result = $this->firstDetail($rucEntidad, $period);
             $nombreRuta = Route::currentRouteName();
-            return view('detail.indices.fraccionamiento.firstDetail', compact('result', 'rucEntidad', 'period', 'busquedaPalabra', 'nameEntidad', 'nombreRuta'));
+            return view('detail.indices.fraccionamiento.firstDetail', compact('result', 'rucEntidad', 'period', 'busquedaPalabra', 'nameEntidad', 'nombreRuta', 'ruta', 'primaryVariable'));
         } else {
             abort(404);
         }
@@ -53,7 +53,7 @@ class FraccionamientoController extends Controller
 
         return $data;
     }
-    public function second($rucContratista, $rucEntidad, $period, $filter, $nameEntidad, $ruc, $nameRuc, $busquedaPalabra = null)
+    public function second($rucContratista, $rucEntidad, $period, $filter, $nameEntidad, $ruc, $nameRuc, $ruta,  $primaryVariable, $busquedaPalabra = null)
     {
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
         $filters = ['orden-compra', 'contrato'];
@@ -66,7 +66,7 @@ class FraccionamientoController extends Controller
         if (!$validator->fails()) {
             $result = $this->secondDetail($rucContratista, $rucEntidad, $period, $filter);
             // dd($result);
-            return view('detail.indices.fraccionamiento.secondDetail', compact('result', 'filter', 'period', 'rucContratista', 'rucEntidad', 'busquedaPalabra', 'nameEntidad', 'ruc', 'nameRuc'));
+            return view('detail.indices.fraccionamiento.secondDetail', compact('result', 'filter', 'period', 'rucContratista', 'rucEntidad', 'busquedaPalabra', 'nameEntidad', 'ruc', 'nameRuc', 'ruta', 'primaryVariable'));
         } else {
             abort(404);
         }

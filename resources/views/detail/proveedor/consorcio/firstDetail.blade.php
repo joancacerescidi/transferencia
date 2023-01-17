@@ -7,14 +7,14 @@
 
                 <span class="btn-preload" onclick="window.location='{{ url('/') }}'">Inicio </span>
                 @if ($busquedaPalabra !== null)
-                    <span class="btn-preload" onclick="javascript:document.busquedaEntidad.submit()">/ Proveedor</span>
+                    <span class="btn-preload" onclick="javascript:document.busquedaProveedor.submit()">/ Proveedor</span>
                 @else
                     <span class="btn-preload" onclick="window.location='{{ url('/ranking/proveedor/' . $period) }}'">/
                         Proveedor</span>
                 @endif
                 @if ($busquedaPalabra !== null)
                     <form onsubmit='return preloadActive()' action="{{ route('proveedor.busqueda', [$period]) }}"
-                        method="POST" name="busquedaEntidad" id="busquedaEntidad">
+                        method="POST" name="busquedaProveedor" id="busquedaProveedor">
                         @csrf
                         <input type="hidden" name="palabraClave" value="{{ $busquedaPalabra }}">
                     </form>
