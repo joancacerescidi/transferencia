@@ -83,11 +83,11 @@
                             <span class="text-main-gray font-medium xl:hidden">Ruc:</span>
                             @if ($busquedaPalabra !== null)
                                 <a class="btn-preload"
-                                    href="{{ url('/detail/second/prc/' . $item->ruc . '/' . $rucEntidad . '/' . $period . '/orden-compra' . '/' . $nameEntidad . '/' . $item->ruc . '/' . $item->nombre . '/' . $ruta . '/' . $primaryVariable . '/' . $busquedaPalabra) }}">{{ $item->ruc }}
+                                    href="{{ url('/detail/second/prc/' . $item->ruc . '/' . $rucEntidad . '/' . $period . '/orden-compra' . '/' . $nameEntidad . '/' . $item->ruc . '/' . $item->nombre . '/' . $ruta . '/' . $primaryVariable . '/fecha_emision' . '/' . $busquedaPalabra) }}">{{ $item->ruc }}
                                 </a>
                             @else
                                 <a class="btn-preload"
-                                    href="{{ url('/detail/second/prc/' . $item->ruc . '/' . $rucEntidad . '/' . $period . '/orden-compra' . '/' . $nameEntidad . '/' . $item->ruc . '/' . $item->nombre . '/' . $ruta . '/' . $primaryVariable) }}">{{ $item->ruc }}
+                                    href="{{ url('/detail/second/prc/' . $item->ruc . '/' . $rucEntidad . '/' . $period . '/orden-compra' . '/' . $nameEntidad . '/' . $item->ruc . '/' . $item->nombre . '/' . $ruta . '/' . $primaryVariable . '/fecha_emision') }}">{{ $item->ruc }}
                                 </a>
                             @endif
                         </p>

@@ -81,7 +81,7 @@ class FraccionamientoController extends Controller
                 ->where('anno', '=', $period)
                 ->where('ruc_entidad', '=', $rucEntidad)
                 ->where('ruc_contratista', '=', $rucContratista)
-                ->orderBy('fecha_emision', 'asc')
+                ->orderBy($orderTable, 'asc')
                 ->paginate(10);
         } else if ($filter == 'contrato') {
             $data = DB::table('osce_contrato')
@@ -89,7 +89,7 @@ class FraccionamientoController extends Controller
                 ->where('anno', '=', $period)
                 ->where('ruc_entidad', '=', $rucEntidad)
                 ->where('ruc_contratista', '=', $rucContratista)
-                ->orderBy('fecha_suscripcion_contrato', 'asc')
+                ->orderBy($orderTable, 'asc')
                 ->paginate(10);
         }
         return $data;

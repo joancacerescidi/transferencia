@@ -26,11 +26,11 @@
 
                 @if ($busquedaPalabra !== null)
                     <span class="btn-preload"
-                        onclick="window.location='{{ url('/detail/first/prc/' . $rucEntidad . '/' . $period . '/' . $nameEntidad . '/' . $ruta . '/' . $primaryVariable . '/' . $busquedaPalabra) }}'">/
+                        onclick="window.location='{{ url('/detail/first/prc/' . $rucEntidad . '/' . $period . '/' . $nameEntidad . '/' . $ruta . '/' . $primaryVariable . '/monto' . $busquedaPalabra) }}'">/
                         Proveedor</span>
                 @else
                     <span class="btn-preload"
-                        onclick="window.location='{{ url('/detail/first/prc/' . $rucEntidad . '/' . $period . '/' . $nameEntidad . '/' . $ruta . '/' . $primaryVariable) }}'">/
+                        onclick="window.location='{{ url('/detail/first/prc/' . $rucEntidad . '/' . $period . '/' . $nameEntidad . '/' . $ruta . '/' . $primaryVariable . '/monto') }}'">/
                         Proveedor</span>
                 @endif
                 @if ($busquedaPalabra !== null)
@@ -54,23 +54,23 @@
             <div class="flex flex-wrap font-semibold text-xs xl:text-base gap-4 mb-4">
                 @if ($busquedaPalabra !== null)
                     <button
-                        onclick="window.location='{{ url('/detail/second/prc/' . $rucContratista . '/' . $rucEntidad . '/' . $period . '/orden-compra' . '/' . $nameEntidad . '/' . $ruc . '/' . $nameRuc . '/' . $ruta . '/' . $primaryVariable . '/' . $busquedaPalabra) }}'"
+                        onclick="window.location='{{ url('/detail/second/prc/' . $rucContratista . '/' . $rucEntidad . '/' . $period . '/orden-compra' . '/' . $nameEntidad . '/' . $ruc . '/' . $nameRuc . '/' . $ruta . '/' . $primaryVariable . '/fecha_emision' . '/' . $busquedaPalabra) }}'"
                         class="btn-preload p-4 bg-white transition-colors shadow-sm rounded-md ring @if ($filter == 'orden-compra') ring-blue-500
                     @else
                         ring-gray-100 @endif   ring-offset-2">Compra</button>
                     <button
-                        onclick="window.location='{{ url('/detail/second/prc/' . $rucContratista . '/' . $rucEntidad . '/' . $period . '/contrato' . '/' . $nameEntidad . '/' . $ruc . '/' . $nameRuc . '/' . $ruta . '/' . $primaryVariable . '/' . $busquedaPalabra) }}'"
+                        onclick="window.location='{{ url('/detail/second/prc/' . $rucContratista . '/' . $rucEntidad . '/' . $period . '/contrato' . '/' . $nameEntidad . '/' . $ruc . '/' . $nameRuc . '/' . $ruta . '/' . $primaryVariable . '/fecha_suscripcion_contrato' . '/' . $busquedaPalabra) }}'"
                         class="btn-preload p-4 bg-white transition-colors shadow-sm rounded-md ring @if ($filter == 'contrato') ring-blue-500
                     @else
                         ring-gray-100 @endif ring-offset-2">Contrato</button>
                 @else
                     <button
-                        onclick="window.location='{{ url('/detail/second/prc/' . $rucContratista . '/' . $rucEntidad . '/' . $period . '/orden-compra' . '/' . $nameEntidad . '/' . $ruc . '/' . $nameRuc . '/' . $ruta . '/' . $primaryVariable) }}'"
+                        onclick="window.location='{{ url('/detail/second/prc/' . $rucContratista . '/' . $rucEntidad . '/' . $period . '/orden-compra' . '/' . $nameEntidad . '/' . $ruc . '/' . $nameRuc . '/' . $ruta . '/' . $primaryVariable . '/fecha_emision') }}'"
                         class="btn-preload p-4 bg-white transition-colors shadow-sm rounded-md ring @if ($filter == 'orden-compra') ring-blue-500
                     @else
                         ring-gray-100 @endif   ring-offset-2">Compra</button>
                     <button
-                        onclick="window.location='{{ url('/detail/second/prc/' . $rucContratista . '/' . $rucEntidad . '/' . $period . '/contrato' . '/' . $nameEntidad . '/' . $ruc . '/' . $nameRuc . '/' . $ruta . '/' . $primaryVariable) }}'"
+                        onclick="window.location='{{ url('/detail/second/prc/' . $rucContratista . '/' . $rucEntidad . '/' . $period . '/contrato' . '/' . $nameEntidad . '/' . $ruc . '/' . $nameRuc . '/' . $ruta . '/' . $primaryVariable . '/fecha_suscripcion_contrato') }}'"
                         class="btn-preload p-4 bg-white transition-colors shadow-sm rounded-md ring @if ($filter == 'contrato') ring-blue-500
                     @else
                         ring-gray-100 @endif ring-offset-2">Contrato</button>
@@ -82,10 +82,17 @@
                     class="bg-white border border-gray-200 shadow-sm rounded-xl mb-6 cursor-pointer hover:shadow-lg overflow-x-auto">
                     <header
                         class="bg-gray-800 text-white p-5 hidden xl:grid grid-cols-2 xl:grid-cols-11 gap-8 items-center text-xs xl:text-sm mb-6 xl:mb-14">
-                        <p class="xl:col-span-2 font-semibold flex items-center gap-2">
+                        <a href=" @if ($busquedaPalabra !== null) {{ url('/detail/second/fraccionamiento/' . $rucContratista . '/' . $rucEntidad . '/' . $period . '/orden-compra' . '/' . $nameEntidad . '/' . $ruc . '/' . $nameRuc . '/' . $ruta . '/' . $primaryVariable . '/fecha_emision' . '/' . $busquedaPalabra) }}
+                    @else
+                        {{ url('/detail/second/prc/' . $rucContratista . '/' . $rucEntidad . '/' . $period . '/orden-compra' . '/' . $nameEntidad . '/' . $ruc . '/' . $nameRuc . '/' . $ruta . '/' . $primaryVariable . '/fecha_emision') }} @endif "
+                            class="btn-preload xl:col-span-2 font-semibold flex items-center gap-2">
                             Fecha Emisión
-                            {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
-                        </p>
+                            @if ($orderTable == 'fecha_emision')
+                                <img src="{{ asset('images/icon-chevron-up.png') }}" alt="w-max">
+                            @else
+                                <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max">
+                            @endif
+                        </a>
                         <p class="xl:col-span-5 font-semibold flex items-center">
                             Descripción Orden
                             {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
@@ -102,10 +109,17 @@
                             Moneda
                             {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
                         </p>
-                        <p class="xl:col-span-1 font-semibold hidden xl:flex items-center gap-2">
+                        <a href=" @if ($busquedaPalabra !== null) {{ url('/detail/second/prc/' . $rucContratista . '/' . $rucEntidad . '/' . $period . '/orden-compra' . '/' . $nameEntidad . '/' . $ruc . '/' . $nameRuc . '/' . $ruta . '/' . $primaryVariable . '/monto_total_original' . '/' . $busquedaPalabra) }}
+                    @else
+                        {{ url('/detail/second/prc/' . $rucContratista . '/' . $rucEntidad . '/' . $period . '/orden-compra' . '/' . $nameEntidad . '/' . $ruc . '/' . $nameRuc . '/' . $ruta . '/' . $primaryVariable . '/monto_total_original') }} @endif "
+                            class="btn-preload xl:col-span-1 font-semibold hidden xl:flex items-center gap-2">
                             Monto Total
-                            {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
-                        </p>
+                            @if ($orderTable == 'monto_total_original')
+                                <img src="{{ asset('images/icon-chevron-up.png') }}" alt="w-max">
+                            @else
+                                <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max">
+                            @endif
+                        </a>
                     </header>
                     <div
                         class="px-5 py-5 xl:py-0 grid xl:grid-cols-11 items-start gap-8 text-xs xl:text-sm mb-10 border-b pb-4 xl:pb-0 xl:border-0">
@@ -146,10 +160,17 @@
                     class="bg-white border border-gray-200 shadow-sm rounded-xl mb-6 cursor-pointer hover:shadow-lg overflow-x-auto">
                     <header
                         class="bg-gray-800 text-white p-5 hidden xl:grid grid-cols-2 xl:grid-cols-11 gap-8 items-center text-xs xl:text-sm mb-6 xl:mb-14">
-                        <p class="xl:col-span-2 font-semibold flex items-center gap-2">
+                        <a href=" @if ($busquedaPalabra !== null) {{ url('/detail/second/prc/' . $rucContratista . '/' . $rucEntidad . '/' . $period . '/contrato' . '/' . $nameEntidad . '/' . $ruc . '/' . $nameRuc . '/' . $ruta . '/' . $primaryVariable . '/fecha_suscripcion_contrato' . '/' . $busquedaPalabra) }}
+                    @else
+                        {{ url('/detail/second/prc/' . $rucContratista . '/' . $rucEntidad . '/' . $period . '/contrato' . '/' . $nameEntidad . '/' . $ruc . '/' . $nameRuc . '/' . $ruta . '/' . $primaryVariable . '/fecha_suscripcion_contrato') }} @endif "
+                            class="btn-preload  xl:col-span-2 font-semibold flex items-center gap-2">
                             Fecha Suscripcion Contrato
-                            {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
-                        </p>
+                            @if ($orderTable == 'fecha_suscripcion_contrato')
+                                <img src="{{ asset('images/icon-chevron-up.png') }}" alt="w-max">
+                            @else
+                                <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max">
+                            @endif
+                        </a>
                         <p class="xl:col-span-5 font-semibold flex items-center">
                             Descripción Proceso
                             {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
@@ -166,10 +187,17 @@
                             Moneda
                             {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
                         </p>
-                        <p class="xl:col-span-1 font-semibold hidden xl:flex items-center gap-2">
+                        <a href=" @if ($busquedaPalabra !== null) {{ url('/detail/second/prc/' . $rucContratista . '/' . $rucEntidad . '/' . $period . '/contrato' . '/' . $nameEntidad . '/' . $ruc . '/' . $nameRuc . '/' . $ruta . '/' . $primaryVariable . '/monto_contratado_item' . '/' . $busquedaPalabra) }}
+                    @else
+                        {{ url('/detail/second/prc/' . $rucContratista . '/' . $rucEntidad . '/' . $period . '/contrato' . '/' . $nameEntidad . '/' . $ruc . '/' . $nameRuc . '/' . $ruta . '/' . $primaryVariable . '/monto_contratado_item') }} @endif "
+                            class="btn-preload  xl:col-span-1 font-semibold hidden xl:flex items-center gap-2">
                             Monto Contratado
-                            {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
-                        </p>
+                            @if ($orderTable == 'monto_contratado_item')
+                                <img src="{{ asset('images/icon-chevron-up.png') }}" alt="w-max">
+                            @else
+                                <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max">
+                            @endif
+                        </a>
                     </header>
                     <div
                         class="px-5 py-5 xl:py-0 grid xl:grid-cols-11 items-start gap-8 text-xs xl:text-sm mb-10 border-b pb-4 xl:pb-0 xl:border-0">
