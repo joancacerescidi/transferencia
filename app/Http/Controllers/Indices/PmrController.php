@@ -53,7 +53,7 @@ class PmrController extends Controller
         if (!$validator->fails()) {
             $result = $this->secondDetail($rucEntidad, $rucContratista, $period, $orderTable);
             $conformacion = $this->conformacionJuridica($rucContratista);
-            return view('detail.indices.pmr.secondDetail', compact('result', 'period', 'rucEntidad', 'conformacion', 'busquedaPalabra', 'nameEntidad', 'ruc', 'nameRuc', 'ruta', 'primaryVariable', 'orderTable'));
+            return view('detail.indices.pmr.secondDetail', compact('result', 'rucContratista', 'period', 'rucEntidad', 'conformacion', 'busquedaPalabra', 'nameEntidad', 'ruc', 'nameRuc', 'ruta', 'primaryVariable', 'orderTable'));
         } else {
             abort(404);
         }
