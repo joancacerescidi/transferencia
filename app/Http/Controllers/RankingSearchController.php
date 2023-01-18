@@ -142,40 +142,44 @@ class RankingSearchController extends Controller
         $result = $this->convertDataProveedor($data);
         return view('ranking.proveedor', compact('result', 'period'));
     }
-    public function searchProveedor(Request $request, $period)
+    public function searchProveedor($period, $busquedaPalabra)
     {
-        $request->validate([
-            'palabraClave' => 'required|string',
+        $validator = Validator::make(['busquedaPalabra' => $busquedaPalabra], [
+            'busquedaPalabra' => ['required', 'string'],
         ]);
-        $data = DB::table('public.proveedor_anno')
-            ->select(
-                'ruc_proveedor',
-                'nombre',
-                'anno',
-                'cantidadoc',
-                'montooc',
-                'cantidadcontrato',
-                'montocontrato',
-                'cantidadconsorcio',
-                'montoconsorcio',
-                'cantidadpostor',
-                'cantidadpmr',
-                'cantidadresuelto',
-                'montoresuelto',
-                'cantidadsanciones',
-                'cantidadpenalidad',
-                'montopenalidad',
-                DB::raw('(cantidadoc + cantidadcontrato + cantidadconsorcio) as ranking')
-            )
-            ->where('anno', $period)
-            ->where('ruc_proveedor', strtoupper($request->palabraClave))
-            ->orWhere('nombre', 'LIKE', '%' . strtoupper($request->palabraClave) . '%')
-            ->orderBy('ranking', 'DESC')->paginate(10);
+        if (!$validator->fails()) {
+            $data = DB::table('public.proveedor_anno')
+                ->select(
+                    'ruc_proveedor',
+                    'nombre',
+                    'anno',
+                    'cantidadoc',
+                    'montooc',
+                    'cantidadcontrato',
+                    'montocontrato',
+                    'cantidadconsorcio',
+                    'montoconsorcio',
+                    'cantidadpostor',
+                    'cantidadpmr',
+                    'cantidadresuelto',
+                    'montoresuelto',
+                    'cantidadsanciones',
+                    'cantidadpenalidad',
+                    'montopenalidad',
+                    DB::raw('(cantidadoc + cantidadcontrato + cantidadconsorcio) as ranking')
+                )
+                ->where('anno', $period)
+                ->where('ruc_proveedor', strtoupper($busquedaPalabra))
+                ->orWhere('nombre', 'LIKE', '%' . strtoupper($busquedaPalabra) . '%')
+                ->orderBy('ranking', 'DESC')->paginate(10);
 
-        $result = $this->convertDataProveedor($data);
-        $search = true;
-        $busquedaPalabra = $request->palabraClave;
-        return view('ranking.proveedor', compact('result', 'search', 'period', 'busquedaPalabra'));
+            $result = $this->convertDataProveedor($data);
+            $search = true;
+            $busquedaPalabra = $busquedaPalabra;
+            return view('ranking.proveedor', compact('result', 'search', 'period', 'busquedaPalabra'));
+        } else {
+            abort(404);
+        }
     }
     public function rankingFuncionario($period)
     {
@@ -216,49 +220,53 @@ class RankingSearchController extends Controller
         $result = $this->convertDataFuncionario($data);
         return view('ranking.funcionario', compact('result', 'period'));
     }
-    public function searchFuncionario(Request $request, $period)
+    public function searchFuncionario($period, $busquedaPalabra)
     {
-        $request->validate([
-            'palabraClave' => 'required|string',
+        $validator = Validator::make(['busquedaPalabra' => $busquedaPalabra], [
+            'busquedaPalabra' => ['required', 'string'],
         ]);
-        $data = DB::table('public.funcionario_anno')
-            ->select(
-                'anno',
-                'idfuncionario',
-                'nombre',
-                'cantidad_ordencompra',
-                'cantidad_contrato',
-                'cantidad_consorcio',
-                'monto_ordencompra',
-                'monto_contrato',
-                'monto_consorcio',
-                'cantidade_ordencompra',
-                'montoe_ordencompra',
-                'cantidade_contrato',
-                'montoe_contrato',
-                'cantidade_consorcio',
-                'montoe_consorcio',
-                'cantidada_ordencompra',
-                'montoa_ordencompra',
-                'cantidada_contrato',
-                'montoa_contrato',
-                'cantidada_consorcio',
-                'montoa_consorcio',
-                'cantidadd_ordencompra',
-                'montod_ordencompra',
-                'cantidadd_contrato',
-                'montod_contrato',
-                'cantidadd_consorcio',
-                'montod_consorcio',
-                DB::raw('(cantidad_ordencompra+cantidad_contrato+cantidad_consorcio+cantidade_ordencompra+cantidade_contrato+cantidade_consorcio+cantidada_ordencompra+cantidada_contrato+cantidada_consorcio) as ranking')
-            )
-            ->where('nombre', 'LIKE', '%' . strtoupper($request->palabraClave) . '%')
-            ->orderBy('ranking', 'DESC')->paginate(10);
+        if (!$validator->fails()) {
+            $data = DB::table('public.funcionario_anno')
+                ->select(
+                    'anno',
+                    'idfuncionario',
+                    'nombre',
+                    'cantidad_ordencompra',
+                    'cantidad_contrato',
+                    'cantidad_consorcio',
+                    'monto_ordencompra',
+                    'monto_contrato',
+                    'monto_consorcio',
+                    'cantidade_ordencompra',
+                    'montoe_ordencompra',
+                    'cantidade_contrato',
+                    'montoe_contrato',
+                    'cantidade_consorcio',
+                    'montoe_consorcio',
+                    'cantidada_ordencompra',
+                    'montoa_ordencompra',
+                    'cantidada_contrato',
+                    'montoa_contrato',
+                    'cantidada_consorcio',
+                    'montoa_consorcio',
+                    'cantidadd_ordencompra',
+                    'montod_ordencompra',
+                    'cantidadd_contrato',
+                    'montod_contrato',
+                    'cantidadd_consorcio',
+                    'montod_consorcio',
+                    DB::raw('(cantidad_ordencompra+cantidad_contrato+cantidad_consorcio+cantidade_ordencompra+cantidade_contrato+cantidade_consorcio+cantidada_ordencompra+cantidada_contrato+cantidada_consorcio) as ranking')
+                )
+                ->where('nombre', 'LIKE', '%' . strtoupper($busquedaPalabra) . '%')
+                ->orderBy('ranking', 'DESC')->paginate(10);
 
-        $result = $this->convertDataFuncionario($data);
-        $search = true;
-        $busquedaPalabra = $request->palabraClave;
-        return view('ranking.funcionario', compact('result', 'search', 'period', 'busquedaPalabra'));
+            $result = $this->convertDataFuncionario($data);
+            $search = true;
+            $busquedaPalabra = $busquedaPalabra;
+            return view('ranking.funcionario', compact('result', 'search', 'period', 'busquedaPalabra'));
+        } else {
+            abort(404);
+        }
     }
 
     public function convertDataEntidad($data)

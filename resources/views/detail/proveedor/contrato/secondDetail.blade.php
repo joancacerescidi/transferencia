@@ -7,7 +7,9 @@
 
                 <span onclick="window.location='{{ url('/') }}'">Inicio </span>
                 @if ($busquedaPalabra !== null)
-                    <span class="btn-preload" onclick="javascript:document.busquedaProveedor.submit()">/ Proveedor</span>
+                    <span
+                        onclick="preloadActive2('proveedor', '<?php echo URL::to('ranking/proveedor/search'); ?>', '<?php echo $period; ?>', '<?php echo $busquedaPalabra; ?>' )">/
+                        Proveedor</span>
                 @else
                     <span class="btn-preload" onclick="window.location='{{ url('/ranking/proveedor/' . $period) }}'">/
                         Proveedor</span>
@@ -21,13 +23,7 @@
                         onclick="window.location='{{ url('/detail/contrato/first/proveedor/' . $rucContratista . '/' . $period . '/' . $nombre) }}'">/
                         1° Detalle</span>
                 @endif
-                @if ($busquedaPalabra !== null)
-                    <form onsubmit='return preloadActive()' action="{{ route('proveedor.busqueda', [$period]) }}"
-                        method="POST" name="busquedaProveedor" id="busquedaProveedor">
-                        @csrf
-                        <input type="hidden" name="palabraClave" value="{{ $busquedaPalabra }}">
-                    </form>
-                @endif
+
             </a>
 
 

@@ -16,18 +16,18 @@
             </h2>
 
             @isset($search)
-                <form onsubmit='return preloadActiveProveedor()' method="POST"
-                    action="{{ route('proveedor.busqueda', [$period]) }}" class="mb-14">
+                <div class="mb-14">
                     @csrf
                     <div class="relative xl:w-1/3 mx-auto mb-14">
-                        <input name="palabraClave" value="<?= $busquedaPalabra ?>"
+                        <input name="palabraClave" id="palabraProveedor" value="<?= $busquedaPalabra ?>"
                             class="block w-full py-5 px-6 rounded-xl border border-gray-200 bg-white shadow-sm focus:outline-none focus:ring focus:ring-main-blue"
                             type="text" placeholder="Buscar entidad del estado">
-                        <button type="submit" class="absolute top-5 right-5">
+                        <button onclick="preloadActive('proveedor',  '<?php echo URL::to('ranking/proveedor/search'); ?>'  ,{{ $period }} )"
+                            class="absolute top-5 right-5">
                             <img src="/images/icon-buscar.png" alt="Buscar">
                         </button>
                     </div>
-                </form>
+                </div>
             @endisset
             <article>
                 <header class="grid grid-cols-6 xl:grid-cols-12 mb-8 font-semibold text-sm xl:text-lg">
@@ -70,9 +70,9 @@
                                 {{ $item->dataList->cantidadTotal }}
                             </p>
                             <!-- <p class="text-right xl:text-left col-span-6 xl:col-span-1 order-5">
-                                                                                                                                                                                                  <span class="text-gray-400 xl:hidden pr-8 font-medium">Ver más</span>
-                                                                                                                                                                                                  <img src="/images/icon-chevron-down.png" class="inline">
-                                                                                                                                                                                                </p> -->
+                                                                                                                                                                                                              <span class="text-gray-400 xl:hidden pr-8 font-medium">Ver más</span>
+                                                                                                                                                                                                              <img src="/images/icon-chevron-down.png" class="inline">
+                                                                                                                                                                                                            </p> -->
                         </summary>
 
 
@@ -105,11 +105,11 @@
                                         @elseif($categorias->sigla == 'consorcio')
                                             @if (isset($busquedaPalabra))
                                                 <a class="btn-preload"
-                                                    href="{{ url('/detail/consorcio/first/proveedor/' . $item->dataList->contratista . '/' . $period . '/contrato'. '/' . $item->dataList->nombre . '/' . $busquedaPalabra) }}"><img
+                                                    href="{{ url('/detail/consorcio/first/proveedor/' . $item->dataList->contratista . '/' . $period . '/contrato' . '/' . $item->dataList->nombre . '/' . $busquedaPalabra) }}"><img
                                                         src="/images/icon-compartir.png" alt="Compartir"></a>
                                             @else
                                                 <a class="btn-preload"
-                                                    href="{{ url('/detail/consorcio/first/proveedor/' . $item->dataList->contratista . '/' . $period . '/contrato'.'/' . $item->dataList->nombre) }}"><img
+                                                    href="{{ url('/detail/consorcio/first/proveedor/' . $item->dataList->contratista . '/' . $period . '/contrato' . '/' . $item->dataList->nombre) }}"><img
                                                         src="/images/icon-compartir.png" alt="Compartir"></a>
                                             @endif
                                         @elseif($categorias->sigla == 'sanciones')

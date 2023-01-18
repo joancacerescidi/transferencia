@@ -45,7 +45,7 @@
                                 <div class="flex flex-col xl:flex-row xl:items-center gap-6 xl:col-span-3">
                                     <p class="text-center xl:text-left xl:text-lg font-bold">Entidad: </p>
                                     <div class="flex w-full">
-                                        <input name="palabraClave" id="palabraClave"
+                                        <input name="palabraClave" id="palabraClaveEntidad"
                                             class="block w-8/12  py-5 px-6 rounded-tl-xl rounded-bl-xl border border-gray-200 bg-white shadow-sm focus:outline-none focus:ring focus:ring-main-blue text-xs xl:text-base"
                                             type="text" placeholder="Buscar entidad" required>
                                         <button
@@ -70,14 +70,15 @@
                         <div class="border bg-body-bg shadow-lg px-6 py-10">
                             <h4 class="xl:text-xl font-bold text-center mb-10">Buscar Proveedor</h4>
                             <div class="grid xl:grid-cols-3 gap-x-6 gap-y-6 xl:gap-y-10 items-center">
-                                @csrf
+
                                 <div class="flex flex-col xl:flex-row xl:items-center gap-6 xl:col-span-3">
                                     <p class="text-center xl:text-left xl:text-lg font-bold">Proveedor: </p>
                                     <div class="flex w-full">
-                                        <input name="palabraClave"
+                                        <input name="palabraClave" id="palabraProveedor"
                                             class="block w-8/12  py-5 px-6 rounded-tl-xl rounded-bl-xl border border-gray-200 bg-white shadow-sm focus:outline-none focus:ring focus:ring-main-blue text-xs xl:text-base"
                                             type="text" placeholder="Buscar proveedor">
-                                        <button onclick="preloadActive('proveedor')"
+                                        <button
+                                            onclick="preloadActive('proveedor', '<?php echo URL::to('ranking/proveedor/search'); ?>',{{ $period }} )"
                                             class="block w-4/12  text-xs xl:text-sm px-4 flex items-center justify-center gap-2 bg-main-blue text-white font-medium rounded-tr-xl rounded-br-xl">
                                             <img src="/images/icon-buscar.png" alt="Buscar">
                                             <span class="text-xs xl:text-base">Buscar</span>
@@ -94,14 +95,15 @@
                         <div class="border bg-body-bg shadow-lg px-6 py-10">
                             <h4 class="xl:text-xl font-bold text-center mb-10">Buscar funcionario</h4>
                             <div class="grid xl:grid-cols-3 gap-x-6 gap-y-6 xl:gap-y-10 items-center">
-                                @csrf
+
                                 <div class="flex flex-col xl:flex-row xl:items-center gap-6 xl:col-span-3">
                                     <p class="text-center xl:text-left xl:text-lg font-bold">Funcionario: </p>
                                     <div class="flex w-full">
-                                        <input name="palabraClave"
+                                        <input name="palabraClave" id="palabraFuncionario"
                                             class="block w-8/12  py-5 px-6 rounded-tl-xl rounded-bl-xl border border-gray-200 bg-white shadow-sm focus:outline-none focus:ring focus:ring-main-blue text-xs xl:text-base"
                                             type="text" placeholder="Buscar funcionario">
-                                        <button onclick="preloadActive('funcionario')"
+                                        <button
+                                            onclick="preloadActive('funcionario', '<?php echo URL::to('ranking/funcionario/search'); ?>',{{ $period }} )"
                                             class="block w-4/12  text-xs xl:text-sm px-4 flex items-center justify-center gap-2 bg-main-blue text-white font-medium rounded-tr-xl rounded-br-xl">
                                             <img src="/images/icon-buscar.png" alt="Buscar">
                                             <span class="text-xs xl:text-base">Buscar</span>
