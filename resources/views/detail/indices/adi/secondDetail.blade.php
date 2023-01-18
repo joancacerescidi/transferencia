@@ -26,11 +26,11 @@
 
                 @if ($busquedaPalabra !== null)
                     <span class="btn-preload"
-                        onclick="window.location='{{ url('/detail/first/adi/' . $rucEntidad . '/' . $period . '/' . $nameEntidad . '/' . $ruta . '/' . $primaryVariable . '/' . $busquedaPalabra) }}'">/
+                        onclick="window.location='{{ url('/detail/first/adi/' . $rucEntidad . '/' . $period . '/' . $nameEntidad . '/' . $ruta . '/' . $primaryVariable . '/monto' . '/' . $busquedaPalabra) }}'">/
                         Proveedor</span>
                 @else
                     <span class="btn-preload"
-                        onclick="window.location='{{ url('/detail/first/adi/' . $rucEntidad . '/' . $period . '/' . $nameEntidad . '/' . $ruta . '/' . $primaryVariable) }}'">/
+                        onclick="window.location='{{ url('/detail/first/adi/' . $rucEntidad . '/' . $period . '/' . $nameEntidad . '/' . $ruta . '/' . $primaryVariable . '/monto') }}'">/
                         Proveedor</span>
                 @endif
                 @if ($busquedaPalabra !== null)
@@ -52,10 +52,17 @@
                 class="bg-white border border-gray-200 shadow-sm rounded-xl mb-6 cursor-pointer hover:shadow-lg overflow-x-auto">
                 <header
                     class="bg-gray-800 text-white p-5 hidden xl:grid grid-cols-2 xl:grid-cols-9 gap-8 items-center text-xs xl:text-sm mb-6 xl:mb-14">
-                    <p class="xl:col-span-1 font-semibold flex items-center gap-2">
+                    <a href=" @if ($busquedaPalabra !== null) {{ url('/detail/second/adi/' . $rucContratista . '/' . $rucEntidad . '/' . $period . '/' . $nameEntidad . '/' . $ruc . '/' . $nameRuc . '/' . $ruta . '/' . $primaryVariable . '/fecha_emision' . '/' . $busquedaPalabra) }}
+                    @else
+                        {{ url('/detail/second/adi/' . $rucContratista . '/' . $rucEntidad . '/' . $period . '/' . $nameEntidad . '/' . $ruc . '/' . $nameRuc . '/' . $ruta . '/' . $primaryVariable . '/fecha_emision') }} @endif "
+                        class="btn-preload xl:col-span-1 font-semibold flex items-center gap-2">
                         Fecha Emisión
-                        {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
-                    </p>
+                        @if ($orderTable == 'fecha_emision')
+                            <img src="{{ asset('images/icon-chevron-up.png') }}" alt="w-max">
+                        @else
+                            <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max">
+                        @endif
+                    </a>
                     <p class="xl:col-span-2 font-semibold flex items-center">
                         Descripción Orden
                         {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
@@ -72,10 +79,17 @@
                         Moneda
                         {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
                     </p>
-                    <p class="xl:col-span-1 font-semibold hidden xl:flex items-center gap-2">
+                    <a href=" @if ($busquedaPalabra !== null) {{ url('/detail/second/adi/' . $rucContratista . '/' . $rucEntidad . '/' . $period . '/' . $nameEntidad . '/' . $ruc . '/' . $nameRuc . '/' . $ruta . '/' . $primaryVariable . '/monto_total_original' . '/' . $busquedaPalabra) }}
+                    @else
+                        {{ url('/detail/second/adi/' . $rucContratista . '/' . $rucEntidad . '/' . $period . '/' . $nameEntidad . '/' . $ruc . '/' . $nameRuc . '/' . $ruta . '/' . $primaryVariable . '/monto_total_original') }} @endif "
+                        class="btn-preload xl:col-span-1 font-semibold hidden xl:flex items-center gap-2">
                         Monto Total
-                        {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
-                    </p>
+                        @if ($orderTable == 'monto_total_original')
+                            <img src="{{ asset('images/icon-chevron-up.png') }}" alt="w-max">
+                        @else
+                            <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max">
+                        @endif
+                    </a>
                     <p class="xl:col-span-2 font-semibold hidden xl:flex items-center gap-2">
                         Tipo Contratación
                         {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}

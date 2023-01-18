@@ -46,22 +46,24 @@ class AdiController extends Controller
 
         return $data;
     }
-    public function second($rucContratista, $rucEntidad, $period, $nameEntidad, $ruc, $nameRuc, $ruta, $primaryVariable, $busquedaPalabra = null)
+    public function second($rucContratista, $rucEntidad, $period, $nameEntidad, $ruc, $nameRuc, $ruta, $primaryVariable, $orderTable, $busquedaPalabra = null)
     {
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
-        $validator = Validator::make(['period' => $period, 'rucContratista' => $rucContratista, 'rucEntidad' => $rucEntidad], [
+        $orderTables = ['fecha_emision', 'monto_total_original'];
+        $validator = Validator::make(['period' => $period, 'rucContratista' => $rucContratista, 'rucEntidad' => $rucEntidad, 'orderTable' => $orderTable], [
             'period' => ['required', 'integer', Rule::in($periods)],
             'rucContratista' => ['required', 'integer'],
             'rucEntidad' => ['required', 'integer'],
+            'orderTable' => ['required', 'string', Rule::in($orderTables)],
         ]);
         if (!$validator->fails()) {
-            $result = $this->secondDetail($rucEntidad, $rucContratista, $period);
-            return view('detail.indices.adi.secondDetail', compact('result', 'rucEntidad', 'rucContratista', 'period', 'busquedaPalabra', 'nameEntidad', 'ruc', 'nameRuc', 'ruta', 'primaryVariable'));
+            $result = $this->secondDetail($rucEntidad, $rucContratista, $period, $orderTable);
+            return view('detail.indices.adi.secondDetail', compact('result', 'rucEntidad', 'rucContratista', 'period', 'busquedaPalabra', 'nameEntidad', 'orderTable', 'ruc', 'nameRuc', 'ruta', 'primaryVariable'));
         } else {
             abort(404);
         }
     }
-    public function secondDetail($rucEntidad, $rucContratista, $period)
+    public function secondDetail($rucEntidad, $rucContratista, $period, $orderTable)
     {
 
         $data =  DB::table('osce_ordencompra')
@@ -69,7 +71,7 @@ class AdiController extends Controller
             ->where('anno', '=', $period)
             ->where('ruc_entidad', '=', $rucEntidad)
             ->where('ruc_contratista', '=', $rucContratista)
-            ->orderBy('fecha_emision', 'asc')
+            ->orderBy($orderTable, 'asc')
             ->paginate(10);
         return $data;
     }

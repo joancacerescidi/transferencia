@@ -83,11 +83,11 @@
                             <span class="text-main-gray font-medium xl:hidden">Ruc Contratista:</span>
                             @if ($busquedaPalabra !== null)
                                 <a class="btn-preload"
-                                    href="{{ url('/detail/second/adi/' . $item->ruc_contratista . '/' . $rucEntidad . '/' . $period . '/' . $nameEntidad . '/' . $item->ruc_contratista . '/' . $item->nombre_razon_contratista . '/' . $ruta . '/' . $primaryVariable . '/' . $busquedaPalabra) }}">{{ $item->ruc_contratista }}
+                                    href="{{ url('/detail/second/adi/' . $item->ruc_contratista . '/' . $rucEntidad . '/' . $period . '/' . $nameEntidad . '/' . $item->ruc_contratista . '/' . $item->nombre_razon_contratista . '/' . $ruta . '/' . $primaryVariable . '/fecha_emision' . '/' . $busquedaPalabra) }}">{{ $item->ruc_contratista }}
                                 </a>
                             @else
                                 <a class="btn-preload"
-                                    href="{{ url('/detail/second/adi/' . $item->ruc_contratista . '/' . $rucEntidad . '/' . $period . '/' . $nameEntidad . '/' . $item->ruc_contratista . '/' . $item->nombre_razon_contratista . '/' . $ruta . '/' . $primaryVariable) }}">{{ $item->ruc_contratista }}
+                                    href="{{ url('/detail/second/adi/' . $item->ruc_contratista . '/' . $rucEntidad . '/' . $period . '/' . $nameEntidad . '/' . $item->ruc_contratista . '/' . $item->nombre_razon_contratista . '/' . $ruta . '/' . $primaryVariable . '/fecha_emision') }}">{{ $item->ruc_contratista }}
                                 </a>
                             @endif
                         </p>
