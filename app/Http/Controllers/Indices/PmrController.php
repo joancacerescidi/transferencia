@@ -40,23 +40,25 @@ class PmrController extends Controller
 
         return $data;
     }
-    public function second($rucContratista, $rucEntidad, $period,  $nameEntidad, $ruc, $nameRuc, $ruta, $primaryVariable, $busquedaPalabra = null)
+    public function second($rucContratista, $rucEntidad, $period,  $nameEntidad, $ruc, $nameRuc, $ruta, $primaryVariable, $orderTable, $busquedaPalabra = null)
     {
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
-        $validator = Validator::make(['period' => $period, 'rucContratista' => $rucContratista, 'rucEntidad' => $rucEntidad], [
+        $orderTables = ['monto_contratado_item', 'fecha_suscripcion_contrato'];
+        $validator = Validator::make(['period' => $period, 'rucContratista' => $rucContratista, 'rucEntidad' => $rucEntidad, 'orderTable' => $orderTable], [
             'period' => ['required', 'integer', Rule::in($periods)],
             'rucContratista' => ['required', 'integer'],
-            'rucEntidad' => ['required', 'integer']
+            'rucEntidad' => ['required', 'integer'],
+            'orderTable' => ['required', 'string', Rule::in($orderTables)],
         ]);
         if (!$validator->fails()) {
-            $result = $this->secondDetail($rucEntidad, $rucContratista, $period);
+            $result = $this->secondDetail($rucEntidad, $rucContratista, $period, $orderTable);
             $conformacion = $this->conformacionJuridica($rucContratista);
-            return view('detail.indices.pmr.secondDetail', compact('result', 'period', 'rucEntidad', 'conformacion', 'busquedaPalabra', 'nameEntidad', 'ruc', 'nameRuc', 'ruta', 'primaryVariable'));
+            return view('detail.indices.pmr.secondDetail', compact('result', 'period', 'rucEntidad', 'conformacion', 'busquedaPalabra', 'nameEntidad', 'ruc', 'nameRuc', 'ruta', 'primaryVariable', 'orderTable'));
         } else {
             abort(404);
         }
     }
-    public function secondDetail($rucEntidad, $rucContratista, $period)
+    public function secondDetail($rucEntidad, $rucContratista, $period, $orderTable)
     {
         $data =
             DB::table(DB::raw('osce_contrato oc'))
@@ -77,7 +79,7 @@ class PmrController extends Controller
 			and ocj.ruc = op.ruc_postor
 	) as rep1'))
             ->where([['oc.anno', $period], ['oc.ruc_entidad', $rucEntidad], ['oc.ruc_contratista', $rucContratista]])
-            ->orderBy('fecha_suscripcion_contrato', 'ASC')
+            ->orderBy($orderTable, 'ASC')
             ->paginate(10);
 
         return $data;
