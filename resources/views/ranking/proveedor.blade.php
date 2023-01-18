@@ -17,7 +17,7 @@
 
             @isset($search)
                 <div class="mb-14">
-                    @csrf
+                 
                     <div class="relative xl:w-1/3 mx-auto mb-14">
                         <input name="palabraClave" id="palabraProveedor" value="<?= $busquedaPalabra ?>"
                             class="block w-full py-5 px-6 rounded-xl border border-gray-200 bg-white shadow-sm focus:outline-none focus:ring focus:ring-main-blue"

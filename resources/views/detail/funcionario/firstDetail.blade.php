@@ -7,19 +7,13 @@
 
                 <span class="btn-preload" onclick="window.location='{{ url('/') }}'">Inicio</span>
                 @if ($busquedaPalabra !== null)
-                    <span class="btn-preload" onclick="javascript:document.busquedaFuncionario.submit()">/ Funcionario</span>
+                    <span onclick="preloadActive2('funcionario', '<?php echo URL::to('ranking/funcionario/search'); ?>', '<?php echo $period; ?>', '<?php echo $busquedaPalabra; ?>' )">/ Funcionario</span>
                 @else
                     <span class="btn-preload" onclick="window.location='{{ url('/ranking/funcionario/' . $period) }}'">/
 
                         Funcionario</span>
                 @endif
-                @if ($busquedaPalabra !== null)
-                    <form onsubmit='return preloadActive()' action="{{ route('funcionario.busqueda', [$period]) }}"
-                        method="POST" name="busquedaFuncionario" id="busquedaFuncionario">
-                        @csrf
-                        <input type="hidden" name="palabraClave" value="{{ $busquedaPalabra }}">
-                    </form>
-                @endif
+              
             </a>
             <h2 class="text-center text-xl xl:text-4xl font-bold mb-6 xl:mb-0">
                 {{ $name }}
