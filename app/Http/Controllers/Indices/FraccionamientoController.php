@@ -68,7 +68,7 @@ class FraccionamientoController extends Controller
         if (!$validator->fails()) {
             $result = $this->secondDetail($rucContratista, $rucEntidad, $period, $filter, $orderTable);
             // dd($result);
-            return view('detail.indices.fraccionamiento.secondDetail', compact('result', 'filter', 'period', 'rucContratista', 'rucEntidad', 'busquedaPalabra', 'nameEntidad', 'ruc', 'nameRuc', 'ruta', 'primaryVariable'));
+            return view('detail.indices.fraccionamiento.secondDetail', compact('result', 'filter', 'period', 'rucContratista', 'rucEntidad', 'busquedaPalabra', 'nameEntidad', 'ruc', 'nameRuc', 'ruta', 'primaryVariable', 'orderTable'));
         } else {
             abort(404);
         }
