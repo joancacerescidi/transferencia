@@ -58,14 +58,13 @@ class RankingSearchController extends Controller
             abort(404);
         }
     }
-    public function searchEntidad(Request $request, $period, $order)
+    public function searchEntidad($period, $order, $busquedaPalabra)
     {
-        $request->validate([
-            'palabraClave' => 'required|string',
-        ]);
+
         $orderby = ['monto', 'ranking'];
-        $validator = Validator::make(['order' => $order], [
+        $validator = Validator::make(['order' => $order, 'busquedaPalabra' => $busquedaPalabra], [
             'order' => ['required', 'string', Rule::in($orderby)],
+            'busquedaPalabra' => ['required', 'string'],
         ]);
         if (!$validator->fails()) {
             $data = DB::table('public.totalannoentidad')
@@ -97,9 +96,9 @@ class RankingSearchController extends Controller
                     DB::raw('montofra+montoadi+montoprc+montocrc+montopmr as ranking'),
                     DB::raw('(montoordencompra+montocontrato) as monto')
                 )
-                ->where(function ($query) use ($request) {
-                    $query->where('ruc_entidad', '=', strtoupper($request->palabraClave));
-                    $query->orWhere('nombre_entidad', 'LIKE', '%' . strtoupper($request->palabraClave) . '%');
+                ->where(function ($query) use ($busquedaPalabra) {
+                    $query->where('ruc_entidad', '=', strtoupper($busquedaPalabra));
+                    $query->orWhere('nombre_entidad', 'LIKE', '%' . strtoupper($busquedaPalabra) . '%');
                 })
                 ->where('anno', '=', $period)
                 ->orderBy($order, 'DESC')
@@ -107,7 +106,7 @@ class RankingSearchController extends Controller
 
             $result = $this->convertDataEntidad($data);
             $search = true;
-            $busquedaPalabra = $request->palabraClave;
+            $busquedaPalabra = $busquedaPalabra;
             $ruta = 'entidad.busqueda';
             return view('ranking.entidad', compact('result', 'search', 'period', 'busquedaPalabra', 'order', 'ruta'));
         } else {

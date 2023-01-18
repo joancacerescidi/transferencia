@@ -50,14 +50,14 @@ Route::get('/detail-government-level/{nivel}/{period}', [GovernmentLevelControll
 
 #Rankings
 #Entidad
-Route::post('/ranking/entidad/search/{period}/{order}', [RankingSearchController::class, 'searchEntidad'])->name('entidad.busqueda');
+Route::get('/ranking/entidad/search/{period}/{order}/{busquedaPalabra}', [RankingSearchController::class, 'searchEntidad']);
 Route::get('/ranking/entidad/{period}/{order}', [RankingSearchController::class, 'rankingEntidad'])->name('rankingEnidad');
 #proveedores
 Route::get('/ranking/proveedor/{period}', [RankingSearchController::class, 'rankingProveedor'])->name('rankingProveedor');
-Route::post('/ranking/proveedor/search/{period}', [RankingSearchController::class, 'searchProveedor'])->name('proveedor.busqueda');
+Route::get('/ranking/proveedor/search/{period}/{busquedaPalabra}', [RankingSearchController::class, 'searchProveedor']);
 #funcionario
 Route::get('/ranking/funcionario/{period}', [RankingSearchController::class, 'rankingFuncionario'])->name('rankingFuncionario');
-Route::post('/ranking/funcionario/search/{period}', [RankingSearchController::class, 'searchFuncionario'])->name('funcionario.busqueda');
+Route::get('/ranking/funcionario/search/{period}/{busquedaPalabra}', [RankingSearchController::class, 'searchFuncionario']);
 
 
 #Detalles

@@ -7,7 +7,9 @@
                 <span class="btn-preload" onclick="window.location='{{ url('/') }}'">Inicio</span>
 
                 @if ($busquedaPalabra !== null && $busquedaPalabra !== 'default')
-                    <span class="btn-preload" onclick="javascript:document.busquedaEntidad.submit()">/ Entidades</span>
+                    <span
+                        onclick="preloadActive2('entidad', '<?php echo URL::to('ranking/entidad/search'); ?>', '<?php echo $period; ?>', '<?php echo $busquedaPalabra; ?>' )">/
+                        Entidades</span>
                 @else
                     @if ($ruta === 'entidad.goverment')
                         <span class="btn-preload"
@@ -24,13 +26,7 @@
                     @endif
 
                 @endif
-                @if ($busquedaPalabra !== null && $busquedaPalabra !== 'default')
-                    <form onsubmit='return preloadActive()' action="{{ route('entidad.busqueda', [$period, 'monto']) }}"
-                        method="POST" name="busquedaEntidad" id="busquedaEntidad">
-                        @csrf
-                        <input type="hidden" name="palabraClave" value="{{ $busquedaPalabra }}">
-                    </form>
-                @endif
+
             </a>
 
             <h2 class="text-center text-xl xl:text-4xl font-bold mb-6 xl:mb-14">

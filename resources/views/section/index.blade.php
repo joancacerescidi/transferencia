@@ -40,17 +40,16 @@
 
                         <div class="border bg-body-bg shadow-lg px-6 py-10">
                             <h4 class="xl:text-xl font-bold text-center mb-10">Buscar Entidad</h4>
-                            <form onsubmit='return preloadActive()' method="POST"
-                                action="{{ route('entidad.busqueda', [$period, 'monto']) }}"
-                                class="grid xl:grid-cols-3 gap-x-6 gap-y-6 xl:gap-y-10 items-center">
-                                @csrf
+                            <div class="grid xl:grid-cols-3 gap-x-6 gap-y-6 xl:gap-y-10 items-center">
+
                                 <div class="flex flex-col xl:flex-row xl:items-center gap-6 xl:col-span-3">
                                     <p class="text-center xl:text-left xl:text-lg font-bold">Entidad: </p>
                                     <div class="flex w-full">
-                                        <input name="palabraClave"
+                                        <input name="palabraClave" id="palabraClave"
                                             class="block w-8/12  py-5 px-6 rounded-tl-xl rounded-bl-xl border border-gray-200 bg-white shadow-sm focus:outline-none focus:ring focus:ring-main-blue text-xs xl:text-base"
                                             type="text" placeholder="Buscar entidad" required>
-                                        <button type="submit"
+                                        <button
+                                            onclick="preloadActive('entidad', '<?php echo URL::to('ranking/entidad/search'); ?>',{{ $period }} )"
                                             class=" block w-4/12  text-xs xl:text-sm px-4 flex items-center justify-center gap-2 bg-main-blue text-white font-medium rounded-tr-xl rounded-br-xl">
                                             <img src="/images/icon-buscar.png" alt="Buscar">
                                             <span class="text-xs xl:text-base">Buscar</span>
@@ -62,7 +61,7 @@
                                     class="btn-preload flex justify-center items-center gap-2 p-5 bg-main-blue text-white font-semibold xl:col-span-3 xl:mx-10 rounded-md text-xs xl:text-base">
                                     <img src="../images/ver-rankings.png" alt="">
                                     Ranking Entidades</a>
-                            </form>
+                            </div>
 
 
 
@@ -70,9 +69,7 @@
 
                         <div class="border bg-body-bg shadow-lg px-6 py-10">
                             <h4 class="xl:text-xl font-bold text-center mb-10">Buscar Proveedor</h4>
-                            <form onsubmit='return preloadActive()' method="POST"
-                                action="{{ route('proveedor.busqueda', [$period]) }}"
-                                class="grid xl:grid-cols-3 gap-x-6 gap-y-6 xl:gap-y-10 items-center">
+                            <div class="grid xl:grid-cols-3 gap-x-6 gap-y-6 xl:gap-y-10 items-center">
                                 @csrf
                                 <div class="flex flex-col xl:flex-row xl:items-center gap-6 xl:col-span-3">
                                     <p class="text-center xl:text-left xl:text-lg font-bold">Proveedor: </p>
@@ -80,7 +77,7 @@
                                         <input name="palabraClave"
                                             class="block w-8/12  py-5 px-6 rounded-tl-xl rounded-bl-xl border border-gray-200 bg-white shadow-sm focus:outline-none focus:ring focus:ring-main-blue text-xs xl:text-base"
                                             type="text" placeholder="Buscar proveedor">
-                                        <button type="submit"
+                                        <button onclick="preloadActive('proveedor')"
                                             class="block w-4/12  text-xs xl:text-sm px-4 flex items-center justify-center gap-2 bg-main-blue text-white font-medium rounded-tr-xl rounded-br-xl">
                                             <img src="/images/icon-buscar.png" alt="Buscar">
                                             <span class="text-xs xl:text-base">Buscar</span>
@@ -92,13 +89,11 @@
                                     class="btn-preload flex justify-center items-center gap-2 p-5 bg-main-blue text-white font-semibold xl:col-span-3 xl:mx-10 rounded-md text-xs xl:text-base">
                                     <img src="../images/ver-rankings.png" alt="">
                                     Ranking Proveedores</a>
-                            </form>
+                            </div>
                         </div>
                         <div class="border bg-body-bg shadow-lg px-6 py-10">
                             <h4 class="xl:text-xl font-bold text-center mb-10">Buscar funcionario</h4>
-                            <form onsubmit='return preloadActive()' method="POST"
-                                action="{{ route('funcionario.busqueda', [$period]) }}"
-                                class="grid xl:grid-cols-3 gap-x-6 gap-y-6 xl:gap-y-10 items-center">
+                            <div class="grid xl:grid-cols-3 gap-x-6 gap-y-6 xl:gap-y-10 items-center">
                                 @csrf
                                 <div class="flex flex-col xl:flex-row xl:items-center gap-6 xl:col-span-3">
                                     <p class="text-center xl:text-left xl:text-lg font-bold">Funcionario: </p>
@@ -106,7 +101,7 @@
                                         <input name="palabraClave"
                                             class="block w-8/12  py-5 px-6 rounded-tl-xl rounded-bl-xl border border-gray-200 bg-white shadow-sm focus:outline-none focus:ring focus:ring-main-blue text-xs xl:text-base"
                                             type="text" placeholder="Buscar funcionario">
-                                        <button type="submit"
+                                        <button onclick="preloadActive('funcionario')"
                                             class="block w-4/12  text-xs xl:text-sm px-4 flex items-center justify-center gap-2 bg-main-blue text-white font-medium rounded-tr-xl rounded-br-xl">
                                             <img src="/images/icon-buscar.png" alt="Buscar">
                                             <span class="text-xs xl:text-base">Buscar</span>
@@ -118,7 +113,7 @@
                                     class="btn-preload flex justify-center items-center gap-2 p-5 bg-main-blue text-white font-semibold xl:col-span-3 xl:mx-10 rounded-md text-xs xl:text-base">
                                     <img src="../images/ver-rankings.png" alt="">
                                     Ranking Funcionario</a>
-                            </form>
+                            </div>
                         </div>
                         <div class="border bg-white shadow-lg px-6 py-10">
                             <h3 class="text-lg text-center font-bold mb-4">
@@ -256,10 +251,6 @@
 @endsection
 @section('scripts')
     <script>
-        function preloadActive() {
-            let preloader = document.getElementById('preloader');
-            preloader.classList.remove('opacity-0', 'pointer-events-none');
-        }
         //Gráfico de barras
         var dataGraf = {!! json_encode($resultGraf) !!};
         const ctx = document.getElementById('myChart');
@@ -292,11 +283,11 @@
                         const url = "<?php echo URL::to('detail-government-level'); ?>";
                         const period = "<?php echo $period; ?>";
                         var regionSigla = '';
-                        if (chart.data.labels[i]==='REGIONAL') {
+                        if (chart.data.labels[i] === 'REGIONAL') {
                             regionSigla = 'R';
-                        } else if (chart.data.labels[i]==='LOCAL') {
+                        } else if (chart.data.labels[i] === 'LOCAL') {
                             regionSigla = 'L';
-                        } else if (chart.data.labels[i]==='AUTÓNOMO') {
+                        } else if (chart.data.labels[i] === 'AUTÓNOMO') {
                             regionSigla = 'A';
                         }
                         const finalUrl = url + '/' + regionSigla + '/' + period;

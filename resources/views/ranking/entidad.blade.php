@@ -16,18 +16,18 @@
             </h2>
 
             @isset($search)
-                <form onsubmit='return preloadActiveEntidad()' method="POST"
-                    action="{{ route('entidad.busqueda', [$period, 'monto']) }}" class="mb-14">
-                    @csrf
+                <div class="mb-14">
+
                     <div class="relative xl:w-1/3 mx-auto mb-14">
-                        <input name="palabraClave" value="<?= $busquedaPalabra ?>"
+                        <input name="palabraClave" id="palabraClave" value="<?= $busquedaPalabra ?>"
                             class="block w-full py-5 px-6 rounded-xl border border-gray-200 bg-white shadow-sm focus:outline-none focus:ring focus:ring-main-blue"
                             type="text" placeholder="Buscar entidad del estado">
-                        <button type="submit" class="absolute top-5 right-5">
+                        <button onclick="preloadActive('entidad',  '<?php echo URL::to('ranking/entidad/search'); ?>'  ,{{ $period }} )"
+                            class="absolute top-5 right-5">
                             <img src="/images/icon-buscar.png" alt="Buscar">
                         </button>
                     </div>
-                </form>
+                </div>
             @endisset
             <article>
                 <header class="grid grid-cols-6 xl:grid-cols-12 mb-8 font-semibold text-sm xl:text-lg">
