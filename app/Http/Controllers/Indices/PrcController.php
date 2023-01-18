@@ -12,21 +12,23 @@ class PrcController extends Controller
 {
     //
 
-    public function first($rucEntidad, $period, $nameEntidad, $ruta, $primaryVariable, $busquedaPalabra = null)
+    public function first($rucEntidad, $period, $nameEntidad, $ruta, $primaryVariable, $orderTable, $busquedaPalabra = null)
     {
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
-        $validator = Validator::make(['period' => $period, 'rucEntidad' => $rucEntidad], [
+        $orderTables = ['cantidad', 'monto'];
+        $validator = Validator::make(['period' => $period, 'rucEntidad' => $rucEntidad, 'orderTable'=> $orderTable], [
             'period' => ['required', 'integer', Rule::in($periods)],
+            'orderTable' => ['required', 'string', Rule::in($orderTables)],
             'rucEntidad' => ['required', 'integer']
         ]);
         if (!$validator->fails()) {
-            $result = $this->firstDetail($rucEntidad, $period);
-            return view('detail.indices.prc.firstDetail', compact('result', 'rucEntidad', 'period', 'busquedaPalabra', 'nameEntidad', 'ruta', 'primaryVariable'));
+            $result = $this->firstDetail($rucEntidad, $period, $orderTable);
+            return view('detail.indices.prc.firstDetail', compact('result', 'rucEntidad', 'period', 'busquedaPalabra', 'nameEntidad', 'ruta', 'primaryVariable', 'orderTable'));
         } else {
             abort(404);
         }
     }
-    public function firstDetail($rucEntidad, $period)
+    public function firstDetail($rucEntidad, $period, $orderTable)
     {
         $data = DB::table(DB::raw("(select oo.ruc_contratista as ruc, oo.nombre_razon_contratista as nombre,  count(1) as cantidad, sum(oo.monto_total_original) as monto
                 FROM osce_ordencompra oo  
@@ -43,7 +45,7 @@ class PrcController extends Controller
                 group by oo.ruc_contratista, oo.nombre_contratista) a"))
             ->select('ruc', 'nombre', DB::raw('sum(cantidad) as cantidad'), DB::raw('sum(monto) as monto'))
             ->groupBy(['ruc', 'nombre'])
-            ->orderByRaw('cantidad DESC')
+            ->orderBy($orderTable, 'DESC')
             ->paginate(10);
         return $data;
     }

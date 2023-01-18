@@ -11,21 +11,23 @@ use Illuminate\Validation\Rule;
 class PmrController extends Controller
 {
     //
-    public function first($rucEntidad, $period,  $nameEntidad, $ruta, $primaryVariable, $busquedaPalabra = null)
+    public function first($rucEntidad, $period,  $nameEntidad, $ruta, $primaryVariable, $orderTable, $busquedaPalabra = null)
     {
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
-        $validator = Validator::make(['period' => $period, 'rucEntidad' => $rucEntidad], [
+        $orderTables = ['cantidad', 'monto'];
+        $validator = Validator::make(['period' => $period, 'rucEntidad' => $rucEntidad, 'orderTable' => $orderTable], [
             'period' => ['required', 'integer', Rule::in($periods)],
-            'rucEntidad' => ['required', 'integer']
+            'rucEntidad' => ['required', 'integer'],
+            'orderTable' => ['required', 'string', Rule::in($orderTables)],
         ]);
         if (!$validator->fails()) {
-            $result = $this->firstDetail($rucEntidad, $period);
-            return view('detail.indices.pmr.firstDetail', compact('result', 'rucEntidad', 'period', 'busquedaPalabra', 'nameEntidad', 'ruta', 'primaryVariable'));
+            $result = $this->firstDetail($rucEntidad, $period, $orderTable);
+            return view('detail.indices.pmr.firstDetail', compact('result', 'rucEntidad', 'period', 'busquedaPalabra', 'nameEntidad', 'ruta', 'primaryVariable', 'orderTable'));
         } else {
             abort(404);
         }
     }
-    public function firstDetail($rucEntidad, $period)
+    public function firstDetail($rucEntidad, $period, $orderTable)
     {
         $data
             = DB::table(DB::raw('osce_contrato oc'))
@@ -33,7 +35,7 @@ class PmrController extends Controller
             ->where('oc.anno', '=', $period)
             ->where('oc.ruc_entidad', '=', $rucEntidad)
             ->groupBy(['oc.ruc_contratista', 'oc.nombre_contratista'])
-            ->orderByRaw('cantidad DESC')
+            ->orderBy($orderTable, 'DESC')
             ->paginate(10);
 
         return $data;

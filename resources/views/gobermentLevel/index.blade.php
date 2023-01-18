@@ -115,23 +115,23 @@
 
                                         @if ($categorias->sigla == 'FRA')
                                             <a class="btn-preload"
-                                                href="{{ url('/detail/first/fraccionamiento/' . $item->dataList->rucEntidad . '/' . $period . '/' . $item->dataList->nombre . '/' . $ruta . '/' . $nivel) }}"><img
+                                                href="{{ url('/detail/first/fraccionamiento/' . $item->dataList->rucEntidad . '/' . $period . '/' . $item->dataList->nombre . '/' . $ruta . '/' . $nivel . '/monto') }}"><img
                                                     src="/images/icon-compartir.png" alt="Compartir"></a>
                                         @elseif($categorias->sigla == 'CRC')
                                             <a class="btn-preload"
-                                                href="{{ url('/detail/first/crc/' . $item->dataList->rucEntidad . '/' . $period . '/' . $item->dataList->nombre . '/' . $ruta . '/' . $nivel) }}"><img
+                                                href="{{ url('/detail/first/crc/' . $item->dataList->rucEntidad . '/' . $period . '/' . $item->dataList->nombre . '/' . $ruta . '/' . $nivel . '/monto') }}"><img
                                                     src="/images/icon-compartir.png" alt="Compartir"></a>
                                         @elseif($categorias->sigla == 'PRC')
                                             <a class="btn-preload"
-                                                href="{{ url('/detail/first/prc/' . $item->dataList->rucEntidad . '/' . $period . '/' . $item->dataList->nombre . '/' . $ruta . '/' . $nivel) }}"><img
+                                                href="{{ url('/detail/first/prc/' . $item->dataList->rucEntidad . '/' . $period . '/' . $item->dataList->nombre . '/' . $ruta . '/' . $nivel . '/monto') }}"><img
                                                     src="/images/icon-compartir.png" alt="Compartir"></a>
                                         @elseif($categorias->sigla == 'ADI')
                                             <a class="btn-preload"
-                                                href="{{ url('/detail/first/adi/' . $item->dataList->rucEntidad . '/' . $period . '/' . $item->dataList->nombre . '/' . $ruta . '/' . $nivel) }}"><img
+                                                href="{{ url('/detail/first/adi/' . $item->dataList->rucEntidad . '/' . $period . '/' . $item->dataList->nombre . '/' . $ruta . '/' . $nivel . '/monto') }}"><img
                                                     src="/images/icon-compartir.png" alt="Compartir"></a>
                                         @elseif($categorias->sigla == 'PMR')
                                             <a class="btn-preload"
-                                                href="{{ url('/detail/first/pmr/' . $item->dataList->rucEntidad . '/' . $period . '/' . $item->dataList->nombre . '/' . $ruta . '/' . $nivel) }}"><img
+                                                href="{{ url('/detail/first/pmr/' . $item->dataList->rucEntidad . '/' . $period . '/' . $item->dataList->nombre . '/' . $ruta . '/' . $nivel . '/monto') }}"><img
                                                     src="/images/icon-compartir.png" alt="Compartir"></a>
                                         @endif
 

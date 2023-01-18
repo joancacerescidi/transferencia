@@ -17,6 +17,8 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="shortcut icon" type="image/jpeg" href="{{ asset('/images/iconQuiilquitaQatipay.jpeg') }}">
+
 
 </head>
 

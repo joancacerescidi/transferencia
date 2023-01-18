@@ -12,21 +12,23 @@ use Illuminate\Http\Request;
 
 class CrcController extends Controller
 {
-    public function first($rucEntidad, $period, $nameEntidad, $ruta, $primaryVariable, $busquedaPalabra = null)
+    public function first($rucEntidad, $period, $nameEntidad, $ruta, $primaryVariable, $orderTable, $busquedaPalabra = null)
     {
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
-        $validator = Validator::make(['period' => $period, 'rucEntidad' => $rucEntidad], [
+        $orderTables = ['cantidad', 'monto'];
+        $validator = Validator::make(['period' => $period, 'rucEntidad' => $rucEntidad, 'orderTable' => $orderTable], [
             'period' => ['required', 'integer', Rule::in($periods)],
-            'rucEntidad' => ['required', 'integer']
+            'rucEntidad' => ['required', 'integer'],
+            'orderTable' => ['required', 'string', Rule::in($orderTables)],
         ]);
         if (!$validator->fails()) {
-            $result = $this->firstDetail($rucEntidad, $period);
-            return view('detail.indices.crc.firstDetail', compact('result', 'rucEntidad', 'period', 'busquedaPalabra', 'nameEntidad', 'primaryVariable', 'ruta'));
+            $result = $this->firstDetail($rucEntidad, $period, $orderTable);
+            return view('detail.indices.crc.firstDetail', compact('result', 'rucEntidad', 'period', 'busquedaPalabra', 'nameEntidad', 'primaryVariable', 'ruta', 'orderTable'));
         } else {
             abort(404);
         }
     }
-    public function firstDetail($rucEntidad, $period)
+    public function firstDetail($rucEntidad, $period, $orderTable)
     {
 
         $data = DB::table(DB::raw('osce_contrato a'))
@@ -38,7 +40,7 @@ class CrcController extends Controller
 														 where oco.ruc_consorcio=a.ruc_contratista and
 																oco.ruc_miembro=op.ruc_proveedor)')
             ->groupBy(['a.ruc_contratista', 'a.nombre_contratista'])
-            ->orderByRaw('cantidad DESC')
+            ->orderBy($orderTable, 'DESC')
             ->paginate(10);
 
         return $data;

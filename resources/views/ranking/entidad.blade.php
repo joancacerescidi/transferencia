@@ -137,51 +137,51 @@
                                         @if ($categorias->sigla == 'FRA')
                                             @if (isset($busquedaPalabra))
                                                 <a class="btn-preload"
-                                                    href="{{ url('/detail/first/fraccionamiento/' . $item->dataList->rucEntidad . '/' . $period . '/' . $item->dataList->nombre . '/' . $ruta . '/default' . '/' . $busquedaPalabra) }}"><img
+                                                    href="{{ url('/detail/first/fraccionamiento/' . $item->dataList->rucEntidad . '/' . $period . '/' . $item->dataList->nombre . '/' . $ruta . '/default' . '/monto' . '/' . $busquedaPalabra) }}"><img
                                                         src="/images/icon-compartir.png" alt="Compartir"></a>
                                             @else
                                                 <a class="btn-preload"
-                                                    href="{{ url('/detail/first/fraccionamiento/' . $item->dataList->rucEntidad . '/' . $period . '/' . $item->dataList->nombre . '/' . $ruta . '/default') }}"><img
+                                                    href="{{ url('/detail/first/fraccionamiento/' . $item->dataList->rucEntidad . '/' . $period . '/' . $item->dataList->nombre . '/' . $ruta . '/default/monto') }}"><img
                                                         src="/images/icon-compartir.png" alt="Compartir"></a>
                                             @endif
                                         @elseif($categorias->sigla == 'CRC')
                                             @if (isset($busquedaPalabra))
                                                 <a class="btn-preload"
-                                                    href="{{ url('/detail/first/crc/' . $item->dataList->rucEntidad . '/' . $period . '/' . $item->dataList->nombre . '/' . $ruta . '/default' . '/' . $busquedaPalabra) }}"><img
+                                                    href="{{ url('/detail/first/crc/' . $item->dataList->rucEntidad . '/' . $period . '/' . $item->dataList->nombre . '/' . $ruta . '/default' . '/monto' . '/' . $busquedaPalabra) }}"><img
                                                         src="/images/icon-compartir.png" alt="Compartir"></a>
                                             @else
                                                 <a class="btn-preload"
-                                                    href="{{ url('/detail/first/crc/' . $item->dataList->rucEntidad . '/' . $period . '/' . $item->dataList->nombre . '/' . $ruta . '/default') }}"><img
+                                                    href="{{ url('/detail/first/crc/' . $item->dataList->rucEntidad . '/' . $period . '/' . $item->dataList->nombre . '/' . $ruta . '/default/monto') }}"><img
                                                         src="/images/icon-compartir.png" alt="Compartir"></a>
                                             @endif
                                         @elseif($categorias->sigla == 'PRC')
                                             @if (isset($busquedaPalabra))
                                                 <a class="btn-preload"
-                                                    href="{{ url('/detail/first/prc/' . $item->dataList->rucEntidad . '/' . $period . '/' . $item->dataList->nombre . '/' . $ruta . '/default' . '/' . $busquedaPalabra) }}"><img
+                                                    href="{{ url('/detail/first/prc/' . $item->dataList->rucEntidad . '/' . $period . '/' . $item->dataList->nombre . '/' . $ruta . '/default' . '/monto' . '/' . $busquedaPalabra) }}"><img
                                                         src="/images/icon-compartir.png" alt="Compartir"></a>
                                             @else
                                                 <a class="btn-preload"
-                                                    href="{{ url('/detail/first/prc/' . $item->dataList->rucEntidad . '/' . $period . '/' . $item->dataList->nombre . '/' . $ruta . '/default') }}"><img
+                                                    href="{{ url('/detail/first/prc/' . $item->dataList->rucEntidad . '/' . $period . '/' . $item->dataList->nombre . '/' . $ruta . '/default/monto') }}"><img
                                                         src="/images/icon-compartir.png" alt="Compartir"></a>
                                             @endif
                                         @elseif($categorias->sigla == 'ADI')
                                             @if (isset($busquedaPalabra))
                                                 <a class="btn-preload"
-                                                    href="{{ url('/detail/first/adi/' . $item->dataList->rucEntidad . '/' . $period . '/' . $item->dataList->nombre . '/' . $ruta . '/default' . '/' . $busquedaPalabra) }}"><img
+                                                    href="{{ url('/detail/first/adi/' . $item->dataList->rucEntidad . '/' . $period . '/' . $item->dataList->nombre . '/' . $ruta . '/default' . '/monto' . '/' . $busquedaPalabra) }}"><img
                                                         src="/images/icon-compartir.png" alt="Compartir"></a>
                                             @else
                                                 <a class="btn-preload"
-                                                    href="{{ url('/detail/first/adi/' . $item->dataList->rucEntidad . '/' . $period . '/' . $item->dataList->nombre . '/' . $ruta . '/default') }}"><img
+                                                    href="{{ url('/detail/first/adi/' . $item->dataList->rucEntidad . '/' . $period . '/' . $item->dataList->nombre . '/' . $ruta . '/default/monto') }}"><img
                                                         src="/images/icon-compartir.png" alt="Compartir"></a>
                                             @endif
                                         @elseif($categorias->sigla == 'PMR')
                                             @if (isset($busquedaPalabra))
                                                 <a class="btn-preload"
-                                                    href="{{ url('/detail/first/pmr/' . $item->dataList->rucEntidad . '/' . $period . '/' . $item->dataList->nombre . '/' . $ruta . '/default' . '/' . $busquedaPalabra) }}"><img
+                                                    href="{{ url('/detail/first/pmr/' . $item->dataList->rucEntidad . '/' . $period . '/' . $item->dataList->nombre . '/' . $ruta . '/default' . '/monto' . '/' . $busquedaPalabra) }}"><img
                                                         src="/images/icon-compartir.png" alt="Compartir"></a>
                                             @else
                                                 <a class="btn-preload"
-                                                    href="{{ url('/detail/first/pmr/' . $item->dataList->rucEntidad . '/' . $period . '/' . $item->dataList->nombre . '/' . $ruta . '/default') }}"><img
+                                                    href="{{ url('/detail/first/pmr/' . $item->dataList->rucEntidad . '/' . $period . '/' . $item->dataList->nombre . '/' . $ruta . '/default/monto') }}"><img
                                                         src="/images/icon-compartir.png" alt="Compartir"></a>
                                             @endif
                                         @endif
