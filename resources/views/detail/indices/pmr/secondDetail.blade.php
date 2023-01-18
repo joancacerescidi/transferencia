@@ -91,7 +91,7 @@
                     </p>
 
 
-                    <a href=" @if ($busquedaPalabra !== null) {{ url('/detail/second/pmr/' . $rucContratista . '/' . $rucEntidad . '/' . $period . '/contrato' . '/' . $nameEntidad . '/' . $ruc . '/' . $nameRuc . '/' . $ruta . '/' . $primaryVariable . '/fecha_suscripcion_contrato' . '/' . $busquedaPalabra) }}
+                    <a href=" @if ($busquedaPalabra !== null) {{ url('/detail/second/pmr/' . $rucContratista . '/' . $rucEntidad . '/' . $period . '/' . $nameEntidad . '/' . $ruc . '/' . $nameRuc . '/' . $ruta . '/' . $primaryVariable . '/fecha_suscripcion_contrato' . '/' . $busquedaPalabra) }}
                     @else
                         {{ url('/detail/second/pmr/' . $rucContratista . '/' . $rucEntidad . '/' . $period . '/' . $nameEntidad . '/' . $ruc . '/' . $nameRuc . '/' . $ruta . '/' . $primaryVariable . '/fecha_suscripcion_contrato') }} @endif "
                         class="btn-preload xl:col-span-1 font-semibold flex items-center">
@@ -114,9 +114,12 @@
                         Moneda
                         {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
                     </p>
-                    <a href=" @if ($busquedaPalabra !== null) {{ url('/detail/second/pmr/' . $rucContratista . '/' . $rucEntidad . '/' . $period . '/contrato' . '/' . $nameEntidad . '/' . $ruc . '/' . $nameRuc . '/' . $ruta . '/' . $primaryVariable . '/monto_contratado_item' . '/' . $busquedaPalabra) }}
+
+
+                    <a href=" @if ($busquedaPalabra !== null) {{ url('/detail/second/pmr/' . $rucContratista . '/' . $rucEntidad . '/' . $period . '/' . $nameEntidad . '/' . $ruc . '/' . $nameRuc . '/' . $ruta . '/' . $primaryVariable . '/monto_contratado_item' . '/' . $busquedaPalabra) }}
                     @else
-                        {{ url('/detail/second/pmr/' . $rucContratista . '/' . $rucEntidad . '/' . $period . '/' . $nameEntidad . '/' . $ruc . '/' . $nameRuc . '/' . $ruta . '/' . $primaryVariable . '/monto_contratado_item') }} @endif " class="btn-preload xl:col-span-1 font-semibold hidden xl:flex items-center gap-2">
+                        {{ url('/detail/second/pmr/' . $rucContratista . '/' . $rucEntidad . '/' . $period . '/' . $nameEntidad . '/' . $ruc . '/' . $nameRuc . '/' . $ruta . '/' . $primaryVariable . '/monto_contratado_item') }} @endif "
+                        class="btn-preload xl:col-span-1 font-semibold hidden xl:flex items-center gap-2">
                         Monto Contratado
                         @if ($orderTable == 'monto_contratado_item')
                             <img src="{{ asset('images/icon-chevron-up.png') }}" alt="w-max">

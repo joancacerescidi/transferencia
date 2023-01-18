@@ -46,24 +46,25 @@ class CrcController extends Controller
         return $data;
     }
 
-    public function second($rucContratista, $rucEntidad, $period, $nameEntidad, $ruc, $ruta, $primaryVariable, $nameRuc = 'Sin nombre', $busquedaPalabra = null)
+    public function second($rucContratista, $rucEntidad, $period, $nameEntidad, $ruc, $ruta, $primaryVariable, $orderTable, $nameRuc = 'Sin nombre', $busquedaPalabra = null)
     {
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
-
-        $validator = Validator::make(['period' => $period, 'rucEntidad' => $rucEntidad, 'rucContratista' => $rucContratista], [
+        $orderTables = ['monto_contratado_item', 'fecha_suscripcion_contrato'];
+        $validator = Validator::make(['period' => $period, 'rucEntidad' => $rucEntidad, 'rucContratista' => $rucContratista, 'orderTable' => $orderTable], [
             'period' => ['required', 'integer', Rule::in($periods)],
             'rucEntidad' => ['required', 'integer'],
-            'rucContratista' => ['required', 'integer']
+            'rucContratista' => ['required', 'integer'],
+            'orderTable' => ['required', 'string', Rule::in($orderTables)],
 
         ]);
         if (!$validator->fails()) {
-            $result = $this->secondDetail($rucContratista, $rucEntidad, $period);
-            return view('detail.indices.crc.secondDetail', compact('result', 'rucEntidad', 'period', 'busquedaPalabra', 'nameEntidad', 'ruc', 'nameRuc', 'primaryVariable', 'ruta'));
+            $result = $this->secondDetail($rucContratista, $rucEntidad, $period, $orderTable);
+            return view('detail.indices.crc.secondDetail', compact('result', 'rucContratista', 'rucEntidad', 'period', 'busquedaPalabra', 'nameEntidad', 'ruc', 'nameRuc', 'primaryVariable', 'orderTable', 'ruta'));
         } else {
             abort(404);
         }
     }
-    public function secondDetail($rucContratista, $rucEntidad, $period)
+    public function secondDetail($rucContratista, $rucEntidad, $period, $orderTable)
     {
 
         $data = DB::table(DB::raw('osce_contrato a'))
@@ -77,7 +78,7 @@ class CrcController extends Controller
 														 where oco.ruc_consorcio=a.ruc_contratista and
 																oco.ruc_miembro=op.ruc_proveedor)')
             ->whereRaw('b.ruc_consorcio = a.ruc_contratista')
-            ->orderBy('fecha_suscripcion_contrato', 'ASC')
+            ->orderBy($orderTable, 'ASC')
             ->paginate(10);
 
         return  $data;
