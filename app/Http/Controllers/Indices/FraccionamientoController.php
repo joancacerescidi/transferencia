@@ -53,25 +53,27 @@ class FraccionamientoController extends Controller
 
         return $data;
     }
-    public function second($rucContratista, $rucEntidad, $period, $filter, $nameEntidad, $ruc, $nameRuc, $ruta,  $primaryVariable, $busquedaPalabra = null)
+    public function second($rucContratista, $rucEntidad, $period, $filter, $nameEntidad, $ruc, $nameRuc, $ruta,  $primaryVariable, $orderTable, $busquedaPalabra = null)
     {
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
         $filters = ['orden-compra', 'contrato'];
-        $validator = Validator::make(['period' => $period, 'rucEntidad' => $rucEntidad, 'rucContratista' => $rucContratista, 'filter' => $filter], [
+        $orderTables = ['fecha_emision', 'monto_total_original', 'fecha_suscripcion_contrato', 'monto_contratado_item'];
+        $validator = Validator::make(['period' => $period, 'rucEntidad' => $rucEntidad, 'rucContratista' => $rucContratista, 'filter' => $filter, 'orderTable' => $orderTable], [
             'period' => ['required', 'integer', Rule::in($periods)],
             'rucEntidad' => ['required', 'integer'],
             'rucContratista' => ['required', 'integer'],
             'filter' => ['required', 'string', Rule::in($filters)],
+            'orderTable' => ['required', 'string', Rule::in($orderTables)],
         ]);
         if (!$validator->fails()) {
-            $result = $this->secondDetail($rucContratista, $rucEntidad, $period, $filter);
+            $result = $this->secondDetail($rucContratista, $rucEntidad, $period, $filter, $orderTable);
             // dd($result);
             return view('detail.indices.fraccionamiento.secondDetail', compact('result', 'filter', 'period', 'rucContratista', 'rucEntidad', 'busquedaPalabra', 'nameEntidad', 'ruc', 'nameRuc', 'ruta', 'primaryVariable'));
         } else {
             abort(404);
         }
     }
-    public function secondDetail($rucContratista, $rucEntidad, $period, $filter)
+    public function secondDetail($rucContratista, $rucEntidad, $period, $filter, $orderTable)
     {
         if ($filter == 'orden-compra') {
             $data = DB::table('osce_ordencompra')
@@ -90,7 +92,6 @@ class FraccionamientoController extends Controller
                 ->orderBy('fecha_suscripcion_contrato', 'asc')
                 ->paginate(10);
         }
-
         return $data;
     }
 }
