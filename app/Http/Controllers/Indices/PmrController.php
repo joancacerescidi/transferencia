@@ -79,7 +79,7 @@ class PmrController extends Controller
 			and ocj.ruc = op.ruc_postor
 	) as rep1'))
             ->where([['oc.anno', $period], ['oc.ruc_entidad', $rucEntidad], ['oc.ruc_contratista', $rucContratista]])
-            ->orderBy($orderTable, 'ASC')
+            ->orderBy($orderTable, 'DESC')
             ->paginate(10);
 
         return $data;

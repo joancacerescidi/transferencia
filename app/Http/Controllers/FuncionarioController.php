@@ -58,7 +58,7 @@ class FuncionarioController extends Controller
                                 ->orWhereNull('fc.fecha_fin');
                         })
                         ->where('oc.estadocontratacion', '!=', 'Anulada')
-                        ->orderBy('oc.fecha_emision', 'asc')
+                        ->orderBy('oc.fecha_emision', 'DESC')
                         ->paginate(10);
                 } else if ($type === 'contrato') {
 
@@ -74,7 +74,7 @@ class FuncionarioController extends Controller
                             $query->where('oc.fecha_suscripcion_contrato', '<=', DB::raw('fc.fecha_fin'))
                                 ->orWhereNull('fc.fecha_fin');
                         })
-                        ->orderBy('oc.fecha_suscripcion_contrato', 'asc')
+                        ->orderBy('oc.fecha_suscripcion_contrato', 'DESC')
                         ->paginate(10);
                 } else if ($type === 'consorcio') {
                     $data =  DB::table('funcionario_cargo AS fc')
@@ -91,7 +91,7 @@ class FuncionarioController extends Controller
                             $query->where('oc.fecha_suscripcion_contrato', '<=', DB::raw('fc.fecha_fin'))
                                 ->orWhereNull('fc.fecha_fin');
                         })
-                        ->orderBy('oc.fecha_suscripcion_contrato', 'asc')
+                        ->orderBy('oc.fecha_suscripcion_contrato', 'DESC')
                         ->paginate(10);
                 }
             } else if ($nivel === 'DPRE') {
@@ -126,7 +126,7 @@ class FuncionarioController extends Controller
                                 ->orWhereNull('fc.fecha_fin');
                         })
                         ->where('oc.estadocontratacion', '!=', 'Anulada')
-                        ->orderBy('oc.fecha_emision', 'asc')
+                        ->orderBy('oc.fecha_emision', 'DESC')
                         ->paginate(10);
                 } else if ($type === 'contrato') {
                     $data =  DB::table('funcionario_cargo AS fc')
@@ -158,7 +158,7 @@ class FuncionarioController extends Controller
                             $query->where('oc.fecha_suscripcion_contrato', '<=', DB::raw('fc.fecha_fin'))
                                 ->orWhereNull('fc.fecha_fin');
                         })
-                        ->orderBy('oc.fecha_suscripcion_contrato', 'asc')
+                        ->orderBy('oc.fecha_suscripcion_contrato', 'DESC')
                         ->paginate(10);
                 } else if ($type === 'consorcio') {
 
@@ -195,7 +195,7 @@ class FuncionarioController extends Controller
                             $query->where('oc.fecha_suscripcion_contrato', '<=', DB::raw('fc.fecha_fin'))
                                 ->orWhereNull('fc.fecha_fin');
                         })
-                        ->orderBy('oc.fecha_suscripcion_contrato', 'asc')
+                        ->orderBy('oc.fecha_suscripcion_contrato', 'DESC')
                         ->paginate(10);
                 }
             } else if ($nivel === 'CDAF') {
@@ -222,7 +222,7 @@ class FuncionarioController extends Controller
                             $query->where('oc.fecha_emision', '<=', DB::raw('fc.fecha_fin'))
                                 ->orWhereNull('fc.fecha_fin');
                         })
-                        ->orderBy('oc.fecha_emision', 'asc')
+                        ->orderBy('oc.fecha_emision', 'DESC')
                         ->paginate(10);
                 } else if ($type === 'contrato') {
                     $data = DB::table('funcionario AS f')
@@ -245,7 +245,7 @@ class FuncionarioController extends Controller
                             $query->where('oc.fecha_suscripcion_contrato', '<=', DB::raw('fc.fecha_fin'))
                                 ->orWhereNull('fc.fecha_fin');
                         })
-                        ->orderBy('oc.fecha_suscripcion_contrato', 'asc')
+                        ->orderBy('oc.fecha_suscripcion_contrato', 'DESC')
                         ->paginate(10);
                 } else if ($type === 'consorcio') {
                     $data =  DB::table('funcionario AS f')
@@ -272,7 +272,7 @@ class FuncionarioController extends Controller
                             $query->where('oc.fecha_suscripcion_contrato', '<=', DB::raw('fc.fecha_fin'))
                                 ->orWhereNull('fc.fecha_fin');
                         })
-                        ->orderBy('oc.fecha_suscripcion_contrato', 'asc')
+                        ->orderBy('oc.fecha_suscripcion_contrato', 'DESC')
                         ->paginate(10);
                 }
             } else if ($nivel === 'CEDFA') {
@@ -308,7 +308,7 @@ class FuncionarioController extends Controller
                             $query->where('oc.fecha_emision', '<=', DB::raw('fa.fecha_fin'))
                                 ->orWhereNull('fa.fecha_fin');
                         })
-                        ->orderBy('fecha_emision', 'asc')
+                        ->orderBy('fecha_emision', 'DESC')
                         ->paginate(10);
                 } else if ($type === 'contrato') {
                     $data = DB::table('funcionario AS f')
@@ -341,7 +341,7 @@ class FuncionarioController extends Controller
                             $query->where('oc.fecha_suscripcion_contrato', '<=', DB::raw('fa.fecha_fin'))
                                 ->orWhereNull('fa.fecha_fin');
                         })
-                        ->orderBy('fecha_suscripcion_contrato', 'asc')
+                        ->orderBy('fecha_suscripcion_contrato', 'DESC')
                         ->paginate(10);
                 } else if ($type === 'consorcio') {
                     $data = DB::table('funcionario AS f')
@@ -378,11 +378,11 @@ class FuncionarioController extends Controller
                             $query->where('oc.fecha_suscripcion_contrato', '<=', DB::raw('fa.fecha_fin'))
                                 ->orWhereNull('fa.fecha_fin');
                         })
-                        ->orderBy('fecha_suscripcion_contrato', 'asc')
+                        ->orderBy('fecha_suscripcion_contrato', 'DESC')
                         ->paginate(10);
                 }
             }
-    
+
             return view('detail.funcionario.firstDetail', compact('data', 'period', 'nivel', 'type', 'name', 'labelNivel', 'labelType', 'busquedaPalabra'));
         } else {
             abort(404);

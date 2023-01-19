@@ -32,7 +32,7 @@ class ProveedorController extends Controller
             ->where('oc.ruc_contratista', '=', $rucContratista)
             ->where('oc.estadocontratacion', '!=', 'Anulada')
             ->groupBy('oc.ruc_entidad', 'oc.entidad')
-            ->orderBy('cantidad', 'desc')
+            ->orderBy('cantidad', 'DESC')
             ->paginate(10);
 
         return  $data;
@@ -59,7 +59,7 @@ class ProveedorController extends Controller
         $data = DB::table(DB::raw('osce_ordencompra oc'))
             ->select('fecha_emision', 'descripcion_orden', 'orden', 'objetocontractual', 'moneda', 'monto_total_original')
             ->where([['oc.anno', $period], ['oc.ruc_contratista', $rucContratista], ['oc.ruc_entidad', $rucEntidad], ['oc.estadocontratacion', '<>', 'Anulada']])
-            ->orderBy('oc.fecha_emision', 'ASC')
+            ->orderBy('oc.fecha_emision', 'DESC')
             ->paginate(10);
 
         return  $data;
@@ -109,7 +109,7 @@ class ProveedorController extends Controller
         $data = DB::table(DB::raw('osce_contrato oc'))
             ->select('fecha_suscripcion_contrato', 'descripcion_proceso', 'num_contrato', 'urlcontrato', 'moneda', 'monto_contratado_item')
             ->where([['oc.anno', $period], ['oc.ruc_contratista', $rucContratista], ['oc.ruc_entidad', $rucEntidad]])
-            ->orderBy('fecha_suscripcion_contrato', 'ASC')
+            ->orderBy('fecha_suscripcion_contrato', 'DESC')
             ->paginate(10);
         return $data;
     }
@@ -142,7 +142,7 @@ class ProveedorController extends Controller
                 ->where('osce_ordencompra.ruc_contratista', '=', DB::raw('osce_consorcio.ruc_consorcio'))
                 ->where('osce_consorcio.ruc_miembro', '=', $rucContratista)
                 ->groupBy('osce_ordencompra.ruc_entidad', 'osce_ordencompra.entidad')
-                ->orderBy('cantidad', 'desc')
+                ->orderBy('cantidad', 'DESC')
                 ->paginate(10);
         } else if ($filter == 'contrato') {
             $data = DB::table('osce_contrato')
@@ -152,7 +152,7 @@ class ProveedorController extends Controller
                 ->where('osce_contrato.ruc_contratista', '=', DB::raw('osce_consorcio.ruc_consorcio'))
                 ->where('osce_consorcio.ruc_miembro', '=', $rucContratista)
                 ->groupBy('osce_contrato.ruc_entidad', 'osce_contrato.nombre_entidad')
-                ->orderBy('cantidad', 'desc')
+                ->orderBy('cantidad', 'DESC')
                 ->paginate(10);
         }
         return $data;
@@ -184,7 +184,7 @@ class ProveedorController extends Controller
                 ->where('oc.ruc_contratista', '=', DB::raw('oco.ruc_consorcio'))
                 ->where('oco.ruc_miembro', '=', $rucContratista)
                 ->where('oc.ruc_entidad', '=', $rucEntidad)
-                ->orderBy('fecha_emision', 'asc')
+                ->orderBy('fecha_emision', 'DESC')
                 ->paginate(10);
         } else if ($filter == 'contrato') {
             $data = DB::table(DB::raw('osce_contrato oc'))
@@ -194,7 +194,7 @@ class ProveedorController extends Controller
                 ->where('oc.ruc_contratista', '=', DB::raw('oco.ruc_consorcio'))
                 ->where('oco.ruc_miembro', '=', $rucContratista)
                 ->where('oc.ruc_entidad', '=', $rucEntidad)
-                ->orderBy('fecha_suscripcion_contrato', 'asc')
+                ->orderBy('fecha_suscripcion_contrato', 'DESC')
                 ->paginate(10);
         }
         return $data;
@@ -272,7 +272,7 @@ class ProveedorController extends Controller
         $data = DB::table(DB::raw('osce_contrato oc'))
             ->select('fecha_suscripcion_contrato', 'descripcion_proceso', 'num_contrato', 'urlcontrato', 'moneda', 'monto_contratado_item')
             ->where([['oc.anno', $period], ['oc.ruc_contratista', $rucContratista], ['oc.ruc_entidad', $rucEntidad], ['oc.tieneresolucion', 'SI']])
-            ->orderBy('fecha_suscripcion_contrato', 'ASC')
+            ->orderBy('fecha_suscripcion_contrato', 'DESC')
             ->paginate(10);
         return $data;
     }
@@ -332,7 +332,7 @@ class ProveedorController extends Controller
             ->whereRaw('op.codigo_convocatoria = oc.codigo_convocatoria')
             ->whereRaw('op.n_item = oc.n_item')
             ->where('oc.entidad_ruc', '=', $rucEntidad)
-            ->orderBy('oc.fecha_convocatoria', 'ASC')
+            ->orderBy('oc.fecha_convocatoria', 'DESC')
             ->paginate(10);
         return $data;
     }
@@ -405,7 +405,7 @@ from osce_postor op, osce_conformacion_juridica ocj
 	 	   and op.ruc_postor<>oc.ruc_contratista
 	       and ocj.ruc=op.ruc_postor) as rep1'))
             ->where([['oc.anno', $period], ['oc.ruc_entidad', $rucEntidad], ['oc.ruc_contratista', $rucContratista]])
-            ->orderBy('fecha_suscripcion_contrato', 'ASC')
+            ->orderBy('fecha_suscripcion_contrato', 'DESC')
             ->paginate(10);
 
         return $data;

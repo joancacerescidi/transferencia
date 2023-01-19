@@ -89,7 +89,7 @@ class PrcController extends Controller
                 ->where('ruc_entidad', '=', $rucEntidad)
                 ->where('ruc_contratista', '=', $rucContratista)
                 ->whereRaw('(select min(fecha_inicio_vigencia) from  osce_proveedor b where b.ruc_proveedor=oo.ruc_contratista) > (oo.fecha_suscripcion_contrato  - interval \'30 day\' )')
-                ->orderBy($orderTable, 'ASC')
+                ->orderBy($orderTable, 'DESC')
                 ->paginate(10);
         }
         return $data;

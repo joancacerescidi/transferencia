@@ -78,7 +78,7 @@ class CrcController extends Controller
 														 where oco.ruc_consorcio=a.ruc_contratista and
 																oco.ruc_miembro=op.ruc_proveedor)')
             ->whereRaw('b.ruc_consorcio = a.ruc_contratista')
-            ->orderBy($orderTable, 'ASC')
+            ->orderBy($orderTable, 'DESC')
             ->paginate(10);
 
         return  $data;

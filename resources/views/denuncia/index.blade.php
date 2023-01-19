@@ -18,17 +18,18 @@
                     class="grid gap-6 xl:gap-10 bg-body-bg xl:bg-white py-10 px-6 xl:p-10 rounded-md shadow-lg border">
                     {{ csrf_field() }}
                     <h2 class="text-center text-xl xl:text-3xl font-bold">
-                        Denuncia
+                        Comparte información
                     </h2>
                     @if (session('success'))
-                        <h3 class="font-semibold text-sm xl:text-xl text-center">Tu denuncia fue enviada con <span
+                        <h3 class="font-semibold text-sm xl:text-xl text-center">Tu información fue enviada con <span
                                 class="text-green-500 font-bold">{{ session('success') }}</span></h3>
                     @endif
                     @if (session('errorSave'))
                         <h3 class="font-semibold text-sm xl:text-xl text-center">Lo sentimos hubo un <span
-                                class="text-red-700 font-bold">{{ session('errorSave') }}</span> al enviar su denuncia</h3>
+                                class="text-red-700 font-bold">{{ session('errorSave') }}</span> al compartir tu información
+                        </h3>
                     @endif
-                    <h4 class="font-bold xl:text-lg">Datos de denuncia</h4>
+                    <h4 class="font-bold xl:text-lg">Datos de la entidad :</h4>
                     <div class="grid xl:grid-cols-2 gap-6 xl:gap-10">
                         <div>
                             <label for="entidad" class="font-semibold text-xs xl:text-sm block mb-1">RUC Entidad</label>
@@ -50,31 +51,31 @@
                         </div>
                     </div>
                     <div>
-                        <label class="font-semibold text-xs xl:text-sm block mb-1" for="denuncia">¿Cuál es tu
-                            denuncia?</label>
+                        <label class="font-semibold text-xs xl:text-sm block mb-1" for="informacion">Ingresa la información
+                            que tengas</label>
                         <textarea name="detalle" id="detalle" rows="4" placeholder="Escribe aqui..."
                             class="text-sm block w-full p-4 rounded-md border shadow-md focus:outline-none focus:ring focus:ring-main-blue @error('detalle') ring ring-red-500  @enderror"">{{ old('detalle') }}</textarea>
                         @error('detalle')
                             <span class="py-2 text-red-500 text-xs xl:text-sm block">{{ $message }}</span>
                         @enderror
                     </div>
-                    <h4 class="font-bold xl:text-lg">Datos de contacto</h4>
+                    <h4 class="font-bold xl:text-lg">Datos de contacto :</h4>
 
                     <div>
                         <label for="nombres" class="font-semibold text-xs xl:text-sm block mb-1">Nombre</label>
                         <input id="nombres" value="{{ old('nombres') }}" name="nombres" type="text"
                             placeholder="Nombres"
                             class="text-sm block w-full p-4 rounded-md border shadow-md focus:outline-none focus:ring focus:ring-main-blue @error('nombres') ring ring-red-500  @enderror" ">
-                                                    @error('nombres')
+                                                            @error('nombres')
         <span class="py-2 text-red-500 text-xs xl:text-sm block">{{ $message }}</span>
     @enderror
-                                            </div>
-                                        <div class="grid xl:grid-cols-2 gap-6 xl:gap-10">
+                                                    </div>
+                                                <div class="grid xl:grid-cols-2 gap-6 xl:gap-10">
 
-                                             <div>
-                                               <label for="email" class="font-semibold text-xs xl:text-sm block mb-1">Teléfono</label>
-                                               <input id="telefono" value="{{ old('telefono') }}" name="telefono" type="number" placeholder="Teléfono"
-                                                  class="text-sm block w-full p-4 rounded-md border shadow-md focus:outline-none focus:ring focus:ring-main-blue @error('telefono') ring ring-red-500  @enderror"">
+                                                     <div>
+                                                       <label for="email" class="font-semibold text-xs xl:text-sm block mb-1">Teléfono</label>
+                                                       <input id="telefono" value="{{ old('telefono') }}" name="telefono" type="number" placeholder="Teléfono"
+                                                          class="text-sm block w-full p-4 rounded-md border shadow-md focus:outline-none focus:ring focus:ring-main-blue @error('telefono') ring ring-red-500  @enderror"">
                         @error('telefono')
                             <span class="py-2 text-red-500 text-xs xl:text-sm block">{{ $message }}</span>
                         @enderror

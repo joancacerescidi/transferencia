@@ -54,8 +54,7 @@ function preloadActive2($type, $ruta, $periodo, $palabraBusqueda) {
             console.log(finalUrl);
             window.location.href = finalUrl;
         } else if ($type === "funcionario") {
-            const finalUrl =
-                $ruta + "/" + $periodo + "/" + $palabraBusqueda;
+            const finalUrl = $ruta + "/" + $periodo + "/" + $palabraBusqueda;
             window.location.href = finalUrl;
         } else if ($type === "proveedor") {
             const finalUrl = $ruta + "/" + $periodo + "/" + $palabraBusqueda;

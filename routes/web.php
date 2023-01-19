@@ -119,7 +119,7 @@ Route::get('/usuario/feedback', [FeedbackController::class, 'index'])->name('fee
 #registrar un feddback
 Route::post('/save/feedback', [FeedbackController::class, 'created'])->name('feedback.created');
 #denuncia
-Route::get('/usuario/denuncia', [DenunciaController::class, 'index'])->name('denuncia.index');
+Route::get('/usuario/comparte-informacion', [DenunciaController::class, 'index'])->name('denuncia.index');
 #registrar una denuncia
 Route::post('/save/denuncia', [DenunciaController::class, 'created'])->name('denuncia.created');
 #fuentes
