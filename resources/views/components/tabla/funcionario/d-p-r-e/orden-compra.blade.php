@@ -15,10 +15,17 @@
                 Descripción
                 {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
             </p>
-            <p class="xl:col-span-1 font-semibold hidden xl:flex items-center gap-2 ">
+            <a href=" @if ($busquedaPalabra !== null) {{ url('/detail/funcionario/' . $idFuncionario . '/' . $nivel . '/' . $type . '/' . $name . '/' . $period . '/oc.fecha_emision' . '/0' . '/' . $busquedaPalabra) }}
+                    @else
+                       {{ url('/detail/funcionario/' . $idFuncionario . '/' . $nivel . '/' . $type . '/' . $name . '/' . $period . '/oc.fecha_emision') }} @endif "
+                class="btn-preload xl:col-span-1 font-semibold hidden xl:flex items-center gap-2 ">
                 Fecha
-                {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
-            </p>
+                @if ($orderTable == 'oc.fecha_emision')
+                    <img src="{{ asset('images/icon-chevron-up.png') }}" alt="w-max">
+                @else
+                    <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max">
+                @endif
+            </a>
             <p class="xl:col-span-1 font-semibold hidden xl:flex items-center gap-2">
                 nrodoc
                 {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
@@ -55,10 +62,17 @@
                 Moneda
                 {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
             </p>
-            <p class="xl:col-span-1 font-semibold hidden xl:flex items-center gap-2">
+            <a href=" @if ($busquedaPalabra !== null) {{ url('/detail/funcionario/' . $idFuncionario . '/' . $nivel . '/' . $type . '/' . $name . '/' . $period . '/oc.monto_total_original' . '/0' . '/' . $busquedaPalabra) }}
+                    @else
+                       {{ url('/detail/funcionario/' . $idFuncionario . '/' . $nivel . '/' . $type . '/' . $name . '/' . $period . '/oc.monto_total_original') }} @endif "
+                class="btn-preload xl:col-span-1 font-semibold hidden xl:flex items-center gap-2">
                 Total
-                {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
-            </p>
+                @if ($orderTable == 'oc.monto_total_original')
+                    <img src="{{ asset('images/icon-chevron-up.png') }}" alt="w-max">
+                @else
+                    <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max">
+                @endif
+            </a>
         </header>
         <div
             class="px-5 py-5 xl:py-0 grid xl:grid-cols-15 items-start gap-4 text-xs xl:text-sm mb-10 border-b pb-4 xl:pb-0 xl:border-0 xl:overflow-x-auto u-table-row">
@@ -117,7 +131,7 @@
                 </p>
                 <p class="xl:col-span-1 font-medium grid grid-cols-2 xl:block items-center gap-8">
                     <span class="text-main-gray font-medium xl:hidden">Total: </span>
-                    <span> {{ number_format(round($item->monto_total_original, 2))   }}</span>
+                    <span> {{ number_format(round($item->monto_total_original, 2)) }}</span>
                 </p>
             @endforeach
         </div>

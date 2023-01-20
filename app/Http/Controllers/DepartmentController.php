@@ -13,8 +13,9 @@ use stdClass;
 class DepartmentController extends Controller
 {
     //
-    public function index($department, $period)
+    public function index($department, $period, $orderTable)
     {
+        $orderby = ['monto', 'ranking'];
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
         $departments = [
             'LAMBAYEQUE', 'PIURA', 'TUMBES', 'APURIMAC', 'AREQUIPA',
@@ -24,20 +25,21 @@ class DepartmentController extends Controller
             'CALLAO', 'HUANCAVELICA', 'ICA', 'JUNIN', 'LIMA'
         ];
 
-        $validator = Validator::make(['period' => $period, 'department' => $department], [
+        $validator = Validator::make(['period' => $period, 'department' => $department, 'orderTable' => $orderTable], [
             'period' => ['required', 'integer', Rule::in($periods)],
-            'department' => ['required', 'string', Rule::in($departments)]
+            'department' => ['required', 'string', Rule::in($departments)],
+            'orderTable' => ['required', 'string', Rule::in($orderby)],
         ]);
 
         if (!$validator->fails()) {
-            $resultDepartmentDetail = $this->deparmentDetail($period, $department);
+            $resultDepartmentDetail = $this->deparmentDetail($period, $department, $orderTable);
             $ruta = 'entidad.deparment';
-            return view('department.index', compact('resultDepartmentDetail', 'department', 'period', 'ruta'));
+            return view('department.index', compact('resultDepartmentDetail', 'department', 'period', 'ruta', 'orderTable'));
         } else {
             abort(404);
         }
     }
-    public function deparmentDetail($period, $department)
+    public function deparmentDetail($period, $department, $orderTable)
     {
         $data = DB::table('public.totalannoentidad')
             ->select(
@@ -60,22 +62,25 @@ class DepartmentController extends Controller
                 'departamento',
                 'nivelgobierno',
                 'poder',
-                DB::raw('(montofra+montoadi+montoprc+montocrc+montopmr) as ranking')
+                DB::raw('coalesce(montofra,0)+coalesce(montoadi,0)+coalesce(montoprc,0)+coalesce(montocrc,0)+coalesce(montopmr,0) as ranking'),
+                DB::raw('coalesce(montoordencompra,0) + coalesce(montocontrato,0) as monto'),
             )
             ->where('anno', $period)
             ->where('departamento', $department)
-            ->orderBy('ranking', 'DESC')->paginate(10);
+            ->orderBy($orderTable, 'DESC')->paginate(10);
+
         $data->each(function ($item) {
             $item->dataList = new stdClass();
             $item->dataList->rucEntidad = $item->ruc_entidad;
             $item->dataList->nombre = $item->nombre_entidad;
-            $item->dataList->montoTotal = number_format(intval($item->montoordencompra + $item->montocontrato));
-            $item->dataList->ranking = number_format(intval($item->ranking / ($item->montoordencompra + $item->montocontrato)));
+            $item->dataList->montoTotal = number_format(intval($item->monto));
+            $item->dataList->ranking = number_format(intval($item->ranking));
+            // $item->dataList->ranking = number_format(intval($item->ranking / ($item->montoordencompra + $item->montocontrato)));
             $item->dataList->categorys = [];
 
             //---Fraccionamientos---//
             $fraccionamiento = new stdClass();
-            $fraccionamiento->name = "Fraccionamiento";
+            $fraccionamiento->name = "Proveedor con más de 3 contrataciones";
             $fraccionamiento->monto =  number_format(intval($item->montofra));
             $fraccionamiento->cantidad = number_format(intval($item->cantidadfra));
             $fraccionamiento->sigla = "FRA";

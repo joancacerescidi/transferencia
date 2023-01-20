@@ -12,41 +12,66 @@ use stdClass;
 class GovernmentLevelController extends Controller
 {
     //
-    public function index($nivel, $period)
+    public function index($nivel, $period, $orderTable)
     {
+        $orderby = ['monto', 'ranking'];
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
-        $validator = Validator::make(['period' => $period, 'nivel' => $nivel], [
+        $validator = Validator::make(['period' => $period, 'nivel' => $nivel, 'orderTable' => $orderTable], [
             'period' => ['required', 'integer', Rule::in($periods)],
-            'nivel' => ['required', 'string', 'max:1']
+            'nivel' => ['required', 'string', 'max:1'],
+            'orderTable' => ['required', 'string', Rule::in($orderby)],
         ]);
         if (!$validator->fails()) {
 
-            $result = $this->dataGovernment($nivel, $period);
+            $result = $this->dataGovernment($nivel, $period, $orderTable);
             $ruta = 'entidad.goverment';
-            return view('gobermentLevel.index', compact('nivel', 'period', 'result', 'nivel', 'ruta'));
+            return view('gobermentLevel.index', compact('nivel', 'period', 'result', 'nivel', 'ruta', 'orderTable'));
         } else {
             abort(404);
         }
     }
-    public function dataGovernment($nivel, $period)
+    public function dataGovernment($nivel, $period, $orderTable)
     {
         $data = DB::table('public.totalannoentidad')
-            ->select('ruc_entidad', 'nombre_entidad', 'montoordencompra', 'montocontrato', 'cantidadfra', 'montoprc', 'montopmr', 'montocrc', 'montoadi', 'montocof', 'montofra', 'cantidadprc', 'cantidadpmr', 'cantidadcrc', 'cantidadadi', 'cantidadcof', 'departamento', 'nivelgobierno', 'poder', DB::raw('montofra + montoadi + montoprc + montocrc + montopmr as ranking'))
+            ->select(
+                'ruc_entidad',
+                'nombre_entidad',
+                'montoordencompra',
+                'montocontrato',
+                'cantidadfra',
+                'montoprc',
+                'montopmr',
+                'montocrc',
+                'montoadi',
+                'montocof',
+                'montofra',
+                'cantidadprc',
+                'cantidadpmr',
+                'cantidadcrc',
+                'cantidadadi',
+                'cantidadcof',
+                'departamento',
+                'nivelgobierno',
+                'poder',
+                DB::raw('coalesce(montofra,0) + coalesce(montoadi,0) + coalesce(montoprc,0) + coalesce(montocrc,0) + coalesce(montopmr,0) as ranking'),
+                DB::raw('coalesce(montoordencompra,0) + coalesce(montocontrato,0) as monto'),
+            )
             ->where('anno', '=', $period)
             ->where('nivelgobierno', '=', $nivel)
-            ->orderByRaw('ranking DESC')
+            ->orderBy($orderTable, 'DESC')
             ->paginate(10);
 
         $data->each(function ($item) {
             $item->dataList = new stdClass();
             $item->dataList->rucEntidad = $item->ruc_entidad;
             $item->dataList->nombre = $item->nombre_entidad;
-            $item->dataList->montoTotal = number_format(intval($item->montoordencompra + $item->montocontrato));
-            $item->dataList->ranking = number_format(intval($item->ranking / ($item->montoordencompra + $item->montocontrato)));
+            $item->dataList->montoTotal = number_format(intval($item->monto));
+            $item->dataList->ranking = number_format(intval($item->ranking));
+            // $item->dataList->ranking = number_format(intval($item->ranking / ($item->montoordencompra + $item->montocontrato)));
             $item->dataList->categorys = [];
             //---Fraccionamientos---//
             $fraccionamiento = new stdClass();
-            $fraccionamiento->name = "Fraccionamiento";
+            $fraccionamiento->name = "Proveedor con más de 3 contrataciones";
             $fraccionamiento->monto =  number_format(intval($item->montofra));
             $fraccionamiento->cantidad = number_format(intval($item->cantidadfra));
             $fraccionamiento->sigla = "FRA";

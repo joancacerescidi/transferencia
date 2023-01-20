@@ -12,17 +12,22 @@ class FuncionarioController extends Controller
     //
 
 
-    public function firstDetail($idFuncionario, $nivel, $type, $name, $period, $ruc = 0, $busquedaPalabra = null)
+    public function firstDetail($idFuncionario, $nivel, $type, $name, $period, $orderTable, $ruc = 0, $busquedaPalabra = null)
     {
-
-        $nivels = ['DCPD', 'DPRE', 'CDAF', 'CEDFA'];
+        // 'CDAF'
+        $nivels = ['DCPD', 'DPRE', 'CEDFA'];
         $types = ['orden-compra', 'contrato', 'consorcio'];
-        $validator = Validator::make(['nivel' => $nivel, 'type' => $type, 'idFuncionario' => $idFuncionario, 'name' => $name], [
+        $orderby = ['oc.fecha_emision', 'oc.monto_total_original', 'oc.fecha_suscripcion_contrato', 'oc.monto_contratado_item'];
+
+
+        $validator = Validator::make(['nivel' => $nivel, 'type' => $type, 'idFuncionario' => $idFuncionario, 'name' => $name, 'orderTable' => $orderTable], [
             'idFuncionario' => ['required', 'integer'],
             'name' => ['required', 'string'],
             'nivel' => ['required', 'string', Rule::in($nivels)],
-            'type' => ['required', 'string', Rule::in($types)]
+            'type' => ['required', 'string', Rule::in($types)],
+            'orderTable' => ['required', 'string', Rule::in($orderby)]
         ]);
+
         $labelNivel = '';
         if ($nivel == 'DCPD') {
             $labelNivel = 'Donde se contrata a un pariente directamente';
@@ -58,7 +63,7 @@ class FuncionarioController extends Controller
                                 ->orWhereNull('fc.fecha_fin');
                         })
                         ->where('oc.estadocontratacion', '!=', 'Anulada')
-                        ->orderBy('oc.fecha_emision', 'DESC')
+                        ->orderBy($orderTable, 'DESC')
                         ->paginate(10);
                 } else if ($type === 'contrato') {
 
@@ -74,7 +79,7 @@ class FuncionarioController extends Controller
                             $query->where('oc.fecha_suscripcion_contrato', '<=', DB::raw('fc.fecha_fin'))
                                 ->orWhereNull('fc.fecha_fin');
                         })
-                        ->orderBy('oc.fecha_suscripcion_contrato', 'DESC')
+                        ->orderBy($orderTable, 'DESC')
                         ->paginate(10);
                 } else if ($type === 'consorcio') {
                     $data =  DB::table('funcionario_cargo AS fc')
@@ -91,7 +96,7 @@ class FuncionarioController extends Controller
                             $query->where('oc.fecha_suscripcion_contrato', '<=', DB::raw('fc.fecha_fin'))
                                 ->orWhereNull('fc.fecha_fin');
                         })
-                        ->orderBy('oc.fecha_suscripcion_contrato', 'DESC')
+                        ->orderBy($orderTable, 'DESC')
                         ->paginate(10);
                 }
             } else if ($nivel === 'DPRE') {
@@ -126,7 +131,7 @@ class FuncionarioController extends Controller
                                 ->orWhereNull('fc.fecha_fin');
                         })
                         ->where('oc.estadocontratacion', '!=', 'Anulada')
-                        ->orderBy('oc.fecha_emision', 'DESC')
+                        ->orderBy($orderTable, 'DESC')
                         ->paginate(10);
                 } else if ($type === 'contrato') {
                     $data =  DB::table('funcionario_cargo AS fc')
@@ -158,7 +163,7 @@ class FuncionarioController extends Controller
                             $query->where('oc.fecha_suscripcion_contrato', '<=', DB::raw('fc.fecha_fin'))
                                 ->orWhereNull('fc.fecha_fin');
                         })
-                        ->orderBy('oc.fecha_suscripcion_contrato', 'DESC')
+                        ->orderBy($orderTable, 'DESC')
                         ->paginate(10);
                 } else if ($type === 'consorcio') {
 
@@ -195,7 +200,7 @@ class FuncionarioController extends Controller
                             $query->where('oc.fecha_suscripcion_contrato', '<=', DB::raw('fc.fecha_fin'))
                                 ->orWhereNull('fc.fecha_fin');
                         })
-                        ->orderBy('oc.fecha_suscripcion_contrato', 'DESC')
+                        ->orderBy($orderTable, 'DESC')
                         ->paginate(10);
                 }
             } else if ($nivel === 'CDAF') {
@@ -222,7 +227,7 @@ class FuncionarioController extends Controller
                             $query->where('oc.fecha_emision', '<=', DB::raw('fc.fecha_fin'))
                                 ->orWhereNull('fc.fecha_fin');
                         })
-                        ->orderBy('oc.fecha_emision', 'DESC')
+                        ->orderBy($orderTable, 'DESC')
                         ->paginate(10);
                 } else if ($type === 'contrato') {
                     $data = DB::table('funcionario AS f')
@@ -245,7 +250,7 @@ class FuncionarioController extends Controller
                             $query->where('oc.fecha_suscripcion_contrato', '<=', DB::raw('fc.fecha_fin'))
                                 ->orWhereNull('fc.fecha_fin');
                         })
-                        ->orderBy('oc.fecha_suscripcion_contrato', 'DESC')
+                        ->orderBy($orderTable, 'DESC')
                         ->paginate(10);
                 } else if ($type === 'consorcio') {
                     $data =  DB::table('funcionario AS f')
@@ -272,7 +277,7 @@ class FuncionarioController extends Controller
                             $query->where('oc.fecha_suscripcion_contrato', '<=', DB::raw('fc.fecha_fin'))
                                 ->orWhereNull('fc.fecha_fin');
                         })
-                        ->orderBy('oc.fecha_suscripcion_contrato', 'DESC')
+                        ->orderBy($orderTable, 'DESC')
                         ->paginate(10);
                 }
             } else if ($nivel === 'CEDFA') {
@@ -308,7 +313,7 @@ class FuncionarioController extends Controller
                             $query->where('oc.fecha_emision', '<=', DB::raw('fa.fecha_fin'))
                                 ->orWhereNull('fa.fecha_fin');
                         })
-                        ->orderBy('fecha_emision', 'DESC')
+                        ->orderBy($orderTable, 'DESC')
                         ->paginate(10);
                 } else if ($type === 'contrato') {
                     $data = DB::table('funcionario AS f')
@@ -341,7 +346,7 @@ class FuncionarioController extends Controller
                             $query->where('oc.fecha_suscripcion_contrato', '<=', DB::raw('fa.fecha_fin'))
                                 ->orWhereNull('fa.fecha_fin');
                         })
-                        ->orderBy('fecha_suscripcion_contrato', 'DESC')
+                        ->orderBy($orderTable, 'DESC')
                         ->paginate(10);
                 } else if ($type === 'consorcio') {
                     $data = DB::table('funcionario AS f')
@@ -378,12 +383,12 @@ class FuncionarioController extends Controller
                             $query->where('oc.fecha_suscripcion_contrato', '<=', DB::raw('fa.fecha_fin'))
                                 ->orWhereNull('fa.fecha_fin');
                         })
-                        ->orderBy('fecha_suscripcion_contrato', 'DESC')
+                        ->orderBy($orderTable, 'DESC')
                         ->paginate(10);
                 }
             }
 
-            return view('detail.funcionario.firstDetail', compact('data', 'period', 'nivel', 'type', 'name', 'labelNivel', 'labelType', 'busquedaPalabra'));
+            return view('detail.funcionario.firstDetail', compact('data', 'period', 'nivel', 'type', 'name', 'labelNivel', 'labelType', 'busquedaPalabra', 'orderTable', 'idFuncionario', 'nivel', 'type', 'name', 'period'));
         } else {
             abort(404);
         }

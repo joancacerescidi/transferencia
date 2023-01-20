@@ -17,7 +17,7 @@
 
             @isset($search)
                 <div class="mb-14">
-                 
+
                     <div class="relative xl:w-1/3 mx-auto mb-14">
                         <input name="palabraClave" id="palabraProveedor" value="<?= $busquedaPalabra ?>"
                             class="block w-full py-5 px-6 rounded-xl border border-gray-200 bg-white shadow-sm focus:outline-none focus:ring focus:ring-main-blue"
@@ -36,14 +36,28 @@
                         Proveedor
                         <img src="../images/icon-chevron-up.png" alt="">
                     </p>
-                    <p class="col-span-2 hidden xl:flex items-center gap-2">
+                    <a href=" @if (isset($busquedaPalabra)) {{ url('/ranking/proveedor/search/' . $period . '/' . $busquedaPalabra . '/monto') }}
+                    @else
+                     {{ url('/ranking/proveedor/' . $period . '/monto') }} @endif "
+                        class="btn-preload col-span-2 hidden xl:flex items-center gap-2">
                         Monto
+                        @if ($orderTable == 'monto')
+                            <img src="{{ asset('images/flecha-2.png') }}" alt="w-max">
+                        @else
+                            <img src="{{ asset('images/flecha-1.png') }}" alt="w-max">
+                        @endif
                         <img src="../images/icon-chevron-down-blue.png" alt="">
-                    </p>
-                    <p class="col-span-1 xl:col-span-2 flex items-center gap-2 justify-center">
-                        Cantidad
-                        <img src="../images/icon-chevron-down-blue.png" alt="">
-                    </p>
+                    </a>
+                    <a href=" @if (isset($busquedaPalabra)) {{ url('/ranking/proveedor/search/' . $period . '/' . $busquedaPalabra . '/cantidad') }}
+                    @else
+                     {{ url('/ranking/proveedor/' . $period . '/cantidad') }} @endif "
+                        class="btn-preload col-span-1 xl:col-span-2 flex items-center gap-2 justify-center">
+                        Cantidad @if ($orderTable == 'cantidad')
+                            <img src="{{ asset('images/flecha-2.png') }}" alt="w-max">
+                        @else
+                            <img src="{{ asset('images/flecha-1.png') }}" alt="w-max">
+                        @endif
+                    </a>
                 </header>
                 @foreach ($result as $key => $item)
                     <details
@@ -70,9 +84,9 @@
                                 {{ $item->dataList->cantidadTotal }}
                             </p>
                             <!-- <p class="text-right xl:text-left col-span-6 xl:col-span-1 order-5">
-                                                                                                                                                                                                              <span class="text-gray-400 xl:hidden pr-8 font-medium">Ver más</span>
-                                                                                                                                                                                                              <img src="/images/icon-chevron-down.png" class="inline">
-                                                                                                                                                                                                            </p> -->
+                                                                                                                                                                                                                      <span class="text-gray-400 xl:hidden pr-8 font-medium">Ver más</span>
+                                                                                                                                                                                                                      <img src="/images/icon-chevron-down.png" class="inline">
+                                                                                                                                                                                                                    </p> -->
                         </summary>
 
 

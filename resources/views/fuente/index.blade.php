@@ -3,7 +3,7 @@
     <main class="bg-body-bg">
         <section class="u-container">
             <h2 class="text-center text-xl xl:text-4xl font-bold mb-14">
-                Fuentes
+                Descargo de Responsaibilidad
             </h2>
             <ul class="list-disc pl-10 grid gap-6 xl:gap-10">
                 <li>

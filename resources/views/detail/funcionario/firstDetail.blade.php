@@ -7,13 +7,16 @@
 
                 <span class="btn-preload" onclick="window.location='{{ url('/') }}'">Inicio</span>
                 @if ($busquedaPalabra !== null)
-                    <span onclick="preloadActive2('funcionario', '<?php echo URL::to('ranking/funcionario/search'); ?>', '<?php echo $period; ?>', '<?php echo $busquedaPalabra; ?>' )">/ Funcionario</span>
+                    <span
+                        onclick="preloadActive2('funcionario', '<?php echo URL::to('ranking/funcionario/search'); ?>', '<?php echo $period; ?>', '<?php echo $busquedaPalabra; ?>' )">/
+                        Funcionario</span>
                 @else
-                    <span class="btn-preload" onclick="window.location='{{ url('/ranking/funcionario/' . $period) }}'">/
+                    <span class="btn-preload"
+                        onclick="window.location='{{ url('/ranking/funcionario/' . $period . '/monto') }}'">/
 
                         Funcionario</span>
                 @endif
-              
+
             </a>
             <h2 class="text-center text-xl xl:text-4xl font-bold mb-6 xl:mb-0">
                 {{ $name }}
@@ -24,35 +27,48 @@
             </h4>
             @if ($nivel == 'DCPD')
                 @if ($type == 'orden-compra')
-                    <x-tabla.funcionario.d-c-p-d.orden-compra :items="$data" />
+                    <x-tabla.funcionario.d-c-p-d.orden-compra :items="$data" :orderTable="$orderTable" :busquedaPalabra="$busquedaPalabra"
+                        :idFuncionario="$idFuncionario" :nivel="$nivel" :type="$type" :name="$name" :period="$period" />
                 @elseif ($type == 'contrato')
-                    <x-tabla.funcionario.d-c-p-d.contrato :items="$data" />
+                    <x-tabla.funcionario.d-c-p-d.contrato :items="$data" :orderTable="$orderTable" :busquedaPalabra="$busquedaPalabra"
+                        :idFuncionario="$idFuncionario" :nivel="$nivel" :type="$type" :name="$name" :period="$period" />
                 @elseif ($type == 'consorcio')
-                    <x-tabla.funcionario.d-c-p-d.consorcio :items="$data" />
+                    <x-tabla.funcionario.d-c-p-d.consorcio :items="$data" :orderTable="$orderTable" :busquedaPalabra="$busquedaPalabra"
+                        :idFuncionario="$idFuncionario" :nivel="$nivel" :type="$type" :name="$name" :period="$period" />
                 @endif
             @elseif($nivel == 'DPRE')
                 @if ($type == 'orden-compra')
-                    <x-tabla.funcionario.d-p-r-e.orden-compra :items="$data" />
+                    <x-tabla.funcionario.d-p-r-e.orden-compra :items="$data" :orderTable="$orderTable" :busquedaPalabra="$busquedaPalabra"
+                        :idFuncionario="$idFuncionario" :nivel="$nivel" :type="$type" :name="$name" :period="$period" />
                 @elseif ($type == 'contrato')
-                    <x-tabla.funcionario.d-p-r-e.contrato :items="$data" />
+                    <x-tabla.funcionario.d-p-r-e.contrato :items="$data" :orderTable="$orderTable" :busquedaPalabra="$busquedaPalabra"
+                        :idFuncionario="$idFuncionario" :nivel="$nivel" :type="$type" :name="$name" :period="$period" />
                 @elseif ($type == 'consorcio')
-                    <x-tabla.funcionario.d-p-r-e.consorcio :items="$data" />
+                    <x-tabla.funcionario.d-p-r-e.consorcio :items="$data" :orderTable="$orderTable" :busquedaPalabra="$busquedaPalabra"
+                        :idFuncionario="$idFuncionario" :nivel="$nivel" :type="$type" :name="$name" :period="$period" />
                 @endif
             @elseif($nivel == 'CDAF')
                 @if ($type == 'orden-compra')
-                    <x-tabla.funcionario.c-d-a-f.orden-compra :items="$data" />
+                    <x-tabla.funcionario.c-d-a-f.orden-compra :items="$data" :orderTable="$orderTable" :busquedaPalabra="$busquedaPalabra"
+                        :idFuncionario="$idFuncionario" :nivel="$nivel" :type="$type" :name="$name" :period="$period" />
                 @elseif ($type == 'contrato')
-                    <x-tabla.funcionario.c-d-a-f.contrato :items="$data" />
+                    <x-tabla.funcionario.c-d-a-f.contrato :items="$data" :orderTable="$orderTable" :busquedaPalabra="$busquedaPalabra"
+                        :idFuncionario="$idFuncionario" :nivel="$nivel" :type="$type" :name="$name" :period="$period" />
                 @elseif ($type == 'consorcio')
-                    <x-tabla.funcionario.c-d-a-f.consorcio :items="$data" />
+                    <x-tabla.funcionario.c-d-a-f.consorcio :items="$data" :orderTable="$orderTable" :busquedaPalabra="$busquedaPalabra"
+                        :idFuncionario="$idFuncionario" :nivel="$nivel" :type="$type" :name="$name" :period="$period" />
                 @endif
             @elseif($nivel == 'CEDFA')
                 @if ($type == 'orden-compra')
-                    <x-tabla.funcionario.c-e-d-f-a.orden-compra :items="$data" />
+                    <x-tabla.funcionario.c-e-d-f-a.orden-compra :items="$data":orderTable="$orderTable"
+                        :busquedaPalabra="$busquedaPalabra" :idFuncionario="$idFuncionario" :nivel="$nivel" :type="$type" :name="$name"
+                        :period="$period" />
                 @elseif ($type == 'contrato')
-                    <x-tabla.funcionario.c-e-d-f-a.contrato :items="$data" />
+                    <x-tabla.funcionario.c-e-d-f-a.contrato :items="$data" :orderTable="$orderTable" :busquedaPalabra="$busquedaPalabra"
+                        :idFuncionario="$idFuncionario" :nivel="$nivel" :type="$type" :name="$name" :period="$period" />
                 @elseif ($type == 'consorcio')
-                    <x-tabla.funcionario.c-e-d-f-a.consorcio :items="$data" />
+                    <x-tabla.funcionario.c-e-d-f-a.consorcio :items="$data" :orderTable="$orderTable" :busquedaPalabra="$busquedaPalabra"
+                        :idFuncionario="$idFuncionario" :nivel="$nivel" :type="$type" :name="$name" :period="$period" />
                 @endif
             @endif
 

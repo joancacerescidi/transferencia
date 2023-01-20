@@ -14,11 +14,11 @@
                     @else
                         @if ($ruta === 'entidad.goverment')
                             <span class="btn-preload"
-                                onclick="window.location='{{ url('/detail-government-level' . '/' . $primaryVariable . '/' . $period) }}'">/
+                                onclick="window.location='{{ url('/detail-government-level' . '/' . $primaryVariable . '/' . $period . '/monto') }}'">/
                                 Entidades</span>
                         @elseif($ruta === 'entidad.deparment')
                             <span class="btn-preload"
-                                onclick="window.location='{{ url('/detail-deparment-period' . '/' . $primaryVariable . '/' . $period) }}'">/
+                                onclick="window.location='{{ url('/detail-deparment-period' . '/' . $primaryVariable . '/' . $period . '/monto') }}'">/
                                 Entidades</span>
                         @elseif($ruta === 'entidad.busqueda')
                             <span class="btn-preload"

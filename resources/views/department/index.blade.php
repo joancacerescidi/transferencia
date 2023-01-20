@@ -19,14 +19,24 @@
                         Departamento
                         <img src="../images/icon-chevron-up.png" alt="">
                     </p>
-                    <p class="col-span-2 hidden xl:flex items-center gap-2">
+                    <a href="{{ url('/detail-deparment-period' . '/' . $department . '/' . $period . '/monto') }}"
+                        class="btn-preload col-span-2 hidden xl:flex items-center gap-2">
                         Monto
-                        <img src="../images/icon-chevron-down-blue.png" alt="">
-                    </p>
-                    <p class="col-span-1 xl:col-span-2 flex items-center gap-2 justify-center">
+                        @if ($orderTable == 'monto')
+                            <img src="{{ asset('images/flecha-2.png') }}" alt="w-max">
+                        @else
+                            <img src="{{ asset('images/flecha-1.png') }}" alt="w-max">
+                        @endif
+                    </a>
+                    <a href="{{ url('/detail-deparment-period' . '/' . $department . '/' . $period . '/ranking') }}"
+                        class="btn-preload col-span-1 xl:col-span-2 flex items-center gap-2 justify-center">
                         Ranking
-                        <img src="../images/icon-chevron-down-blue.png" alt="">
-                    </p>
+                        @if ($orderTable == 'ranking')
+                            <img src="{{ asset('images/flecha-2.png') }}" alt="w-max">
+                        @else
+                            <img src="{{ asset('images/flecha-1.png') }}" alt="w-max">
+                        @endif
+                    </a>
                 </header>
                 @foreach ($resultDepartmentDetail as $key => $item)
                     <details

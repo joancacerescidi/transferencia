@@ -13,11 +13,11 @@
                 @else
                     @if ($ruta === 'entidad.goverment')
                         <span class="btn-preload"
-                            onclick="window.location='{{ url('/detail-government-level' . '/' . $primaryVariable . '/' . $period) }}'">/
+                            onclick="window.location='{{ url('/detail-government-level' . '/' . $primaryVariable . '/' . $period. '/monto') }}'">/
                             Entidades</span>
                     @elseif($ruta === 'entidad.deparment')
                         <span class="btn-preload"
-                            onclick="window.location='{{ url('/detail-deparment-period' . '/' . $primaryVariable . '/' . $period) }}'">/
+                            onclick="window.location='{{ url('/detail-deparment-period' . '/' . $primaryVariable . '/' . $period. '/monto') }}'">/
                             Entidades</span>
                     @elseif($ruta === 'entidad.busqueda')
                         <span class="btn-preload"
@@ -40,7 +40,7 @@
 
             </a>
             <h2 class="text-center text-xl xl:text-4xl font-bold mb-6 xl:mb-14">
-                FRACCIONAMIENTO <br>
+                PROVEEDOR CON MÁS DE 3 CONTRATACIONES <br>
                 {{ $nameEntidad }}<br> {{ $ruc }}<br> {{ $nameRuc }}
             </h2>
 

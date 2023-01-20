@@ -43,9 +43,9 @@ Route::get('/ranking/entidad', [SectionController::class, 'index']);
 
 
 //Ruta al darle clic en una regiòn del mapa
-Route::get('/detail-deparment-period/{department}/{period}', [DepartmentController::class, 'index']);
+Route::get('/detail-deparment-period/{department}/{period}/{orderTable}', [DepartmentController::class, 'index']);
 //Ruta al darle clic al grafico de data por nivel de gobierno
-Route::get('/detail-government-level/{nivel}/{period}', [GovernmentLevelController::class, 'index']);
+Route::get('/detail-government-level/{nivel}/{period}/{orderTable}', [GovernmentLevelController::class, 'index']);
 
 
 #Rankings
@@ -53,16 +53,16 @@ Route::get('/detail-government-level/{nivel}/{period}', [GovernmentLevelControll
 Route::get('/ranking/entidad/search/{period}/{order}/{busquedaPalabra}', [RankingSearchController::class, 'searchEntidad']);
 Route::get('/ranking/entidad/{period}/{order}', [RankingSearchController::class, 'rankingEntidad'])->name('rankingEnidad');
 #proveedores
-Route::get('/ranking/proveedor/{period}', [RankingSearchController::class, 'rankingProveedor'])->name('rankingProveedor');
-Route::get('/ranking/proveedor/search/{period}/{busquedaPalabra}', [RankingSearchController::class, 'searchProveedor']);
+Route::get('/ranking/proveedor/{period}/{orderTable}', [RankingSearchController::class, 'rankingProveedor'])->name('rankingProveedor');
+Route::get('/ranking/proveedor/search/{period}/{busquedaPalabra}/{orderTable}', [RankingSearchController::class, 'searchProveedor']);
 #funcionario
-Route::get('/ranking/funcionario/{period}', [RankingSearchController::class, 'rankingFuncionario'])->name('rankingFuncionario');
-Route::get('/ranking/funcionario/search/{period}/{busquedaPalabra}', [RankingSearchController::class, 'searchFuncionario']);
+Route::get('/ranking/funcionario/{period}/{orderTable}', [RankingSearchController::class, 'rankingFuncionario'])->name('rankingFuncionario');
+Route::get('/ranking/funcionario/search/{period}/{busquedaPalabra}/{orderTable}', [RankingSearchController::class, 'searchFuncionario']);
 
 
 #Detalles
 #Detalle - 1 - funcionario
-Route::get('/detail/funcionario/{idFuncionario}/{nivel}/{type}/{name}/{period}/{ruc?}/{busquedaPalabra?}', [FuncionarioController::class, 'firstDetail']);
+Route::get('/detail/funcionario/{idFuncionario}/{nivel}/{type}/{name}/{period}/{orderTable}/{ruc?}/{busquedaPalabra?}', [FuncionarioController::class, 'firstDetail']);
 
 
 #Detalle - 1-2 - entidad - grafico - entidad

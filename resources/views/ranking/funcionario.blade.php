@@ -14,7 +14,6 @@
                     <br class="hidden xl:block"> Resultado de "{{ $busquedaPalabra }}"
                 @endisset
             </h2>
-
             @isset($search)
                 <div class="mb-14">
 
@@ -34,16 +33,31 @@
                     <p class="col-span-1 pl-6 xl:pl-10">#</p>
                     <p class="col-span-4 xl:col-span-7 pl-4 xl:pl-10 flex items-center gap-2">
                         Funcionario
-                        <img src="../images/icon-chevron-up.png" alt="">
                     </p>
-                    <p class="col-span-2 hidden xl:flex items-center gap-2">
+                    <a href=" @if (isset($busquedaPalabra)) {{ url('/ranking/funcionario/search/' . $period . '/' . $busquedaPalabra . '/monto') }}
+                    @else
+                     {{ url('/ranking/funcionario/' . $period . '/monto') }} @endif "
+                        class="btn-preload col-span-2 hidden xl:flex items-center gap-2">
                         Monto
-                        <img src="../images/icon-chevron-down-blue.png" alt="">
-                    </p>
-                    <p class="col-span-1 xl:col-span-2 flex items-center gap-2 justify-center">
+
+                        @if ($orderTable == 'monto')
+                            <img src="{{ asset('images/flecha-2.png') }}" alt="w-max">
+                        @else
+                            <img src="{{ asset('images/flecha-1.png') }}" alt="w-max">
+                        @endif
+                    </a>
+                    <a href=" @if (isset($busquedaPalabra)) {{ url('/ranking/funcionario/search/' . $period . '/' . $busquedaPalabra . '/cantidad') }}
+                    @else
+                     {{ url('/ranking/funcionario/' . $period . '/cantidad') }} @endif "
+                        class="btn-preload col-span-1 xl:col-span-2 flex items-center gap-2 justify-center">
                         Cantidad
-                        <img src="../images/icon-chevron-down-blue.png" alt="">
-                    </p>
+
+                        @if ($orderTable == 'cantidad')
+                            <img src="{{ asset('images/flecha-2.png') }}" alt="w-max">
+                        @else
+                            <img src="{{ asset('images/flecha-1.png') }}" alt="w-max">
+                        @endif
+                    </a>
                 </header>
                 @foreach ($result as $key => $item)
                     <details
@@ -69,9 +83,9 @@
                                 {{ $item->dataList->cantidadTotal }}
                             </p>
                             <!-- <p class="text-right xl:text-left col-span-6 xl:col-span-1 order-5">
-                                                                                                                                                                                  <span class="text-gray-400 xl:hidden pr-8 font-medium">Ver más</span>
-                                                                                                                                                                                  <img src="/images/icon-chevron-down.png" class="inline">
-                                                                                                                                                                                </p> -->
+                                                                                                                                                                                                                                                                                                                                      <span class="text-gray-400 xl:hidden pr-8 font-medium">Ver más</span>
+                                                                                                                                                                                                                                                                                                                                      <img src="/images/icon-chevron-down.png" class="inline">
+                                                                                                                                                                                                                                                                                                                                    </p> -->
                         </summary>
 
 
@@ -93,11 +107,80 @@
                                             @if ($categorias->abbreviation !== 'CDAF')
                                                 @if (isset($busquedaPalabra))
                                                     <a class="btn-preload"
-                                                        href="{{ url('/detail/funcionario/' . $item->dataList->idFuncionario . '/' . $categorias->abbreviation . '/' . $subCategorias->abbreviation . '/' . $item->dataList->nombre . '/' . $period . '/0' . '/' . $busquedaPalabra) }}"><img
+                                                        href=" @if (
+                                                            ($categorias->abbreviation == 'DCPD' ||
+                                                                $categorias->abbreviation == 'DPRE' ||
+                                                                $categorias->abbreviation == 'CEDFA') &&
+                                                                $subCategorias->abbreviation == 'orden-compra') {{ url(
+                                                                    '/detail/funcionario/' .
+                                                                        $item->dataList->idFuncionario .
+                                                                        '/' .
+                                                                        $categorias->abbreviation .
+                                                                        '/' .
+                                                                        $subCategorias->abbreviation .
+                                                                        '/' .
+                                                                        $item->dataList->nombre .
+                                                                        '/' .
+                                                                        $period .
+                                                                        '/oc.fecha_emision' .
+                                                                        '/0' .
+                                                                        '/' .
+                                                                        $busquedaPalabra,
+                                                                ) }}
+                                                        @else
+                                                               {{ url(
+                                                                   '/detail/funcionario/' .
+                                                                       $item->dataList->idFuncionario .
+                                                                       '/' .
+                                                                       $categorias->abbreviation .
+                                                                       '/' .
+                                                                       $subCategorias->abbreviation .
+                                                                       '/' .
+                                                                       $item->dataList->nombre .
+                                                                       '/' .
+                                                                       $period .
+                                                                       '/oc.fecha_suscripcion_contrato' .
+                                                                       '/0' .
+                                                                       '/' .
+                                                                       $busquedaPalabra,
+                                                               ) }} @endif 
+                                                     "><img
                                                             src="/images/icon-compartir.png" alt="Compartir"></a>
                                                 @else
                                                     <a class="btn-preload"
-                                                        href="{{ url('/detail/funcionario/' . $item->dataList->idFuncionario . '/' . $categorias->abbreviation . '/' . $subCategorias->abbreviation . '/' . $item->dataList->nombre . '/' . $period) }}"><img
+                                                        href="
+                                                        @if (
+                                                            ($categorias->abbreviation == 'DCPD' ||
+                                                                $categorias->abbreviation == 'DPRE' ||
+                                                                $categorias->abbreviation == 'CEDFA') &&
+                                                                $subCategorias->abbreviation == 'orden-compra') {{ url(
+                                                                    '/detail/funcionario/' .
+                                                                        $item->dataList->idFuncionario .
+                                                                        '/' .
+                                                                        $categorias->abbreviation .
+                                                                        '/' .
+                                                                        $subCategorias->abbreviation .
+                                                                        '/' .
+                                                                        $item->dataList->nombre .
+                                                                        '/' .
+                                                                        $period .
+                                                                        '/oc.fecha_emision',
+                                                                ) }}  
+                                                                
+                                                                @else  {{ url(
+                                                                    '/detail/funcionario/' .
+                                                                        $item->dataList->idFuncionario .
+                                                                        '/' .
+                                                                        $categorias->abbreviation .
+                                                                        '/' .
+                                                                        $subCategorias->abbreviation .
+                                                                        '/' .
+                                                                        $item->dataList->nombre .
+                                                                        '/' .
+                                                                        $period .
+                                                                        '/oc.fecha_suscripcion_contrato',
+                                                                ) }} @endif
+                                                      "><img
                                                             src="/images/icon-compartir.png" alt="Compartir"></a>
                                                 @endif
                                             @endif

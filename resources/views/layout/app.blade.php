@@ -92,7 +92,7 @@
 
             <ul class="grid gap-6 xl:text-lg xl:justify-center">
                 <li>
-                    <a class="btn-preload" href="{{ route('fuente.index') }}">Fuentes</a>
+                    <a class="btn-preload" href="{{ route('fuente.index') }}">Descargo de Responsaibilidad</a>
                 </li>
                 <li>
                     <a class="btn-preload" href="{{ route('feedback.index') }}">Danos tu opinión</a>

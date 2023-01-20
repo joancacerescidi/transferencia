@@ -29,7 +29,8 @@ function preloadActive($type, $ruta, $periodo) {
         if (inputValue2.length > 3) {
             let preloader = document.getElementById("preloader");
             preloader.classList.remove("opacity-0", "pointer-events-none");
-            const finalUrl = $ruta + "/" + $periodo + "/" + inputValue2;
+            const finalUrl =
+                $ruta + "/" + $periodo + "/" + inputValue2 + "/monto";
             window.location.href = finalUrl;
         }
     } else if ($type === "proveedor") {
@@ -37,7 +38,8 @@ function preloadActive($type, $ruta, $periodo) {
         if (inputValue3.length > 3) {
             let preloader = document.getElementById("preloader");
             preloader.classList.remove("opacity-0", "pointer-events-none");
-            const finalUrl = $ruta + "/" + $periodo + "/" + inputValue3;
+            const finalUrl =
+                $ruta + "/" + $periodo + "/" + inputValue3 + "/monto";
             window.location.href = finalUrl;
         }
     }
@@ -54,10 +56,12 @@ function preloadActive2($type, $ruta, $periodo, $palabraBusqueda) {
             console.log(finalUrl);
             window.location.href = finalUrl;
         } else if ($type === "funcionario") {
-            const finalUrl = $ruta + "/" + $periodo + "/" + $palabraBusqueda;
+            const finalUrl =
+                $ruta + "/" + $periodo + "/" + $palabraBusqueda + "/monto";
             window.location.href = finalUrl;
         } else if ($type === "proveedor") {
-            const finalUrl = $ruta + "/" + $periodo + "/" + $palabraBusqueda;
+            const finalUrl =
+                $ruta + "/" + $periodo + "/" + $palabraBusqueda + "/monto";
             window.location.href = finalUrl;
         }
     }

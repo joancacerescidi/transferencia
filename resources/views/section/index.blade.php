@@ -86,7 +86,8 @@
                                     </div>
                                 </div>
                                 <hr class="xl:col-span-3">
-                                <a href="{{ url('/ranking/proveedor/' . $period) }}"
+
+                                <a href="{{ url('/ranking/proveedor/' . $period . '/monto') }}"
                                     class="btn-preload flex justify-center items-center gap-2 p-5 bg-main-blue text-white font-semibold xl:col-span-3 xl:mx-10 rounded-md text-xs xl:text-base">
                                     <img src="../images/ver-rankings.png" alt="">
                                     Ranking Proveedores</a>
@@ -111,7 +112,7 @@
                                     </div>
                                 </div>
                                 <hr class="xl:col-span-3">
-                                <a href="{{ url('/ranking/funcionario/' . $period) }}"
+                                <a href="{{ url('/ranking/funcionario/' . $period . '/monto') }}"
                                     class="btn-preload flex justify-center items-center gap-2 p-5 bg-main-blue text-white font-semibold xl:col-span-3 xl:mx-10 rounded-md text-xs xl:text-base">
                                     <img src="../images/ver-rankings.png" alt="">
                                     Ranking Funcionario</a>
@@ -292,7 +293,7 @@
                         } else if (chart.data.labels[i] === 'AUTÓNOMO') {
                             regionSigla = 'A';
                         }
-                        const finalUrl = url + '/' + regionSigla + '/' + period;
+                        const finalUrl = url + '/' + regionSigla + '/' + period+'/monto';
                         window.location.href = finalUrl;
                     }
                 }
@@ -442,7 +443,7 @@
                     const url = "<?php echo URL::to('detail-deparment-period'); ?>";
                     const nameRegion = region.getAttribute('name');
                     const period = "<?php echo $period; ?>";
-                    const finalUrl = url + '/' + nameRegion + '/' + period;
+                    const finalUrl = url + '/' + nameRegion + '/' + period+'/monto';
                     window.location.href = finalUrl;
 
 
