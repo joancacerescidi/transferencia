@@ -43,7 +43,8 @@
                             <div class="grid xl:grid-cols-3 gap-x-6 gap-y-6 xl:gap-y-10 items-center">
 
                                 <div class="flex flex-col xl:flex-row xl:items-center gap-6 xl:col-span-3">
-                                    <p class="text-center xl:text-left xl:text-lg font-bold">Entidad: </p>
+
+                                    <p class="text-center xl:text-left xl:text-lg font-bold hidden xl:block">Entidad: </p>
                                     <div class="flex w-full">
                                         <input name="palabraClave" id="palabraClaveEntidad"
                                             class="block w-8/12  py-5 px-6 rounded-tl-xl rounded-bl-xl border border-gray-200 bg-white shadow-sm focus:outline-none focus:ring focus:ring-main-blue text-xs xl:text-base"
@@ -72,7 +73,8 @@
                             <div class="grid xl:grid-cols-3 gap-x-6 gap-y-6 xl:gap-y-10 items-center">
 
                                 <div class="flex flex-col xl:flex-row xl:items-center gap-6 xl:col-span-3">
-                                    <p class="text-center xl:text-left xl:text-lg font-bold">Proveedor: </p>
+
+                                    <p class="text-center xl:text-left xl:text-lg font-bold hidden xl:block">Proveedor: </p>
                                     <div class="flex w-full">
                                         <input name="palabraClave" id="palabraProveedor"
                                             class="block w-8/12  py-5 px-6 rounded-tl-xl rounded-bl-xl border border-gray-200 bg-white shadow-sm focus:outline-none focus:ring focus:ring-main-blue text-xs xl:text-base"
@@ -98,7 +100,9 @@
                             <div class="grid xl:grid-cols-3 gap-x-6 gap-y-6 xl:gap-y-10 items-center">
 
                                 <div class="flex flex-col xl:flex-row xl:items-center gap-6 xl:col-span-3">
-                                    <p class="text-center xl:text-left xl:text-lg font-bold">Funcionario: </p>
+                                    <p class="text-center xl:text-left xl:text-lg font-bold hidden xl:block">Funcionario:
+                                    </p>
+
                                     <div class="flex w-full">
                                         <input name="palabraClave" id="palabraFuncionario"
                                             class="block w-8/12  py-5 px-6 rounded-tl-xl rounded-bl-xl border border-gray-200 bg-white shadow-sm focus:outline-none focus:ring focus:ring-main-blue text-xs xl:text-base"
@@ -293,7 +297,7 @@
                         } else if (chart.data.labels[i] === 'AUTÓNOMO') {
                             regionSigla = 'A';
                         }
-                        const finalUrl = url + '/' + regionSigla + '/' + period+'/monto';
+                        const finalUrl = url + '/' + regionSigla + '/' + period + '/monto';
                         window.location.href = finalUrl;
                     }
                 }
@@ -443,7 +447,7 @@
                     const url = "<?php echo URL::to('detail-deparment-period'); ?>";
                     const nameRegion = region.getAttribute('name');
                     const period = "<?php echo $period; ?>";
-                    const finalUrl = url + '/' + nameRegion + '/' + period+'/monto';
+                    const finalUrl = url + '/' + nameRegion + '/' + period + '/monto';
                     window.location.href = finalUrl;
 
 

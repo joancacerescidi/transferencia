@@ -652,6 +652,10 @@ input[type=number] {
   margin-left: auto;
   margin-right: auto;
 }
+.my-8 {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
 .my-4 {
   margin-top: 1rem;
   margin-bottom: 1rem;
@@ -749,12 +753,12 @@ input[type=number] {
 .w-full {
   width: 100%;
 }
-.w-3 {
-  width: 0.75rem;
-}
 .w-max {
   width: -moz-max-content;
   width: max-content;
+}
+.w-3 {
+  width: 0.75rem;
 }
 .w-8\/12 {
   width: 66.666667%;
@@ -1130,6 +1134,10 @@ input[type=number] {
 .text-\[\#3cb371\] {
   --tw-text-opacity: 1;
   color: rgb(60 179 113 / var(--tw-text-opacity));
+}
+.text-blue-500 {
+  --tw-text-opacity: 1;
+  color: rgb(59 130 246 / var(--tw-text-opacity));
 }
 .text-main-gray-light {
   --tw-text-opacity: 1;
