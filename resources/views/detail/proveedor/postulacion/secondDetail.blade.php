@@ -9,7 +9,7 @@
                 @if ($busquedaPalabra !== null)
                     <span onclick="preloadActive2('proveedor', '<?php echo URL::to('ranking/proveedor/search'); ?>', '<?php echo $period; ?>', '<?php echo $busquedaPalabra; ?>' )">/ Proveedor</span>
                 @else
-                    <span class="btn-preload" onclick="window.location='{{ url('/ranking/proveedor/' . $period) }}'">/
+                    <span class="btn-preload" onclick="window.location='{{ url('/ranking/proveedor/' . $period.'/monto') }}'">/
                         Proveedor</span>
                 @endif
 

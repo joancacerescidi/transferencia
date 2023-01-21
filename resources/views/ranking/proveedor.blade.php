@@ -84,9 +84,9 @@
                                 {{ $item->dataList->cantidadTotal }}
                             </p>
                             <!-- <p class="text-right xl:text-left col-span-6 xl:col-span-1 order-5">
-                                                                                                                                                                                                                      <span class="text-gray-400 xl:hidden pr-8 font-medium">Ver más</span>
-                                                                                                                                                                                                                      <img src="/images/icon-chevron-down.png" class="inline">
-                                                                                                                                                                                                                    </p> -->
+                                                                                                                                                                                                                                      <span class="text-gray-400 xl:hidden pr-8 font-medium">Ver más</span>
+                                                                                                                                                                                                                                      <img src="/images/icon-chevron-down.png" class="inline">
+                                                                                                                                                                                                                                    </p> -->
                         </summary>
 
 
@@ -99,41 +99,41 @@
                                         @if ($categorias->sigla == 'orden_compra')
                                             @if (isset($busquedaPalabra))
                                                 <a class="btn-preload"
-                                                    href="{{ url('/detail/orden-compra/first/proveedor/' . $item->dataList->contratista . '/' . $period . '/' . $item->dataList->nombre . '/' . $busquedaPalabra) }}"><img
+                                                    href="{{ url('/detail/orden-compra/first/proveedor/' . $item->dataList->contratista . '/' . $period . '/monto' . '/' . $item->dataList->nombre . '/' . $busquedaPalabra) }}"><img
                                                         src="/images/icon-compartir.png" alt="Compartir"></a>
                                             @else
                                                 <a class="btn-preload"
-                                                    href="{{ url('/detail/orden-compra/first/proveedor/' . $item->dataList->contratista . '/' . $period . '/' . $item->dataList->nombre) }}"><img
+                                                    href="{{ url('/detail/orden-compra/first/proveedor/' . $item->dataList->contratista . '/' . $period . '/monto' . '/' . $item->dataList->nombre) }}"><img
                                                         src="/images/icon-compartir.png" alt="Compartir"></a>
                                             @endif
                                         @elseif($categorias->sigla == 'contrato')
                                             @if (isset($busquedaPalabra))
                                                 <a class="btn-preload"
-                                                    href="{{ url('/detail/contrato/first/proveedor/' . $item->dataList->contratista . '/' . $period . '/' . $item->dataList->nombre . '/' . $busquedaPalabra) }}"><img
+                                                    href="{{ url('/detail/contrato/first/proveedor/' . $item->dataList->contratista . '/' . $period . '/monto' . '/' . $item->dataList->nombre . '/' . $busquedaPalabra) }}"><img
                                                         src="/images/icon-compartir.png" alt="Compartir"></a>
                                             @else
                                                 <a class="btn-preload"
-                                                    href="{{ url('/detail/contrato/first/proveedor/' . $item->dataList->contratista . '/' . $period . '/' . $item->dataList->nombre) }}"><img
+                                                    href="{{ url('/detail/contrato/first/proveedor/' . $item->dataList->contratista . '/' . $period . '/monto' . '/' . $item->dataList->nombre) }}"><img
                                                         src="/images/icon-compartir.png" alt="Compartir"></a>
                                             @endif
                                         @elseif($categorias->sigla == 'consorcio')
                                             @if (isset($busquedaPalabra))
                                                 <a class="btn-preload"
-                                                    href="{{ url('/detail/consorcio/first/proveedor/' . $item->dataList->contratista . '/' . $period . '/contrato' . '/' . $item->dataList->nombre . '/' . $busquedaPalabra) }}"><img
+                                                    href="{{ url('/detail/consorcio/first/proveedor/' . $item->dataList->contratista . '/' . $period . '/contrato' . '/monto' . '/' . $item->dataList->nombre . '/' . $busquedaPalabra) }}"><img
                                                         src="/images/icon-compartir.png" alt="Compartir"></a>
                                             @else
                                                 <a class="btn-preload"
-                                                    href="{{ url('/detail/consorcio/first/proveedor/' . $item->dataList->contratista . '/' . $period . '/contrato' . '/' . $item->dataList->nombre) }}"><img
+                                                    href="{{ url('/detail/consorcio/first/proveedor/' . $item->dataList->contratista . '/' . $period . '/contrato' . '/monto' . '/' . $item->dataList->nombre) }}"><img
                                                         src="/images/icon-compartir.png" alt="Compartir"></a>
                                             @endif
                                         @elseif($categorias->sigla == 'sanciones')
                                             @if (isset($busquedaPalabra))
                                                 <a class="btn-preload"
-                                                    href="{{ url('/detail/sanciones/first/proveedor/' . $item->dataList->contratista . '/' . $period . '/' . $item->dataList->nombre . '/' . $busquedaPalabra) }}"><img
+                                                    href="{{ url('/detail/sanciones/first/proveedor/' . $item->dataList->contratista . '/' . $period . '/monto' . '/' . $item->dataList->nombre . '/' . $busquedaPalabra) }}"><img
                                                         src="/images/icon-compartir.png" alt="Compartir"></a>
                                             @else
                                                 <a class="btn-preload"
-                                                    href="{{ url('/detail/sanciones/first/proveedor/' . $item->dataList->contratista . '/' . $period . '/' . $item->dataList->nombre) }}"><img
+                                                    href="{{ url('/detail/sanciones/first/proveedor/' . $item->dataList->contratista . '/' . $period . '/monto' . '/' . $item->dataList->nombre) }}"><img
                                                         src="/images/icon-compartir.png" alt="Compartir"></a>
                                             @endif
                                         @elseif($categorias->sigla == 'contrato_resuelto')

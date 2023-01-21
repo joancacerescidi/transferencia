@@ -10,21 +10,23 @@ use Illuminate\Validation\Rule;
 class ProveedorController extends Controller
 {
     //
-    public function ordenCompraFirst($rucContratista, $period,  $nombre = 'Sin nombre', $busquedaPalabra = null)
+    public function ordenCompraFirst($rucContratista, $period, $orderTable, $nombre = 'Sin nombre', $busquedaPalabra = null)
     {
+        $orderTables = ['cantidad', 'monto'];
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
-        $validator = Validator::make(['period' => $period, 'rucContratista' => $rucContratista], [
+        $validator = Validator::make(['period' => $period, 'rucContratista' => $rucContratista, 'orderTable' => $orderTable], [
             'period' => ['required', 'integer', Rule::in($periods)],
-            'rucContratista' => ['required', 'integer']
+            'rucContratista' => ['required', 'integer'],
+            'orderTable' => ['required', 'string', Rule::in($orderTables)],
         ]);
         if (!$validator->fails()) {
-            $result = $this->ordenCompraFirstDetail($rucContratista, $period);
-            return view('detail.proveedor.orden-compra.firstDetail', compact('result', 'rucContratista', 'period', 'nombre', 'busquedaPalabra'));
+            $result = $this->ordenCompraFirstDetail($rucContratista, $period, $orderTable);
+            return view('detail.proveedor.orden-compra.firstDetail', compact('result', 'rucContratista', 'period', 'nombre', 'busquedaPalabra', 'orderTable'));
         } else {
             abort(404);
         }
     }
-    public function ordenCompraFirstDetail($rucContratista, $period)
+    public function ordenCompraFirstDetail($rucContratista, $period, $orderTable)
     {
         $data = DB::table(DB::raw('osce_ordencompra oc'))
             ->select('oc.ruc_entidad', 'oc.entidad', DB::raw('count(1) as cantidad'), DB::raw('sum(oc.monto_total_original) as monto'))
@@ -32,107 +34,113 @@ class ProveedorController extends Controller
             ->where('oc.ruc_contratista', '=', $rucContratista)
             ->where('oc.estadocontratacion', '!=', 'Anulada')
             ->groupBy('oc.ruc_entidad', 'oc.entidad')
-            ->orderBy('cantidad', 'DESC')
+            ->orderBy($orderTable, 'DESC')
             ->paginate(10);
 
         return  $data;
     }
-    public function ordenCompraSecond($rucEntidad, $rucContratista, $period, $ruc, $rucNombre, $nombre = 'Sin nombre', $busquedaPalabra = null)
+    public function ordenCompraSecond($rucEntidad, $rucContratista, $period, $ruc, $rucNombre, $orderTable, $nombre = 'Sin nombre', $busquedaPalabra = null)
     {
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
-
-        $validator = Validator::make(['period' => $period, 'rucContratista' => $rucContratista, 'rucEntidad' => $rucEntidad], [
+        $orderTables = ['oc.fecha_emision', 'monto_total_original'];
+        $validator = Validator::make(['period' => $period, 'rucContratista' => $rucContratista, 'rucEntidad' => $rucEntidad, 'orderTable' => $orderTable], [
             'period' => ['required', 'integer', Rule::in($periods)],
             'rucContratista' => ['required', 'integer'],
-            'rucEntidad' => ['required', 'integer']
+            'rucEntidad' => ['required', 'integer'],
+            'orderTable' => ['required', 'string', Rule::in($orderTables)],
         ]);
         if (!$validator->fails()) {
-            $result = $this->ordenCompraSecondDetail($rucEntidad, $rucContratista, $period);
-            return view('detail.proveedor.orden-compra.secondDetail', compact('result', 'rucEntidad', 'rucContratista', 'period', 'ruc', 'rucNombre', 'nombre', 'busquedaPalabra'));
+            $result = $this->ordenCompraSecondDetail($rucEntidad, $rucContratista, $period, $orderTable);
+            return view('detail.proveedor.orden-compra.secondDetail', compact('result', 'rucEntidad', 'rucContratista', 'period', 'ruc', 'rucNombre', 'nombre', 'busquedaPalabra', 'orderTable'));
         } else {
             abort(404);
         }
     }
-    public function ordenCompraSecondDetail($rucEntidad, $rucContratista, $period)
+    public function ordenCompraSecondDetail($rucEntidad, $rucContratista, $period, $orderTable)
     {
 
         $data = DB::table(DB::raw('osce_ordencompra oc'))
             ->select('fecha_emision', 'descripcion_orden', 'orden', 'objetocontractual', 'moneda', 'monto_total_original')
             ->where([['oc.anno', $period], ['oc.ruc_contratista', $rucContratista], ['oc.ruc_entidad', $rucEntidad], ['oc.estadocontratacion', '<>', 'Anulada']])
-            ->orderBy('oc.fecha_emision', 'DESC')
+            ->orderBy($orderTable, 'DESC')
             ->paginate(10);
 
         return  $data;
     }
-    public function contratoFirst($rucContratista, $period, $nombre = 'Sin nombre', $busquedaPalabra = null)
+    public function contratoFirst($rucContratista, $period, $orderTable, $nombre = 'Sin nombre', $busquedaPalabra = null)
     {
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
-        $validator = Validator::make(['period' => $period, 'rucContratista' => $rucContratista], [
+        $orderTables = ['cantidad', 'monto'];
+        $validator = Validator::make(['period' => $period, 'rucContratista' => $rucContratista, 'orderTable' => $orderTable], [
             'period' => ['required', 'integer', Rule::in($periods)],
-            'rucContratista' => ['required', 'integer']
+            'rucContratista' => ['required', 'integer'],
+            'orderTable' => ['required', 'string', Rule::in($orderTables)],
         ]);
         if (!$validator->fails()) {
-            $result = $this->contratoFirstDetail($rucContratista, $period);
-            return view('detail.proveedor.contrato.firstDetail', compact('result', 'rucContratista', 'period', 'nombre', 'busquedaPalabra'));
+            $result = $this->contratoFirstDetail($rucContratista, $period, $orderTable);
+            return view('detail.proveedor.contrato.firstDetail', compact('result', 'rucContratista', 'period', 'nombre', 'busquedaPalabra', 'orderTable'));
         } else {
             abort(404);
         }
     }
-    public function contratoFirstDetail($rucContratista, $period)
+    public function contratoFirstDetail($rucContratista, $period, $orderTable)
     {
         $data = DB::table(DB::raw('osce_contrato oc'))
             ->select('oc.ruc_entidad', 'oc.nombre_entidad', DB::raw('count(1) as cantidad'), DB::raw('sum(oc.monto_contratado_item) as monto'))
             ->where([['oc.anno', $period], ['oc.ruc_contratista', $rucContratista]])
             ->groupBy(['oc.ruc_entidad', 'oc.nombre_entidad'])
-            ->orderByRaw('cantidad DESC')
+            ->orderBy($orderTable, 'DESC')
             ->paginate(10);
         return $data;
     }
-    public function contratoSecond($rucEntidad, $rucContratista, $period, $ruc, $rucNombre, $nombre = 'Sin nombre', $busquedaPalabra = null)
+    public function contratoSecond($rucEntidad, $rucContratista, $period, $ruc, $rucNombre, $orderTable, $nombre = 'Sin nombre', $busquedaPalabra = null)
     {
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
-
-        $validator = Validator::make(['period' => $period, 'rucContratista' => $rucContratista, 'rucEntidad' => $rucEntidad], [
+        $orderTables = ['fecha_suscripcion_contrato', 'monto_contratado_item'];
+        $validator = Validator::make(['period' => $period, 'rucContratista' => $rucContratista, 'rucEntidad' => $rucEntidad, 'orderTable' => $orderTable], [
             'period' => ['required', 'integer', Rule::in($periods)],
             'rucContratista' => ['required', 'integer'],
-            'rucEntidad' => ['required', 'integer']
+            'rucEntidad' => ['required', 'integer'],
+            'orderTable' => ['required', 'string', Rule::in($orderTables)],
         ]);
         if (!$validator->fails()) {
-            $result = $this->contratoSecondDetail($rucEntidad, $rucContratista, $period);
-            return view('detail.proveedor.contrato.secondDetail', compact('result', 'rucEntidad', 'rucContratista', 'period', 'ruc', 'rucNombre', 'nombre', 'busquedaPalabra'));
+            $result = $this->contratoSecondDetail($rucEntidad, $rucContratista, $period, $orderTable);
+            return view('detail.proveedor.contrato.secondDetail', compact('result', 'rucEntidad', 'rucContratista', 'period', 'ruc', 'rucNombre', 'nombre', 'busquedaPalabra', 'orderTable'));
         } else {
             abort(404);
         }
     }
-    public function contratoSecondDetail($rucEntidad, $rucContratista, $period)
+    public function contratoSecondDetail($rucEntidad, $rucContratista, $period, $orderTable)
     {
         $data = DB::table(DB::raw('osce_contrato oc'))
             ->select('fecha_suscripcion_contrato', 'descripcion_proceso', 'num_contrato', 'urlcontrato', 'moneda', 'monto_contratado_item')
             ->where([['oc.anno', $period], ['oc.ruc_contratista', $rucContratista], ['oc.ruc_entidad', $rucEntidad]])
-            ->orderBy('fecha_suscripcion_contrato', 'DESC')
+            ->orderBy($orderTable, 'DESC')
             ->paginate(10);
         return $data;
     }
 
-    public function consorcioFirst($rucContratista, $period, $filter, $nombre = 'Sin nombre', $busquedaPalabra = null)
+    public function consorcioFirst($rucContratista, $period, $filter, $orderTable, $nombre = 'Sin nombre', $busquedaPalabra = null)
     {
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
         $filters = ['orden-compra', 'contrato'];
-        $validator = Validator::make(['period' => $period, 'rucContratista' => $rucContratista, 'filter' => $filter], [
+        $orderTables = ['monto', 'cantidad'];
+        $validator = Validator::make(['period' => $period, 'rucContratista' => $rucContratista, 'filter' => $filter, 'orderTable' => $orderTable], [
             'period' => ['required', 'integer', Rule::in($periods)],
             'rucContratista' => ['required', 'integer'],
             'filter' => ['required', 'string', Rule::in($filters)],
+            'orderTable' => ['required', 'string', Rule::in($orderTables)],
         ]);
         if (!$validator->fails()) {
-            $result = $this->consorcioFirstDetail($rucContratista, $period, $filter);
+            $result = $this->consorcioFirstDetail($rucContratista, $period, $filter, $orderTable);
 
-            return view('detail.proveedor.consorcio.firstDetail', compact('result', 'rucContratista', 'period', 'filter', 'nombre', 'busquedaPalabra'));
+            return view('detail.proveedor.consorcio.firstDetail', compact('result', 'rucContratista', 'period', 'filter', 'nombre', 'busquedaPalabra', 'orderTable'));
         } else {
 
             abort(404);
         }
     }
-    public function consorcioFirstDetail($rucContratista, $period, $filter)
+    public function consorcioFirstDetail($rucContratista, $period, $filter, $orderTable)
     {
         if ($filter == 'orden-compra') {
             $data = DB::table('osce_ordencompra')
@@ -142,7 +150,7 @@ class ProveedorController extends Controller
                 ->where('osce_ordencompra.ruc_contratista', '=', DB::raw('osce_consorcio.ruc_consorcio'))
                 ->where('osce_consorcio.ruc_miembro', '=', $rucContratista)
                 ->groupBy('osce_ordencompra.ruc_entidad', 'osce_ordencompra.entidad')
-                ->orderBy('cantidad', 'DESC')
+                ->orderBy($orderTable, 'DESC')
                 ->paginate(10);
         } else if ($filter == 'contrato') {
             $data = DB::table('osce_contrato')
@@ -152,29 +160,31 @@ class ProveedorController extends Controller
                 ->where('osce_contrato.ruc_contratista', '=', DB::raw('osce_consorcio.ruc_consorcio'))
                 ->where('osce_consorcio.ruc_miembro', '=', $rucContratista)
                 ->groupBy('osce_contrato.ruc_entidad', 'osce_contrato.nombre_entidad')
-                ->orderBy('cantidad', 'DESC')
+                ->orderBy($orderTable, 'DESC')
                 ->paginate(10);
         }
         return $data;
     }
-    public function consorcioSecond($rucEntidad, $rucContratista, $period, $filter, $ruc, $rucNombre, $nombre = 'Sin nombre', $busquedaPalabra = null)
+    public function consorcioSecond($rucEntidad, $rucContratista, $period, $filter, $ruc, $rucNombre, $orderTable, $nombre = 'Sin nombre', $busquedaPalabra = null)
     {
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
         $filters = ['orden-compra', 'contrato'];
-        $validator = Validator::make(['period' => $period, 'rucContratista' => $rucContratista, 'rucEntidad' => $rucEntidad, 'filter' => $filter], [
+        $orderTables = ['fecha_emision', 'fecha_suscripcion_contrato', 'monto_total_original', 'monto_contratado_item'];
+        $validator = Validator::make(['period' => $period, 'rucContratista' => $rucContratista, 'rucEntidad' => $rucEntidad, 'filter' => $filter, 'orderTable' => $orderTable], [
             'period' => ['required', 'integer', Rule::in($periods)],
             'rucContratista' => ['required', 'integer'],
             'rucEntidad' => ['required', 'integer'],
             'filter' => ['required', 'string', Rule::in($filters)],
+            'orderTable' => ['required', 'string', Rule::in($orderTables)],
         ]);
         if (!$validator->fails()) {
-            $result = $this->consorcioSecondDetail($rucEntidad, $rucContratista, $period, $filter);
-            return view('detail.proveedor.consorcio.secondDetail', compact('result', 'rucEntidad', 'rucContratista', 'period', 'filter', 'ruc', 'rucNombre', 'nombre', 'busquedaPalabra'));
+            $result = $this->consorcioSecondDetail($rucEntidad, $rucContratista, $period, $filter, $orderTable);
+            return view('detail.proveedor.consorcio.secondDetail', compact('result', 'rucEntidad', 'rucContratista', 'period', 'filter', 'ruc', 'rucNombre', 'nombre', 'busquedaPalabra', 'orderTable'));
         } else {
             abort(404);
         }
     }
-    public function consorcioSecondDetail($rucEntidad, $rucContratista, $period, $filter)
+    public function consorcioSecondDetail($rucEntidad, $rucContratista, $period, $filter, $orderTable)
     {
         if ($filter == 'orden-compra') {
             $data = DB::table(DB::raw('osce_ordencompra oc'))
@@ -184,7 +194,7 @@ class ProveedorController extends Controller
                 ->where('oc.ruc_contratista', '=', DB::raw('oco.ruc_consorcio'))
                 ->where('oco.ruc_miembro', '=', $rucContratista)
                 ->where('oc.ruc_entidad', '=', $rucEntidad)
-                ->orderBy('fecha_emision', 'DESC')
+                ->orderBy($orderTable, 'DESC')
                 ->paginate(10);
         } else if ($filter == 'contrato') {
             $data = DB::table(DB::raw('osce_contrato oc'))
@@ -194,33 +204,36 @@ class ProveedorController extends Controller
                 ->where('oc.ruc_contratista', '=', DB::raw('oco.ruc_consorcio'))
                 ->where('oco.ruc_miembro', '=', $rucContratista)
                 ->where('oc.ruc_entidad', '=', $rucEntidad)
-                ->orderBy('fecha_suscripcion_contrato', 'DESC')
+                ->orderBy($orderTable, 'DESC')
                 ->paginate(10);
         }
         return $data;
     }
-    public function sancionesFirst($rucContratista, $period, $nombre = 'Sin nombre', $busquedaPalabra = null)
+    public function sancionesFirst($rucContratista, $period, $orderTable, $nombre = 'Sin nombre', $busquedaPalabra = null)
     {
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
-        $validator = Validator::make(['period' => $period, 'rucContratista' => $rucContratista], [
+        $orderTables = ['monto'];
+        $validator = Validator::make(['period' => $period, 'rucContratista' => $rucContratista, 'orderTable' => $orderTable], [
             'period' => ['required', 'integer', Rule::in($periods)],
-            'rucContratista' => ['required', 'integer']
+            'rucContratista' => ['required', 'integer'],
+            'orderTable' => ['required', 'string', Rule::in($orderTables)],
         ]);
         if (!$validator->fails()) {
-            $result = $this->sancionesFirstDetail($rucContratista, $period);
+            $result = $this->sancionesFirstDetail($rucContratista, $period, $orderTable);
 
-            return view('detail.proveedor.sanciones.firstDetail', compact('result', 'rucContratista', 'period', 'nombre', 'busquedaPalabra'));
+            return view('detail.proveedor.sanciones.firstDetail', compact('result', 'rucContratista', 'period', 'nombre', 'busquedaPalabra', 'orderTable'));
         } else {
             abort(404);
         }
     }
-    public function sancionesFirstDetail($rucContratista, $period)
+    public function sancionesFirstDetail($rucContratista, $period, $orderTable)
     {
 
         $data = DB::table(DB::raw('osce_sancionada os'))
             ->select('desde', 'hasta', 'resolucion', 'motivo', 'monto')
             ->whereRaw('date_part(\'year\',desde) = ? ', [$period])
             ->where('ruc', '=', $rucContratista)
+            ->orderBy($orderTable, 'DESC')
             ->paginate(10);
         return $data;
     }
