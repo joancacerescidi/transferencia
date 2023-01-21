@@ -7,12 +7,15 @@
 
                 <span onclick="window.location='{{ url('/') }}'">Inicio </span>
                 @if ($busquedaPalabra !== null)
-                    <span onclick="preloadActive2('proveedor', '<?php echo URL::to('ranking/proveedor/search'); ?>', '<?php echo $period; ?>', '<?php echo $busquedaPalabra; ?>' )">/ Proveedor</span>
+                    <span
+                        onclick="preloadActive2('proveedor', '<?php echo URL::to('ranking/proveedor/search'); ?>', '<?php echo $period; ?>', '<?php echo $busquedaPalabra; ?>' )">/
+                        Proveedor</span>
                 @else
-                   <span class="btn-preload" onclick="window.location='{{ url('/ranking/proveedor/' . $period.'/monto') }}'">/
+                    <span class="btn-preload"
+                        onclick="window.location='{{ url('/ranking/proveedor/' . $period . '/monto') }}'">/
                         Proveedor</span>
                 @endif
-              
+
             </a>
 
 
@@ -34,10 +37,18 @@
                         Entidad
                         {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
                     </p>
-                    <p class="xl:col-span-1 font-semibold flex items-center gap-2">
+                    <a href=" @if ($busquedaPalabra !== null) {{ url('/detail/postulaciones/first/proveedor/' . $rucContratista . '/' . $period . '/cantidad' . '/' . $nombre . '/' . $busquedaPalabra) }}
+                    @else
+                        {{ url('/detail/postulaciones/first/proveedor/' . $rucContratista . '/' . $period . '/cantidad' . '/' . $nombre) }} @endif"
+                        class="btn-preload
+                        xl:col-span-1 font-semibold flex items-center gap-2">
                         Cantidad
-                        {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
-                    </p>
+                        @if ($orderTable == 'cantidad')
+                            <img src="{{ asset('images/icon-chevron-up.png') }}" alt="w-max">
+                        @else
+                            <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max">
+                        @endif
+                    </a>
 
                 </header>
                 <div
@@ -47,10 +58,10 @@
                             <span class="text-main-gray font-medium xl:hidden">Entidad Ruc:</span>
                             @if ($busquedaPalabra !== null)
                                 <a class="btn-preload"
-                                    href="{{ url('/detail/postulaciones/second/proveedor/' . $item->entidad_ruc . '/' . $rucContratista . '/' . $period . '/' . $item->entidad_ruc . '/' . $item->entidad . '/' . $nombre . '/' . $busquedaPalabra) }}">{{ $item->entidad_ruc }}</a>
+                                    href="{{ url('/detail/postulaciones/second/proveedor/' . $item->entidad_ruc . '/' . $rucContratista . '/' . $period . '/' . $item->entidad_ruc . '/' . $item->entidad . '/oc.fecha_convocatoria' . '/' . $nombre . '/' . $busquedaPalabra) }}">{{ $item->entidad_ruc }}</a>
                             @else
                                 <a class="btn-preload"
-                                    href="{{ url('/detail/postulaciones/second/proveedor/' . $item->entidad_ruc . '/' . $rucContratista . '/' . $period . '/' . $item->entidad_ruc . '/' . $item->entidad . '/' . $nombre) }}">{{ $item->entidad_ruc }}</a>
+                                    href="{{ url('/detail/postulaciones/second/proveedor/' . $item->entidad_ruc . '/' . $rucContratista . '/' . $period . '/' . $item->entidad_ruc . '/' . $item->entidad . '/oc.fecha_convocatoria' . '/' . $nombre) }}">{{ $item->entidad_ruc }}</a>
                             @endif
                         </p>
                         <p class="xl:col-span-1 font-medium grid grid-cols-2 xl:block items-center gap-8">

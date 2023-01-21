@@ -84,9 +84,9 @@
                                 {{ $item->dataList->cantidadTotal }}
                             </p>
                             <!-- <p class="text-right xl:text-left col-span-6 xl:col-span-1 order-5">
-                                                                                                                                                                                                                                      <span class="text-gray-400 xl:hidden pr-8 font-medium">Ver más</span>
-                                                                                                                                                                                                                                      <img src="/images/icon-chevron-down.png" class="inline">
-                                                                                                                                                                                                                                    </p> -->
+                                                                                                                                                                                                                                              <span class="text-gray-400 xl:hidden pr-8 font-medium">Ver más</span>
+                                                                                                                                                                                                                                              <img src="/images/icon-chevron-down.png" class="inline">
+                                                                                                                                                                                                                                            </p> -->
                         </summary>
 
 
@@ -139,31 +139,31 @@
                                         @elseif($categorias->sigla == 'contrato_resuelto')
                                             @if (isset($busquedaPalabra))
                                                 <a class="btn-preload"
-                                                    href="{{ url('/detail/contrato-resuelto/first/proveedor/' . $item->dataList->contratista . '/' . $period . '/' . $item->dataList->nombre . '/' . $busquedaPalabra) }}"><img
+                                                    href="{{ url('/detail/contrato-resuelto/first/proveedor/' . $item->dataList->contratista . '/' . $period . '/monto' . '/' . $item->dataList->nombre . '/' . $busquedaPalabra) }}"><img
                                                         src="/images/icon-compartir.png" alt="Compartir"></a>
                                             @else
                                                 <a class="btn-preload"
-                                                    href="{{ url('/detail/contrato-resuelto/first/proveedor/' . $item->dataList->contratista . '/' . $period . '/' . $item->dataList->nombre) }}"><img
+                                                    href="{{ url('/detail/contrato-resuelto/first/proveedor/' . $item->dataList->contratista . '/' . $period . '/monto' . '/' . $item->dataList->nombre) }}"><img
                                                         src="/images/icon-compartir.png" alt="Compartir"></a>
                                             @endif
                                         @elseif($categorias->sigla == 'postulaciones')
                                             @if (isset($busquedaPalabra))
                                                 <a class="btn-preload"
-                                                    href="{{ url('/detail/postulaciones/first/proveedor/' . $item->dataList->contratista . '/' . $period . '/' . $item->dataList->nombre . '/' . $busquedaPalabra) }}"><img
+                                                    href="{{ url('/detail/postulaciones/first/proveedor/' . $item->dataList->contratista . '/' . $period . '/cantidad' . '/' . $item->dataList->nombre . '/' . $busquedaPalabra) }}"><img
                                                         src="/images/icon-compartir.png" alt="Compartir"></a>
                                             @else
                                                 <a class="btn-preload"
-                                                    href="{{ url('/detail/postulaciones/first/proveedor/' . $item->dataList->contratista . '/' . $period . '/' . $item->dataList->nombre) }}"><img
+                                                    href="{{ url('/detail/postulaciones/first/proveedor/' . $item->dataList->contratista . '/' . $period . '/cantidad' . '/' . $item->dataList->nombre) }}"><img
                                                         src="/images/icon-compartir.png" alt="Compartir"></a>
                                             @endif
                                         @elseif($categorias->sigla == 'postulaciones_representante')
                                             @if (isset($busquedaPalabra))
                                                 <a class="btn-preload"
-                                                    href="{{ url('/detail/postulaciones-con-mismo-representante/first/proveedor/' . $item->dataList->contratista . '/' . $period . '/' . $item->dataList->nombre . '/' . $busquedaPalabra) }}"><img
+                                                    href="{{ url('/detail/postulaciones-con-mismo-representante/first/proveedor/' . $item->dataList->contratista . '/' . $period . '/cantidad' . '/' . $item->dataList->nombre . '/' . $busquedaPalabra) }}"><img
                                                         src="/images/icon-compartir.png" alt="Compartir"></a>
                                             @else
                                                 <a class="btn-preload"
-                                                    href="{{ url('/detail/postulaciones-con-mismo-representante/first/proveedor/' . $item->dataList->contratista . '/' . $period . '/' . $item->dataList->nombre) }}"><img
+                                                    href="{{ url('/detail/postulaciones-con-mismo-representante/first/proveedor/' . $item->dataList->contratista . '/' . $period . '/cantidad' . '/' . $item->dataList->nombre) }}"><img
                                                         src="/images/icon-compartir.png" alt="Compartir"></a>
                                             @endif
                                         @endif

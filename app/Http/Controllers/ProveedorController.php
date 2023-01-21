@@ -237,73 +237,78 @@ class ProveedorController extends Controller
             ->paginate(10);
         return $data;
     }
-    public function contratoResueltoFirst($rucContratista, $period, $nombre = 'Sin nombre', $busquedaPalabra = null)
+    public function contratoResueltoFirst($rucContratista, $period, $orderTable, $nombre = 'Sin nombre', $busquedaPalabra = null)
     {
 
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
-        $validator = Validator::make(['period' => $period, 'rucContratista' => $rucContratista], [
+        $orderTables = ['monto', 'cantidad'];
+        $validator = Validator::make(['period' => $period, 'rucContratista' => $rucContratista, 'orderTable' => $orderTable], [
             'period' => ['required', 'integer', Rule::in($periods)],
-            'rucContratista' => ['required', 'integer']
+            'rucContratista' => ['required', 'integer'],
+            'orderTable' => ['required', 'string', Rule::in($orderTables)],
         ]);
         if (!$validator->fails()) {
-            $result = $this->contratoResueltoFirstDetail($rucContratista, $period);
-            return view('detail.proveedor.contratoResuelto.firstDetail', compact('result', 'rucContratista', 'period', 'nombre', 'busquedaPalabra'));
+            $result = $this->contratoResueltoFirstDetail($rucContratista, $period, $orderTable);
+            return view('detail.proveedor.contratoResuelto.firstDetail', compact('result', 'rucContratista', 'period', 'nombre', 'busquedaPalabra', 'orderTable'));
         } else {
 
             abort(404);
         }
     }
-    public function contratoResueltoFirstDetail($rucContratista, $period)
+    public function contratoResueltoFirstDetail($rucContratista, $period, $orderTable)
     {
         $data = DB::table(DB::raw('osce_contrato oc'))
             ->select('oc.ruc_entidad', 'oc.nombre_entidad', DB::raw('count(1) as cantidad'), DB::raw('sum(oc.monto_contratado_item) as monto'))
             ->where([['oc.anno', $period], ['oc.ruc_contratista', $rucContratista], ['oc.tieneresolucion', 'SI']])
             ->groupBy(['oc.ruc_entidad', 'oc.nombre_entidad'])
-            ->orderByRaw('cantidad DESC')
+            ->orderBy($orderTable, 'DESC')
             ->paginate(10);
         return $data;
     }
-    public function contratoResueltoSecond($rucEntidad, $rucContratista, $period, $ruc, $rucNombre, $nombre = 'Sin nombre', $busquedaPalabra = null)
+    public function contratoResueltoSecond($rucEntidad, $rucContratista, $period, $ruc, $rucNombre, $orderTable, $nombre = 'Sin nombre', $busquedaPalabra = null)
     {
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
-
-        $validator = Validator::make(['period' => $period, 'rucContratista' => $rucContratista, 'rucEntidad' => $rucEntidad], [
+        $orderTables = ['fecha_suscripcion_contrato', 'monto_contratado_item'];
+        $validator = Validator::make(['period' => $period, 'rucContratista' => $rucContratista, 'rucEntidad' => $rucEntidad, 'orderTable' => $orderTable], [
             'period' => ['required', 'integer', Rule::in($periods)],
             'rucContratista' => ['required', 'integer'],
-            'rucEntidad' => ['required', 'integer']
+            'rucEntidad' => ['required', 'integer'],
+            'orderTable' => ['required', 'string', Rule::in($orderTables)],
         ]);
         if (!$validator->fails()) {
-            $result = $this->contratoResueltoSecondDetail($rucEntidad, $rucContratista, $period);
-            return view('detail.proveedor.contratoResuelto.secondDetail', compact('result', 'rucEntidad', 'rucContratista', 'period', 'ruc', 'rucNombre', 'nombre', 'busquedaPalabra'));
+            $result = $this->contratoResueltoSecondDetail($rucEntidad, $rucContratista, $period, $orderTable);
+            return view('detail.proveedor.contratoResuelto.secondDetail', compact('result', 'rucEntidad', 'rucContratista', 'period', 'ruc', 'rucNombre', 'nombre', 'busquedaPalabra', 'orderTable'));
         } else {
             abort(404);
         }
     }
-    public function contratoResueltoSecondDetail($rucEntidad, $rucContratista, $period)
+    public function contratoResueltoSecondDetail($rucEntidad, $rucContratista, $period, $orderTable)
     {
 
         $data = DB::table(DB::raw('osce_contrato oc'))
             ->select('fecha_suscripcion_contrato', 'descripcion_proceso', 'num_contrato', 'urlcontrato', 'moneda', 'monto_contratado_item')
             ->where([['oc.anno', $period], ['oc.ruc_contratista', $rucContratista], ['oc.ruc_entidad', $rucEntidad], ['oc.tieneresolucion', 'SI']])
-            ->orderBy('fecha_suscripcion_contrato', 'DESC')
+            ->orderBy($orderTable, 'DESC')
             ->paginate(10);
         return $data;
     }
-    public  function postulacionesFirst($rucContratista, $period, $nombre = 'Sin nombre', $busquedaPalabra = null)
+    public  function postulacionesFirst($rucContratista, $period, $orderTable, $nombre = 'Sin nombre', $busquedaPalabra = null)
     {
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
-        $validator = Validator::make(['period' => $period, 'rucContratista' => $rucContratista], [
+        $orderTables = ['cantidad'];
+        $validator = Validator::make(['period' => $period, 'rucContratista' => $rucContratista, 'orderTable' => $orderTable], [
             'period' => ['required', 'integer', Rule::in($periods)],
-            'rucContratista' => ['required', 'integer']
+            'rucContratista' => ['required', 'integer'],
+            'orderTable' => ['required', 'string', Rule::in($orderTables)],
         ]);
         if (!$validator->fails()) {
-            $result = $this->postulacionesFirstDetail($rucContratista, $period);
-            return view('detail.proveedor.postulacion.firstDetail', compact('result', 'rucContratista', 'period', 'nombre', 'busquedaPalabra'));
+            $result = $this->postulacionesFirstDetail($rucContratista, $period, $orderTable);
+            return view('detail.proveedor.postulacion.firstDetail', compact('result', 'rucContratista', 'period', 'nombre', 'busquedaPalabra', 'orderTable'));
         } else {
             abort(404);
         }
     }
-    public  function postulacionesFirstDetail($rucContratista, $period)
+    public  function postulacionesFirstDetail($rucContratista, $period, $orderTable)
     {
         $data = DB::table(DB::raw('osce_postor op'))
             ->select('oc.entidad_ruc', 'oc.entidad', DB::raw('count(1) as cantidad'))
@@ -313,29 +318,30 @@ class ProveedorController extends Controller
             ->whereRaw('op.codigo_convocatoria = oc.codigo_convocatoria')
             ->whereRaw('op.n_item = oc.n_item')
             ->groupBy(['oc.entidad_ruc', 'oc.entidad'])
-            ->orderByRaw('cantidad DESC')
+            ->orderBy($orderTable, 'DESC')
             ->paginate(10);
 
         return $data;
     }
-    public function postulacionesSecond($rucEntidad, $rucContratista, $period, $ruc, $rucNombre, $nombre = 'Sin nombre', $busquedaPalabra = null)
+    public function postulacionesSecond($rucEntidad, $rucContratista, $period, $ruc, $rucNombre, $orderTable, $nombre = 'Sin nombre', $busquedaPalabra = null)
     {
 
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
-
-        $validator = Validator::make(['period' => $period, 'rucContratista' => $rucContratista, 'rucEntidad' => $rucEntidad], [
+        $orderTables = ['oc.fecha_convocatoria', 'oc.monto_referencial_item'];
+        $validator = Validator::make(['period' => $period, 'rucContratista' => $rucContratista, 'rucEntidad' => $rucEntidad, 'orderTable' => $orderTable], [
             'period' => ['required', 'integer', Rule::in($periods)],
             'rucContratista' => ['required', 'integer'],
-            'rucEntidad' => ['required', 'integer']
+            'rucEntidad' => ['required', 'integer'],
+            'orderTable' => ['required', 'string', Rule::in($orderTables)],
         ]);
         if (!$validator->fails()) {
-            $result = $this->postulacionesSecondDetail($rucEntidad, $rucContratista, $period);
-            return view('detail.proveedor.postulacion.secondDetail', compact('result', 'ruc', 'rucEntidad', 'rucContratista', 'rucNombre', 'nombre', 'ruc', 'rucNombre', 'nombre', 'busquedaPalabra'));
+            $result = $this->postulacionesSecondDetail($rucEntidad, $rucContratista, $period, $orderTable);
+            return view('detail.proveedor.postulacion.secondDetail', compact('result', 'ruc', 'rucEntidad', 'period', 'rucContratista', 'rucNombre', 'nombre', 'ruc', 'rucNombre', 'nombre', 'busquedaPalabra', 'orderTable'));
         } else {
             abort(404);
         }
     }
-    public function postulacionesSecondDetail($rucEntidad, $rucContratista, $period)
+    public function postulacionesSecondDetail($rucEntidad, $rucContratista, $period, $orderTable)
     {
         $data = DB::table(DB::raw('osce_postor op'))
             ->select('oc.proceso', 'oc.objeto_contractual', 'oc.descripcion_item', 'oc.moneda', 'oc.monto_referencial_item', 'oc.fecha_convocatoria', 'oc.fecha_presentacion_propuesta')
@@ -345,25 +351,27 @@ class ProveedorController extends Controller
             ->whereRaw('op.codigo_convocatoria = oc.codigo_convocatoria')
             ->whereRaw('op.n_item = oc.n_item')
             ->where('oc.entidad_ruc', '=', $rucEntidad)
-            ->orderBy('oc.fecha_convocatoria', 'DESC')
+            ->orderBy($orderTable, 'DESC')
             ->paginate(10);
         return $data;
     }
-    public function postulacionesMismoRepresentanteFirst($rucContratista, $period, $nombre = 'Sin nombre', $busquedaPalabra = null)
+    public function postulacionesMismoRepresentanteFirst($rucContratista, $period, $orderTable, $nombre = 'Sin nombre', $busquedaPalabra = null)
     {
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
-        $validator = Validator::make(['period' => $period, 'rucContratista' => $rucContratista], [
+        $orderTables = ['cantidad'];
+        $validator = Validator::make(['period' => $period, 'rucContratista' => $rucContratista, 'orderTable' => $orderTable], [
             'period' => ['required', 'integer', Rule::in($periods)],
-            'rucContratista' => ['required', 'integer']
+            'rucContratista' => ['required', 'integer'],
+            'orderTable' => ['required', 'string', Rule::in($orderTables)],
         ]);
         if (!$validator->fails()) {
-            $result = $this->postulacionesMismoRepresentanteFirstDetail($rucContratista, $period);
-            return view('detail.proveedor.postulacionMismoRepresenante.firstDetail', compact('result', 'rucContratista', 'period', 'nombre', 'busquedaPalabra'));
+            $result = $this->postulacionesMismoRepresentanteFirstDetail($rucContratista, $period, $orderTable);
+            return view('detail.proveedor.postulacionMismoRepresenante.firstDetail', compact('result', 'rucContratista', 'period', 'nombre', 'busquedaPalabra', 'orderTable'));
         } else {
             abort(404);
         }
     }
-    public function postulacionesMismoRepresentanteFirstDetail($rucContratista, $period)
+    public function postulacionesMismoRepresentanteFirstDetail($rucContratista, $period, $orderTable)
     {
 
         $data =
@@ -384,29 +392,31 @@ class ProveedorController extends Controller
             ->whereRaw('oc.codigo_convocatoria = op.codigo_convocatoria')
             ->whereRaw('oc.n_item = op.n_item')
             ->groupBy(['oc.entidad_ruc', 'oc.entidad'])
-            ->orderByRaw('cantidad DESC')
+            ->orderBy($orderTable, 'DESC')
             ->paginate(10);
 
         return $data;
     }
-    public function postulacionesMismoRepresentanteSecond($rucEntidad, $rucContratista, $period, $ruc, $rucNombre, $nombre = 'Sin nombre', $busquedaPalabra = null)
+    public function postulacionesMismoRepresentanteSecond($rucEntidad, $rucContratista, $period, $ruc, $rucNombre, $orderTable, $nombre = 'Sin nombre', $busquedaPalabra = null)
     {
         $periods = [2018, 2019, 2020, 2021, 2022, 2023];
 
-        $validator = Validator::make(['period' => $period, 'rucContratista' => $rucContratista, 'rucEntidad' => $rucEntidad], [
+        $orderTables = ['fecha_suscripcion_contrato', 'monto_contratado_item'];
+        $validator = Validator::make(['period' => $period, 'rucContratista' => $rucContratista, 'rucEntidad' => $rucEntidad, 'orderTable' => $orderTable], [
             'period' => ['required', 'integer', Rule::in($periods)],
             'rucContratista' => ['required', 'integer'],
-            'rucEntidad' => ['required', 'integer']
+            'rucEntidad' => ['required', 'integer'],
+            'orderTable' => ['required', 'string', Rule::in($orderTables)],
         ]);
         if (!$validator->fails()) {
-            $result = $this->postulacionesMismoRepresentanteSecondDetail($rucEntidad, $rucContratista, $period);
+            $result = $this->postulacionesMismoRepresentanteSecondDetail($rucEntidad, $rucContratista, $period, $orderTable);
             $conformacion = $this->conformacionJuridica($rucContratista);
-            return view('detail.proveedor.postulacionMismoRepresenante.secondDetail', compact('result', 'rucEntidad', 'rucContratista', 'conformacion', 'period', 'ruc', 'rucNombre', 'nombre', 'busquedaPalabra'));
+            return view('detail.proveedor.postulacionMismoRepresenante.secondDetail', compact('result', 'rucEntidad', 'rucContratista', 'conformacion', 'period', 'ruc', 'rucNombre', 'nombre', 'busquedaPalabra', 'orderTable'));
         } else {
             abort(404);
         }
     }
-    public function postulacionesMismoRepresentanteSecondDetail($rucEntidad, $rucContratista, $period)
+    public function postulacionesMismoRepresentanteSecondDetail($rucEntidad, $rucContratista, $period, $orderTable)
     {
 
         $data = DB::table(DB::raw('osce_contrato oc'))
@@ -418,7 +428,7 @@ from osce_postor op, osce_conformacion_juridica ocj
 	 	   and op.ruc_postor<>oc.ruc_contratista
 	       and ocj.ruc=op.ruc_postor) as rep1'))
             ->where([['oc.anno', $period], ['oc.ruc_entidad', $rucEntidad], ['oc.ruc_contratista', $rucContratista]])
-            ->orderBy('fecha_suscripcion_contrato', 'DESC')
+            ->orderBy($orderTable, 'DESC')
             ->paginate(10);
 
         return $data;

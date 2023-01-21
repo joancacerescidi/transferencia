@@ -10,17 +10,18 @@
                         onclick="preloadActive2('proveedor', '<?php echo URL::to('ranking/proveedor/search'); ?>', '<?php echo $period; ?>', '<?php echo $busquedaPalabra; ?>' )">/
                         Proveedor</span>
                 @else
-                   <span class="btn-preload" onclick="window.location='{{ url('/ranking/proveedor/' . $period.'/monto') }}'">/
+                    <span class="btn-preload"
+                        onclick="window.location='{{ url('/ranking/proveedor/' . $period . '/monto') }}'">/
                         Proveedor</span>
                 @endif
 
                 @if ($busquedaPalabra !== null)
                     <span class="btn-preload"
-                        onclick="window.location='{{ url('/detail/postulaciones-con-mismo-representante/first/proveedor/' . $rucContratista . '/' . $period . '/' . $nombre . '/' . $busquedaPalabra) }}'">/
+                        onclick="window.location='{{ url('/detail/postulaciones-con-mismo-representante/first/proveedor/' . $rucContratista . '/' . $period . '/cantidad' . '/' . $nombre . '/' . $busquedaPalabra) }}'">/
                         1° Detalle</span>
                 @else
                     <span class="btn-preload"
-                        onclick="window.location='{{ url('/detail/postulaciones-con-mismo-representante/first/proveedor/' . $rucContratista . '/' . $period . '/' . $nombre) }}'">/
+                        onclick="window.location='{{ url('/detail/postulaciones-con-mismo-representante/first/proveedor/' . $rucContratista . '/' . $period . '/cantidad' . '/' . $nombre) }}'">/
                         1° Detalle</span>
                 @endif
 
@@ -71,10 +72,20 @@
                         Número Contrato
                         {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
                     </p>
-                    <p class="xl:col-span-1 font-semibold flex items-center">
+
+
+                    <a href=" @if ($busquedaPalabra !== null) {{ url('/detail/postulaciones-con-mismo-representante/second/proveedor/' . $rucEntidad . '/' . $rucContratista . '/' . $period . '/' . $ruc . '/' . $rucNombre . '/fecha_suscripcion_contrato' . '/' . $nombre . '/' . $busquedaPalabra) }}
+                    @else
+                  
+                       {{ url('/detail/postulaciones-con-mismo-representante/second/proveedor/' . $rucEntidad . '/' . $rucContratista . '/' . $period . '/' . $ruc . '/' . $rucNombre . '/fecha_suscripcion_contrato' . '/' . $nombre) }} @endif "
+                        class="btn-preload xl:col-span-1 font-semibold flex items-center">
                         fecha suscripción contrato
-                        {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
-                    </p>
+                        @if ($orderTable == 'fecha_suscripcion_contrato')
+                            <img src="{{ asset('images/icon-chevron-up.png') }}" alt="w-max">
+                        @else
+                            <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max">
+                        @endif
+                    </a>
                     <p class="xl:col-span-2 font-semibold flex items-center gap-2">
                         Descripción proceso
                         {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
@@ -87,10 +98,17 @@
                         Moneda
                         {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
                     </p>
-                    <p class="xl:col-span-1 font-semibold hidden xl:flex items-center gap-2">
+                    <a  href=" @if ($busquedaPalabra !== null) {{ url('/detail/postulaciones-con-mismo-representante/second/proveedor/' . $rucEntidad . '/' . $rucContratista . '/' . $period . '/' . $ruc . '/' . $rucNombre . '/monto_contratado_item' . '/' . $nombre . '/' . $busquedaPalabra) }}
+                    @else
+                  
+                       {{ url('/detail/postulaciones-con-mismo-representante/second/proveedor/' . $rucEntidad . '/' . $rucContratista . '/' . $period . '/' . $ruc . '/' . $rucNombre . '/monto_contratado_item' . '/' . $nombre) }} @endif " class="btn-preload xl:col-span-1 font-semibold hidden xl:flex items-center gap-2">
                         Monto Contratado Item
-                        {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
-                    </p>
+                        @if ($orderTable == 'monto_contratado_item')
+                            <img src="{{ asset('images/icon-chevron-up.png') }}" alt="w-max">
+                        @else
+                            <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max">
+                        @endif
+                    </a>
                     <p class="xl:col-span-4 font-semibold hidden xl:flex items-center gap-2">
                         Representantes de los postores en la misma convocatoria
                         {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
