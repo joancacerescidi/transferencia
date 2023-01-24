@@ -53,7 +53,20 @@ class FuncionarioController extends Controller
                     $data =  DB::table('funcionario_cargo AS fc')
                         ->crossJoin('funcionario_pariente AS fp')
                         ->crossJoin('osce_ordencompra AS oc')
-                        ->select('fc.cargo', 'fc.nombreentidad', 'oc.fecha_emision', 'oc.ruc_contratista', 'fp.nombrepariente', 'fp.parentesco', 'oc.descripcion_orden', 'oc.orden', 'oc.objetocontractual', 'oc.moneda', 'oc.monto_total_original')
+                        ->select(
+                            'fc.cargo',
+                            'fc.nombreentidad',
+                            'oc.fecha_emision',
+                            'oc.ruc_contratista',
+                            'fp.nombrepariente',
+                            'fp.parentesco',
+                            'oc.descripcion_orden',
+                            'oc.orden',
+                            'oc.objetocontractual',
+                            'oc.moneda',
+                            'oc.monto_total_original',
+                            'oc.entidad'
+                        )
                         ->where('fc.idfuncionario', '=', intval($idFuncionario))
                         ->where('fp.idfuncionario', '=', intval($idFuncionario))
                         ->where('fp.ruc', '=', DB::raw('oc.ruc_contratista'))
@@ -70,7 +83,20 @@ class FuncionarioController extends Controller
                     $data =  DB::table('funcionario_cargo AS fc')
                         ->crossJoin('funcionario_pariente AS fp')
                         ->crossJoin('osce_contrato AS oc')
-                        ->select('fc.cargo', 'fc.nombreentidad', 'oc.fecha_suscripcion_contrato', 'oc.ruc_contratista', 'fp.nombrepariente', 'fp.parentesco', 'oc.descripcion_proceso', 'oc.num_contrato', 'oc.urlcontrato', 'oc.moneda', 'oc.monto_contratado_item')
+                        ->select(
+                            'fc.cargo',
+                            'fc.nombreentidad',
+                            'oc.fecha_suscripcion_contrato',
+                            'oc.ruc_contratista',
+                            'fp.nombrepariente',
+                            'fp.parentesco',
+                            'oc.descripcion_proceso',
+                            'oc.num_contrato',
+                            'oc.urlcontrato',
+                            'oc.moneda',
+                            'oc.monto_contratado_item',
+                            'oc.nombre_entidad'
+                        )
                         ->where('fc.idfuncionario', '=', intval($idFuncionario))
                         ->where('fp.idfuncionario', '=', intval($idFuncionario))
                         ->where('fp.ruc', '=', DB::raw('oc.ruc_contratista'))
@@ -86,7 +112,22 @@ class FuncionarioController extends Controller
                         ->crossJoin('funcionario_pariente AS fp')
                         ->crossJoin('osce_contrato AS oc')
                         ->crossJoin('osce_consorcio AS oo')
-                        ->select('fc.cargo', 'fc.nombreentidad', 'oc.fecha_suscripcion_contrato', 'fp.ruc as rucpariente', 'fp.nombrepariente', 'fp.parentesco', 'oo.ruc_consorcio', 'oo.consorcio', 'oc.descripcion_proceso', 'oc.num_contrato', 'oc.urlcontrato', 'oc.moneda', 'oc.monto_contratado_item')
+                        ->select(
+                            'fc.cargo',
+                            'fc.nombreentidad',
+                            'oc.fecha_suscripcion_contrato',
+                            'fp.ruc as rucpariente',
+                            'fp.nombrepariente',
+                            'fp.parentesco',
+                            'oo.ruc_consorcio',
+                            'oo.consorcio',
+                            'oc.descripcion_proceso',
+                            'oc.num_contrato',
+                            'oc.urlcontrato',
+                            'oc.moneda',
+                            'oc.monto_contratado_item',
+                            'oc.nombre_entidad'
+                        )
                         ->where('fc.idfuncionario', '=', intval($idFuncionario))
                         ->where('fp.idfuncionario', '=', intval($idFuncionario))
                         ->where('fp.ruc', '=', DB::raw('oo.ruc_miembro'))
@@ -119,7 +160,8 @@ class FuncionarioController extends Controller
                             'oc.orden',
                             'oc.objetocontractual',
                             'oc.moneda',
-                            'oc.monto_total_original'
+                            'oc.monto_total_original',
+                            'oc.entidad'
                         )
                         ->where('fc.idfuncionario', '=', intval($idFuncionario))
                         ->where('fp.idfuncionario', '=', intval($idFuncionario))
@@ -152,7 +194,8 @@ class FuncionarioController extends Controller
                             'oc.num_contrato',
                             'oc.urlcontrato',
                             'oc.moneda',
-                            'oc.monto_contratado_item'
+                            'oc.monto_contratado_item',
+                            'oc.nombre_entidad'
                         )
                         ->where('fc.idfuncionario', '=', intval($idFuncionario))
                         ->where('fp.idfuncionario', '=', intval($idFuncionario))
@@ -188,7 +231,8 @@ class FuncionarioController extends Controller
                             'oc.num_contrato',
                             'oc.urlcontrato',
                             'oc.moneda',
-                            'oc.monto_contratado_item'
+                            'oc.monto_contratado_item',
+                            'oc.nombre_entidad'
                         )
                         ->where('fc.idfuncionario', '=', intval($idFuncionario))
                         ->where('fp.idfuncionario', '=', intval($idFuncionario))
@@ -217,7 +261,8 @@ class FuncionarioController extends Controller
                             'oc.orden',
                             'oc.objetocontractual',
                             'oc.moneda',
-                            'oc.monto_total_original'
+                            'oc.monto_total_original',
+                            'oc.entidad'
                         )
                         ->where('oc.ruc_contratista', '=', $ruc)
                         ->where('fc.idfuncionario', '=', intval($idFuncionario))
@@ -241,7 +286,8 @@ class FuncionarioController extends Controller
                             'oc.num_contrato',
                             'oc.urlcontrato',
                             'oc.moneda',
-                            'oc.monto_contratado_item'
+                            'oc.monto_contratado_item',
+                            'oc.nombre_entidad '
                         )
                         ->where('oc.ruc_contratista', '=', $ruc)
                         ->where('fc.idfuncionario', '=', intval($idFuncionario))
@@ -267,7 +313,8 @@ class FuncionarioController extends Controller
                             'oc.num_contrato',
                             'oc.urlcontrato',
                             'oc.moneda',
-                            'oc.monto_contratado_item'
+                            'oc.monto_contratado_item',
+                            'oc.nombre_entidad '
                         )
                         ->where('oo.ruc_miembro', '=',  $ruc)
                         ->where('oc.ruc_contratista', '=', DB::raw('oo.ruc_consorcio'))
@@ -296,7 +343,8 @@ class FuncionarioController extends Controller
                             'oc.orden',
                             'oc.objetocontractual',
                             'oc.moneda',
-                            'oc.monto_total_original'
+                            'oc.monto_total_original',
+                            'oc.entidad'
                         )
                         ->where('fa.ruc', '=', DB::raw('oc.ruc_contratista'))
                         ->where('fc.idfuncionario', '=', intval($idFuncionario))
@@ -330,7 +378,8 @@ class FuncionarioController extends Controller
                             'oc.num_contrato',
                             'oc.urlcontrato',
                             'oc.moneda',
-                            'oc.monto_contratado_item'
+                            'oc.monto_contratado_item',
+                            'oc.nombre_entidad'
                         )
                         ->where('fa.ruc', '=', DB::raw('oc.ruc_contratista'))
                         ->where('fc.idfuncionario', '=', intval($idFuncionario))
@@ -366,7 +415,8 @@ class FuncionarioController extends Controller
                             'oc.num_contrato',
                             'oc.urlcontrato',
                             'oc.moneda',
-                            'oc.monto_contratado_item'
+                            'oc.monto_contratado_item',
+                            'oc.nombre_entidad',
                         )
                         ->where('fa.ruc', '=', DB::raw('oo.ruc_miembro'))
                         ->where('oc.ruc_contratista', '=', DB::raw('oo.ruc_consorcio'))

@@ -2,7 +2,7 @@
     <article
         class="bg-white border border-gray-200 shadow-sm rounded-xl mb-6 cursor-pointer hover:shadow-lg overflow-x-auto">
         <header
-            class="bg-gray-800 text-white p-5 hidden xl:grid grid-cols-2 xl:grid-cols-17 gap-4 items-center text-xs xl:text-sm mb-6 xl:mb-14 xl:overflow-x-auto u-table-row">
+            class="bg-gray-800 text-white p-5 hidden xl:grid grid-cols-2 xl:grid-cols-20 gap-4 items-center text-xs xl:text-sm mb-6 xl:mb-14 xl:overflow-x-auto u-table-row">
             <p class="xl:col-span-1 font-semibold flex items-center gap-2">
                 Cargo
                 {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
@@ -38,8 +38,12 @@
                 Parentesco
                 {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
             </p>
-            <p class="xl:col-span-1 font-semibold hidden xl:flex items-center gap-2">
+            <p class="xl:col-span-2 font-semibold hidden xl:flex items-center gap-2">
                 Tipo Conf Juridica
+                {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
+            </p>
+            <p class="xl:col-span-2 font-semibold hidden xl:flex items-center gap-2">
+                Entidad Contratante
                 {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
             </p>
             <p class="xl:col-span-1 font-semibold hidden xl:flex items-center gap-2">
@@ -83,7 +87,7 @@
             </a>
         </header>
         <div
-            class="px-5 py-5 xl:py-0 grid xl:grid-cols-17 items-start gap-4 text-xs xl:text-sm mb-10 border-b pb-4 xl:pb-0 xl:border-0 xl:overflow-x-auto u-table-row">
+            class="px-5 py-5 xl:py-0 grid xl:grid-cols-20 items-start gap-4 text-xs xl:text-sm mb-10 border-b pb-4 xl:pb-0 xl:border-0 xl:overflow-x-auto u-table-row">
             @foreach ($collection as $key => $item)
                 <p class="xl:col-span-1 font-semibold grid grid-cols-2 xl:block items-center gap-8">
                     <span class="text-main-gray font-medium xl:hidden">Cargo:</span>
@@ -113,9 +117,13 @@
                     <span class="text-main-gray font-medium xl:hidden">Parentesco: </span>
                     <span> {{ $item->parentesco }}</span>
                 </p>
-                <p class="xl:col-span-1 font-medium grid grid-cols-2 xl:block items-center gap-8">
+                <p class="xl:col-span-2 font-medium grid grid-cols-2 xl:block items-center gap-8">
                     <span class="text-main-gray font-medium xl:hidden">Tipo Conf Juridica: </span>
                     <span> {{ $item->tipo_conf_juridica }}</span>
+                </p>
+                <p class="xl:col-span-2 font-medium grid grid-cols-2 xl:block items-center gap-8">
+                    <span class="text-main-gray font-medium xl:hidden">Entidad Contratante: </span>
+                    <span> {{ $item->nombre_entidad }}</span>
                 </p>
                 <p class="xl:col-span-1 font-medium grid grid-cols-2 xl:block items-center gap-8">
                     <span class="text-main-gray font-medium xl:hidden">Ruc Contratista: </span>

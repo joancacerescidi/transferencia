@@ -46,8 +46,8 @@ class RankingSearchController extends Controller
                     'distrito',
                     'nivelgobierno',
                     'poder',
-                    DB::raw('(montofra+montoadi+montoprc+montocrc+montopmr) as ranking'),
-                    DB::raw('(montoordencompra+montocontrato) as monto')
+                    DB::raw('(coalesce(montofra,0)+coalesce(montoadi,0)+coalesce(montoprc,0)+coalesce(montocrc,0)+coalesce(montopmr,0)) / (coalesce(montoordencompra,0) + coalesce(montocontrato,0)) as ranking'),
+                    DB::raw('(coalesce(montoordencompra,0)+coalesce(montocontrato,0)) as monto')
                 )
                 ->where('anno', $period)
                 ->orderBy($order, 'DESC')->paginate(10);
@@ -93,8 +93,8 @@ class RankingSearchController extends Controller
                     'distrito',
                     'nivelgobierno',
                     'poder',
-                    DB::raw('montofra+montoadi+montoprc+montocrc+montopmr as ranking'),
-                    DB::raw('(montoordencompra+montocontrato) as monto')
+                    DB::raw('(coalesce(montofra,0)+coalesce(montoadi,0)+coalesce(montoprc,0)+coalesce(montocrc,0)+coalesce(montopmr,0)) / (coalesce(montoordencompra,0) + coalesce(montocontrato,0)) as ranking'),
+                    DB::raw('(coalesce(montoordencompra,0)+coalesce(montocontrato,0)) as monto')
                 )
                 ->where(function ($query) use ($busquedaPalabra) {
                     $query->where('ruc_entidad', '=', strtoupper($busquedaPalabra));
@@ -316,8 +316,8 @@ class RankingSearchController extends Controller
             $item->dataList = new stdClass();
             $item->dataList->rucEntidad = $item->ruc_entidad;
             $item->dataList->nombre = $item->nombre_entidad;
-            $item->dataList->montoTotal = number_format(intval($item->montoordencompra + $item->montocontrato));
-            $item->dataList->ranking = number_format(intval($item->ranking / ($item->montoordencompra + $item->montocontrato)));
+            $item->dataList->montoTotal = number_format(intval($item->monto));
+            $item->dataList->ranking = number_format(intval($item->ranking));
             $item->dataList->categorys = [];
             //---Fraccionamientos---//
             $fraccionamiento = new stdClass();

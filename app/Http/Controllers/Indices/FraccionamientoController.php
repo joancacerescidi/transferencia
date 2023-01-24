@@ -81,7 +81,7 @@ class FraccionamientoController extends Controller
                 ->where('anno', '=', $period)
                 ->where('ruc_entidad', '=', $rucEntidad)
                 ->where('ruc_contratista', '=', $rucContratista)
-                ->orderBy($orderTable, 'asc')
+                ->orderBy($orderTable, 'DESC')
                 ->paginate(10);
         } else if ($filter == 'contrato') {
             $data = DB::table('osce_contrato')

@@ -62,8 +62,8 @@ class DepartmentController extends Controller
                 'departamento',
                 'nivelgobierno',
                 'poder',
-                DB::raw('coalesce(montofra,0)+coalesce(montoadi,0)+coalesce(montoprc,0)+coalesce(montocrc,0)+coalesce(montopmr,0) as ranking'),
-                DB::raw('coalesce(montoordencompra,0) + coalesce(montocontrato,0) as monto'),
+                DB::raw('(coalesce(montofra,0)+coalesce(montoadi,0)+coalesce(montoprc,0)+coalesce(montocrc,0)+coalesce(montopmr,0)) / (coalesce(montoordencompra,0) + coalesce(montocontrato,0)) as ranking'),
+                DB::raw('(coalesce(montoordencompra,0)+coalesce(montocontrato,0)) as monto')
             )
             ->where('anno', $period)
             ->where('departamento', $department)
