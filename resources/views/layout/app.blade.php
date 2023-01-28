@@ -69,7 +69,7 @@
             <a href="/" class="btn-preload font-semibold text-lg ">
                 Qullqita Qatipay
             </a>
-            <p class="font-semibold text-lg hidden xl:block">Data actualizada a Noviembre 2022 </p>
+            <p class="font-semibold text-lg hidden xl:block">Data actualizada a Diciembre 2022 </p>
             <nav class="hidden xl:flex items-center gap-12 font-semibold text-main-gray-light">
                 <a href="{{ route('feedback.index') }}" class="btn-preload text-white">Danos tu opinión</a>
                 <a href="{{ route('denuncia.index') }}" class="btn-preload text-white">Comparte información</a>
@@ -106,7 +106,7 @@
             </ul>
         </div>
         <hr class="xl:mx-10">
-        <p class="py-8 text-sm xl:text-lg text-center">2022@ Qullqita Qatipay - Todos los derechos reservados</p>
+        <p class="py-8 text-sm xl:text-lg text-center">2023@ Qullqita Qatipay - Todos los derechos reservados</p>
     </footer>
     <script src="{{ asset('js/header/index.js') }}"></script>
     <script src="{{ asset('js/preload/index.js') }}"></script>
