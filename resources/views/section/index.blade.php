@@ -296,6 +296,8 @@
                             regionSigla = 'L';
                         } else if (chart.data.labels[i] === 'AUTÓNOMO') {
                             regionSigla = 'A';
+                        } else if (chart.data.labels[i] === 'NACIONAL') {
+                            regionSigla = 'N';
                         }
                         const finalUrl = url + '/' + regionSigla + '/' + period + '/monto';
                         window.location.href = finalUrl;
