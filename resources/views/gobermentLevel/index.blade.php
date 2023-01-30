@@ -14,8 +14,10 @@
                     LOCAL
                 @elseif($nivel == 'R')
                     REGIONAL
-                @else
+                @elseif($nivel == 'A')
                     AUTÓNOMO
+                @else
+                    NACIONAL
                 @endif
             </h2>
             <article>
