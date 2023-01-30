@@ -62,6 +62,8 @@ class SectionController extends Controller
                 $graf->nivelgobierno = "LOCAL";
             } else if ($graf->nivelgobierno == 'A') {
                 $graf->nivelgobierno = "AUTÓNOMO";
+            } else if ($graf->nivelgobierno == 'N') {
+                $graf->nivelgobierno = "NACIONAL";
             }
             array_push($newObjt->label, $graf->nivelgobierno);
             array_push($newObjt->dataSet1, intval($graf->sum));
