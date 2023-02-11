@@ -15,6 +15,10 @@ if (btnPreloader.length > 0) {
     });
 }
 
+setTimeout(() => {
+    preloader.classList.add("opacity-0", "pointer-events-none");
+}, 10000);
+
 function preloadActive($type, $ruta, $periodo) {
     if ($type === "entidad") {
         let inputValue1 = document.getElementById("palabraClaveEntidad").value;
