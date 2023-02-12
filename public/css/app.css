@@ -1334,6 +1334,10 @@ input[type=number] {
 }
 @media (min-width: 1280px) {
 
+  .xl\:static {
+    position: static;
+  }
+
   .xl\:order-3 {
     order: 3;
   }

@@ -1,9 +1,7 @@
 @extends('layout.app')
 @section('content')
     <main class="bg-body-bg">
-        <span
-            class=" opacity-0 absolute bg-body-bg border shadow-lg p-4 transition-opacity rounded-md pointer-events-none text-sm xl:text-base font-semibold"
-            id="tooltip"></span>
+
         <section class="u-container">
             <h2 class="text-center text-xl xl:text-4xl font-bold mb-14">
                 Seleccionar el periodo
@@ -134,7 +132,7 @@
                             <h4 class="xl:text-xl font-bold text-center mb-10">Data por nivel de Gobierno</h4>
                             <canvas id="myChart"></canvas>
                         </div>
-                        <div class="border bg-white shadow-lg px-6 py-10">
+                        <div class="relative xl:static border bg-white shadow-lg px-6 py-10">
                             <h4 class="xl:text-xl font-bold text-center mb-10">Data por Región</h4>
                             <svg id="mapa-peru" baseprofile="tiny" fill="#7c7c7c" stroke="#ffffff" stroke-linecap="round"
                                 stroke-linejoin="round" stroke-width="2" version="1.2" viewbox="0 0 1000 1472"
@@ -247,8 +245,11 @@
                                 <circle cx="766.9" cy="1359" id="2">
                                 </circle>
                             </svg>
+                             <span
+                            class=" opacity-0 absolute bg-body-bg border shadow-lg p-4 transition-opacity rounded-md pointer-events-none text-sm xl:text-base font-semibold"
+                            id="tooltip"></span>
                         </div>
-
+                       
 
                     </article>
                 </div>
@@ -360,8 +361,6 @@
                     let top = e.layerY
                     let left = e.layerX
                     let name = region.getAttribute('name');
-
-
 
                     var m_compra = "indefinido";
                     var m_contrato = "indefinido";
