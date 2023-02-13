@@ -1,6 +1,17 @@
 let preloader = document.getElementById("preloader");
 let btnPreloader = [...document.querySelectorAll(".btn-preload")];
 
+function isMobileDevice() {
+    return (
+        typeof window.orientation !== "undefined" ||
+        navigator.userAgent.indexOf("IEMobile") !== -1
+    );
+}
+
+if (isMobileDevice()) {
+    preloader.remove();
+}
+
 function preload() {
     preloader.classList.add("opacity-0", "pointer-events-none");
 }
@@ -12,9 +23,6 @@ if (preloader) {
         preloader.classList.add("opacity-0", "pointer-events-none");
     });
 }
-window.addEventListener("load", () => {
-    preloader.classList.add("opacity-0", "pointer-events-none");
-});
 if (btnPreloader.length > 0) {
     btnPreloader.map((btn) => {
         btn.addEventListener("click", () => {
