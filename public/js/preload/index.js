@@ -1,14 +1,14 @@
 let preloader = document.getElementById("preloader");
 let btnPreloader = [...document.querySelectorAll(".btn-preload")];
 
-function isMobileDevice() {
-    return (
-        typeof window.orientation !== "undefined" ||
-        navigator.userAgent.indexOf("IEMobile") !== -1
-    );
+if (
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+    )
+) {
+    preloader.remove();
 }
-
-if (isMobileDevice()) {
+if (screen.width <= 767) {
     preloader.remove();
 }
 
