@@ -162,15 +162,7 @@
         </svg>
         <h2 class="text-2xl font-bold xl:text-4xl xl:font-black text-center animate-bounce mt-6">Qullqita Qatipay</h2>
     </div>
-    <script>
-        let navegador = navigator.userAgent;
-        if (navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/webOS/i) || navigator.userAgent.match(
-                /iPhone/i) || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPod/i) || navigator
-            .userAgent.match(/BlackBerry/i) || navigator.userAgent.match(/Windows Phone/i)) {
-            let preloader = document.getElementById("preloader");
-            preloader.classList.add("opacity-0", "pointer-events-none");
-        }
-    </script>
+
     <script src="{{ asset('js/header/index.js') }}"></script>
     <script src="{{ asset('js/preload/index.js') }}"></script>
     <script src="{{ asset('js/modal/nosotros.js') }}"></script>

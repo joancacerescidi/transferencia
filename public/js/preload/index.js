@@ -1,15 +1,10 @@
 let preloader = document.getElementById("preloader");
 let btnPreloader = [...document.querySelectorAll(".btn-preload")];
-
-if (
-    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-        navigator.userAgent)
-) {
-    preloader.classList.add("opacity-0", "pointer-events-none");
-}
-if (screen.width <= 767) {
-    preloader.classList.add("opacity-0", "pointer-events-none");
-}
+window.addEventListener("pageshow", function(event) {
+    if (event.persisted) {
+        preloader.classList.add("opacity-0", "pointer-events-none");
+    }
+});
 
 function preload() {
     preloader.classList.add("opacity-0", "pointer-events-none");
