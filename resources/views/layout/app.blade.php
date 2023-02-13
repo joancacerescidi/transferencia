@@ -161,7 +161,15 @@
         <hr class="xl:mx-10">
         <p class="py-8 text-sm xl:text-lg text-center">2023@ Qullqita Qatipay - Todos los derechos reservados</p>
     </footer>
-
+    <script>
+        let navegador = navigator.userAgent;
+        if (navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/webOS/i) || navigator.userAgent.match(
+                /iPhone/i) || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPod/i) || navigator
+            .userAgent.match(/BlackBerry/i) || navigator.userAgent.match(/Windows Phone/i)) {
+            let preloader = document.getElementById("preloader");
+            preloader.classList.add("opacity-0", "pointer-events-none");
+        }
+    </script>
     <script src="{{ asset('js/header/index.js') }}"></script>
     <script src="{{ asset('js/preload/index.js') }}"></script>
     <script src="{{ asset('js/modal/nosotros.js') }}"></script>
