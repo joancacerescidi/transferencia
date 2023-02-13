@@ -6,9 +6,7 @@ window.addEventListener("pageshow", function(event) {
     }
 });
 
-function preload() {
-    preloader.classList.add("opacity-0", "pointer-events-none");
-}
+
 window.addEventListener("popstate", function(event) {
     preloader.classList.add("opacity-0", "pointer-events-none");
 });
