@@ -22,7 +22,56 @@
 
 </head>
 
-<body>
+<body OnLoad="preload();">
+    <!-- Modal -->
+    <div id="modal-nosotros"
+        class="opacity-0 pointer-events-none bg-black bg-opacity-20  fixed inset-0 flex items-center justify-center flex-col p-4 transition-opacity"
+        style="z-index: 999999;">
+        <div class="p-4 rounded-md text-lft border shadow-md bg-white overflow-y-auto max-h-screen">
+            <button onclick="closemodalnosotros()"
+                class="ml-auto block cursor-pointer mb-2                                                    ">
+                <img src="{{ asset('images/icon-cerrar-black.png') }}" alt="">
+            </button>
+            <h3 class="font-bold text-lg mb-4">Qullqita Qitapay</h3>
+            <p style="max-width: 70ch;" class="mb-4">¿Qué significa Qullqita Qitapay?</p>
+            <p style="max-width: 70ch;" class="mb-6">
+                Es la mejor traducción que encontramos en quechua al término conocido en inglés “Follow the Money” o en
+                español “Sigue el dinero”. Nuestro dominio es <a href="http://qqperu.com/"
+                    class="font-medium text-blue-500 cursor-pointer ">www.qqperu.com</a>
+            </p>
+            <p style="max-width: 70ch;" class="mb-4">¿Qué es?</p>
+            <p style="max-width: 70ch;" class="mb-2">
+                Es una iniciativa ciudadana que trata datos abiertos del Estado sobre el uso del presupuesto nacional.
+                En esta primera etapa, hemos consolidado sólo datos desde enero 2018 y está actualizado hasta diciembre
+                2022.
+            </p>
+            <p style="max-width: 70ch;" class="mb-4">
+                El alcance inicial incluye aquellos gastos comprometidos en Contratos u Órdenes de Compra por el
+                momento:
+            </p>
+            <ul class="grid gap-2 pl-6 mb-6">
+                <li>Datos abiertos de OSCE</li>
+                <li>Datos abiertos de SUNAT</li>
+                <li>Datos abiertos de Contraloría</li>
+            </ul>
+            <p style="max-width: 70ch;" class="mb-4">
+                El portal permitire analizar e investigar información relevante sobre el uso del dinero. Los datos han
+                sido estructurados en bases de datos para que puedan ser explotados inicialmente con analítica básica.
+                Los datos no han sido modificados por lo que podrán visualizar algunas inconsistencias de origen que
+                proviene de las fuentes.
+            </p>
+            <p style="max-width: 70ch;" class="mb-4">¿Para qué existe?</p>
+            <p style="max-width: 70ch;" class="mb-6">
+                Para facilitar de manera abierta la investigación y datos sobre el uso del dinero en el Estado. No
+                sacamos conclusiones.
+            </p>
+            <p style="max-width: 70ch;" class="mb-4">¿Quiénes podrán usarla?</p>
+            <p style="max-width: 70ch;">
+                Cualquier ciudadano o persona que busque acceder fácilmente a información inicial y sin restricciones.
+                Por el momento no tiene un costo. La iniciativa es financiada con fondos privados voluntarios.
+            </p>
+        </div>
+    </div>
     <!-- Loader -->
     <!-- opacity-0 pointer-events-none -->
     <div id="preloader"
@@ -56,6 +105,7 @@
         class="oculto fixed inset-0 bg-text-color text-white text-sm z-10 flex flex-col items-center justify-center gap-8 text-center transition-opacity">
         <a href="/" class="btn-preload font-semibold">Inicio</a>
         <a class="btn-preload" href="{{ route('feedback.index') }}">Danos tu opinión</a>
+        <a class="btn-preload" href="{{ route('nosotros.index') }}">Quienes somos</a>
         <a class="btn-preload" href="{{ route('denuncia.index') }}">Comparte información</a>
         <a class="btn-preload" href="{{ route('glosario.index') }}">Glosario</a>
         <button class="absolute top-8 right-4" type="button" id="btn-cerrar-menu">
@@ -72,6 +122,7 @@
             <p class="font-semibold text-lg hidden xl:block">Data actualizada a Diciembre 2022 </p>
             <nav class="hidden xl:flex items-center gap-12 font-semibold text-main-gray-light">
                 <a href="{{ route('feedback.index') }}" class="btn-preload text-white">Danos tu opinión</a>
+                <a href="{{ route('nosotros.index') }}" class="btn-preload text-white">Quienes somos</a>
                 <a href="{{ route('denuncia.index') }}" class="btn-preload text-white">Comparte información</a>
                 <a href="{{ route('glosario.index') }}" class=" btn-preload text-white cursor-pointer">Glosario</a>
             </nav>
@@ -89,10 +140,12 @@
             <a href="/" class="btn-preload font-semibold text-lg ">
                 Qullqita Qatipay
             </a>
-
             <ul class="grid gap-6 xl:text-lg xl:justify-center">
                 <li>
                     <a class="btn-preload" href="{{ route('fuente.index') }}">Descargo de Responsaibilidad</a>
+                </li>
+                <li>
+                    <a class="btn-preload" href="{{ route('nosotros.index') }}">Quienes somos</a>
                 </li>
                 <li>
                     <a class="btn-preload" href="{{ route('feedback.index') }}">Danos tu opinión</a>
@@ -108,8 +161,10 @@
         <hr class="xl:mx-10">
         <p class="py-8 text-sm xl:text-lg text-center">2023@ Qullqita Qatipay - Todos los derechos reservados</p>
     </footer>
+
     <script src="{{ asset('js/header/index.js') }}"></script>
     <script src="{{ asset('js/preload/index.js') }}"></script>
+    <script src="{{ asset('js/modal/nosotros.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     @yield('scripts')
 

@@ -3,9 +3,9 @@
     <main class="bg-body-bg">
         <section class="u-container">
             <h2 class="text-center text-xl xl:text-4xl font-bold mb-14">
-               Descargo de responsabilidad
+                Descargo de responsabilidad
             </h2>
-        
+
             <p class="text-sm xl:text-base">
                 Toda la información de este sitio web se publica de buena fe y únicamente con fines de información general.
                 No se garantiza la integridad, fiabilidad y exactitud de esta información. Cualquier acción que usted tome
@@ -26,19 +26,18 @@
                 <li>
                     Portal de datos abiertos de OSCE
                     <a href="https://bi.seace.gob.pe/pentaho/api/repos/%3Apublic%3Aportal%3Adatosabiertos.html/content?userid=public&password=key"
-                        class="block text-blue-500"
-                        target="_blank">https://bi.seace.gob.pe/pentaho/api/repos/%3Apublic%3Aportal%3Adatosabiertos.html/content?userid=public&password=key</a>
+                        class="text-blue-500 underline" target="_blank">Aqui</a>
                 </li>
                 <li>
                     Información de datos abiertos de SUNAT
-                    <a href="https://www.datosabiertos.gob.pe/group/sunat" class="block text-blue-500"
-                        target="_blank">https://www.datosabiertos.gob.pe/group/sunat</a>
+                    <a href="https://www.datosabiertos.gob.pe/group/sunat" class="text-blue-500 underline"
+                        target="_blank">Aqui</a>
                 </li>
                 <li>
                     Información de las declaraciones juradas de interés de funcionarios públicos, del portal de
                     declaraciones juradas de interés de la Contraloría.
-                    <a href="https://appdji.contraloria.gob.pe/djic/" class="block text-blue-500"
-                        target="_blank">https://appdji.contraloria.gob.pe/djic/</a>
+                    <a href="https://appdji.contraloria.gob.pe/djic/" class="text-blue-500 underline"
+                        target="_blank">Aqui</a>
                 </li>
             </ul>
             <h3 class="xl:text-lg font-bold my-8">Actualización</h3>

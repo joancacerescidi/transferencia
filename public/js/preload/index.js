@@ -1,6 +1,10 @@
 let preloader = document.getElementById("preloader");
 let btnPreloader = [...document.querySelectorAll(".btn-preload")];
 
+function preload() {
+    preloader.classList.add("opacity-0", "pointer-events-none");
+}
+
 if (preloader) {
     window.addEventListener("load", () => {
         preloader.classList.add("opacity-0", "pointer-events-none");

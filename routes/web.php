@@ -15,6 +15,7 @@ use App\Http\Controllers\Indices\FraccionamientoController;
 use App\Http\Controllers\Indices\PmrController as IndicesPmrController;
 use App\Http\Controllers\Indices\PrcController as IndicesPrcController;
 use App\Http\Controllers\MapaEntidadGraficoController;
+use App\Http\Controllers\NosotrosController;
 use App\Http\Controllers\PmrController;
 use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\RankingController;
@@ -124,3 +125,5 @@ Route::get('/usuario/comparte-informacion', [DenunciaController::class, 'index']
 Route::post('/save/denuncia', [DenunciaController::class, 'created'])->name('denuncia.created');
 #fuentes
 Route::get('/usuario/fuentes', [FuenteController::class, 'index'])->name('fuente.index');
+#quienes somos
+Route::get('/quienes/somos', [NosotrosController::class, 'index'])->name('nosotros.index');

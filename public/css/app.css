@@ -702,6 +702,12 @@ input[type=number] {
 .mb-6 {
   margin-bottom: 1.5rem;
 }
+.ml-auto {
+  margin-left: auto;
+}
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
 .mt-6 {
   margin-top: 1.5rem;
 }
@@ -737,6 +743,9 @@ input[type=number] {
 }
 .h-2 {
   height: 0.5rem;
+}
+.max-h-screen {
+  max-height: 100vh;
 }
 .min-h-screen {
   min-height: 100vh;
@@ -872,6 +881,9 @@ input[type=number] {
 .overflow-x-auto {
   overflow-x: auto;
 }
+.overflow-y-auto {
+  overflow-y: auto;
+}
 .rounded-lg {
   border-radius: 0.5rem;
 }
@@ -941,6 +953,10 @@ input[type=number] {
   --tw-bg-opacity: 1;
   background-color: rgb(34 197 94 / var(--tw-bg-opacity));
 }
+.bg-black {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+}
 .bg-text-color {
   --tw-bg-opacity: 1;
   background-color: rgb(13 16 28 / var(--tw-bg-opacity));
@@ -952,6 +968,9 @@ input[type=number] {
 .bg-gray-900 {
   --tw-bg-opacity: 1;
   background-color: rgb(17 24 39 / var(--tw-bg-opacity));
+}
+.bg-opacity-20 {
+  --tw-bg-opacity: 0.2;
 }
 .bg-opacity-95 {
   --tw-bg-opacity: 0.95;
