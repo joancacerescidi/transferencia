@@ -12,7 +12,9 @@ if (preloader) {
         preloader.classList.add("opacity-0", "pointer-events-none");
     });
 }
-
+window.addEventListener("load", () => {
+    preloader.classList.add("opacity-0", "pointer-events-none");
+});
 if (btnPreloader.length > 0) {
     btnPreloader.map((btn) => {
         btn.addEventListener("click", () => {
