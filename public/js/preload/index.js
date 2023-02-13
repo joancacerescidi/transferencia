@@ -4,7 +4,9 @@ let btnPreloader = [...document.querySelectorAll(".btn-preload")];
 function preload() {
     preloader.classList.add("opacity-0", "pointer-events-none");
 }
-
+window.addEventListener("popstate", function(event) {
+    preloader.classList.add("opacity-0", "pointer-events-none");
+});
 if (preloader) {
     window.addEventListener("load", () => {
         preloader.classList.add("opacity-0", "pointer-events-none");
