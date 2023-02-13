@@ -3,13 +3,12 @@ let btnPreloader = [...document.querySelectorAll(".btn-preload")];
 
 if (
     /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-        navigator.userAgent
-    )
+        navigator.userAgent)
 ) {
-    preloader.remove();
+    preloader.classList.add("opacity-0", "pointer-events-none");
 }
 if (screen.width <= 767) {
-    preloader.remove();
+    preloader.classList.add("opacity-0", "pointer-events-none");
 }
 
 function preload() {
@@ -86,7 +85,3 @@ function preloadActive2($type, $ruta, $periodo, $palabraBusqueda) {
         }
     }
 }
-
-//   window.onbeforeunload = function (e) {
-//       preloader.classList.add("opacity-0", "pointer-events-none");
-//   };
