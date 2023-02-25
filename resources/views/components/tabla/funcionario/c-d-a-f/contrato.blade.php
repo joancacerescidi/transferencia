@@ -5,39 +5,39 @@
             class="bg-gray-800 text-white p-5 hidden xl:grid grid-cols-2 xl:grid-cols-14 gap-4 items-center text-xs xl:text-sm mb-6 xl:mb-14 xl:overflow-x-auto u-table-row">
             <p class="xl:col-span-2 font-semibold flex items-center gap-2">
                 Cargo
-                {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
+                {{-- <img src="{{ secure_asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
             </p>
             <p class="xl:col-span-1 font-semibold flex items-center">
                 Entidad
-                {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
+                {{-- <img src="{{ secure_asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
             </p>
             <p class="xl:col-span-3 font-semibold flex items-center gap-2">
                 Descripción
-                {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
+                {{-- <img src="{{ secure_asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
             </p>
             <p class="xl:col-span-2 font-semibold flex items-center gap-2">
                 Entidad Contratante
-                {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
+                {{-- <img src="{{ secure_asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
             </p>
             <p class="xl:col-span-1 font-semibold hidden xl:flex items-center gap-2 ">
                 Fecha Suscripción
-                {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
+                {{-- <img src="{{ secure_asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
             </p>
             <p class="xl:col-span-1 font-semibold hidden xl:flex items-center justify-end gap-2">
                 Num Contrato
-                {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
+                {{-- <img src="{{ secure_asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
             </p>
             <p class="xl:col-span-1 font-semibold hidden xl:flex items-center justify-end gap-2">
                 Url Contrato
-                {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
+                {{-- <img src="{{ secure_asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
             </p>
             <p class="xl:col-span-1 font-semibold hidden xl:flex items-center justify-end gap-2">
                 Moneda
-                {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
+                {{-- <img src="{{ secure_asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
             </p>
             <p class="xl:col-span-1 font-semibold hidden xl:flex items-center justify-end gap-2">
                 Total
-                {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
+                {{-- <img src="{{ secure_asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
             </p>
         </header>
         <div

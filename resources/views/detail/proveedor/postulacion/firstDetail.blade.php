@@ -3,7 +3,7 @@
     <main class="bg-body-bg">
         <section class="py-20 px-6 xl:px-10">
             <a href="#" class="flex items-center gap-3 mb-8 xl:mb-16 font-semibold text-sm xl:text-lg text-main-blue">
-                <img src="{{ asset('images/icon-chevron-left-blue.png') }}" alt="">
+                <img src="{{ secure_asset('images/icon-chevron-left-blue.png') }}" alt="">
 
                 <span onclick="window.location='{{ url('/') }}'">Inicio </span>
                 @if ($busquedaPalabra !== null)
@@ -31,11 +31,11 @@
                     class="bg-gray-800 text-white p-5 hidden xl:grid grid-cols-2 xl:grid-cols-3 gap-8 items-center text-xs xl:text-sm mb-6 xl:mb-14">
                     <p class="xl:col-span-1 font-semibold flex items-center gap-2">
                         Entidad Ruc
-                        {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
+                        {{-- <img src="{{ secure_asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
                     </p>
                     <p class="xl:col-span-1 font-semibold flex items-center">
                         Entidad
-                        {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
+                        {{-- <img src="{{ secure_asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
                     </p>
                     <a href=" @if ($busquedaPalabra !== null) {{ url('/detail/postulaciones/first/proveedor/' . $rucContratista . '/' . $period . '/cantidad' . '/' . $nombre . '/' . $busquedaPalabra) }}
                     @else
@@ -44,9 +44,9 @@
                         xl:col-span-1 font-semibold flex items-center gap-2">
                         Cantidad
                         @if ($orderTable == 'cantidad')
-                            <img src="{{ asset('images/icon-chevron-up.png') }}" alt="w-max">
+                            <img src="{{ secure_asset('images/icon-chevron-up.png') }}" alt="w-max">
                         @else
-                            <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max">
+                            <img src="{{ secure_asset('images/icon-chevron-down-blue.png') }}" alt="w-max">
                         @endif
                     </a>
 

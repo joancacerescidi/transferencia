@@ -3,7 +3,7 @@
     <main class="bg-body-bg">
         <section class="py-20 px-6 xl:px-10">
             <a href="#" class="flex items-center gap-3 mb-8 xl:mb-16 font-semibold text-sm xl:text-lg text-main-blue">
-                <img src="{{ asset('images/icon-chevron-left-blue.png') }}" alt="">
+                <img src="{{ secure_asset('images/icon-chevron-left-blue.png') }}" alt="">
                 <span class="btn-preload" onclick="window.location='{{ url('/') }}'">Inicio</span>
 
                 @if ($busquedaPalabra !== null&& $busquedaPalabra !== 'default')
@@ -54,26 +54,26 @@
                         class="btn-preload xl:col-span-1 font-semibold flex items-center gap-2">
                         Fecha Emisión
                         @if ($orderTable == 'fecha_emision')
-                            <img src="{{ asset('images/icon-chevron-up.png') }}" alt="w-max">
+                            <img src="{{ secure_asset('images/icon-chevron-up.png') }}" alt="w-max">
                         @else
-                            <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max">
+                            <img src="{{ secure_asset('images/icon-chevron-down-blue.png') }}" alt="w-max">
                         @endif
                     </a>
                     <p class="xl:col-span-2 font-semibold flex items-center">
                         Descripción Orden
-                        {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
+                        {{-- <img src="{{ secure_asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
                     </p>
                     <p class="xl:col-span-1 font-semibold flex items-center gap-2">
                         Orden
-                        {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
+                        {{-- <img src="{{ secure_asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
                     </p>
                     <p class="xl:col-span-1 font-semibold hidden xl:flex items-center gap-2">
                         Objeto Contractual
-                        {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
+                        {{-- <img src="{{ secure_asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
                     </p>
                     <p class="xl:col-span-1 font-semibold hidden xl:flex items-center gap-2">
                         Moneda
-                        {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
+                        {{-- <img src="{{ secure_asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
                     </p>
                     <a href=" @if ($busquedaPalabra !== null) {{ url('/detail/second/adi/' . $rucContratista . '/' . $rucEntidad . '/' . $period . '/' . $nameEntidad . '/' . $ruc . '/' . $nameRuc . '/' . $ruta . '/' . $primaryVariable . '/monto_total_original' . '/' . $busquedaPalabra) }}
                     @else
@@ -81,14 +81,14 @@
                         class="btn-preload xl:col-span-1 font-semibold hidden xl:flex items-center gap-2">
                         Monto Total
                         @if ($orderTable == 'monto_total_original')
-                            <img src="{{ asset('images/icon-chevron-up.png') }}" alt="w-max">
+                            <img src="{{ secure_asset('images/icon-chevron-up.png') }}" alt="w-max">
                         @else
-                            <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max">
+                            <img src="{{ secure_asset('images/icon-chevron-down-blue.png') }}" alt="w-max">
                         @endif
                     </a>
                     <p class="xl:col-span-2 font-semibold hidden xl:flex items-center gap-2">
                         Tipo Contratación
-                        {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
+                        {{-- <img src="{{ secure_asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
                     </p>
                 </header>
                 <div

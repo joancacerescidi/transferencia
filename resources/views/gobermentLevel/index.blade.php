@@ -31,18 +31,18 @@
                         class="btn-preload col-span-2 hidden xl:flex items-center gap-2">
                         Monto
                         @if ($orderTable == 'monto')
-                            <img src="{{ asset('images/flecha-2.png') }}" alt="w-max">
+                            <img src="{{ secure_asset('images/flecha-2.png') }}" alt="w-max">
                         @else
-                            <img src="{{ asset('images/flecha-1.png') }}" alt="w-max">
+                            <img src="{{ secure_asset('images/flecha-1.png') }}" alt="w-max">
                         @endif
                     </a>
                     <a href="{{ url('/detail-government-level' . '/' . $nivel . '/' . $period . '/ranking') }}"
                         class="btn-preload col-span-1 xl:col-span-2 flex items-center gap-2 justify-center">
                         Ranking
                         @if ($orderTable == 'ranking')
-                            <img src="{{ asset('images/flecha-2.png') }}" alt="w-max">
+                            <img src="{{ secure_asset('images/flecha-2.png') }}" alt="w-max">
                         @else
-                            <img src="{{ asset('images/flecha-1.png') }}" alt="w-max">
+                            <img src="{{ secure_asset('images/flecha-1.png') }}" alt="w-max">
                         @endif
                     </a>
                 </header>

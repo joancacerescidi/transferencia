@@ -41,9 +41,9 @@
                         Monto
 
                         @if ($orderTable == 'monto')
-                            <img src="{{ asset('images/flecha-2.png') }}" alt="w-max">
+                            <img src="{{ secure_asset('images/flecha-2.png') }}" alt="w-max">
                         @else
-                            <img src="{{ asset('images/flecha-1.png') }}" alt="w-max">
+                            <img src="{{ secure_asset('images/flecha-1.png') }}" alt="w-max">
                         @endif
                     </a>
                     <a href=" @if (isset($busquedaPalabra)) {{ url('/ranking/funcionario/search/' . $period . '/' . $busquedaPalabra . '/cantidad') }}
@@ -53,9 +53,9 @@
                         Cantidad
 
                         @if ($orderTable == 'cantidad')
-                            <img src="{{ asset('images/flecha-2.png') }}" alt="w-max">
+                            <img src="{{ secure_asset('images/flecha-2.png') }}" alt="w-max">
                         @else
-                            <img src="{{ asset('images/flecha-1.png') }}" alt="w-max">
+                            <img src="{{ secure_asset('images/flecha-1.png') }}" alt="w-max">
                         @endif
                     </a>
                 </header>
