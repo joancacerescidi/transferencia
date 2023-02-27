@@ -916,9 +916,6 @@ input[type=number] {
 .inline-flex {
   display: inline-flex;
 }
-.table {
-  display: table;
-}
 .grid {
   display: grid;
 }
@@ -1147,9 +1144,6 @@ input[type=number] {
 }
 .overflow-y-auto {
   overflow-y: auto;
-}
-.break-all {
-  word-break: break-all;
 }
 .rounded-lg {
   border-radius: 0.5rem;
