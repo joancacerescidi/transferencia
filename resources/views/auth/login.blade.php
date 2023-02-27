@@ -60,7 +60,7 @@
                 </x-button>
             </div>
             <div class="grid grid-cols-2 items-center gap-4 mt-4">
-                <a
+                <a href="{{ route('facebook') }}"
                     class="cursor-pointer text-[10px] sm:text-base flex items-center justify-center gap-4 py-4 border-2 border-[#1976D2] bg-[#1976D2] text-white rounded-2xl">
                     <img width="8" height="13" src="{{ asset('images/facebook.svg') }}" alt="Facebook qqperu" />
                     <span class="text[10px] font-semibold">FACEBOOK</span>
@@ -68,6 +68,7 @@
                 </a>
 
                 <a
+                href="{{ route('google') }}"
                     class="cursor-pointer text-[10px] sm:text-base flex items-center justify-center gap-4 py-4 border-2 border-gray-300 bg-white rounded-2xl">
                     <img width="24" height="24" src="{{ asset('images/google.svg') }}" alt="Sendi Google" />
                     <span class="text[10px] font-semibold">GOOGLE</span>
