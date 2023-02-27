@@ -42,9 +42,9 @@
                         class="btn-preload col-span-2 hidden xl:flex items-center gap-2">
                         Monto
                         @if ($orderTable == 'monto')
-                            <img src="{{ secure_asset('images/flecha-2.png') }}" alt="w-max">
+                            <img src="{{ asset('images/flecha-2.png') }}" alt="w-max">
                         @else
-                            <img src="{{ secure_asset('images/flecha-1.png') }}" alt="w-max">
+                            <img src="{{ asset('images/flecha-1.png') }}" alt="w-max">
                         @endif
                         <img src="../images/icon-chevron-down-blue.png" alt="">
                     </a>
@@ -53,9 +53,9 @@
                      {{ url('/ranking/proveedor/' . $period . '/cantidad') }} @endif "
                         class="btn-preload col-span-1 xl:col-span-2 flex items-center gap-2 justify-center">
                         Cantidad @if ($orderTable == 'cantidad')
-                            <img src="{{ secure_asset('images/flecha-2.png') }}" alt="w-max">
+                            <img src="{{ asset('images/flecha-2.png') }}" alt="w-max">
                         @else
-                            <img src="{{ secure_asset('images/flecha-1.png') }}" alt="w-max">
+                            <img src="{{ asset('images/flecha-1.png') }}" alt="w-max">
                         @endif
                     </a>
                 </header>

@@ -5,15 +5,15 @@
             class="bg-gray-800 text-white p-5 hidden xl:grid grid-cols-2 xl:grid-cols-20 gap-4 items-center text-xs xl:text-sm mb-6 xl:mb-14 xl:overflow-x-auto u-table-row">
             <p class="xl:col-span-1 font-semibold flex items-center gap-2">
                 Cargo
-                {{-- <img src="{{ secure_asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
+                {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
             </p>
             <p class="xl:col-span-1 font-semibold flex items-center">
                 Entidad
-                {{-- <img src="{{ secure_asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
+                {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
             </p>
             <p class="xl:col-span-2 font-semibold flex items-center gap-2">
                 Descripción
-                {{-- <img src="{{ secure_asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
+                {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
             </p>
             <a href=" @if ($busquedaPalabra !== null) {{ url('/detail/funcionario/' . $idFuncionario . '/' . $nivel . '/' . $type . '/' . $name . '/' . $period . '/oc.fecha_suscripcion_contrato' . '/0' . '/' . $busquedaPalabra) }}
                     @else
@@ -21,58 +21,58 @@
                 class="btn-preload xl:col-span-1 font-semibold hidden xl:flex items-center gap-2 ">
                 Fecha
                 @if ($orderTable == 'oc.fecha_suscripcion_contrato')
-                    <img src="{{ secure_asset('images/icon-chevron-up.png') }}" alt="w-max">
+                    <img src="{{ asset('images/icon-chevron-up.png') }}" alt="w-max">
                 @else
-                    <img src="{{ secure_asset('images/icon-chevron-down-blue.png') }}" alt="w-max">
+                    <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max">
                 @endif
             </a>
             <p class="xl:col-span-1 font-semibold hidden xl:flex items-center gap-2">
                 nrodoc
-                {{-- <img src="{{ secure_asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
+                {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
             </p>
             <p class="xl:col-span-1 font-semibold hidden xl:flex items-center gap-2">
                 Pariente
-                {{-- <img src="{{ secure_asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
+                {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
             </p>
             <p class="xl:col-span-1 font-semibold hidden xl:flex items-center gap-2">
                 Parentesco
-                {{-- <img src="{{ secure_asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
+                {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
             </p>
             <p class="xl:col-span-2 font-semibold hidden xl:flex items-center gap-2">
                 Tipo Conf Juridica
-                {{-- <img src="{{ secure_asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
+                {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
             </p>
             <p class="xl:col-span-2 font-semibold hidden xl:flex items-center gap-2">
                 Entidad Contratante
-                {{-- <img src="{{ secure_asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
+                {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
             </p>
             <p class="xl:col-span-1 font-semibold hidden xl:flex items-center gap-2">
                 Ruc Contratista
-                {{-- <img src="{{ secure_asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
+                {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
             </p>
             <p class="xl:col-span-1 font-semibold hidden xl:flex items-center gap-2">
                 Nombre Contratista
-                {{-- <img src="{{ secure_asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
+                {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
             </p>
             <p class="xl:col-span-1 font-semibold hidden xl:flex items-center gap-2">
                 Ruc Consorcio
-                {{-- <img src="{{ secure_asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
+                {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
             </p>
             <p class="xl:col-span-1 font-semibold hidden xl:flex items-center gap-2">
                 Consorcio
-                {{-- <img src="{{ secure_asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
+                {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
             </p>
             <p class="xl:col-span-1 font-semibold hidden xl:flex items-center gap-2">
                 Num Contrato
-                {{-- <img src="{{ secure_asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
+                {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
             </p>
             <p class="xl:col-span-1 font-semibold hidden xl:flex items-center gap-2">
                 Url contrato
-                {{-- <img src="{{ secure_asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
+                {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
             </p>
             <p class="xl:col-span-1 font-semibold hidden xl:flex items-center gap-2">
                 Moneda
-                {{-- <img src="{{ secure_asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
+                {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
             </p>
             <a href=" @if ($busquedaPalabra !== null) {{ url('/detail/funcionario/' . $idFuncionario . '/' . $nivel . '/' . $type . '/' . $name . '/' . $period . '/oc.monto_contratado_item' . '/0' . '/' . $busquedaPalabra) }}
                     @else
@@ -80,9 +80,9 @@
                 class="btn-preload xl:col-span-1 font-semibold hidden xl:flex items-center gap-2">
                 Total
                 @if ($orderTable == 'oc.monto_contratado_item')
-                    <img src="{{ secure_asset('images/icon-chevron-up.png') }}" alt="w-max">
+                    <img src="{{ asset('images/icon-chevron-up.png') }}" alt="w-max">
                 @else
-                    <img src="{{ secure_asset('images/icon-chevron-down-blue.png') }}" alt="w-max">
+                    <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max">
                 @endif
             </a>
         </header>

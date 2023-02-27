@@ -3,7 +3,7 @@
     <main class="bg-body-bg">
         <section class="py-20 px-6 xl:px-10">
             <a href="#" class="flex items-center gap-3 mb-8 xl:mb-16 font-semibold text-sm xl:text-lg text-main-blue">
-                <img src="{{ secure_asset('images/icon-chevron-left-blue.png') }}" alt="">
+                <img src="{{ asset('images/icon-chevron-left-blue.png') }}" alt="">
                 <span class="btn-preload" onclick="window.location='{{ url('/') }}'">Inicio</span>
 
                 @if ($busquedaPalabra !== null && $busquedaPalabra !== 'default')
@@ -83,7 +83,7 @@
                     class="bg-gray-800 text-white p-5 hidden xl:grid grid-cols-2 xl:grid-cols-9 gap-8 items-center text-xs xl:text-sm mb-6 xl:mb-14">
                     <p class="xl:col-span-1 font-semibold flex items-center gap-2">
                         Número Contrato
-                        {{-- <img src="{{ secure_asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
+                        {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
                     </p>
 
 
@@ -93,22 +93,22 @@
                         class="btn-preload xl:col-span-1 font-semibold flex items-center">
                         Fecha Suscripción Contrato
                         @if ($orderTable == 'fecha_suscripcion_contrato')
-                            <img src="{{ secure_asset('images/icon-chevron-up.png') }}" alt="w-max">
+                            <img src="{{ asset('images/icon-chevron-up.png') }}" alt="w-max">
                         @else
-                            <img src="{{ secure_asset('images/icon-chevron-down-blue.png') }}" alt="w-max">
+                            <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max">
                         @endif
                     </a>
                     <p class="xl:col-span-1 font-semibold flex items-center gap-2">
                         Descripción Proceso
-                        {{-- <img src="{{ secure_asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
+                        {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
                     </p>
                     <p class="xl:col-span-1 font-semibold hidden xl:flex items-center gap-2">
                         Url Contrato
-                        {{-- <img src="{{ secure_asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
+                        {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
                     </p>
                     <p class="xl:col-span-1 font-semibold hidden xl:flex items-center gap-2">
                         Moneda
-                        {{-- <img src="{{ secure_asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
+                        {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
                     </p>
 
 
@@ -118,14 +118,14 @@
                         class="btn-preload xl:col-span-1 font-semibold hidden xl:flex items-center gap-2">
                         Monto Contratado
                         @if ($orderTable == 'monto_contratado_item')
-                            <img src="{{ secure_asset('images/icon-chevron-up.png') }}" alt="w-max">
+                            <img src="{{ asset('images/icon-chevron-up.png') }}" alt="w-max">
                         @else
-                            <img src="{{ secure_asset('images/icon-chevron-down-blue.png') }}" alt="w-max">
+                            <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max">
                         @endif
                     </a>
                     <p class="xl:col-span-3 font-semibold hidden xl:flex items-center gap-2">
                         Representantes de los postores en la misma convocatoria
-                        {{-- <img src="{{ secure_asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
+                        {{-- <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max"> --}}
                     </p>
                 </header>
                 <div

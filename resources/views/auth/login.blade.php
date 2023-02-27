@@ -41,24 +41,38 @@
                 </label>
             </div>
 
-            <div class="flex items-center justify-end mt-4">
+            <div class="flex items-center justify-between mt-4">
+
+                @if (Route::has('register'))
+                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('register') }}">
+                        {{ __('Registrarse') }}
+                    </a>
+                @endif
                 @if (Route::has('password.request'))
                     <a class="underline text-sm text-gray-600 hover:text-gray-900"
                         href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
+                        {{ __('¿Olvidaste tu password?') }}
                     </a>
                 @endif
 
                 <x-button class="ml-3">
-                    {{ __('Log in') }}
+                    {{ __('Ingresar') }}
                 </x-button>
             </div>
-            <a class="btn btn-primary btn-lg btn-block" style="background-color: #3b5998" href="#!" role="button">
-                <i class="fab fa-facebook-f me-2"></i>Ingresa con Facebook
-            </a>
-            <a class="btn btn-primary btn-lg btn-block" style="background-color: #55acee" href="#!" role="button">
-                <i class="fab fa-twitter me-2"></i>Ingresa con Gmail</a>
+            <div class="grid grid-cols-2 items-center gap-4 mt-4">
+                <a
+                    class="cursor-pointer text-[10px] sm:text-base flex items-center justify-center gap-4 py-4 border-2 border-[#1976D2] bg-[#1976D2] text-white rounded-2xl">
+                    <img width="8" height="13" src="{{ asset('images/facebook.svg') }}" alt="Facebook qqperu" />
+                    <span class="text[10px] font-semibold">FACEBOOK</span>
 
+                </a>
+
+                <a
+                    class="cursor-pointer text-[10px] sm:text-base flex items-center justify-center gap-4 py-4 border-2 border-gray-300 bg-white rounded-2xl">
+                    <img width="24" height="24" src="{{ asset('images/google.svg') }}" alt="Sendi Google" />
+                    <span class="text[10px] font-semibold">GOOGLE</span>
+                </a>
+            </div>
         </form>
     </x-auth-card>
 </x-guest-layout>

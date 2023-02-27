@@ -3,7 +3,7 @@
     <main class="bg-body-bg">
         <section class="py-20 px-6 xl:px-10">
             <a href="#" class="flex items-center gap-3 mb-8 xl:mb-16 font-semibold text-sm xl:text-lg text-main-blue">
-                <img src="{{ secure_asset('images/icon-chevron-left-blue.png') }}" alt="">
+                <img src="{{ asset('images/icon-chevron-left-blue.png') }}" alt="">
 
                 <span class="btn-preload" onclick="window.location='{{ url('/') }}'">Inicio</span>
                 @if ($busquedaPalabra !== null)

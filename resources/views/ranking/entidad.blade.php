@@ -40,9 +40,9 @@
                         class="btn-preload col-span-2 hidden xl:flex items-center gap-2 cursor-pointer">
                         Monto Contratado
                         @if ($order == 'monto')
-                            <img src="{{ secure_asset('images/flecha-2.png') }}" alt="w-max">
+                            <img src="{{ asset('images/flecha-2.png') }}" alt="w-max">
                         @else
-                            <img src="{{ secure_asset('images/flecha-1.png') }}" alt="w-max">
+                            <img src="{{ asset('images/flecha-1.png') }}" alt="w-max">
                         @endif
 
                     </a>
@@ -50,9 +50,9 @@
                         class="btn-preload col-span-1 xl:col-span-2 flex items-center gap-2 justify-center cursor-pointer">
                         Ranking
                         @if ($order == 'ranking')
-                            <img src="{{ secure_asset('images/flecha-2.png') }}" alt="w-max">
+                            <img src="{{ asset('images/flecha-2.png') }}" alt="w-max">
                         @else
-                            <img src="{{ secure_asset('images/flecha-1.png') }}" alt="w-max">
+                            <img src="{{ asset('images/flecha-1.png') }}" alt="w-max">
                         @endif
                     </a>
                 </header>

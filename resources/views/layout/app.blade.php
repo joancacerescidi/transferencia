@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="UTF-8">
@@ -16,8 +16,8 @@
     </script>
 
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
-    <link rel="shortcut icon" type="image/jpeg" href="{{ secure_asset('/images/iconQuiilquitaQatipay.jpeg') }}">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="shortcut icon" type="image/jpeg" href="{{ asset('/images/iconQuiilquitaQatipay.jpeg') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
@@ -29,7 +29,7 @@
         <div class="p-4 rounded-md text-lft border shadow-md bg-white overflow-y-auto max-h-screen">
             <button onclick="closemodalnosotros()"
                 class="ml-auto block cursor-pointer mb-2                                                    ">
-                <img src="{{ secure_asset('images/icon-cerrar-black.png') }}" alt="">
+                <img src="{{ asset('images/icon-cerrar-black.png') }}" alt="">
             </button>
             <h3 class="font-bold text-lg mb-4">Qullqita Qitapay</h3>
             <p style="max-width: 70ch;" class="mb-4">¿Qué significa Qullqita Qitapay?</p>
@@ -80,8 +80,16 @@
         <a class="btn-preload" href="{{ route('nosotros.index') }}">Quienes somos</a>
         <a class="btn-preload" href="{{ route('denuncia.index') }}">Comparte información</a>
         <a class="btn-preload" href="{{ route('glosario.index') }}">Glosario</a>
+
+        @if (Route::has('login'))
+            @auth
+                <a href="{{ url('/dashboard') }}" class="">Perfil</a>
+            @else
+                <a href="{{ route('login') }}" class="">Ingresar</a>
+            @endauth
+        @endif
         <button class="absolute top-8 right-4" type="button" id="btn-cerrar-menu">
-            <img src="{{ secure_asset('images/icon-cerrar.png') }}" class="w-8">
+            <img src="{{ asset('images/icon-cerrar.png') }}" class="w-8">
         </button>
     </section>
 
@@ -97,9 +105,16 @@
                 <a href="{{ route('nosotros.index') }}" class="btn-preload text-white">Quienes somos</a>
                 <a href="{{ route('denuncia.index') }}" class="btn-preload text-white">Comparte información</a>
                 <a href="{{ route('glosario.index') }}" class=" btn-preload text-white cursor-pointer">Glosario</a>
+                @if (Route::has('login'))
+                    @auth
+                        <a href="{{ url('/dashboard') }}" class="  text-white cursor-pointer">Perfil</a>
+                    @else
+                        <a href="{{ route('login') }}" class="  text-white cursor-pointer">Ingresar</a>
+                    @endauth
+                @endif
             </nav>
             <button type="button" class="xl:hidden" id="btn-abrir-menu">
-                <img src="{{ secure_asset('images/icon-menu.svg') }}" alt="Menu">
+                <img src="{{ asset('images/icon-menu.svg') }}" alt="Menu">
             </button>
         </header>
     </div>
@@ -167,9 +182,9 @@
             preloader.classList.add("opacity-0", "pointer-events-none");
         }
     </script>
-    <script src="{{ secure_asset('js/header/index.js') }}"></script>
-    <script src="{{ secure_asset('js/preload/index.js') }}"></script>
-    <script src="{{ secure_asset('js/modal/nosotros.js') }}"></script>
+    <script src="{{ asset('js/header/index.js') }}"></script>
+    <script src="{{ asset('js/preload/index.js') }}"></script>
+    <script src="{{ asset('js/modal/nosotros.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     @yield('scripts')
 
