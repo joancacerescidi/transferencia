@@ -73,6 +73,7 @@ class AuthenticatedSessionController extends Controller
                 'type' => 'free',
             ]);
             Auth::login($userNew);
+            return redirect()->intended(RouteServiceProvider::HOME);
         }
     }
     public function google()
@@ -83,12 +84,12 @@ class AuthenticatedSessionController extends Controller
     {
         $user = Socialite::driver('google')->user();
         $userExists = User::where('google_id', $user->id)->where('type_auth', 'google')->exists();
-       
+
         if ($userExists) {
-          
+
             Auth::login($userExists);
         } else {
-           
+
             $userNew = User::create([
                 'name' => $user->name,
                 'email' => $user->email,
@@ -96,8 +97,9 @@ class AuthenticatedSessionController extends Controller
                 'google_id' => $user->id,
                 'type' => 'free',
             ]);
-          
+
             Auth::login($userNew);
+            return redirect()->intended(RouteServiceProvider::HOME);
         }
     }
 }
