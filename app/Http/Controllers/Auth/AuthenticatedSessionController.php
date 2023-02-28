@@ -82,8 +82,7 @@ class AuthenticatedSessionController extends Controller
     public function authGoogle()
     {
         $user = Socialite::driver('google')->user();
-        dd($user);
-        $userExists = User::where('google_id', $user->id)->where('type_auth', 'google')->first();
+        $userExists = User::where('google_id', $user->id)->where('type_auth', 'google')->exists();
         if ($userExists) {
             Auth::login($userExists);
         } else {
