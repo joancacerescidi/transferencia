@@ -84,7 +84,6 @@ class AuthenticatedSessionController extends Controller
     {
         $user = Socialite::driver('google')->user();
         $userExists = User::where('google_id', $user->id)->where('type_auth', 'google')->exists();
-        dd($userExists);
         if ($userExists) {
             Auth::login($userExists);
             return redirect()->intended(RouteServiceProvider::HOME);
