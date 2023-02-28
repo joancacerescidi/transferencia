@@ -85,10 +85,10 @@ class AuthenticatedSessionController extends Controller
         $userExists = User::where('google_id', $user->id)->where('type_auth', 'google')->exists();
        
         if ($userExists) {
-            dd("1");
+          
             Auth::login($userExists);
         } else {
-            dd("2");
+           
             $userNew = User::created([
                 'name' => $user->name,
                 'email' => $user->email,
@@ -96,6 +96,7 @@ class AuthenticatedSessionController extends Controller
                 'google_id' => $user->id,
                 'type' => 'free',
             ]);
+            dd($userNew);
             Auth::login($userNew);
         }
     }
