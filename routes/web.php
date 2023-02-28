@@ -137,3 +137,15 @@ Route::post('/save/denuncia', [DenunciaController::class, 'created'])->name('den
 Route::get('/usuario/fuentes', [FuenteController::class, 'index'])->name('fuente.index');
 #quienes somos
 Route::get('/quienes/somos', [NosotrosController::class, 'index'])->name('nosotros.index');
+
+
+
+//Login con facebook
+Route::get('login-facebook', [AuthenticatedSessionController::class, 'facebook'])->name('facebook');
+
+Route::get('facebook-callback', [AuthenticatedSessionController::class, 'authFacebook']);
+
+//login con gmail
+Route::get('login-google', [AuthenticatedSessionController::class, 'google'])->name('google');
+
+Route::get('google-callback', [AuthenticatedSessionController::class, 'authGoogle']);
