@@ -32,6 +32,16 @@ Route::middleware('guest')->group(function () {
 
     Route::post('reset-password', [NewPasswordController::class, 'store'])
         ->name('password.update');
+
+    //Login con facebook
+    Route::get('login-facebook', [AuthenticatedSessionController::class, 'facebook'])->name('facebook');
+
+    Route::get('facebook-callback', [AuthenticatedSessionController::class, 'authFacebook']);
+
+    //login con gmail
+    Route::get('login-google', [AuthenticatedSessionController::class, 'google'])->name('google');
+
+    Route::get('google-callback', [AuthenticatedSessionController::class, 'authGoogle']);
 });
 
 Route::middleware('auth')->group(function () {
@@ -57,12 +67,3 @@ Route::middleware('auth')->group(function () {
 
 
 
-//Login con facebook
-Route::get('login-facebook', [AuthenticatedSessionController::class, 'facebook'])->name('facebook');
-
-Route::get('facebook-callback', [AuthenticatedSessionController::class, 'authFacebook']);
-
-//login con gmail
-Route::get('login-google', [AuthenticatedSessionController::class, 'google'])->name('google');
-
-Route::get('google-callback', [AuthenticatedSessionController::class, 'authGoogle']);
