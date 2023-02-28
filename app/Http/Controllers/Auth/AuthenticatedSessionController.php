@@ -65,7 +65,7 @@ class AuthenticatedSessionController extends Controller
         if ($userExists) {
             Auth::login($userExists);
         } else {
-            $userNew = User::created([
+            $userNew = User::create([
                 'name' => $user->name,
                 'email' => $user->email,
                 'type_auth' => 'facebook',
@@ -89,14 +89,14 @@ class AuthenticatedSessionController extends Controller
             Auth::login($userExists);
         } else {
            
-            $userNew = User::created([
+            $userNew = User::create([
                 'name' => $user->name,
                 'email' => $user->email,
                 'type_auth' => 'google',
                 'google_id' => $user->id,
                 'type' => 'free',
             ]);
-            dd($userNew);
+          
             Auth::login($userNew);
         }
     }
