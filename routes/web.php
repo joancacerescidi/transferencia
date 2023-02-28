@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\DenunciaController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\FeedbackController;
@@ -141,11 +142,11 @@ Route::get('/quienes/somos', [NosotrosController::class, 'index'])->name('nosotr
 
 
 //Login con facebook
-Route::get('login-facebook', [AuthenticatedSessionController::class, 'facebook'])->name('facebook');
+Route::get('/login-facebook', [AuthenticatedSessionController::class, 'facebook'])->name('facebook');
 
-Route::get('facebook-callback', [AuthenticatedSessionController::class, 'authFacebook']);
+Route::get('/facebook-callback', [AuthenticatedSessionController::class, 'authFacebook']);
 
 //login con gmail
-Route::get('login-google', [AuthenticatedSessionController::class, 'google'])->name('google');
+Route::get('/login-google', [AuthenticatedSessionController::class, 'google'])->name('google');
 
-Route::get('google-callback', [AuthenticatedSessionController::class, 'authGoogle']);
+Route::get('/google-callback', [AuthenticatedSessionController::class, 'authGoogle']);
