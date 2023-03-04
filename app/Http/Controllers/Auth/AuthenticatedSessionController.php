@@ -60,21 +60,31 @@ class AuthenticatedSessionController extends Controller
     public function authFacebook()
     {
         $user = Socialite::driver('facebook')->user();
-
         $userExists = User::where('facebook_id', $user->id)->where('type_auth', 'facebook')->first();
         if ($userExists) {
             Auth::login($userExists);
-        } else {
-            $userNew = User::create([
-                'name' => $user->name,
-                'email' => $user->email,
-                'type_auth' => 'facebook',
-                'facebook_id' => $user->id,
-                'type' => 'free',
-                'email_verified_at' => date('Y-m-d H:i:s')
-            ]);
-            Auth::login($userNew);
             return redirect()->intended(RouteServiceProvider::HOME);
+        } else {
+            $validator = Validator::make(['email' => $user->email], [
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            ]);
+            if (!$validator->fails()) {
+                $userNew = User::create([
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'type_auth' => 'facebook',
+                    'facebook_id' => $user->id,
+                    'type' => 'free',
+                    'email_verified_at' => date('Y-m-d H:i:s')
+                ]);
+                event(new Registered($userNew));
+                Auth::login($userNew);
+                return redirect()->intended(RouteServiceProvider::HOME);
+            } else {
+                return redirect('/register')
+                    ->withErrors($validator)
+                    ->withInput();
+            }
         }
     }
     public function google()
@@ -105,7 +115,7 @@ class AuthenticatedSessionController extends Controller
                 Auth::login($userNew);
                 return redirect()->intended(RouteServiceProvider::HOME);
             } else {
-                return redirect('/register')
+                return redirect()->back()
                     ->withErrors($validator)
                     ->withInput();
             }
