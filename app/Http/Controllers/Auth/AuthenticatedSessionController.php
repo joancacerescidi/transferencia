@@ -31,6 +31,7 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request)
     {
         $request->authenticate();
+        dd($request->authenticate());
 
         $request->session()->regenerate();
 
@@ -86,6 +87,7 @@ class AuthenticatedSessionController extends Controller
         $user = Socialite::driver('google')->user();
         $userExists = User::where('google_id', $user->id)->where('type_auth', 'google')->first();
         if ($userExists) {
+            dd($userExists->authenticate());
             Auth::login($userExists);
             return redirect()->intended(RouteServiceProvider::HOME);
         } else {
