@@ -115,7 +115,7 @@ class AuthenticatedSessionController extends Controller
                 Auth::login($userNew);
                 return redirect()->intended(RouteServiceProvider::HOME);
             } else {
-                return back()
+                return redirect()->back()->back()
                     ->withErrors($validator)
                     ->withInput();
             }
