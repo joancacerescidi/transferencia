@@ -89,20 +89,24 @@ class AuthenticatedSessionController extends Controller
             Auth::login($userExists);
             return redirect()->intended(RouteServiceProvider::HOME);
         } else {
-            Validator::make(['email' => $user->email], [
+            $validator = Validator::make(['email' => $user->email], [
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             ]);
-            $userNew = User::create([
-                'name' => $user->name,
-                'email' => $user->email,
-                'type_auth' => 'google',
-                'google_id' => $user->id,
-                'type' => 'free',
-                'email_verified_at' => date('Y-m-d H:i:s')
-            ]);
-            event(new Registered($userNew));
-            Auth::login($userNew);
-            return redirect()->intended(RouteServiceProvider::HOME);
+            if (!$validator->fails()) {
+                $userNew = User::create([
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'type_auth' => 'google',
+                    'google_id' => $user->id,
+                    'type' => 'free',
+                    'email_verified_at' => date('Y-m-d H:i:s')
+                ]);
+                event(new Registered($userNew));
+                Auth::login($userNew);
+                return redirect()->intended(RouteServiceProvider::HOME);
+            } else {
+                abort(404);
+            }
         }
     }
 }
