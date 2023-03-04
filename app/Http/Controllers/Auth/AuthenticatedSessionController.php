@@ -9,6 +9,8 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Validator;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -31,10 +33,7 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request)
     {
         $request->authenticate();
-        dd($request->authenticate());
-
         $request->session()->regenerate();
-
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 
@@ -87,11 +86,12 @@ class AuthenticatedSessionController extends Controller
         $user = Socialite::driver('google')->user();
         $userExists = User::where('google_id', $user->id)->where('type_auth', 'google')->first();
         if ($userExists) {
-            dd($userExists->authenticate());
             Auth::login($userExists);
             return redirect()->intended(RouteServiceProvider::HOME);
         } else {
-
+            Validator::make(['email' => $user->email], [
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            ]);
             $userNew = User::create([
                 'name' => $user->name,
                 'email' => $user->email,
@@ -100,7 +100,7 @@ class AuthenticatedSessionController extends Controller
                 'type' => 'free',
                 'email_verified_at' => date('Y-m-d H:i:s')
             ]);
-
+            event(new Registered($userNew));
             Auth::login($userNew);
             return redirect()->intended(RouteServiceProvider::HOME);
         }
