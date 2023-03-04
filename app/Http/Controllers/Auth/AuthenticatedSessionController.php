@@ -91,7 +91,7 @@ class AuthenticatedSessionController extends Controller
     {
         return Socialite::driver('google')->redirect();
     }
-    public function authGoogle(Request $request)
+    public function authGoogle()
     {
         $user = Socialite::driver('google')->user();
         $userExists = User::where('google_id', $user->id)->where('type_auth', 'google')->first();
@@ -115,10 +115,6 @@ class AuthenticatedSessionController extends Controller
                 Auth::login($userNew);
                 return redirect()->intended(RouteServiceProvider::HOME);
             } else {
-
-                $ultimaRuta = $request->url($request->previous());
-                dd($ultimaRuta);
-                return $ultimaRuta;
                 return redirect('/register')
                     ->withErrors($validator)
                     ->withInput();
