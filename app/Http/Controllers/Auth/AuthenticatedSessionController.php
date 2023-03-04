@@ -71,6 +71,7 @@ class AuthenticatedSessionController extends Controller
                 'type_auth' => 'facebook',
                 'facebook_id' => $user->id,
                 'type' => 'free',
+                'email_verified_at' => date('Y-m-d H:i:s')
             ]);
             Auth::login($userNew);
             return redirect()->intended(RouteServiceProvider::HOME);
@@ -95,6 +96,7 @@ class AuthenticatedSessionController extends Controller
                 'type_auth' => 'google',
                 'google_id' => $user->id,
                 'type' => 'free',
+                'email_verified_at' => date('Y-m-d H:i:s')
             ]);
 
             Auth::login($userNew);
