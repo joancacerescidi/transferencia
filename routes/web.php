@@ -69,13 +69,11 @@ Route::get('/ranking/funcionario/{period}/{orderTable}', [RankingSearchControlle
 Route::get('/ranking/funcionario/search/{period}/{busquedaPalabra}/{orderTable}', [RankingSearchController::class, 'searchFuncionario']);
 
 
-Route::middleware('auth')->group(
+Route::middleware(['auth', 'user.type'])->group(
     function () {
         #Detalles
         #Detalle - 1 - funcionario
         Route::get('/detail/funcionario/{idFuncionario}/{nivel}/{type}/{name}/{period}/{orderTable}/{ruc?}/{busquedaPalabra?}', [FuncionarioController::class, 'firstDetail']);
-
-
         #Detalle - 1-2 - entidad - grafico - entidad
         #Fraccionamiento
         Route::get('/detail/first/fraccionamiento/{rucEntidad}/{period}/{nameEntidad}/{ruta}/{primaryVariable}/{orderTable}/{busquedaPalabra?}', [FraccionamientoController::class, 'first']);
