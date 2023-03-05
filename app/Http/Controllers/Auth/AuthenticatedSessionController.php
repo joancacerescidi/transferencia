@@ -59,7 +59,7 @@ class AuthenticatedSessionController extends Controller
     }
     public function authFacebook()
     {
-        $user = Socialite::driver('facebook')->user();
+        $user = Socialite::driver('facebook')->stateless()->user();
         $userExists = User::where('facebook_id', $user->id)->where('type_auth', 'facebook')->first();
         if ($userExists) {
             Auth::login($userExists);
