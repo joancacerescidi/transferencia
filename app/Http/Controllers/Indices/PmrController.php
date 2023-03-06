@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Artesaos\SEOTools\Facades\SEOTools;
 
 class PmrController extends Controller
 {
@@ -22,6 +23,7 @@ class PmrController extends Controller
         ]);
         if (!$validator->fails()) {
             $result = $this->firstDetail($rucEntidad, $period, $orderTable);
+            $this->seo($rucEntidad, $period, 1);
             return view('detail.indices.pmr.firstDetail', compact('result', 'rucEntidad', 'period', 'busquedaPalabra', 'nameEntidad', 'ruta', 'primaryVariable', 'orderTable'));
         } else {
             abort(404);
@@ -53,6 +55,7 @@ class PmrController extends Controller
         if (!$validator->fails()) {
             $result = $this->secondDetail($rucEntidad, $rucContratista, $period, $orderTable);
             $conformacion = $this->conformacionJuridica($rucContratista);
+            $this->seo($rucEntidad, $period, 2, $rucContratista);
             return view('detail.indices.pmr.secondDetail', compact('result', 'rucContratista', 'period', 'rucEntidad', 'conformacion', 'busquedaPalabra', 'nameEntidad', 'ruc', 'nameRuc', 'ruta', 'primaryVariable', 'orderTable'));
         } else {
             abort(404);
@@ -92,5 +95,19 @@ class PmrController extends Controller
             ->where('ocj1.ruc', '=', $rucContratista)
             ->get();
         return $data;
+    }
+    public function seo($rucEntidad, $period, $order, $rucContratista = '')
+    {
+        SEOTools::setTitle('Qullqita Qitapay - Proveedor con mismo representante', false);
+        if ($order == 1) {
+            SEOTools::setDescription('Proveedor con mismo representantes - ' . 'Ruc Entidad : ' . $rucEntidad . ' - Período: ' . $period);
+        }
+        if ($order == 2) {
+            SEOTools::setDescription('Proveedor con mismo representante - ' . 'Ruc Entidad : ' . $rucEntidad . '- Ruc Contratista : ' . $rucContratista . ' - Período: ' . $period);
+        }
+        SEOTools::opengraph()->setUrl('https://qqperu.com/');
+        SEOTools::setCanonical('https://qqperu.com/');
+        SEOTools::opengraph()->addProperty('type', 'articles');
+        SEOTools::jsonLd()->addImage('https://qqperu.com/images/iconQuiilquitaQatipay.jpeg');
     }
 }

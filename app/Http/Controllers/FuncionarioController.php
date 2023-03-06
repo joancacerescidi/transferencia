@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Artesaos\SEOTools\Facades\SEOTools;
 class FuncionarioController extends Controller
 {
     //
@@ -437,10 +437,19 @@ class FuncionarioController extends Controller
                         ->paginate(10);
                 }
             }
-
+            $this->seo($period, $name);
             return view('detail.funcionario.firstDetail', compact('data', 'period', 'nivel', 'type', 'name', 'labelNivel', 'labelType', 'busquedaPalabra', 'orderTable', 'idFuncionario', 'nivel', 'type', 'name', 'period'));
         } else {
             abort(404);
         }
+    }
+    public function seo($period, $name)
+    {
+        SEOTools::setTitle('Qullqita Qitapay - Funcionario', false);
+        SEOTools::setDescription('Qullqita Qitapay - Funcionario: '. $name.' '.' - Periódo: '. $period);
+        SEOTools::opengraph()->setUrl('https://qqperu.com/');
+        SEOTools::setCanonical('https://qqperu.com/');
+        SEOTools::opengraph()->addProperty('type', 'articles');
+        SEOTools::jsonLd()->addImage('https://qqperu.com/images/iconQuiilquitaQatipay.jpeg');
     }
 }

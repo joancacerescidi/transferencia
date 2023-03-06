@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Artesaos\SEOTools\Facades\SEOTools;
 
 class ProveedorController extends Controller
 {
@@ -21,6 +22,7 @@ class ProveedorController extends Controller
         ]);
         if (!$validator->fails()) {
             $result = $this->ordenCompraFirstDetail($rucContratista, $period, $orderTable);
+            $this->seo('Órden de compra', $period, $rucContratista);
             return view('detail.proveedor.orden-compra.firstDetail', compact('result', 'rucContratista', 'period', 'nombre', 'busquedaPalabra', 'orderTable'));
         } else {
             abort(404);
@@ -51,6 +53,7 @@ class ProveedorController extends Controller
         ]);
         if (!$validator->fails()) {
             $result = $this->ordenCompraSecondDetail($rucEntidad, $rucContratista, $period, $orderTable);
+            $this->seo('Órden de compra', $period, $rucContratista, $rucEntidad);
             return view('detail.proveedor.orden-compra.secondDetail', compact('result', 'rucEntidad', 'rucContratista', 'period', 'ruc', 'rucNombre', 'nombre', 'busquedaPalabra', 'orderTable'));
         } else {
             abort(404);
@@ -78,6 +81,7 @@ class ProveedorController extends Controller
         ]);
         if (!$validator->fails()) {
             $result = $this->contratoFirstDetail($rucContratista, $period, $orderTable);
+            $this->seo('Contrato', $period, $rucContratista);
             return view('detail.proveedor.contrato.firstDetail', compact('result', 'rucContratista', 'period', 'nombre', 'busquedaPalabra', 'orderTable'));
         } else {
             abort(404);
@@ -105,6 +109,7 @@ class ProveedorController extends Controller
         ]);
         if (!$validator->fails()) {
             $result = $this->contratoSecondDetail($rucEntidad, $rucContratista, $period, $orderTable);
+            $this->seo('Contrato', $period, $rucContratista, $rucEntidad);
             return view('detail.proveedor.contrato.secondDetail', compact('result', 'rucEntidad', 'rucContratista', 'period', 'ruc', 'rucNombre', 'nombre', 'busquedaPalabra', 'orderTable'));
         } else {
             abort(404);
@@ -133,7 +138,7 @@ class ProveedorController extends Controller
         ]);
         if (!$validator->fails()) {
             $result = $this->consorcioFirstDetail($rucContratista, $period, $filter, $orderTable);
-
+            $this->seo('Consorcio', $period, $rucContratista);
             return view('detail.proveedor.consorcio.firstDetail', compact('result', 'rucContratista', 'period', 'filter', 'nombre', 'busquedaPalabra', 'orderTable'));
         } else {
 
@@ -179,6 +184,7 @@ class ProveedorController extends Controller
         ]);
         if (!$validator->fails()) {
             $result = $this->consorcioSecondDetail($rucEntidad, $rucContratista, $period, $filter, $orderTable);
+            $this->seo('Consorcio', $period, $rucContratista, $rucEntidad);
             return view('detail.proveedor.consorcio.secondDetail', compact('result', 'rucEntidad', 'rucContratista', 'period', 'filter', 'ruc', 'rucNombre', 'nombre', 'busquedaPalabra', 'orderTable'));
         } else {
             abort(404);
@@ -220,7 +226,7 @@ class ProveedorController extends Controller
         ]);
         if (!$validator->fails()) {
             $result = $this->sancionesFirstDetail($rucContratista, $period, $orderTable);
-
+            $this->seo('Sanciones', $period, $rucContratista);
             return view('detail.proveedor.sanciones.firstDetail', compact('result', 'rucContratista', 'period', 'nombre', 'busquedaPalabra', 'orderTable'));
         } else {
             abort(404);
@@ -249,6 +255,7 @@ class ProveedorController extends Controller
         ]);
         if (!$validator->fails()) {
             $result = $this->contratoResueltoFirstDetail($rucContratista, $period, $orderTable);
+            $this->seo('Contrato Resuelto', $period, $rucContratista);
             return view('detail.proveedor.contratoResuelto.firstDetail', compact('result', 'rucContratista', 'period', 'nombre', 'busquedaPalabra', 'orderTable'));
         } else {
 
@@ -277,6 +284,7 @@ class ProveedorController extends Controller
         ]);
         if (!$validator->fails()) {
             $result = $this->contratoResueltoSecondDetail($rucEntidad, $rucContratista, $period, $orderTable);
+            $this->seo('Contrato Resuelto', $period, $rucContratista, $rucEntidad);
             return view('detail.proveedor.contratoResuelto.secondDetail', compact('result', 'rucEntidad', 'rucContratista', 'period', 'ruc', 'rucNombre', 'nombre', 'busquedaPalabra', 'orderTable'));
         } else {
             abort(404);
@@ -303,6 +311,7 @@ class ProveedorController extends Controller
         ]);
         if (!$validator->fails()) {
             $result = $this->postulacionesFirstDetail($rucContratista, $period, $orderTable);
+            $this->seo('Postulaciones', $period, $rucContratista);
             return view('detail.proveedor.postulacion.firstDetail', compact('result', 'rucContratista', 'period', 'nombre', 'busquedaPalabra', 'orderTable'));
         } else {
             abort(404);
@@ -336,6 +345,7 @@ class ProveedorController extends Controller
         ]);
         if (!$validator->fails()) {
             $result = $this->postulacionesSecondDetail($rucEntidad, $rucContratista, $period, $orderTable);
+            $this->seo('Postulaciones', $period, $rucContratista, $rucEntidad);
             return view('detail.proveedor.postulacion.secondDetail', compact('result', 'ruc', 'rucEntidad', 'period', 'rucContratista', 'rucNombre', 'nombre', 'ruc', 'rucNombre', 'nombre', 'busquedaPalabra', 'orderTable'));
         } else {
             abort(404);
@@ -366,6 +376,7 @@ class ProveedorController extends Controller
         ]);
         if (!$validator->fails()) {
             $result = $this->postulacionesMismoRepresentanteFirstDetail($rucContratista, $period, $orderTable);
+            $this->seo('Postulaciones con el mismo representante', $period, $rucContratista);
             return view('detail.proveedor.postulacionMismoRepresenante.firstDetail', compact('result', 'rucContratista', 'period', 'nombre', 'busquedaPalabra', 'orderTable'));
         } else {
             abort(404);
@@ -411,6 +422,7 @@ class ProveedorController extends Controller
         if (!$validator->fails()) {
             $result = $this->postulacionesMismoRepresentanteSecondDetail($rucEntidad, $rucContratista, $period, $orderTable);
             $conformacion = $this->conformacionJuridica($rucContratista);
+            $this->seo('Postulaciones con el mismo representante', $period, $rucContratista, $rucEntidad);
             return view('detail.proveedor.postulacionMismoRepresenante.secondDetail', compact('result', 'rucEntidad', 'rucContratista', 'conformacion', 'period', 'ruc', 'rucNombre', 'nombre', 'busquedaPalabra', 'orderTable'));
         } else {
             abort(404);
@@ -442,5 +454,14 @@ from osce_postor op, osce_conformacion_juridica ocj
             ->get();
 
         return $data;
+    }
+    public function seo($type, $period, $RucContratista, $RucEntidad = '' )
+    {
+        SEOTools::setTitle('Qullqita Qitapay - Proveedor - ' . $type . ' - ' . $period, false);
+        SEOTools::setDescription('Qullqita Qitapay - Proveedor - ' . $type . ' - ' . $period . ' - Ruc Entidad: ' . $RucEntidad . ' - Ruc Contratista: ' . $RucContratista);
+        SEOTools::opengraph()->setUrl('https://qqperu.com/');
+        SEOTools::setCanonical('https://qqperu.com/');
+        SEOTools::opengraph()->addProperty('type', 'articles');
+        SEOTools::jsonLd()->addImage('https://qqperu.com/images/iconQuiilquitaQatipay.jpeg');
     }
 }

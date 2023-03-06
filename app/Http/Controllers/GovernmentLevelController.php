@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 use stdClass;
+use Artesaos\SEOTools\Facades\SEOTools;
 
 class GovernmentLevelController extends Controller
 {
@@ -25,6 +26,7 @@ class GovernmentLevelController extends Controller
 
             $result = $this->dataGovernment($nivel, $period, $orderTable);
             $ruta = 'entidad.goverment';
+            $this->seo($nivel, $period);
             return view('gobermentLevel.index', compact('nivel', 'period', 'result', 'nivel', 'ruta', 'orderTable'));
         } else {
             abort(404);
@@ -120,5 +122,15 @@ class GovernmentLevelController extends Controller
         });
 
         return $data;
+    }
+
+    public function seo($nivel, $period)
+    {
+        SEOTools::setTitle('Qullqita Qitapay - Data por gobierno - '. $nivel, false);
+        SEOTools::setDescription('Qullqita Qitapay - Data por gobierno - ' . 'Nivel: ' . $nivel . ' - Periódo: ' . $period);
+        SEOTools::opengraph()->setUrl('https://qqperu.com/');
+        SEOTools::setCanonical('https://qqperu.com/');
+        SEOTools::opengraph()->addProperty('type', 'articles');
+        SEOTools::jsonLd()->addImage('https://qqperu.com/images/iconQuiilquitaQatipay.jpeg');
     }
 }

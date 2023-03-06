@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-
+use Artesaos\SEOTools\Facades\SEOTools;
 
 class CrcController extends Controller
 {
@@ -23,6 +23,7 @@ class CrcController extends Controller
         ]);
         if (!$validator->fails()) {
             $result = $this->firstDetail($rucEntidad, $period, $orderTable);
+            $this->seo($rucEntidad, $period, 1);
             return view('detail.indices.crc.firstDetail', compact('result', 'rucEntidad', 'period', 'busquedaPalabra', 'nameEntidad', 'primaryVariable', 'ruta', 'orderTable'));
         } else {
             abort(404);
@@ -59,6 +60,7 @@ class CrcController extends Controller
         ]);
         if (!$validator->fails()) {
             $result = $this->secondDetail($rucContratista, $rucEntidad, $period, $orderTable);
+            $this->seo($rucEntidad, $period, 2, $rucContratista);
             return view('detail.indices.crc.secondDetail', compact('result', 'rucContratista', 'rucEntidad', 'period', 'busquedaPalabra', 'nameEntidad', 'ruc', 'nameRuc', 'primaryVariable', 'orderTable', 'ruta'));
         } else {
             abort(404);
@@ -82,5 +84,20 @@ class CrcController extends Controller
             ->paginate(10);
 
         return  $data;
+    }
+    public function seo($rucEntidad, $period, $order, $rucContratista = '')
+    {
+        SEOTools::setTitle('Qullqita Qitapay - Consorcio con proveedores recién creados', false);
+        if ($order == 1) {
+            SEOTools::setDescription('Consorcio con proveedores recién creados - ' . 'Ruc Entidad : ' . $rucEntidad . ' - Período: ' . $period);
+        }
+        if ($order == 2) {
+            SEOTools::setDescription('Consorcio con proveedores recién creados - ' . 'Ruc Entidad : ' . $rucEntidad . '- Ruc Contratista : ' . $rucContratista . ' - Período: ' . $period);
+        }
+
+        SEOTools::opengraph()->setUrl('https://qqperu.com/');
+        SEOTools::setCanonical('https://qqperu.com/');
+        SEOTools::opengraph()->addProperty('type', 'articles');
+        SEOTools::jsonLd()->addImage('https://qqperu.com/images/iconQuiilquitaQatipay.jpeg');
     }
 }

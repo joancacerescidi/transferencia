@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Artesaos\SEOTools\Facades\SEOTools;
 
 class FeedbackController extends Controller
 {
     //
     public function index()
     {
+        $this->seo();
         return view('feedback.index');
     }
     public function created(Request $request)
@@ -47,5 +48,14 @@ class FeedbackController extends Controller
             return back()->with('errorSave', 'error');
         }
         return back()->with('success', 'éxito');
+    }
+    public function seo()
+    {
+        SEOTools::setTitle('Qullqita Qitapay - ¿Cómo podemos mejorar?', false);
+        SEOTools::setDescription('Danos tu opinión : Tu opinión es muy importante por eso nos gustaría que rellenaras el siguiente formulario.');
+        SEOTools::opengraph()->setUrl('https://qqperu.com/');
+        SEOTools::setCanonical('https://qqperu.com/');
+        SEOTools::opengraph()->addProperty('type', 'articles');
+        SEOTools::jsonLd()->addImage('https://qqperu.com/images/iconQuiilquitaQatipay.jpeg');
     }
 }

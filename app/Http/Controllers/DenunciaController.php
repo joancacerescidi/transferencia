@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Artesaos\SEOTools\Facades\SEOTools;
 
 class DenunciaController extends Controller
 {
     //
     public function index()
     {
+        $this->seo();
         return view('denuncia.index');
     }
     public function created(Request $request)
@@ -113,5 +115,14 @@ class DenunciaController extends Controller
         } else {
             return $_SERVER["REMOTE_ADDR"];
         }
+    }
+    public function seo()
+    {
+        SEOTools::setTitle('Qullqita Qitapay - Comparte información', false);
+        SEOTools::setDescription('Comparte información - Si tienes conocimiento de información que podría servir, puedes rellenar el siguiente formulario y ayudar a la justicia.');
+        SEOTools::opengraph()->setUrl('https://qqperu.com/');
+        SEOTools::setCanonical('https://qqperu.com/');
+        SEOTools::opengraph()->addProperty('type', 'articles');
+        SEOTools::jsonLd()->addImage('https://qqperu.com/images/iconQuiilquitaQatipay.jpeg');
     }
 }

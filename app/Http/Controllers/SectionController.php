@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 use stdClass;
+use Artesaos\SEOTools\Facades\SEOTools;
 
 class SectionController extends Controller
 {
@@ -22,6 +23,7 @@ class SectionController extends Controller
         if (!$validator->fails()) {
             $resultDeparment = $this->dataDepartment($period);
             $resultGraf = $this->governmentLevel($period);
+            $this->seo();
             return view('section.index', compact('periods', 'period', 'resultDeparment', 'resultGraf'));
         } else {
             abort(404);
@@ -69,5 +71,14 @@ class SectionController extends Controller
             array_push($newObjt->dataSet1, intval($graf->sum));
         }
         return $newObjt;
+    }
+    public function seo()
+    {
+        SEOTools::setTitle('Qullqita Qitapay', false);
+        SEOTools::setDescription('Es una iniciativa ciudadana que trata datos abiertos del Estado sobre el uso del presupuesto nacional. En esta primera etapa, hemos consolidado sólo datos desde enero 2018 y está actualizado hasta enero 2023.');
+        SEOTools::opengraph()->setUrl('https://qqperu.com/');
+        SEOTools::setCanonical('https://qqperu.com/');
+        SEOTools::opengraph()->addProperty('type', 'articles');
+        SEOTools::jsonLd()->addImage('https://qqperu.com/images/iconQuiilquitaQatipay.jpeg');
     }
 }

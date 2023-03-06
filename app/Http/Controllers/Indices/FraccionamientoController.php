@@ -9,7 +9,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use Artesaos\SEOTools\Facades\SEOTools;
 class FraccionamientoController extends Controller
 {
     //
@@ -25,6 +25,7 @@ class FraccionamientoController extends Controller
         if (!$validator->fails()) {
             $result = $this->firstDetail($rucEntidad, $period, $orderTable);
             $nombreRuta = Route::currentRouteName();
+            $this->seo($rucEntidad, $period, 1);
             return view('detail.indices.fraccionamiento.firstDetail', compact('result', 'rucEntidad', 'period', 'busquedaPalabra', 'nameEntidad', 'nombreRuta', 'ruta', 'primaryVariable', 'orderTable'));
         } else {
             abort(404);
@@ -67,7 +68,7 @@ class FraccionamientoController extends Controller
         ]);
         if (!$validator->fails()) {
             $result = $this->secondDetail($rucContratista, $rucEntidad, $period, $filter, $orderTable);
-            // dd($result);
+            $this->seo($rucEntidad, $period, 2, $rucContratista);
             return view('detail.indices.fraccionamiento.secondDetail', compact('result', 'filter', 'period', 'rucContratista', 'rucEntidad', 'busquedaPalabra', 'nameEntidad', 'ruc', 'nameRuc', 'ruta', 'primaryVariable', 'orderTable'));
         } else {
             abort(404);
@@ -93,5 +94,20 @@ class FraccionamientoController extends Controller
                 ->paginate(10);
         }
         return $data;
+    }
+    public function seo($rucEntidad, $period, $order, $rucContratista = '')
+    {
+        SEOTools::setTitle('Qullqita Qitapay - Proveedor con más de 3 contrataciones', false);
+        if ($order == 1) {
+            SEOTools::setDescription('Proveedor con más de 3 contrataciones - ' . 'Ruc Entidad : ' . $rucEntidad . ' - Período: ' . $period);
+        }
+        if ($order == 2) {
+            SEOTools::setDescription('Proveedor con más de 3 contrataciones - ' . 'Ruc Entidad : ' . $rucEntidad . '- Ruc Contratista : ' . $rucContratista . ' - Período: ' . $period);
+        }
+
+        SEOTools::opengraph()->setUrl('https://qqperu.com/');
+        SEOTools::setCanonical('https://qqperu.com/');
+        SEOTools::opengraph()->addProperty('type', 'articles');
+        SEOTools::jsonLd()->addImage('https://qqperu.com/images/iconQuiilquitaQatipay.jpeg');
     }
 }

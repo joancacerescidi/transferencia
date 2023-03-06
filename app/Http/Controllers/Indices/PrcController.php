@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Artesaos\SEOTools\Facades\SEOTools;
 
 class PrcController extends Controller
 {
@@ -23,6 +24,7 @@ class PrcController extends Controller
         ]);
         if (!$validator->fails()) {
             $result = $this->firstDetail($rucEntidad, $period, $orderTable);
+            $this->seo($rucEntidad, $period, 1);
             return view('detail.indices.prc.firstDetail', compact('result', 'rucEntidad', 'period', 'busquedaPalabra', 'nameEntidad', 'ruta', 'primaryVariable', 'orderTable'));
         } else {
             abort(404);
@@ -65,7 +67,7 @@ class PrcController extends Controller
         if (!$validator->fails()) {
             $resultDate = $this->fechaRegistroProveedor($rucEntidad);
             $result = $this->secondDetail($rucEntidad, $rucContratista, $period, $filter, $orderTable);
-
+            $this->seo($rucEntidad, $period, 2, $rucContratista);
             return view('detail.indices.prc.secondDetail', compact('result', 'rucEntidad', 'rucContratista', 'period', 'filter', 'resultDate', 'busquedaPalabra', 'nameEntidad', 'ruc', 'nameRuc', 'ruta', 'primaryVariable', 'orderTable'));
         } else {
             abort(404);
@@ -101,5 +103,19 @@ class PrcController extends Controller
             ->select(DB::raw('min(fecha_inicio_vigencia)'))
             ->where('osce_proveedor.ruc_proveedor', '=', $rucEntidad)->get();
         return $dataFechaRegistroProveedor;
+    }
+    public function seo($rucEntidad, $period, $order, $rucContratista = '')
+    {
+        SEOTools::setTitle('Qullqita Qitapay - Proveedor recién creado', false);
+        if ($order == 1) {
+            SEOTools::setDescription('Proveedor recién creado - ' . 'Ruc Entidad : ' . $rucEntidad . ' - Período: ' . $period);
+        }
+        if ($order == 2) {
+            SEOTools::setDescription('Proveedor recién creado - ' . 'Ruc Entidad : ' . $rucEntidad . '- Ruc Contratista : ' . $rucContratista . ' - Período: ' . $period);
+        }
+        SEOTools::opengraph()->setUrl('https://qqperu.com/');
+        SEOTools::setCanonical('https://qqperu.com/');
+        SEOTools::opengraph()->addProperty('type', 'articles');
+        SEOTools::jsonLd()->addImage('https://qqperu.com/images/iconQuiilquitaQatipay.jpeg');
     }
 }

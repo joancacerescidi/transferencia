@@ -8,6 +8,7 @@ use stdClass;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Route;
+use Artesaos\SEOTools\Facades\SEOTools;
 
 class RankingSearchController extends Controller
 {
@@ -53,6 +54,7 @@ class RankingSearchController extends Controller
                 ->orderBy($order, 'DESC')->paginate(10);
             $result = $this->convertDataEntidad($data);
             $ruta = 'entidad.busqueda';
+            $this->seo('Ranking Entidad', $period);
             return view('ranking.entidad', compact('result', 'period', 'order', 'ruta'));
         } else {
             abort(404);
@@ -108,6 +110,7 @@ class RankingSearchController extends Controller
             $search = true;
             $busquedaPalabra = $busquedaPalabra;
             $ruta = 'entidad.busqueda';
+            $this->seo('Buscar Entidad', $period);
             return view('ranking.entidad', compact('result', 'search', 'period', 'busquedaPalabra', 'order', 'ruta'));
         } else {
             abort(404);
@@ -147,6 +150,7 @@ class RankingSearchController extends Controller
                 ->orderBy($orderTable, 'DESC')->paginate(10);
 
             $result = $this->convertDataProveedor($data);
+            $this->seo('Ranking Proveedor', $period);
             return view('ranking.proveedor', compact('result', 'period', 'orderTable'));
         } else {
             abort(404);
@@ -190,6 +194,7 @@ class RankingSearchController extends Controller
             $result = $this->convertDataProveedor($data);
             $search = true;
             $busquedaPalabra = $busquedaPalabra;
+            $this->seo('Buscar Proveedor', $period);
             return view('ranking.proveedor', compact('result', 'search', 'period', 'busquedaPalabra', 'orderTable'));
         } else {
             abort(404);
@@ -244,6 +249,7 @@ class RankingSearchController extends Controller
                 ->where('anno', $period)
                 ->orderBy($orderTable, 'DESC')->paginate(10);
             $result = $this->convertDataFuncionario($data);
+            $this->seo('Ranking Funcionario', $period);
             return view('ranking.funcionario', compact('result', 'period', 'orderTable'));
         } else {
             abort(404);
@@ -303,6 +309,7 @@ class RankingSearchController extends Controller
             $result = $this->convertDataFuncionario($data);
             $search = true;
             $busquedaPalabra = $busquedaPalabra;
+            $this->seo('Buscar Funcionario', $period);
             return view('ranking.funcionario', compact('result', 'search', 'period', 'busquedaPalabra', 'orderTable'));
         } else {
             abort(404);
@@ -591,5 +598,15 @@ class RankingSearchController extends Controller
         });
 
         return $data;
+    }
+
+    public function seo($name, $period)
+    {
+        SEOTools::setTitle('Qullqita Qitapay ' . $name . ' - ' . $period, false);
+        SEOTools::setDescription('Qullqita Qitapay ' . $name . ' - ' . $period);
+        SEOTools::opengraph()->setUrl('https://qqperu.com/');
+        SEOTools::setCanonical('https://qqperu.com/');
+        SEOTools::opengraph()->addProperty('type', 'articles');
+        SEOTools::jsonLd()->addImage('https://qqperu.com/images/iconQuiilquitaQatipay.jpeg');
     }
 }

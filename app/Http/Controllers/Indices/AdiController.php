@@ -9,6 +9,8 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
+use Artesaos\SEOTools\Facades\SEOTools;
+
 class AdiController extends Controller
 {
     //
@@ -23,6 +25,7 @@ class AdiController extends Controller
         ]);
         if (!$validator->fails()) {
             $result = $this->firstDetail($rucEntidad, $period, $orderTable);
+            $this->seo($rucEntidad, $period, 1);
             return view('detail.indices.adi.firstDetail', compact('result', 'rucEntidad', 'period', 'busquedaPalabra', 'nameEntidad', 'ruta', 'primaryVariable', 'orderTable'));
         } else {
             abort(404);
@@ -58,6 +61,7 @@ class AdiController extends Controller
         ]);
         if (!$validator->fails()) {
             $result = $this->secondDetail($rucEntidad, $rucContratista, $period, $orderTable);
+            $this->seo($rucEntidad, $period, 2, $rucContratista);
             return view('detail.indices.adi.secondDetail', compact('result', 'rucEntidad', 'rucContratista', 'period', 'busquedaPalabra', 'nameEntidad', 'orderTable', 'ruc', 'nameRuc', 'ruta', 'primaryVariable'));
         } else {
             abort(404);
@@ -74,5 +78,21 @@ class AdiController extends Controller
             ->orderBy($orderTable, 'DESC')
             ->paginate(10);
         return $data;
+    }
+
+    public function seo($rucEntidad, $period, $order, $rucContratista='')
+    {
+        SEOTools::setTitle('Qullqita Qitapay - Adjudicaciones directas', false);
+        if ($order == 1) {
+            SEOTools::setDescription('Adjudicaciones directas - ' . 'Ruc Entidad : ' . $rucEntidad . ' - Período: ' . $period);
+        }
+        if ($order == 2) {
+            SEOTools::setDescription('Adjudicaciones directas - ' . 'Ruc Entidad : ' . $rucEntidad .'- Ruc Contratista : '. $rucContratista. ' - Período: ' . $period);
+        }
+
+        SEOTools::opengraph()->setUrl('https://qqperu.com/');
+        SEOTools::setCanonical('https://qqperu.com/');
+        SEOTools::opengraph()->addProperty('type', 'articles');
+        SEOTools::jsonLd()->addImage('https://qqperu.com/images/iconQuiilquitaQatipay.jpeg');
     }
 }

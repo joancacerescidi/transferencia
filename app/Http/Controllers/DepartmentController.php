@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use stdClass;
-
+use Artesaos\SEOTools\Facades\SEOTools;
 
 
 class DepartmentController extends Controller
@@ -34,6 +34,7 @@ class DepartmentController extends Controller
         if (!$validator->fails()) {
             $resultDepartmentDetail = $this->deparmentDetail($period, $department, $orderTable);
             $ruta = 'entidad.deparment';
+            $this->seo($period, $department);
             return view('department.index', compact('resultDepartmentDetail', 'department', 'period', 'ruta', 'orderTable'));
         } else {
             abort(404);
@@ -129,5 +130,14 @@ class DepartmentController extends Controller
         });
 
         return $data;
+    }
+    public function seo($period, $department)
+    {
+        SEOTools::setTitle('Qullqita Qitapay - Data por Departamento', false);
+        SEOTools::setDescription('Qullqita Qitapay - '. $department.' '. $period);
+        SEOTools::opengraph()->setUrl('https://qqperu.com/');
+        SEOTools::setCanonical('https://qqperu.com/');
+        SEOTools::opengraph()->addProperty('type', 'articles');
+        SEOTools::jsonLd()->addImage('https://qqperu.com/images/iconQuiilquitaQatipay.jpeg');
     }
 }
