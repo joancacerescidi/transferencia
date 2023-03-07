@@ -48,7 +48,7 @@ Route::get('/dashboard', function () {
 
 // Data para el Section
 #Ruta inicial
-Route::get('/{period?}', [SectionController::class, 'index']);
+Route::get('/{period?}', [SectionController::class, 'index'])->name('inicio');
 
 
 //Ruta al darle clic en una regiòn del mapa

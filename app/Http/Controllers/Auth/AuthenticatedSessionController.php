@@ -59,32 +59,37 @@ class AuthenticatedSessionController extends Controller
     }
     public function authFacebook()
     {
-        $user = Socialite::driver('facebook')->stateless()->user();
-        $userExists = User::where('facebook_id', $user->id)->where('type_auth', 'facebook')->first();
-        if ($userExists) {
-            Auth::login($userExists);
-            return redirect()->intended(RouteServiceProvider::HOME);
-        } else {
-            $validator = Validator::make(['email' => $user->email], [
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            ]);
-            if (!$validator->fails()) {
-                $userNew = User::create([
-                    'name' => $user->name,
-                    'email' => $user->email,
-                    'type_auth' => 'facebook',
-                    'facebook_id' => $user->id,
-                    'type' => 'free',
-                    'email_verified_at' => date('Y-m-d H:i:s')
-                ]);
-                event(new Registered($userNew));
-                Auth::login($userNew);
+        try {
+            $user = Socialite::driver('facebook')->stateless()->user();
+
+            $userExists = User::where('facebook_id', $user->id)->where('type_auth', 'facebook')->first();
+            if ($userExists) {
+                Auth::login($userExists);
                 return redirect()->intended(RouteServiceProvider::HOME);
             } else {
-                return redirect('/register')
-                    ->withErrors($validator)
-                    ->withInput();
+                $validator = Validator::make(['email' => $user->email], [
+                    'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                ]);
+                if (!$validator->fails()) {
+                    $userNew = User::create([
+                        'name' => $user->name,
+                        'email' => $user->email,
+                        'type_auth' => 'facebook',
+                        'facebook_id' => $user->id,
+                        'type' => 'free',
+                        'email_verified_at' => date('Y-m-d H:i:s')
+                    ]);
+                    event(new Registered($userNew));
+                    Auth::login($userNew);
+                    return redirect()->intended(RouteServiceProvider::HOME);
+                } else {
+                    return redirect('/register')
+                        ->withErrors($validator)
+                        ->withInput();
+                }
             }
+        } catch (\Exception $e) {
+            return redirect('/');
         }
     }
     public function google()
@@ -93,32 +98,36 @@ class AuthenticatedSessionController extends Controller
     }
     public function authGoogle()
     {
-        $user = Socialite::driver('google')->user();
-        $userExists = User::where('google_id', $user->id)->where('type_auth', 'google')->first();
-        if ($userExists) {
-            Auth::login($userExists);
-            return redirect()->intended(RouteServiceProvider::HOME);
-        } else {
-            $validator = Validator::make(['email' => $user->email], [
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            ]);
-            if (!$validator->fails()) {
-                $userNew = User::create([
-                    'name' => $user->name,
-                    'email' => $user->email,
-                    'type_auth' => 'google',
-                    'google_id' => $user->id,
-                    'type' => 'free',
-                    'email_verified_at' => date('Y-m-d H:i:s')
-                ]);
-                event(new Registered($userNew));
-                Auth::login($userNew);
+        try {
+            $user = Socialite::driver('google')->user();
+            $userExists = User::where('google_id', $user->id)->where('type_auth', 'google')->first();
+            if ($userExists) {
+                Auth::login($userExists);
                 return redirect()->intended(RouteServiceProvider::HOME);
             } else {
-                return redirect('/register')
-                    ->withErrors($validator)
-                    ->withInput();
+                $validator = Validator::make(['email' => $user->email], [
+                    'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                ]);
+                if (!$validator->fails()) {
+                    $userNew = User::create([
+                        'name' => $user->name,
+                        'email' => $user->email,
+                        'type_auth' => 'google',
+                        'google_id' => $user->id,
+                        'type' => 'free',
+                        'email_verified_at' => date('Y-m-d H:i:s')
+                    ]);
+                    event(new Registered($userNew));
+                    Auth::login($userNew);
+                    return redirect()->intended(RouteServiceProvider::HOME);
+                } else {
+                    return redirect('/register')
+                        ->withErrors($validator)
+                        ->withInput();
+                }
             }
+        } catch (\Exception $e) {
+            return redirect('/');
         }
     }
 }
