@@ -107,8 +107,35 @@
                                     </button>
                                 </div>
                             </div>
-                            <h3 class="font-bold text-text-blue text-sm xl:text-lg mb-8">Información de suscripciones
-                            </h3>
+                           
+                            <div
+                                class="px-4 py-3 mb-6 text-sm xl:text-base border border-blue-200 bg-blue-100 rounded-md shadow-md ">
+                                <h3 class="font-bold mb-3 text-blue-700 flex items-center justify-between gap-8">
+                                    Información de suscripciones
+                                </h3>
+                                <div class="text-sm xl:text-base grid gap-4">
+                                    <p>La suscripcion tiene los siguientes beneficios</p>
+                                    <ul class="pl-3 xl:pl-6 grid gap-2">
+                                        <li class="flex items-center gap-3"><span
+                                                class="block w-3 xl:w-2 h-2 rounded-full bg-gray-800"></span> Podras
+                                            acceder de forma ilimitada a toda la informacion procesada</li>
+                                        <li class="flex items-center gap-3"><span
+                                                class="block w-3 xl:w-2 h-2 rounded-full bg-gray-800"></span> Recibiras
+                                            notificaciones cuando carguemos nueva informacion</li>
+                                        <li class="flex items-center gap-3"><span
+                                                class="block w-3 xl:w-2 h-2 rounded-full bg-gray-800"></span>
+                                            Atenderemos tus solicitudes de soporte si tienes algun problema</li>
+                                    </ul>
+                                    <p>
+                                        El costo de la suscripcion es de USD 2 (dolares americanos) y se cobra de forma
+                                        mensual
+                                    </p>
+                                    <p>
+                                        Puedes desuscribirte en cualquier momento si siente que nuestro servicio no te
+                                        agrega valor, nuestro compromiso es de brindarte la mejor informacion.
+                                    </p>
+                                </div>
+                            </div>
                             <article
                                 class="bg-white border border-gray-200 shadow-sm rounded-xl mb-6 cursor-pointer shadow-md overflow-x-auto">
                                 <header
