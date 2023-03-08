@@ -68,8 +68,9 @@ Route::get('/ranking/proveedor/search/{period}/{busquedaPalabra}/{orderTable}', 
 Route::get('/ranking/funcionario/{period}/{orderTable}', [RankingSearchController::class, 'rankingFuncionario'])->name('rankingFuncionario');
 Route::get('/ranking/funcionario/search/{period}/{busquedaPalabra}/{orderTable}', [RankingSearchController::class, 'searchFuncionario']);
 
+// user.type
 
-Route::middleware(['auth', 'user.type'])->group(
+Route::middleware('auth')->group(
     function () {
         #Detalles
         #Detalle - 1 - funcionario

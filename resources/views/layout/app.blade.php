@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!-- SPLIDE JS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
@@ -83,6 +83,7 @@
         @if (Route::has('login'))
             @auth
                 <a href="{{ url('/dashboard') }}" class="">Perfil</a>
+                <a href="{{ url('/dashboard') }}" class="">Suscripciones</a>
             @else
                 <a href="{{ route('login') }}" class="">Ingresar</a>
             @endauth
@@ -107,8 +108,10 @@
                 @if (Route::has('login'))
                     @auth
                         <a href="{{ url('/dashboard') }}" class="  text-white cursor-pointer">Perfil</a>
+                        <a href="{{ url('/dashboard') }}" class="  text-white cursor-pointer">Suscripciones</a>
                     @else
                         <a href="{{ route('login') }}" class="  text-white cursor-pointer">Ingresar</a>
+
                     @endauth
                 @endif
             </nav>

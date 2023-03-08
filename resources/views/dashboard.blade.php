@@ -25,7 +25,7 @@
 
                 <div class="u-container ">
                     {{-- Perfil del usuario --}}
-                    <section id="perfilUser" class="bg-white rounded-md shadow-lg">
+                    <section id="perfilUser" class="hidden bg-white rounded-md shadow-lg">
                         <header class="flex">
                             <button type="button"
                                 class="text-sm xl:text-base w-full xl:w-72 p-5 flex items-center gap-4 font-semibold bg-main-blue hover:bg-main-blue text-white transition-colors rounded-tl-md rounded-tr-md">
@@ -95,7 +95,7 @@
 
                     </section>
                     {{-- Suscripciones --}}
-                    <section id="userSuscripcion" class="hidden bg-white rounded-md shadow-lg">
+                    <section id="userSuscripcion" class=" bg-white rounded-md shadow-lg">
                         <header class="flex">
                             <button type="button" onclick="perfilUser()"
                                 class="text-sm xl:text-base w-full xl:w-72 p-5 flex items-center gap-4 bg-gray-800 hover:bg-main-blue text-white transition-colors rounded-tl-md rounded-tr-md">
