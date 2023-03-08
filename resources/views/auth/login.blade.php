@@ -11,7 +11,16 @@
 
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
-
+        @if (Session::has('message'))
+            <div class="px-4 py-3 mb-6 text-sm xl:text-base border border-red-200 bg-red-100 rounded-md shadow-md ">
+                <h3 class="font-bold mb-3 text-red-700 flex items-center justify-between gap-8">
+                    Información
+                </h3>
+                <p style="max-width: 70ch;" class="opacity-80 xl:pr-4">
+                    {{ Session::get('message') }}
+                </p>
+            </div>
+        @endif
         <form method="POST" action="{{ route('login') }}">
             @csrf
 
@@ -19,8 +28,8 @@
             <div>
                 <x-label for="email" :value="__('Email')" />
 
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required
-                    autofocus />
+                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')"
+                    required autofocus />
             </div>
 
             <!-- Password -->
@@ -67,8 +76,7 @@
 
                 </a>
 
-                <a
-                href="{{ route('google') }}"
+                <a href="{{ route('google') }}"
                     class="cursor-pointer text-[10px] sm:text-base flex items-center justify-center gap-4 py-4 border-2 border-gray-300 bg-white rounded-2xl">
                     <img width="24" height="24" src="{{ asset('images/google.svg') }}" alt="Sendi Google" />
                     <span class="text[10px] font-semibold">GOOGLE</span>

@@ -7,7 +7,22 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            @if (Session::has('message'))
+                <div id="message"
+                    class="px-4 py-3 mb-6 text-sm xl:text-base border border-orange-200 bg-orange-100 rounded-md shadow-md xl:w-max mx-auto">
+                    <h3 class="font-bold mb-3 text-orange-700 flex items-center justify-between gap-8">
+                        Suscripciones.
+                        <button type="button" onclick="closeMessage()">
+                            <img src="{{ asset('images/icon-cerrar-black.png') }}" class="">
+                        </button>
+                    </h3>
+                    <p style="max-width: 70ch;" class="opacity-80 xl:pr-4">
+                        {{ Session::get('message') }}
+                    </p>
+                </div>
+            @endif
             <div class="p-6 bg-white border-b border-gray-200">
+
                 <div class="u-container ">
                     {{-- Perfil del usuario --}}
                     <section id="perfilUser" class="bg-white rounded-md shadow-lg">
@@ -107,7 +122,7 @@
                                     </button>
                                 </div>
                             </div>
-                           
+
                             <div
                                 class="px-4 py-3 mb-6 text-sm xl:text-base border border-blue-200 bg-blue-100 rounded-md shadow-md ">
                                 <h3 class="font-bold mb-3 text-blue-700 flex items-center justify-between gap-8">
@@ -174,7 +189,8 @@
                                         <span class="text-main-gray font-medium xl:hidden">Comentario:</span>
                                         Cobro de suscripción
                                     </p>
-                                    <p class="xl:col-span-2 font-semibold grid grid-cols-2 xl:block items-center gap-8">
+                                    <p
+                                        class="xl:col-span-2 font-semibold grid grid-cols-2 xl:block items-center gap-8">
                                         <span class="text-main-gray font-medium xl:hidden">Fecha:</span>
                                         12/12/1999
                                     </p>
@@ -204,8 +220,11 @@
             const userSection = document.getElementById('perfilUser');
             userSuscription.classList.remove("hidden");
             userSection.classList.add("hidden");
+        }
 
-
+        function closeMessage() {
+            const message = document.getElementById('message');
+            message.classList.add("hidden");
         }
     </script>
 </x-app-layout>
