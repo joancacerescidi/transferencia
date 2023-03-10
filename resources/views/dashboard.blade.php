@@ -116,7 +116,7 @@
                                         class="font-semibold text-red-500 border border-red-500 p-5 rounded-md cursor-pointer block">
                                         Cancelar suscripcion
                                     </button>
-                                    <button
+                                    <button id="btn_pagar"
                                         class="font-semibold text-white bg-blue-500 p-5 rounded-md cursor-pointer block">
                                         Suscribete
                                     </button>
@@ -174,7 +174,8 @@
                                         <span class="text-main-gray font-medium xl:hidden">Comentario:</span>
                                         Cobro de suscripción
                                     </p>
-                                    <p class="xl:col-span-2 font-semibold grid grid-cols-2 xl:block items-center gap-8">
+                                    <p
+                                        class="xl:col-span-2 font-semibold grid grid-cols-2 xl:block items-center gap-8">
                                         <span class="text-main-gray font-medium xl:hidden">Fecha:</span>
                                         12/12/1999
                                     </p>
@@ -226,5 +227,41 @@
             const message = document.getElementById('message');
             message.classList.add("hidden");
         }
+    </script>
+    <script src="https://checkout.culqi.com/js/v4"></script>
+    <script>
+        Culqi.publicKey = 'pk_test_95d355acbcdd4e28';
+    </script>
+    <script>
+        Culqi.settings({
+            title: 'Qullqita Qatipay',
+            amount: 200, // Este parámetro es requerido para realizar pagos yape
+        });
+    </script>
+    <script>
+        const btn_pagar = document.getElementById('btn_pagar');
+
+        btn_pagar.addEventListener('click', function(e) {
+            // Abre el formulario con la configuración en Culqi.settings y CulqiOptions
+            Culqi.open();
+            e.preventDefault();
+        })
+    </script>
+    <script>
+        function culqi() {
+            if (Culqi.token) { // ¡Objeto Token creado exitosamente!
+                const token = Culqi.token.id;
+                console.log('Se ha creado un Token: ', token);
+                //En esta linea de codigo debemos enviar el "Culqi.token.id"
+                //hacia tu servidor con Ajax
+            } else if (Culqi.order) { // ¡Objeto Order creado exitosamente!
+                const order = Culqi.order;
+                console.log('Se ha creado el objeto Order: ', order);
+
+            } else {
+                // Mostramos JSON de objeto error en consola
+                console.log('Error : ', Culqi.error);
+            }
+        };
     </script>
 </x-app-layout>
