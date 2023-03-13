@@ -142,7 +142,7 @@
                                             Atenderemos tus solicitudes de soporte si tienes algun problema</li>
                                     </ul>
                                     <p>
-                                        El costo de la suscripcion es de USD 2 (dolares americanos) y se cobra de forma
+                                        El costo de la suscripcion es de USD 3 (dolares americanos) y se cobra de forma
                                         mensual
                                     </p>
                                     <p>
