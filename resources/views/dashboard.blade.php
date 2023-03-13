@@ -235,12 +235,11 @@
     <script>
         Culqi.settings({
             title: 'Qullqita Qatipay',
-            amount: 200, // Este parámetro es requerido para realizar pagos yape
+            amount: 300, // Este parámetro es requerido para realizar pagos yape
         });
     </script>
     <script>
         const btn_pagar = document.getElementById('btn_pagar');
-
         btn_pagar.addEventListener('click', function(e) {
             // Abre el formulario con la configuración en Culqi.settings y CulqiOptions
             Culqi.open();
@@ -257,7 +256,6 @@
             } else if (Culqi.order) { // ¡Objeto Order creado exitosamente!
                 const order = Culqi.order;
                 console.log('Se ha creado el objeto Order: ', order);
-
             } else {
                 // Mostramos JSON de objeto error en consola
                 console.log('Error : ', Culqi.error);

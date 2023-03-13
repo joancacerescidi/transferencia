@@ -1007,9 +1007,6 @@ input[type=number] {
 .max-w-6xl {
   max-width: 72rem;
 }
-.max-w-xl {
-  max-width: 36rem;
-}
 .flex-1 {
   flex: 1 1 0%;
 }
@@ -1151,9 +1148,6 @@ input[type=number] {
 .overflow-y-auto {
   overflow-y: auto;
 }
-.break-all {
-  word-break: break-all;
-}
 .rounded-md {
   border-radius: 0.375rem;
 }
@@ -1216,9 +1210,6 @@ input[type=number] {
 .border-l-4 {
   border-left-width: 4px;
 }
-.border-r {
-  border-right-width: 1px;
-}
 .border-orange-200 {
   --tw-border-opacity: 1;
   border-color: rgb(254 215 170 / var(--tw-border-opacity));
@@ -1257,10 +1248,6 @@ input[type=number] {
 .border-gray-100 {
   --tw-border-opacity: 1;
   border-color: rgb(243 244 246 / var(--tw-border-opacity));
-}
-.border-gray-400 {
-  --tw-border-opacity: 1;
-  border-color: rgb(156 163 175 / var(--tw-border-opacity));
 }
 .bg-orange-100 {
   --tw-bg-opacity: 1;
@@ -1529,9 +1516,6 @@ input[type=number] {
 }
 .tracking-widest {
   letter-spacing: 0.1em;
-}
-.tracking-wider {
-  letter-spacing: 0.05em;
 }
 .text-gray-800 {
   --tw-text-opacity: 1;
@@ -2345,6 +2329,11 @@ input[type=number] {
     padding-bottom: 0px;
   }
 
+  .xl\:px-14 {
+    padding-left: 3.5rem;
+    padding-right: 3.5rem;
+  }
+
   .xl\:pr-4 {
     padding-right: 1rem;
   }
@@ -2371,6 +2360,10 @@ input[type=number] {
 
   .xl\:text-left {
     text-align: left;
+  }
+
+  .xl\:text-center {
+    text-align: center;
   }
 
   .xl\:text-right {

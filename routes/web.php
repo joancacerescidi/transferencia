@@ -15,6 +15,7 @@ use App\Http\Controllers\Indices\CrcController;
 use App\Http\Controllers\Indices\FraccionamientoController;
 use App\Http\Controllers\Indices\PmrController as IndicesPmrController;
 use App\Http\Controllers\Indices\PrcController as IndicesPrcController;
+use App\Http\Controllers\InfSuscriptionController;
 use App\Http\Controllers\MapaEntidadGraficoController;
 use App\Http\Controllers\NosotrosController;
 use App\Http\Controllers\PmrController;
@@ -136,3 +137,5 @@ Route::post('/save/denuncia', [DenunciaController::class, 'created'])->name('den
 Route::get('/usuario/fuentes', [FuenteController::class, 'index'])->name('fuente.index');
 #quienes somos
 Route::get('/quienes/somos', [NosotrosController::class, 'index'])->name('nosotros.index');
+#Información de la suscripción
+Route::get('/suscripcion/detalle', [InfSuscriptionController::class, 'index'])->name('suscription.index');
