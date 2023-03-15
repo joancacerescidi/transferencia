@@ -17,6 +17,18 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="shortcut icon" type="image/jpeg" href="{{ asset('/images/iconQuiilquitaQatipay.jpeg') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-12C0PPQW2D"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-12C0PPQW2D');
+    </script>
     {!! SEO::generate() !!}
 </head>
 
