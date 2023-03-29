@@ -47,6 +47,6 @@ class Recaptcha implements Rule
      */
     public function message()
     {
-        return 'The verificación de ReCaptcha ha fallado.';
+        return back()->with('errorSave', 'The verificación de ReCaptcha ha fallado.');
     }
 }
