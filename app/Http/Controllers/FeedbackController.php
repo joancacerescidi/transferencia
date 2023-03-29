@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Artesaos\SEOTools\Facades\SEOTools;
+use Illuminate\Support\Facades\Http;
 
 class FeedbackController extends Controller
 {
@@ -17,8 +18,14 @@ class FeedbackController extends Controller
     }
     public function created(Request $request)
     {
-        return $request->all();
         
+        $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify',[
+         'secret'=> '6LeDPkElAAAAAC5OGElNY0uXx_v8x70SkY6O4tuw',
+         'response'=>$request->iput('g-recaptcha-response')
+        ])->object();
+
+        return $response;
+
         $request->validate([
             'detalle' => 'required|string',
             'telefono' => 'required|integer',
