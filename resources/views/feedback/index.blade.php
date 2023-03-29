@@ -27,6 +27,9 @@
                         <h3 class="font-semibold text-sm xl:text-xl text-center">Lo sentimos hubo un <span
                                 class="text-red-700 font-bold">{{ session('errorSave') }}</span> al guardar su opinión</h3>
                     @endif
+                    @error('g-recaptcha-response')
+                        <h3 class=" text-sm xl:text-xl text-center text-red-700 font-bold">{{ session('errorSave') }}</h3>
+                    @enderror
                     <div>
                         <label class="font-semibold text-xs xl:text-sm block mb-1" for="opinion">Danos tu opinión de que
                             podriamos mejorar.</label>
