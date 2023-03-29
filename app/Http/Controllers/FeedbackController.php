@@ -18,19 +18,12 @@ class FeedbackController extends Controller
     }
     public function created(Request $request)
     {
-        
-        $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify',[
-         'secret'=> '6LeDPkElAAAAAC5OGElNY0uXx_v8x70SkY6O4tuw',
-         'response'=>$request->input('g-recaptcha-response')
-        ])->object();
-
-        return $response;
-
         $request->validate([
             'detalle' => 'required|string',
             'telefono' => 'required|integer',
             'email' => 'required|email',
             'nombre' => 'required|string',
+            'g-recaptcha-response'=>['required', new \App\Rules\Recaptcha]
         ], [
             'detalle.required' => 'El campo detalle no puede estar vacío',
             'detalle.string' => 'El campo detalle debe ser una cadena de texto',
