@@ -27,7 +27,7 @@ class Recaptcha implements Rule
     public function passes($attribute, $value)
     {
         //
-        return false;
+
         $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
             'secret' => '6LeDPkElAAAAAC5OGElNY0uXx_v8x70SkY6O4tuw',
             'response' => $value
@@ -47,6 +47,6 @@ class Recaptcha implements Rule
      */
     public function message()
     {
-        return  'The verificación de ReCaptcha ha fallado.';
+        return  'La verificación de ReCaptcha ha fallado.';
     }
 }

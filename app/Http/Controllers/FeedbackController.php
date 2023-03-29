@@ -23,7 +23,7 @@ class FeedbackController extends Controller
             'telefono' => 'required|integer',
             'email' => 'required|email',
             'nombre' => 'required|string',
-            'g-recaptcha-response'=>['required', new \App\Rules\Recaptcha]
+            'g-recaptcha-response' => ['required', new \App\Rules\Recaptcha]
         ], [
             'detalle.required' => 'El campo detalle no puede estar vacío',
             'detalle.string' => 'El campo detalle debe ser una cadena de texto',

@@ -24,6 +24,7 @@ class DenunciaController extends Controller
             'email' => 'required|email',
             'telefono' => 'required|integer',
             'nombres' => 'required|string',
+            'g-recaptcha-response' => ['required', new \App\Rules\Recaptcha],
             'files.*' => 'nullable|file|max:10000|mimes:pdf,png,jpeg,jpg',
         ], [
             'ruc_entidad.required' => 'El campo ruc Entidad no puede estar vacío',
