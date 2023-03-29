@@ -21,7 +21,7 @@ class FeedbackController extends Controller
         
         $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify',[
          'secret'=> '6LeDPkElAAAAAC5OGElNY0uXx_v8x70SkY6O4tuw',
-         'response'=>$request->iput('g-recaptcha-response')
+         'response'=>$request->input('g-recaptcha-response')
         ])->object();
 
         return $response;
