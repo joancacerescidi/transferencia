@@ -14,7 +14,7 @@
                 </p>
             </aside>
             <article>
-                <form method="POST" enctype="multipart/form-data" action="{{ route('denuncia.created') }}"
+                <form method="POST" id="denuncia-form" enctype="multipart/form-data" action="{{ route('denuncia.created') }}"
                     class="grid gap-6 xl:gap-10 bg-body-bg xl:bg-white py-10 px-6 xl:p-10 rounded-md shadow-lg border">
                     {{ csrf_field() }}
                     <h2 class="text-center text-xl xl:text-3xl font-bold">
@@ -66,16 +66,16 @@
                         <input id="nombres" value="{{ old('nombres') }}" name="nombres" type="text"
                             placeholder="Nombres"
                             class="text-sm block w-full p-4 rounded-md border shadow-md focus:outline-none focus:ring focus:ring-main-blue @error('nombres') ring ring-red-500  @enderror" ">
-                                                            @error('nombres')
+                                                                        @error('nombres')
         <span class="py-2 text-red-500 text-xs xl:text-sm block">{{ $message }}</span>
     @enderror
-                                                    </div>
-                                                <div class="grid xl:grid-cols-2 gap-6 xl:gap-10">
+                                                                </div>
+                                                            <div class="grid xl:grid-cols-2 gap-6 xl:gap-10">
 
-                                                     <div>
-                                                       <label for="email" class="font-semibold text-xs xl:text-sm block mb-1">Teléfono</label>
-                                                       <input id="telefono" value="{{ old('telefono') }}" name="telefono" type="number" placeholder="Teléfono"
-                                                          class="text-sm block w-full p-4 rounded-md border shadow-md focus:outline-none focus:ring focus:ring-main-blue @error('telefono') ring ring-red-500  @enderror"">
+                                                                 <div>
+                                                                   <label for="email" class="font-semibold text-xs xl:text-sm block mb-1">Teléfono</label>
+                                                                   <input id="telefono" value="{{ old('telefono') }}" name="telefono" type="number" placeholder="Teléfono"
+                                                                      class="text-sm block w-full p-4 rounded-md border shadow-md focus:outline-none focus:ring focus:ring-main-blue @error('telefono') ring ring-red-500  @enderror"">
                         @error('telefono')
                             <span class="py-2 text-red-500 text-xs xl:text-sm block">{{ $message }}</span>
                         @enderror
@@ -113,8 +113,9 @@
                             </span>
                         @enderror
                     </div>
-                    <button type="submit"
-                        class="block w-full p-5 bg-main-blue text-white font-semibold rounded-md text-sm">Enviar</button>
+                    <button data-sitekey="6LeDPkElAAAAAPswSAkRZxKt4nqx4Tfqbobl0nXe" data-callback='onSubmit'
+                        data-action='submit'
+                        class="g-recaptcha block w-full p-5 bg-main-blue text-white font-semibold rounded-md text-sm">Enviar</button>
 
                 </form>
             </article>
@@ -124,6 +125,12 @@
 
 
 @section('scripts')
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+    <script>
+        function onSubmit(token) {
+            document.getElementById("denuncia-form").submit();
+        }
+    </script>
     <script>
         const $file = document.getElementById('archivo')
         const $fileIcon = document.getElementById('archivo-icon')

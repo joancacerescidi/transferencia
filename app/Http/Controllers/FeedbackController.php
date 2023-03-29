@@ -17,6 +17,8 @@ class FeedbackController extends Controller
     }
     public function created(Request $request)
     {
+        return $request->all();
+        
         $request->validate([
             'detalle' => 'required|string',
             'telefono' => 'required|integer',

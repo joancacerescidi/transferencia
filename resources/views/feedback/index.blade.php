@@ -13,8 +13,7 @@
                 </p>
             </aside>
             <article>
-
-                <form method="POST" action="{{ route('feedback.created') }}"
+                <form method="POST" id="feedback-form" action="{{ route('feedback.created') }}"
                     class="grid gap-6 xl:gap-10 bg-body-bg xl:bg-white py-10 px-6 xl:p-10 rounded-md shadow-lg border">
                     @csrf
                     <h2 class="text-center text-xl xl:text-3xl font-bold">
@@ -67,11 +66,19 @@
                             <span class="py-2 text-red-500 text-xs xl:text-sm block">{{ $message }}</span>
                         @enderror
                     </div>
-
-                    <button type="submit"
-                        class="block w-full p-5 bg-main-blue text-white font-semibold rounded-md text-sm">Enviar</button>
+                    <button data-sitekey="6LeDPkElAAAAAPswSAkRZxKt4nqx4Tfqbobl0nXe" data-callback='onSubmit'
+                        data-action='submit'
+                        class="g-recaptcha block w-full p-5 bg-main-blue text-white font-semibold rounded-md text-sm">Enviar</button>
                 </form>
             </article>
         </section>
     </main>
+@endsection
+@section('scripts')
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+    <script>
+        function onSubmit(token) {
+            document.getElementById("feedback-form").submit();
+        }
+    </script>
 @endsection
