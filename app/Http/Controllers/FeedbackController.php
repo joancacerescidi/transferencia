@@ -20,18 +20,18 @@ class FeedbackController extends Controller
     {
         $request->validate([
             'detalle' => 'required|string',
-            'telefono' => 'required|integer',
-            'email' => 'required|email',
-            'nombre' => 'required|string',
+            'telefono' => 'nullable|integer',
+            'email' => 'nullable|email',
+            'nombre' => 'nullable|string',
             'g-recaptcha-response' => ['required', new \App\Rules\Recaptcha]
         ], [
             'detalle.required' => 'El campo detalle no puede estar vacío',
             'detalle.string' => 'El campo detalle debe ser una cadena de texto',
-            'telefono.required' => 'El campo teléfono no puedo estar vacío',
+          
             'telefono.integer' => 'El campo teléfono solo debe contener números, sin caracteres especiales',
-            'email.required' => 'El campo email no puedo estar vacío',
+           
             'email.email' => 'El campo email debe tener el formato de un correo',
-            'nombre.required' => 'El campo nombre no puedo estar vacío',
+          
             'nombre.string' => 'El campo nombre debe debe ser una cadena de texto',
         ]);
         DB::beginTransaction();

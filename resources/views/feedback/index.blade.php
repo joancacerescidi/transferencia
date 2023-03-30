@@ -42,7 +42,7 @@
                     <h4 class="font-bold xl:text-lg">Datos de contacto</h4>
                     <div>
 
-                        <label for="nombres" class="font-semibold text-xs xl:text-sm block mb-1">Nombre:</label>
+                        <label for="nombres" class="font-semibold text-xs xl:text-sm block mb-1">Nombre (Opcional):</label>
                         <input id="nombre" name="nombre" type="text" value="{{ old('nombre') }}"
                             placeholder="Ingrese su nombre"
                             class="text-sm block w-full p-4 rounded-md border shadow-md focus:outline-none focus:ring focus:ring-main-blue @error('nombre') ring ring-red-500  @enderror">
@@ -51,7 +51,7 @@
                         @enderror
                     </div>
                     <div>
-                        <label for="nombres" class="font-semibold text-xs xl:text-sm block mb-1">Teléfono:</label>
+                        <label for="nombres" class="font-semibold text-xs xl:text-sm block mb-1">Teléfono (Opcional):</label>
                         <input id="telefono" name="telefono" type="number" value="{{ old('telefono') }}"
                             placeholder="Ingrese su teléfono"
                             class="text-sm block w-full p-4 rounded-md border shadow-md focus:outline-none focus:ring focus:ring-main-blue @error('telefono') ring ring-red-500  @enderror">
@@ -60,8 +60,7 @@
                         @enderror
                     </div>
                     <div>
-                        <label for="email" class="font-semibold text-xs xl:text-sm block mb-1">Correo
-                            electrónico:</label>
+                        <label for="email" class="font-semibold text-xs xl:text-sm block mb-1">Correo electrónico (Opcional):</label>
                         <input id="email" name="email" type="email" value="{{ old('email') }}"
                             placeholder="Ingrese su email"
                             class="text-sm block w-full p-4 rounded-md border shadow-md focus:outline-none focus:ring focus:ring-main-blue @error('email') ring ring-red-500  @enderror"">
