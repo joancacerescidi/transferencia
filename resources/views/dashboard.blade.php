@@ -207,8 +207,11 @@
 
                                 </div>
                             </article> --}}
+
                             @if (Auth::user()->type == 'admin')
+                            
                                 @livewire('user-component')
+
                             @endif
                         </article>
                     </section>
