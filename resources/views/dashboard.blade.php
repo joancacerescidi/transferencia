@@ -117,10 +117,10 @@
                                         class="font-semibold text-red-500 border border-red-500 p-5 rounded-md cursor-pointer block">
                                         Cancelar suscripcion
                                     </button> --}}
-                                        <button id="btn_pagar"
+                                        <a href="https://wa.link/72ix8w" target="_Blank"
                                             class="font-semibold text-white bg-blue-500 p-5 rounded-md cursor-pointer block">
                                             Suscribete
-                                        </button>
+                                        </a>
                                     </div>
                                 </div>
 
@@ -209,9 +209,7 @@
                             </article> --}}
 
                             @if (Auth::user()->type == 'admin')
-                            
                                 @livewire('user-component')
-
                             @endif
                         </article>
                     </section>
