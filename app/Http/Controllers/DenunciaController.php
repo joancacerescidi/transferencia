@@ -21,9 +21,9 @@ class DenunciaController extends Controller
             'ruc_entidad' => 'required|integer',
             'entidad' => 'required|string',
             'detalle' => 'required|string',
-            'email' => 'required|email',
-            'telefono' => 'required|integer',
-            'nombres' => 'required|string',
+            'email' => 'nullable|email',
+            'telefono' => 'nullable|integer',
+            'nombres' => 'nullable|string',
             'g-recaptcha-response' => ['required', new \App\Rules\Recaptcha],
             'files.*' => 'nullable|file|max:10000|mimes:pdf,png,jpeg,jpg',
         ], [
@@ -36,13 +36,10 @@ class DenunciaController extends Controller
             'detalle.required' => 'El campo detalle no puede estar vacío',
             'detalle.string' => 'El campo detalle debe ser una cadena de texto',
 
-            'email.required' => 'El campo email no puedo estar vacío',
             'email.email' => 'El campo email debe tener el formato de un correo',
 
-            'telefono.required' => 'El campo teléfono no puedo estar vacío',
             'telefono.integer' => 'El campo teléfono solo debe contener números, sin caracteres especiales',
 
-            'nombres.required' => 'El campo nombre no puedo estar vacío',
             'nombres.string' => 'El campo nombre debe debe ser una cadena de texto',
         ]);
 
