@@ -109,49 +109,54 @@
                             </button>
                         </header>
                         <article class="px-5 py-6 xl:p-10">
-                            <div class="flex flex-col xl:flex-row gap-6 xl:items-center justify-between mb-10">
-                                <h3 class="text-xl xl:text-3xl font-bold text-main-blue ">Suscripciones</h3>
-                                <div class="flex flex-col xl:flex-row gap-6">
-                                    <button
+                            @if (Auth::user()->type !== 'admin')
+                                <div class="flex flex-col xl:flex-row gap-6 xl:items-center justify-between mb-10">
+                                    <h3 class="text-xl xl:text-3xl font-bold text-main-blue ">Suscripciones</h3>
+                                    <div class="flex flex-col xl:flex-row gap-6">
+                                        {{-- <button
                                         class="font-semibold text-red-500 border border-red-500 p-5 rounded-md cursor-pointer block">
                                         Cancelar suscripcion
-                                    </button>
-                                    <button id="btn_pagar"
-                                        class="font-semibold text-white bg-blue-500 p-5 rounded-md cursor-pointer block">
-                                        Suscribete
-                                    </button>
+                                    </button> --}}
+                                        <button id="btn_pagar"
+                                            class="font-semibold text-white bg-blue-500 p-5 rounded-md cursor-pointer block">
+                                            Suscribete
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div
-                                class="px-4 py-3 mb-6 text-sm xl:text-base border border-blue-200 bg-blue-100 rounded-md shadow-md ">
-                                <h3 class="font-bold mb-3 text-blue-700 flex items-center justify-between gap-8">
-                                    Información de suscripciones
-                                </h3>
-                                <div class="text-sm xl:text-base grid gap-4">
-                                    <p>La suscripcion tiene los siguientes beneficios</p>
-                                    <ul class="pl-3 xl:pl-6 grid gap-2">
-                                        <li class="flex items-center gap-3"><span
-                                                class="block w-3 xl:w-2 h-2 rounded-full bg-gray-800"></span> Podras
-                                            acceder de forma ilimitada a toda la informacion procesada</li>
-                                        <li class="flex items-center gap-3"><span
-                                                class="block w-3 xl:w-2 h-2 rounded-full bg-gray-800"></span> Recibiras
-                                            notificaciones cuando carguemos nueva informacion</li>
-                                        <li class="flex items-center gap-3"><span
-                                                class="block w-3 xl:w-2 h-2 rounded-full bg-gray-800"></span>
-                                            Atenderemos tus solicitudes de soporte si tienes algun problema</li>
-                                    </ul>
-                                    <p>
-                                        El costo de la suscripcion es de USD 3 (dolares americanos) y se cobra de forma
-                                        mensual
-                                    </p>
-                                    <p>
-                                        Puedes desuscribirte en cualquier momento si siente que nuestro servicio no te
-                                        agrega valor, nuestro compromiso es de brindarte la mejor informacion.
-                                    </p>
+                                <div
+                                    class="px-4 py-3 mb-6 text-sm xl:text-base border border-blue-200 bg-blue-100 rounded-md shadow-md ">
+                                    <h3 class="font-bold mb-3 text-blue-700 flex items-center justify-between gap-8">
+                                        Información de suscripciones
+                                    </h3>
+                                    <div class="text-sm xl:text-base grid gap-4">
+                                        <p>La suscripcion tiene los siguientes beneficios</p>
+                                        <ul class="pl-3 xl:pl-6 grid gap-2">
+                                            <li class="flex items-center gap-3"><span
+                                                    class="block w-3 xl:w-2 h-2 rounded-full bg-gray-800"></span> Podras
+                                                acceder de forma ilimitada a toda la informacion procesada</li>
+                                            <li class="flex items-center gap-3"><span
+                                                    class="block w-3 xl:w-2 h-2 rounded-full bg-gray-800"></span>
+                                                Recibiras
+                                                notificaciones cuando carguemos nueva informacion</li>
+                                            <li class="flex items-center gap-3"><span
+                                                    class="block w-3 xl:w-2 h-2 rounded-full bg-gray-800"></span>
+                                                Atenderemos tus solicitudes de soporte si tienes algun problema</li>
+                                        </ul>
+                                        <p>
+                                            El costo de la suscripcion es de USD 3 (dolares americanos) y se cobra de
+                                            forma
+                                            mensual
+                                        </p>
+                                        <p>
+                                            Puedes desuscribirte en cualquier momento si siente que nuestro servicio no
+                                            te
+                                            agrega valor, nuestro compromiso es de brindarte la mejor informacion.
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
-                            <article
+                            @endif
+                            {{-- <article
                                 class="bg-white border border-gray-200 shadow-sm rounded-xl mb-6 cursor-pointer shadow-md overflow-x-auto">
                                 <header
                                     class="bg-gray-800 text-white p-5 hidden xl:grid grid-cols-2 xl:grid-cols-11 gap-8 items-center text-xs xl:text-sm mb-6 xl:mb-14">
@@ -201,7 +206,10 @@
                                     </p>
 
                                 </div>
-                            </article>
+                            </article> --}}
+                            @if (Auth::user()->type == 'admin')
+                                @livewire('user-component')
+                            @endif
                         </article>
                     </section>
                 </div>
@@ -228,38 +236,5 @@
             message.classList.add("hidden");
         }
     </script>
-    <script src="https://checkout.culqi.com/js/v4"></script>
-    <script>
-        Culqi.publicKey = 'pk_test_95d355acbcdd4e28';
-    </script>
-    <script>
-        Culqi.settings({
-            title: 'Qullqita Qatipay',
-            amount: 300, // Este parámetro es requerido para realizar pagos yape
-        });
-    </script>
-    <script>
-        const btn_pagar = document.getElementById('btn_pagar');
-        btn_pagar.addEventListener('click', function(e) {
-            // Abre el formulario con la configuración en Culqi.settings y CulqiOptions
-            Culqi.open();
-            e.preventDefault();
-        })
-    </script>
-    <script>
-        function culqi() {
-            if (Culqi.token) { // ¡Objeto Token creado exitosamente!
-                const token = Culqi.token.id;
-                console.log('Se ha creado un Token: ', token);
-                //En esta linea de codigo debemos enviar el "Culqi.token.id"
-                //hacia tu servidor con Ajax
-            } else if (Culqi.order) { // ¡Objeto Order creado exitosamente!
-                const order = Culqi.order;
-                console.log('Se ha creado el objeto Order: ', order);
-            } else {
-                // Mostramos JSON de objeto error en consola
-                console.log('Error : ', Culqi.error);
-            }
-        };
-    </script>
+
 </x-app-layout>

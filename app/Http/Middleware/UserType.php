@@ -17,7 +17,7 @@ class UserType
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->user()->type == 'payment') {
+        if (auth()->user()->type == 'payment' || auth()->user()->type == 'admin') {
             return $next($request);
         } else {
             Session::flash('message', "Necesita suscribirse para ver toda la información informacion,puedes darle clic en la sección 'Suscripciones' para más detalles");

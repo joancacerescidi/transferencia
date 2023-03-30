@@ -24,6 +24,7 @@
 
         gtag('config', 'G-12C0PPQW2D');
     </script>
+    @livewireStyles
 </head>
 
 <body class="font-sans antialiased">
@@ -41,6 +42,7 @@
             {{ $slot }}
         </main>
     </div>
+    @livewireScripts
 </body>
 
 </html>

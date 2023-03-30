@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('type_auth')->nullable();
             $table->string('facebook_id')->unique()->nullable();
             $table->string('google_id')->unique()->nullable();
-            $table->enum('type', ['free', 'payment']);
+            $table->enum('type', ['free', 'payment','admin']);
             $table->timestamps();
         });
     }
