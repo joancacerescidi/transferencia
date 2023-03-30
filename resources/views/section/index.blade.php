@@ -245,11 +245,11 @@
                                 <circle cx="766.9" cy="1359" id="2">
                                 </circle>
                             </svg>
-                             <span
-                            class=" opacity-0 absolute bg-body-bg border shadow-lg p-4 transition-opacity rounded-md pointer-events-none text-sm xl:text-base font-semibold"
-                            id="tooltip"></span>
+                            <span
+                                class=" opacity-0 absolute bg-body-bg border shadow-lg p-4 transition-opacity rounded-md pointer-events-none text-sm xl:text-base font-semibold"
+                                id="tooltip"></span>
                         </div>
-                       
+
 
                     </article>
                 </div>
@@ -337,12 +337,13 @@
                         perPage: 2,
                     },
                 },
-                autoScroll: {
-                    speed: 1.5,
-                },
+                // autoScroll: {
+                //     speed: 1.5,
+                // },
             })
 
-            hero.mount(window.splide.Extensions)
+            // hero.mount(window.splide.Extensions)
+            hero.mount()
         })();
         // Mapa Peru
 
