@@ -17,7 +17,7 @@ class AdminSeeder extends Seeder
         //
         User::create([
             "name" => 'ADMIN QQPERU',
-            "email" => 'adminqqperu@gmail.com',
+            "email" => 'admin@qqperu.com',
             "email_verified_at" => '2023-03-30 01:36:00',
             "password" => bcrypt('3vt&4jT!RkG6sctB'),
             "type_auth" => 'formulario',

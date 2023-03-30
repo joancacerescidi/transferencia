@@ -12,20 +12,22 @@ use Rappasoft\LaravelLivewireTables\Views\Columns\LinkColumn;
 
 class UserComponent extends DataTableComponent
 {
-    protected $model = User::class;
+
 
     public function configure(): void
     {
-        $this->setPrimaryKey('id');
+        $this->setPrimaryKey('id')->setAdditionalSelects(['users.id as id']);
     }
-
+    public function builder(): Builder
+    {
+        return User::query()->where('type', '!=', 'admin');
+    }
     public function columns(): array
     {
         return [
+
             Column::make('Nombre', 'name'),
-
             Column::make('Email', 'email')
-
                 ->searchable(),
             Column::make('Tipo de Registro', 'type_auth'),
 
@@ -38,11 +40,11 @@ class UserComponent extends DataTableComponent
                 })
                 ->buttons([
                     LinkColumn::make('Edit')
-                        ->title(fn ($row) => 'Editar')
-                        ->location(fn ($row) => route('inicio', $row))
+                        ->title(fn ($row) => $row->type == 'free' ? 'Payment' : 'Free')
+                        ->location(fn ($row) => route('update.user', $row->id))
                         ->attributes(function ($row) {
                             return [
-                                'target' => '_blank',
+
                                 'class' => 'underline text-blue-500 hover:no-underline',
                             ];
                         }),

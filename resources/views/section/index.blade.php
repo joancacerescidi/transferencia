@@ -3,6 +3,9 @@
     <main class="bg-body-bg">
 
         <section class="u-container">
+
+
+            <p class="text-center text-xl xl:text-4xl font-bold mb-14">Data actualizada a Febrero 2023 </p>
             <h2 class="text-center text-xl xl:text-4xl font-bold mb-14">
                 Seleccionar el periodo
             </h2>
