@@ -40,12 +40,12 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-require __DIR__ . '/auth.php';
+// require __DIR__ . '/auth.php';
 
 //Perfil del usuario
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 // Data para el Section
 #Ruta inicial
@@ -70,56 +70,56 @@ Route::get('/ranking/funcionario/{period}/{orderTable}', [RankingSearchControlle
 Route::get('/ranking/funcionario/search/{period}/{busquedaPalabra}/{orderTable}', [RankingSearchController::class, 'searchFuncionario']);
 
 // user.type
-
-Route::middleware('auth')->group(
-    function () {
-        #Detalles
-        #Detalle - 1 - funcionario
-        Route::get('/detail/funcionario/{idFuncionario}/{nivel}/{type}/{name}/{period}/{orderTable}/{ruc?}/{busquedaPalabra?}', [FuncionarioController::class, 'firstDetail']);
-        #Detalle - 1-2 - entidad - grafico - entidad
-        #Fraccionamiento
-        Route::get('/detail/first/fraccionamiento/{rucEntidad}/{period}/{nameEntidad}/{ruta}/{primaryVariable}/{orderTable}/{busquedaPalabra?}', [FraccionamientoController::class, 'first']);
-        Route::get('/detail/second/fraccionamiento/{rucContratista}/{rucEntidad}/{period}/{filter}/{nameEntidad}/{ruc}/{nameRuc}/{ruta}/{primaryVariable}/{orderTable}/{busquedaPalabra?}', [FraccionamientoController::class, 'second']);
-        #CRC
-        Route::get('/detail/first/crc/{rucEntidad}/{period}/{nameEntidad}/{ruta}/{primaryVariable}/{orderTable}/{busquedaPalabra?}', [CrcController::class, 'first']);
-        Route::get('/detail/second/crc/{rucContratista}/{rucEntidad}/{period}/{nameEntidad}/{ruc}/{ruta}/{primaryVariable}/{orderTable}/{nameRuc?}/{busquedaPalabra?}', [CrcController::class, 'second']);
-        #ADI
-        Route::get('/detail/first/adi/{rucEntidad}/{period}/{nameEntidad}/{ruta}/{primaryVariable}/{orderTable}/{busquedaPalabra?}', [AdiController::class, 'first']);
-        Route::get('/detail/second/adi/{rucContratista}/{rucEntidad}/{period}/{nameEntidad}/{ruc}/{nameRuc}/{ruta}/{primaryVariable}/{orderTable}/{busquedaPalabra?}', [AdiController::class, 'second']);
-        #/PRC 
-        Route::get('/detail/first/prc/{rucEntidad}/{period}/{nameEntidad}/{ruta}/{primaryVariable}/{orderTable}/{busquedaPalabra?}', [IndicesPrcController::class, 'first']);
-        Route::get('/detail/second/prc/{rucContratista}/{rucEntidad}/{period}/{filter}/{nameEntidad}/{ruc}/{nameRuc}/{ruta}/{primaryVariable}/{orderTable}/{busquedaPalabra?}', [IndicesPrcController::class, 'second']);
-        #/PMR
-        Route::get('/detail/first/pmr/{rucEntidad}/{period}/{nameEntidad}/{ruta}/{primaryVariable}/{orderTable}/{busquedaPalabra?}', [IndicesPmrController::class, 'first']);
-        Route::get('/detail/second/pmr/{rucContratista}/{rucEntidad}/{period}/{nameEntidad}/{ruc}/{nameRuc}/{ruta}/{primaryVariable}/{orderTable}/{busquedaPalabra?}', [IndicesPmrController::class, 'second']);
+// Route::middleware('auth')->group(
+//     function () {
 
 
+#Detalles
+#Detalle - 1 - funcionario
+Route::get('/detail/funcionario/{idFuncionario}/{nivel}/{type}/{name}/{period}/{orderTable}/{ruc?}/{busquedaPalabra?}', [FuncionarioController::class, 'firstDetail']);
+#Detalle - 1-2 - entidad - grafico - entidad
+#Fraccionamiento
+Route::get('/detail/first/fraccionamiento/{rucEntidad}/{period}/{nameEntidad}/{ruta}/{primaryVariable}/{orderTable}/{busquedaPalabra?}', [FraccionamientoController::class, 'first']);
+Route::get('/detail/second/fraccionamiento/{rucContratista}/{rucEntidad}/{period}/{filter}/{nameEntidad}/{ruc}/{nameRuc}/{ruta}/{primaryVariable}/{orderTable}/{busquedaPalabra?}', [FraccionamientoController::class, 'second']);
+#CRC
+Route::get('/detail/first/crc/{rucEntidad}/{period}/{nameEntidad}/{ruta}/{primaryVariable}/{orderTable}/{busquedaPalabra?}', [CrcController::class, 'first']);
+Route::get('/detail/second/crc/{rucContratista}/{rucEntidad}/{period}/{nameEntidad}/{ruc}/{ruta}/{primaryVariable}/{orderTable}/{nameRuc?}/{busquedaPalabra?}', [CrcController::class, 'second']);
+#ADI
+Route::get('/detail/first/adi/{rucEntidad}/{period}/{nameEntidad}/{ruta}/{primaryVariable}/{orderTable}/{busquedaPalabra?}', [AdiController::class, 'first']);
+Route::get('/detail/second/adi/{rucContratista}/{rucEntidad}/{period}/{nameEntidad}/{ruc}/{nameRuc}/{ruta}/{primaryVariable}/{orderTable}/{busquedaPalabra?}', [AdiController::class, 'second']);
+#/PRC 
+Route::get('/detail/first/prc/{rucEntidad}/{period}/{nameEntidad}/{ruta}/{primaryVariable}/{orderTable}/{busquedaPalabra?}', [IndicesPrcController::class, 'first']);
+Route::get('/detail/second/prc/{rucContratista}/{rucEntidad}/{period}/{filter}/{nameEntidad}/{ruc}/{nameRuc}/{ruta}/{primaryVariable}/{orderTable}/{busquedaPalabra?}', [IndicesPrcController::class, 'second']);
+#/PMR
+Route::get('/detail/first/pmr/{rucEntidad}/{period}/{nameEntidad}/{ruta}/{primaryVariable}/{orderTable}/{busquedaPalabra?}', [IndicesPmrController::class, 'first']);
+Route::get('/detail/second/pmr/{rucContratista}/{rucEntidad}/{period}/{nameEntidad}/{ruc}/{nameRuc}/{ruta}/{primaryVariable}/{orderTable}/{busquedaPalabra?}', [IndicesPmrController::class, 'second']);
 
 
 
-        #Detalle - 1- 2 proveedor
-        #orden de compra
-        Route::get('/detail/orden-compra/first/proveedor/{rucContratista}/{period}/{orderTable}/{nombre?}/{busquedaPalabra?}', [ProveedorController::class, 'ordenCompraFirst']);
-        Route::get('/detail/orden-compra/second/proveedor/{rucEntidad}/{rucContratista}/{period}/{ruc}/{rucNombre}/{orderTable}/{nombre?}/{busquedaPalabra?}', [ProveedorController::class, 'ordenCompraSecond']);
-        #contrato
-        Route::get('/detail/contrato/first/proveedor/{rucContratista}/{period}/{orderTable}/{nombre?}/{busquedaPalabra?}', [ProveedorController::class, 'contratoFirst']);
-        Route::get('/detail/contrato/second/proveedor/{rucEntidad}/{rucContratista}/{period}/{ruc}/{rucNombre}/{orderTable}/{nombre?}/{busquedaPalabra?}', [ProveedorController::class, 'contratoSecond']);
-        #consorcio
-        Route::get('/detail/consorcio/first/proveedor/{rucContratista}/{period}/{filter}/{orderTable}/{nombre?}/{busquedaPalabra?}', [ProveedorController::class, 'consorcioFirst']);
-        Route::get('/detail/consorcio/second/proveedor/{rucEntidad}/{rucContratista}/{period}/{filter}/{ruc}/{rucNombre}/{orderTable}/{nombre?}/{busquedaPalabra?}', [ProveedorController::class, 'consorcioSecond']);
-        #sanciones
-        Route::get('/detail/sanciones/first/proveedor/{rucContratista}/{period}/{orderTable}/{nombre?}/{busquedaPalabra?}', [ProveedorController::class, 'sancionesFirst']);
-        #contrato resuelto
-        Route::get('/detail/contrato-resuelto/first/proveedor/{rucContratista}/{period}/{orderTable}/{nombre?}/{busquedaPalabra?}', [ProveedorController::class, 'contratoResueltoFirst']);
-        Route::get('/detail/contrato-resuelto/second/proveedor/{rucEntidad}/{rucContratista}/{period}/{ruc}/{rucNombre}/{orderTable}/{nombre?}/{busquedaPalabra?}', [ProveedorController::class, 'contratoResueltoSecond']);
-        #postulaciones
-        Route::get('/detail/postulaciones/first/proveedor/{rucContratista}/{period}/{orderTable}/{nombre?}/{busquedaPalabra?}', [ProveedorController::class, 'postulacionesFirst']);
-        Route::get('/detail/postulaciones/second/proveedor/{rucEntidad}/{rucContratista}/{period}/{ruc}/{rucNombre}/{orderTable}/{nombre?}/{busquedaPalabra?}', [ProveedorController::class, 'postulacionesSecond']);
-        #Postulaciones con mismo representante
-        Route::get('/detail/postulaciones-con-mismo-representante/first/proveedor/{rucContratista}/{period}/{orderTable}/{nombre?}/{busquedaPalabra?}', [ProveedorController::class, 'postulacionesMismoRepresentanteFirst']);
-        Route::get('/detail/postulaciones-con-mismo-representante/second/proveedor/{rucEntidad}/{rucContratista}/{period}/{ruc}/{rucNombre}/{orderTable}/{nombre?}/{busquedaPalabra?}', [ProveedorController::class, 'postulacionesMismoRepresentanteSecond']);
-    }
-);
+
+
+#Detalle - 1- 2 proveedor
+#orden de compra
+Route::get('/detail/orden-compra/first/proveedor/{rucContratista}/{period}/{orderTable}/{nombre?}/{busquedaPalabra?}', [ProveedorController::class, 'ordenCompraFirst']);
+Route::get('/detail/orden-compra/second/proveedor/{rucEntidad}/{rucContratista}/{period}/{ruc}/{rucNombre}/{orderTable}/{nombre?}/{busquedaPalabra?}', [ProveedorController::class, 'ordenCompraSecond']);
+#contrato
+Route::get('/detail/contrato/first/proveedor/{rucContratista}/{period}/{orderTable}/{nombre?}/{busquedaPalabra?}', [ProveedorController::class, 'contratoFirst']);
+Route::get('/detail/contrato/second/proveedor/{rucEntidad}/{rucContratista}/{period}/{ruc}/{rucNombre}/{orderTable}/{nombre?}/{busquedaPalabra?}', [ProveedorController::class, 'contratoSecond']);
+#consorcio
+Route::get('/detail/consorcio/first/proveedor/{rucContratista}/{period}/{filter}/{orderTable}/{nombre?}/{busquedaPalabra?}', [ProveedorController::class, 'consorcioFirst']);
+Route::get('/detail/consorcio/second/proveedor/{rucEntidad}/{rucContratista}/{period}/{filter}/{ruc}/{rucNombre}/{orderTable}/{nombre?}/{busquedaPalabra?}', [ProveedorController::class, 'consorcioSecond']);
+#sanciones
+Route::get('/detail/sanciones/first/proveedor/{rucContratista}/{period}/{orderTable}/{nombre?}/{busquedaPalabra?}', [ProveedorController::class, 'sancionesFirst']);
+#contrato resuelto
+Route::get('/detail/contrato-resuelto/first/proveedor/{rucContratista}/{period}/{orderTable}/{nombre?}/{busquedaPalabra?}', [ProveedorController::class, 'contratoResueltoFirst']);
+Route::get('/detail/contrato-resuelto/second/proveedor/{rucEntidad}/{rucContratista}/{period}/{ruc}/{rucNombre}/{orderTable}/{nombre?}/{busquedaPalabra?}', [ProveedorController::class, 'contratoResueltoSecond']);
+#postulaciones
+Route::get('/detail/postulaciones/first/proveedor/{rucContratista}/{period}/{orderTable}/{nombre?}/{busquedaPalabra?}', [ProveedorController::class, 'postulacionesFirst']);
+Route::get('/detail/postulaciones/second/proveedor/{rucEntidad}/{rucContratista}/{period}/{ruc}/{rucNombre}/{orderTable}/{nombre?}/{busquedaPalabra?}', [ProveedorController::class, 'postulacionesSecond']);
+#Postulaciones con mismo representante
+Route::get('/detail/postulaciones-con-mismo-representante/first/proveedor/{rucContratista}/{period}/{orderTable}/{nombre?}/{busquedaPalabra?}', [ProveedorController::class, 'postulacionesMismoRepresentanteFirst']);
+Route::get('/detail/postulaciones-con-mismo-representante/second/proveedor/{rucEntidad}/{rucContratista}/{period}/{ruc}/{rucNombre}/{orderTable}/{nombre?}/{busquedaPalabra?}', [ProveedorController::class, 'postulacionesMismoRepresentanteSecond']);
+
 
 
 #Otras vistas
@@ -138,4 +138,4 @@ Route::get('/usuario/fuentes', [FuenteController::class, 'index'])->name('fuente
 #quienes somos
 Route::get('/quienes/somos', [NosotrosController::class, 'index'])->name('nosotros.index');
 #Información de la suscripción
-Route::get('/suscripcion/detalle', [InfSuscriptionController::class, 'index'])->name('suscription.index');
+// Route::get('/suscripcion/detalle', [InfSuscriptionController::class, 'index'])->name('suscription.index');

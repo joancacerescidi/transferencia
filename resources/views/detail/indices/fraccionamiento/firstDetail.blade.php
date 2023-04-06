@@ -19,7 +19,7 @@
                     @elseif($ruta === 'entidad.deparment')
                         <span class="btn-preload"
                             onclick="window.location='{{ url('/detail-deparment-period' . '/' . $primaryVariable . '/' . $period. '/monto') }}'">/
-                            Entidades</span>
+                            Entidades </span>
                     @elseif($ruta === 'entidad.busqueda')
                         <span class="btn-preload"
                             onclick="window.location='{{ url('/ranking/entidad/' . $period . '/monto') }}'">/
@@ -49,9 +49,9 @@
                     </p>
 
 
-                    <a href=" @if ($busquedaPalabra !== null) {{ url('/detail/first/fraccionamiento/' . $rucEntidad . '/' . $period . '/' . $nameEntidad . '/' . $ruta . '/default' . '/cantidad' . '/' . $busquedaPalabra) }}
+                    <a href=" @if ($busquedaPalabra !== null) {{ url('/detail/first/fraccionamiento/' . $rucEntidad . '/' . $period . '/' . $nameEntidad . '/' . $ruta . '/'.$primaryVariable . '/cantidad' . '/' . $busquedaPalabra) }}
                     @else
-                        {{ url('/detail/first/fraccionamiento/' . $rucEntidad . '/' . $period . '/' . $nameEntidad . '/' . $ruta . '/default' . '/cantidad' . '/' . $busquedaPalabra) }} @endif "
+                        {{ url('/detail/first/fraccionamiento/' . $rucEntidad . '/' . $period . '/' . $nameEntidad . '/' . $ruta . '/'.$primaryVariable . '/cantidad' . '/' . $busquedaPalabra) }} @endif "
                         class="btn-preload xl:col-span-1 font-semibold flex items-center gap-2">
                         Cantidad
                         @if ($orderTable == 'cantidad')
@@ -60,9 +60,9 @@
                             <img src="{{ asset('images/icon-chevron-down-blue.png') }}" alt="w-max">
                         @endif
                     </a>
-                    <a href=" @if ($busquedaPalabra !== null) {{ url('/detail/first/fraccionamiento/' . $rucEntidad . '/' . $period . '/' . $nameEntidad . '/' . $ruta . '/default' . '/monto' . '/' . $busquedaPalabra) }}
+                    <a href=" @if ($busquedaPalabra !== null) {{ url('/detail/first/fraccionamiento/' . $rucEntidad . '/' . $period . '/' . $nameEntidad . '/' . $ruta . '/'.$primaryVariable . '/monto' . '/' . $busquedaPalabra) }}
                     @else
-                        {{ url('/detail/first/fraccionamiento/' . $rucEntidad . '/' . $period . '/' . $nameEntidad . '/' . $ruta . '/default' . '/monto' . '/' . $busquedaPalabra) }} @endif "
+                        {{ url('/detail/first/fraccionamiento/' . $rucEntidad . '/' . $period . '/' . $nameEntidad . '/' . $ruta . '/'.$primaryVariable . '/monto' . '/' . $busquedaPalabra) }} @endif "
                         class="btn-preload xl:col-span-1 font-semibold hidden xl:flex items-center gap-2">
                         Monto
                         @if ($orderTable == 'monto')

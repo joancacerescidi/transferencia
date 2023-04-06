@@ -92,7 +92,7 @@
         <a class="btn-preload" href="{{ route('denuncia.index') }}">Comparte información</a>
         <a class="btn-preload" href="{{ route('glosario.index') }}">Glosario</a>
 
-        @if (Route::has('login'))
+        {{-- @if (Route::has('login'))
             @auth
                 <a href="{{ url('/dashboard') }}" class="">Perfil</a>
                 <a href="{{ url('/dashboard') }}" class="">Suscripciones</a>
@@ -100,7 +100,7 @@
                 <a href="{{ route('login') }}" class="">Ingresar</a>
             @endauth
         @endif
-        <a href="{{ url('/suscripcion/detalle') }}" class="  ">Suscripciones</a>
+        <a href="{{ url('/suscripcion/detalle') }}" class="  ">Suscripciones</a> --}}
         <button class="absolute top-8 right-4" type="button" id="btn-cerrar-menu">
             <img src="{{ asset('images/icon-cerrar.png') }}" class="w-8">
         </button>
@@ -118,14 +118,14 @@
                 <a href="{{ route('nosotros.index') }}" class="btn-preload text-white">Quienes somos</a>
                 <a href="{{ route('denuncia.index') }}" class="btn-preload text-white">Comparte información</a>
                 <a href="{{ route('glosario.index') }}" class="btn-preload text-white cursor-pointer">Glosario</a>
-                @if (Route::has('login'))
+                {{-- @if (Route::has('login'))
                     @auth
                         <a href="{{ url('/dashboard') }}" class="  text-white cursor-pointer">Perfil</a>
                     @else
                         <a href="{{ route('login') }}" class="  text-white cursor-pointer">Ingresar</a>
                     @endauth
                 @endif
-                <a href="{{ url('/suscripcion/detalle') }}" class="  text-white cursor-pointer">Suscripciones</a>
+                <a href="{{ url('/suscripcion/detalle') }}" class="  text-white cursor-pointer">Suscripciones</a> --}}
             </nav>
             <button type="button" class="xl:hidden" id="btn-abrir-menu">
                 <img src="{{ asset('images/icon-menu.svg') }}" alt="Menu">
